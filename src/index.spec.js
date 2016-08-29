@@ -25,9 +25,14 @@ const toIso = (fractions) => {
     .map(leftPad)
     .value;
 
+  const day = buildMaybeMonad(fractions.day)
+    .map(leftPad)
+    .value;
+
   const dateComponents = [
     fractions.year,
-    month
+    month,
+    day
   ].filter((value) => value).join('-');
 
   return dateComponents;
@@ -42,6 +47,9 @@ describe.only('toIso', () => {
 
   it('{ year: 2000, month: 10 } => 2000-02', () => assertThat(
     toIso({ year: 2000, month: 10 }), equalTo('2000-10')));
+
+  it('{ year: 2000, month: 10, day: 20 } => 2000-02-20', () => assertThat(
+    toIso({ year: 2000, month: 10, day: 20 }), equalTo('2000-10-20')));
 });
 
 
