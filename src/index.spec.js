@@ -1,14 +1,15 @@
 import { assertThat, equalTo } from 'hamjest';
 
+const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
+
 const TIME_SEPARATOR_1 = 'T';
 const TIME_SEPARATOR_2 = ' ';
 
-const parseUnit = (defaultValue) => {
-  return (realValue) => realValue ? parseFloat(realValue) : defaultValue;
-};
+const parseDateUnit = (value) => value ? parseInt(value, 10) : 1;
+const parseTimeUnit = (value) => value ? parseFloat(value) : 0;
 
 const findTimeSeperator = (isoString) => {
-  if(isoString.indexOf(TIME_SEPARATOR_1) !== -1) { return TIME_SEPARATOR_1; }
+  if(containsChar(isoString, TIME_SEPARATOR_1)) { return TIME_SEPARATOR_1; }
   return TIME_SEPARATOR_2;
 };
 
@@ -22,9 +23,6 @@ const parseIso = (isoString) => {
   const { dateComponent, timeComponent } = separateDateAndTimeComponents(isoString);
   const [year, month, day] = dateComponent.split('-');
   const [hour, minute, second] = timeComponent.split(':');
-
-  const parseDateUnit = parseUnit(1);
-  const parseTimeUnit = parseUnit(0);
 
   return {
     year: parseInt(year),
