@@ -1,8 +1,11 @@
 import { assertThat, equalTo } from 'hamjest';
 
+const TIME_SEPARATOR_1 = 'T';
+const TIME_SEPARATOR_2 = ' ';
+
 const findTimeSeperator = (isoString) => {
-  if(isoString.indexOf('T') !== -1) { return 'T'; }
-  return ' ';
+  if(isoString.indexOf(TIME_SEPARATOR_1) !== -1) { return TIME_SEPARATOR_1; }
+  return TIME_SEPARATOR_2;
 };
 
 const seperateDateAndTimeComponents = (isoString) => {
