@@ -12,14 +12,14 @@ const findTimeSeperator = (isoString) => {
   return TIME_SEPARATOR_2;
 };
 
-const seperateDateAndTimeComponents = (isoString) => {
-  const timeSeperator = findTimeSeperator(isoString);
-  const [dateComponent, timeComponent = ''] = isoString.split(timeSeperator);
+const separateDateAndTimeComponents = (isoString) => {
+  const timeSeparator = findTimeSeperator(isoString);
+  const [dateComponent, timeComponent = ''] = isoString.split(timeSeparator);
   return { dateComponent, timeComponent };
 };
 
 const parseIso = (isoString) => {
-  const { dateComponent, timeComponent } = seperateDateAndTimeComponents(isoString);
+  const { dateComponent, timeComponent } = separateDateAndTimeComponents(isoString);
   const [year, month, day] = dateComponent.split('-');
   const [hour, minute, second] = timeComponent.split(':');
 
