@@ -1,8 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { parseIso, daysInMonth, isLeapYear } from './index';
 
-
-
 describe('parseIso', () => {
   describe('`2000` responds', () => {
     it('year 2000', () => assertThat(
@@ -106,7 +104,6 @@ describe('isLeapYear', () => {
   });
 });
 
-
 describe('daysInMonth', () => {
   describe('in a leap year', () => {
     it('january has 31 days', () => assertThat(
@@ -184,4 +181,3 @@ describe('daysInMonth', () => {
       daysInMonth('2017', 12), equalTo(31)));
   });
 });
-
