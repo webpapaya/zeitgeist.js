@@ -135,32 +135,17 @@ const isLeapYear = (isoString) => {
 };
 
 describe('isLeapYear', () => {
-  const LEAP_YEARS = [
-    2000,
-    2016,
-  ];
-
-  const REGULAR_YEARS = [
-    1582,
-    1700,
-    1800,
-    1900,
-    2017,
-    2100,
-    2200,
-    2300,
-    2500,
-    2600
-  ];
+  const LEAP_YEARS = '2000 2016'.split(' ');
+  const REGULAR_YEARS = '1582 1700 1800 2017'.split(' ');
 
   LEAP_YEARS.forEach((year) => {
     it(`${year} is a leap year`, () => assertThat(
-      isLeapYear(`${year}`), equalTo(true)));
+      isLeapYear(year), equalTo(true)));
   });
 
   REGULAR_YEARS.forEach((year) => {
     it(`${year} is NOT a leap year`, () => assertThat(
-      isLeapYear(`${year}`), equalTo(false)));
+      isLeapYear(year), equalTo(false)));
   });
 });
 
