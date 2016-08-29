@@ -2,13 +2,20 @@ import { assertThat, equalTo } from 'hamjest';
 import { parseIso, daysInMonth, isLeapYear } from './index';
 
 const toIso = (fractions) => {
-  return fractions.year + '';
+  const dateComponents = [
+    fractions.year,
+    fractions.month ? '0' + fractions.month : void 0
+  ].filter((value) => value).join('-');
+
+  return dateComponents;
 };
 
 describe('toIso', () => {
   it('{ year: 2000 } => 2000', () => assertThat(
     toIso({ year: 2000 }), equalTo('2000')));
 
+  it('{ year: 2000, month: 2 } => 2000-02', () => assertThat(
+    toIso({ year: 2000, month: 2 }), equalTo('2000-02')));
 });
 
 
