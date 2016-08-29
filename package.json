@@ -1,0 +1,39 @@
+{
+  "name": "pomeranian-datetime",
+  "version": "0.0.0",
+  "description": "An immutable date and time library based on the ISO-8601 format",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint-crewmeister src",
+    "test": "mocha src/{*,**/*,**/**/*,**/**/**/*}.spec.js --recursive --compilers js:babel-register",
+    "prepublish": "babel src/ --out-dir lib/ --ignore *.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webPapaya/pomeranian-datetime.git"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.9.0",
+    "eslint-config-crewmeister": "latest",
+    "hamjest": "^2.13.0",
+    "mocha": "^2.5.3"
+  },
+  "keywords": [
+    "time",
+    "date",
+    "ISO-8601",
+    "ISO",
+    "8601"
+  ],
+  "author": "Webpapaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webPapaya/pomeranian-datetime/issues"
+  },
+  "homepage": "https://github.com/webPapaya/pomeranian-datetime#readme"
+}
