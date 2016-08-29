@@ -2,15 +2,18 @@ import { assertThat, equalTo } from 'hamjest';
 
 const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
 
-const TIME_SEPARATOR_1 = 'T';
-const TIME_SEPARATOR_2 = ' ';
+const DATE_UNIT_SEPARATOR = '-';
+const TIME_UNIT_SEPARATOR = ':';
+
+const TIME_COMPONENT_SEPARATOR_1 = 'T';
+const TIME_COMPONENT_SEPARATOR_2 = ' ';
 
 const parseDateUnit = (value) => value ? parseInt(value, 10) : 1;
 const parseTimeUnit = (value) => value ? parseFloat(value) : 0;
 
 const findTimeSeperator = (isoString) => {
-  if(containsChar(isoString, TIME_SEPARATOR_1)) { return TIME_SEPARATOR_1; }
-  return TIME_SEPARATOR_2;
+  if(containsChar(isoString, TIME_COMPONENT_SEPARATOR_1)) { return TIME_COMPONENT_SEPARATOR_1; }
+  return TIME_COMPONENT_SEPARATOR_2;
 };
 
 const separateDateAndTimeComponents = (isoString) => {
@@ -21,8 +24,8 @@ const separateDateAndTimeComponents = (isoString) => {
 
 const parseIso = (isoString) => {
   const { dateComponent, timeComponent } = separateDateAndTimeComponents(isoString);
-  const [year, month, day] = dateComponent.split('-');
-  const [hour, minute, second] = timeComponent.split(':');
+  const [year, month, day] = dateComponent.split(DATE_UNIT_SEPARATOR);
+  const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
 
   return {
     year: parseInt(year),
