@@ -1,21 +1,47 @@
 import { assertThat, equalTo } from 'hamjest';
 import { parseIso, daysInMonth, isLeapYear } from './index';
 
+const buildMaybeMonad = (value) => {
+  const isEmpty = () =>
+    value === null || value === void 0;
+
+  const map = (fn) => {
+    if(isEmpty()) { return buildMaybeMonad(void 0); }
+    return buildMaybeMonad(fn(value));
+  };
+
+  return { map, value };
+};
+
+
+const leftPad = (value) => {
+  const string = `${value}`;
+  const pad = "00";
+  return pad.substring(0, pad.length - string.length) + string;
+};
+
 const toIso = (fractions) => {
+  const month = buildMaybeMonad(fractions.month)
+    .map(leftPad)
+    .value;
+
   const dateComponents = [
     fractions.year,
-    fractions.month ? '0' + fractions.month : void 0
+    month
   ].filter((value) => value).join('-');
 
   return dateComponents;
 };
 
-describe('toIso', () => {
+describe.only('toIso', () => {
   it('{ year: 2000 } => 2000', () => assertThat(
     toIso({ year: 2000 }), equalTo('2000')));
 
   it('{ year: 2000, month: 2 } => 2000-02', () => assertThat(
     toIso({ year: 2000, month: 2 }), equalTo('2000-02')));
+
+  it('{ year: 2000, month: 10 } => 2000-02', () => assertThat(
+    toIso({ year: 2000, month: 10 }), equalTo('2000-10')));
 });
 
 
