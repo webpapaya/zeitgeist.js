@@ -1,17 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { parseIso, daysInMonth, isLeapYear } from './index';
-
-const buildMaybeMonad = (value) => {
-  const isEmpty = () =>
-    value === null || value === void 0;
-
-  const map = (fn) => {
-    if(isEmpty()) { return buildMaybeMonad(void 0); }
-    return buildMaybeMonad(fn(value));
-  };
-
-  return { map, value };
-};
+import { buildMaybeMonad } from './utils';
 
 
 const leftPad = (value) => {
@@ -38,7 +27,7 @@ const toIso = (fractions) => {
   return dateComponents;
 };
 
-describe.only('toIso', () => {
+describe('toIso', () => {
   it('{ year: 2000 } => 2000', () => assertThat(
     toIso({ year: 2000 }), equalTo('2000')));
 
