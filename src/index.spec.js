@@ -4,14 +4,22 @@ const parseIso = (isoString) => {
   const [year, month, day] = isoString.split('-');
   return {
     year: parseInt(year),
-    month: parseInt(month),
-    day: parseInt(day),
+    month: month ? parseInt(month) : 1,
+    day: day ? parseInt(day) : 1,
   };
 };
 
 describe('parseIso', () => {
-  it('`2000` responds year 2000', () => assertThat(
-    parseIso('2000').year, equalTo(2000)));
+  describe('`2000` responds', () => {
+    it('year 2000', () => assertThat(
+      parseIso('2000').year, equalTo(2000)));
+
+    it('month 1', () => assertThat(
+      parseIso('2000').month, equalTo(1)));
+
+    it('day 1', () => assertThat(
+      parseIso('2000').day, equalTo(1)));
+  });
 
   it('`2000-01` responds month 1', () => assertThat(
     parseIso('2000-01').month, equalTo(1)));
