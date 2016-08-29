@@ -3,8 +3,8 @@ import { assertThat, equalTo } from 'hamjest';
 const TIME_SEPARATOR_1 = 'T';
 const TIME_SEPARATOR_2 = ' ';
 
-const defaultTo = (defaultValue) => {
-  return (realValue) => realValue ? realValue : defaultValue;
+const parseUnit = (defaultValue) => {
+  return (realValue) => realValue ? parseInt(realValue, 10) : defaultValue;
 };
 
 const findTimeSeperator = (isoString) => {
@@ -23,16 +23,16 @@ const parseIso = (isoString) => {
   const [year, month, day] = dateComponent.split('-');
   const [hour, minute, second] = timeComponent.split(':');
 
-  const dateComponentDefaultTo = defaultTo(1);
-  const timeComponentDefaultTo = defaultTo(0);
+  const parseDateUnit = parseUnit(1);
+  const parseTimeUnit = parseUnit(0);
 
   return {
     year: parseInt(year),
-    month: dateComponentDefaultTo(parseInt(month)),
-    day: dateComponentDefaultTo(parseInt(day)),
-    hour: timeComponentDefaultTo(parseInt(hour)),
-    minute: timeComponentDefaultTo(parseInt(minute)),
-    second: timeComponentDefaultTo(parseInt(second)),
+    month: parseDateUnit(parseInt(month)),
+    day: parseDateUnit(parseInt(day)),
+    hour: parseTimeUnit(parseInt(hour)),
+    minute: parseTimeUnit(parseInt(minute)),
+    second: parseTimeUnit(parseInt(second)),
   };
 };
 
