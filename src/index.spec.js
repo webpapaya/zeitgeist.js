@@ -1,6 +1,18 @@
 import { assertThat, equalTo } from 'hamjest';
 import { parseIso, daysInMonth, isLeapYear } from './index';
 
+const toIso = (fractions) => {
+  return fractions.year + '';
+};
+
+describe('toIso', () => {
+  it('{ year: 2000 } => 2000', () => assertThat(
+    toIso({ year: 2000 }), equalTo('2000')));
+
+});
+
+
+
 describe('parseIso', () => {
   describe('`2000` responds', () => {
     it('year 2000', () => assertThat(
