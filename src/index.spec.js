@@ -1,7 +1,19 @@
 import { assertThat, equalTo } from 'hamjest';
 
+const findTimeSeperator = (isoString) => {
+  if(isoString.indexOf('T') !== -1) { return 'T'; }
+  return ' ';
+};
+
+const seperateDateAndTimeComponents = (isoString) => {
+  const timeSeperator = findTimeSeperator(isoString);
+  const [dateComponent, timeComponent = ''] = isoString.split(timeSeperator);
+  return { dateComponent, timeComponent };
+};
+
 const parseIso = (isoString) => {
-  const [dateComponent, timeComponent = ''] = isoString.split('T');
+  const { dateComponent, timeComponent } = seperateDateAndTimeComponents(isoString);
+
   const [year, month, day] = dateComponent.split('-');
   const [hour, minute] = timeComponent.split(':');
   return {
@@ -64,5 +76,13 @@ describe('parseIso', () => {
 
     it('`minute is 20`', () => assertThat(
       parseIso('2000-01-01T10:20').minute, equalTo(20)));
+  });
+
+  describe('`2000-01-01 10:20` responds', () => {
+    it('`hour is 10`', () => assertThat(
+      parseIso('2000-01-01 10:20').hour, equalTo(10)));
+
+    it('`minute is 20`', () => assertThat(
+      parseIso('2000-01-01 10:20').minute, equalTo(20)));
   });
 });
