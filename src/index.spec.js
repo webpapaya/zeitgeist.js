@@ -25,6 +25,7 @@ const parseIso = (isoString) => {
     day: day ? parseInt(day) : 1,
     hour: parseInt(hour),
     minute: parseInt(minute),
+    second: 0,
   };
 };
 
@@ -79,6 +80,9 @@ describe('parseIso', () => {
 
     it('`minute is 20`', () => assertThat(
       parseIso('2000-01-01T10:20').minute, equalTo(20)));
+
+    it('`second is 0`', () => assertThat(
+      parseIso('2000-01-01T10:20').second, equalTo(0)));
   });
 
   describe('`2000-01-01 10:20` responds', () => {
