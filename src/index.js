@@ -6,6 +6,35 @@ const TIME_UNIT_SEPARATOR = ':';
 const TIME_COMPONENT_SEPARATOR_1 = 'T';
 const TIME_COMPONENT_SEPARATOR_2 = ' ';
 
+const JANUARY = 1;
+const FEBRUARY = 2;
+const MARCH = 3;
+const APRIL = 4;
+const MAY = 5;
+const JUNE= 6;
+const JULY = 7;
+const AUGUST = 8;
+const SEPTEMBER = 9;
+const OCTOBER = 10;
+const NOVEMBER = 11;
+const DECEMBER = 12;
+
+const DAYS_IN_MONTHS = {
+  [JANUARY]: 31,
+  [FEBRUARY]: 28,
+  [MARCH]: 31,
+  [APRIL]: 30,
+  [MAY]: 31,
+  [JUNE]: 30,
+  [JULY]: 30,
+  [AUGUST]: 31,
+  [SEPTEMBER]: 30,
+  [OCTOBER]: 31,
+  [NOVEMBER]: 30,
+  [DECEMBER]: 31,
+};
+
+
 const parseDateUnit = (value) => value ? parseInt(value, 10) : 1;
 const parseTimeUnit = (value) => value ? parseFloat(value) : 0;
 
@@ -35,12 +64,11 @@ export const parseIso = (isoString) => {
   };
 };
 
-const DAYS_IN_MONTHS = [31, 28, 31, 30, 31, 30, 30, 31, 30, 31, 30, 31];
-export const daysInMonth = (isoString, month) => {
-  if(month === 2 && isLeapYear(isoString) ) { return 29; }
-  return DAYS_IN_MONTHS[month - 1];
-};
 
+export const daysInMonth = (isoString, month) => {
+  if(month === FEBRUARY && isLeapYear(isoString) ) { return 29; }
+  return DAYS_IN_MONTHS[month ];
+};
 
 export const isLeapYear = (isoString) => {
   const year = parseIso(isoString).year;
