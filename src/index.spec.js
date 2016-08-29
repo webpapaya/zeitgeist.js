@@ -3,6 +3,10 @@ import { assertThat, equalTo } from 'hamjest';
 const TIME_SEPARATOR_1 = 'T';
 const TIME_SEPARATOR_2 = ' ';
 
+const defaultTo = (defaultValue) => {
+  return (realValue) => realValue ? realValue : defaultValue;
+};
+
 const findTimeSeperator = (isoString) => {
   if(isoString.indexOf(TIME_SEPARATOR_1) !== -1) { return TIME_SEPARATOR_1; }
   return TIME_SEPARATOR_2;
@@ -16,16 +20,19 @@ const seperateDateAndTimeComponents = (isoString) => {
 
 const parseIso = (isoString) => {
   const { dateComponent, timeComponent } = seperateDateAndTimeComponents(isoString);
-
   const [year, month, day] = dateComponent.split('-');
   const [hour, minute, second] = timeComponent.split(':');
+
+  const dateComponentDefaultTo = defaultTo(1);
+  const timeComponentDefaultTo = defaultTo(0);
+
   return {
     year: parseInt(year),
-    month: month ? parseInt(month) : 1,
-    day: day ? parseInt(day) : 1,
-    hour: hour ? parseInt(hour) : 0,
-    minute: minute ? parseInt(minute) : 0,
-    second: second ? parseInt(second) : 0,
+    month: dateComponentDefaultTo(parseInt(month)),
+    day: dateComponentDefaultTo(parseInt(day)),
+    hour: timeComponentDefaultTo(parseInt(hour)),
+    minute: timeComponentDefaultTo(parseInt(minute)),
+    second: timeComponentDefaultTo(parseInt(second)),
   };
 };
 
