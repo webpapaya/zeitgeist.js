@@ -1,39 +1,12 @@
 const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
-
-const DATE_UNIT_SEPARATOR = '-';
-const TIME_UNIT_SEPARATOR = ':';
-
-const TIME_COMPONENT_SEPARATOR_1 = 'T';
-const TIME_COMPONENT_SEPARATOR_2 = ' ';
-
-const JANUARY = 1;
-const FEBRUARY = 2;
-const MARCH = 3;
-const APRIL = 4;
-const MAY = 5;
-const JUNE= 6;
-const JULY = 7;
-const AUGUST = 8;
-const SEPTEMBER = 9;
-const OCTOBER = 10;
-const NOVEMBER = 11;
-const DECEMBER = 12;
-
-const DAYS_IN_MONTHS = {
-  [JANUARY]: 31,
-  [FEBRUARY]: 28,
-  [MARCH]: 31,
-  [APRIL]: 30,
-  [MAY]: 31,
-  [JUNE]: 30,
-  [JULY]: 30,
-  [AUGUST]: 31,
-  [SEPTEMBER]: 30,
-  [OCTOBER]: 31,
-  [NOVEMBER]: 30,
-  [DECEMBER]: 31,
-};
-
+import {
+  TIME_COMPONENT_SEPARATOR_1,
+  TIME_COMPONENT_SEPARATOR_2,
+  DATE_UNIT_SEPARATOR,
+  TIME_UNIT_SEPARATOR,
+  FEBRUARY,
+  DAYS_IN_MONTHS,
+} from './constants';
 
 const parseDateUnit = (value) => value ? parseInt(value, 10) : 1;
 const parseTimeUnit = (value) => value ? parseFloat(value) : 0;
