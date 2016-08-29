@@ -24,7 +24,7 @@ const parseIso = (isoString) => {
     month: month ? parseInt(month) : 1,
     day: day ? parseInt(day) : 1,
     hour: hour ? parseInt(hour) : 0,
-    minute: parseInt(minute),
+    minute: minute ? parseInt(minute) : 0,
     second: second ? parseInt(second) : 0,
   };
 };
@@ -42,6 +42,12 @@ describe('parseIso', () => {
 
     it('hour 0', () => assertThat(
       parseIso('2000').hour, equalTo(0)));
+
+    it('minute 0', () => assertThat(
+      parseIso('2000').minute, equalTo(0)));
+
+    it('second 0', () => assertThat(
+      parseIso('2000').second, equalTo(0)));
   });
 
   describe('`2000-01` responds', () => {
