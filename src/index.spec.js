@@ -124,3 +124,41 @@ describe('parseIso', () => {
       parseIso('2000-01-01 10:20').second, equalTo(0)));
   });
 });
+
+const isLeapYear = (year) => {
+  const dividableBy4 = year % 4 === 0;
+  const dividableBy100 = year % 100 === 0;
+  const dividableBy400 = year % 400 === 0;
+
+  return (dividableBy4 && !dividableBy100) || dividableBy400;
+};
+
+describe('isLeapYear', () => {
+  const LEAP_YEARS = [
+    2000,
+    2016,
+  ];
+
+  const REGULAR_YEARS = [
+    1582,
+    1700,
+    1800,
+    1900,
+    2017,
+    2100,
+    2200,
+    2300,
+    2500,
+    2600
+  ];
+
+  LEAP_YEARS.forEach((year) => {
+    it(`${year} is a leap year`, () => assertThat(
+      isLeapYear(year), equalTo(true)));
+  });
+
+  REGULAR_YEARS.forEach((year) => {
+    it(`${year} is NOT a leap year`, () => assertThat(
+      isLeapYear(year), equalTo(false)));
+  });
+});
