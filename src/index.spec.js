@@ -18,14 +18,14 @@ const parseIso = (isoString) => {
   const { dateComponent, timeComponent } = seperateDateAndTimeComponents(isoString);
 
   const [year, month, day] = dateComponent.split('-');
-  const [hour, minute] = timeComponent.split(':');
+  const [hour, minute, second] = timeComponent.split(':');
   return {
     year: parseInt(year),
     month: month ? parseInt(month) : 1,
     day: day ? parseInt(day) : 1,
     hour: parseInt(hour),
     minute: parseInt(minute),
-    second: 0,
+    second: second ? parseInt(second) : 0,
   };
 };
 
@@ -74,15 +74,15 @@ describe('parseIso', () => {
       parseIso('2000-01-01').day, equalTo(1)));
   });
 
-  describe('`2000-01-01T10:20` responds', () => {
+  describe('`2000-01-01T10:20:30` responds', () => {
     it('`hour is 10`', () => assertThat(
-      parseIso('2000-01-01T10:20').hour, equalTo(10)));
+      parseIso('2000-01-01T10:20:30').hour, equalTo(10)));
 
     it('`minute is 20`', () => assertThat(
-      parseIso('2000-01-01T10:20').minute, equalTo(20)));
+      parseIso('2000-01-01T10:20:30').minute, equalTo(20)));
 
     it('`second is 0`', () => assertThat(
-      parseIso('2000-01-01T10:20').second, equalTo(0)));
+      parseIso('2000-01-01T10:20:30').second, equalTo(30)));
   });
 
   describe('`2000-01-01 10:20` responds', () => {
@@ -91,5 +91,8 @@ describe('parseIso', () => {
 
     it('`minute is 20`', () => assertThat(
       parseIso('2000-01-01 10:20').minute, equalTo(20)));
+
+    it('`second is 0`', () => assertThat(
+      parseIso('2000-01-01 10:20').second, equalTo(0)));
   });
 });
