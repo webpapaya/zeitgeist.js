@@ -39,8 +39,11 @@ export const parseIso = (isoString) => {
   };
 };
 
+const isLeapMonth = (isoString, month) =>
+  month === FEBRUARY && isLeapYear(isoString);
+
 export const daysInMonth = (isoString, month) => {
-  if (month === FEBRUARY && isLeapYear(isoString)) { return 29; }
+  if (isLeapMonth(isoString, month)) { return 29; }
   return DAYS_IN_MONTHS[month];
 };
 
