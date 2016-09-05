@@ -4,23 +4,24 @@ const isEmpty = (value) => value === null || value === void 0;
 const isCollection = (value) => value.map;
 const isCollectionEmpty = (collection) => collection.length === 0;
 
-export const buildMaybeMonad = (value) => {
+export const buildMaybeMonad = (rawValue) => {
   const map = (fn) => {
-    if(isEmpty(value)) { return buildMaybeMonad(void 0); }
-    if(isCollection(value)) { return buildCollectionMonad(value).map(fn); }
+    if(isEmpty(rawValue)) { return buildMaybeMonad(void 0); }
+    if(isCollection(rawValue)) { return buildCollectionMonad(rawValue).map(fn); }
 
-    return buildMaybeMonad(fn(value));
+    return buildMaybeMonad(fn(rawValue));
   };
 
-  const chain = (fn) => map(fn).value;
+  const chain = (fn) => map(fn).rawValue;
   const join = (valueToBeJoined) => {
-    const newCollection = isCollection(value)
-      ? [...value, valueToBeJoined]
-      : [value, valueToBeJoined];
+    const newCollection = isCollection(rawValue)
+      ? [...rawValue, valueToBeJoined]
+      : [rawValue, valueToBeJoined];
 
     return buildMaybeMonad(newCollection);
   };
 
+  const value = (fn) => fn(rawValue);
   return { map, join, chain, value };
 };
 
@@ -79,7 +80,7 @@ const buildCollectionMonad = (...rawValues) => {
     const newValue = rawValue.map((singleValue) => {
       return buildMaybeMonad(singleValue)
         .map(fn)
-        .value;
+        .value((value) => value);
     });
 
     return buildCollectionMonad(newValue);
@@ -91,7 +92,12 @@ const buildCollectionMonad = (...rawValues) => {
   const toValue = () => rawValue;
   const value = (fn) => fn(rawValue);
 
-  return { map, concat, toValue, value };
+  const asString = (delimiter) => {
+    const filteredRawValue = rawValue.filter((item) => !isEmpty(item));
+    return buildMaybeMonad(filteredRawValue.join(delimiter));
+  };
+
+  return { map, concat, toValue, value, asString };
 };
 
 describe.only('collection monad', () => {
@@ -138,6 +144,20 @@ describe.only('collection monad', () => {
         .concat(['test3'])
         .map((value) => value.toUpperCase())
         .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
+    });
+  });
+
+  describe('asString', () => {
+    it('combines a collection to a string', () => {
+      buildCollectionMonad('test1', 'test2')
+        .asString(', ')
+        .value((result) => assertThat(result, equalTo('test1, test2')));
+    });
+
+    it('combines a collection to a string and removed undefined', () => {
+      buildCollectionMonad('test1', 'test2', void 0)
+        .asString(', ')
+        .value((result) => assertThat(result, equalTo('test1, test2')));
     });
   });
 });
