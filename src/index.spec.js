@@ -1,7 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { parseIso, daysInMonth, isLeapYear } from './index';
-import { buildMaybeMonad, buildCollectionMonad } from './utils';
-
+import { buildCollectionMonad } from './utils';
 
 const leftPad = (value) => {
   const string = `${value}`;
@@ -21,6 +20,9 @@ const toIso = (fractions) => {
 };
 
 describe('toIso', () => {
+  it('{} => ""', () => assertThat(
+    toIso({ }), equalTo('')));
+
   it('{ year: 2000 } => 2000', () => assertThat(
     toIso({ year: 2000 }), equalTo('2000')));
 
