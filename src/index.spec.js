@@ -1,6 +1,35 @@
 import { assertThat, equalTo } from 'hamjest';
 import { daysInMonth, isLeapYear } from './index';
 
+import { toFragments } from './index';
+
+const isLastDayOfMonth = (isoString) => {
+  const { day } = toFragments(isoString);
+  return daysInMonth(isoString) === day;
+};
+
+const isFirstDayOfMonth = (isoString) => {
+  const { day } = toFragments(isoString);
+  return day === 1;
+};
+
+describe('isLastDayOfMonth', () => {
+  it('2000-01-31 is last of month', () => assertThat(
+    isLastDayOfMonth('2000-01-31'), equalTo(true)));
+
+  it('2000-01-01 is NOT last of month', () => assertThat(
+    isLastDayOfMonth('2000-01-01'), equalTo(false)));
+});
+
+describe('isFirstDayOfMonth', () => {
+  it('2000-01-31 is last of month', () => assertThat(
+    isFirstDayOfMonth('2000-01-31'), equalTo(false)));
+
+  it('2000-01-01 is NOT last of month', () => assertThat(
+    isFirstDayOfMonth('2000-01-01'), equalTo(true)));
+});
+
+
 describe('isLeapYear', () => {
   const LEAP_YEARS = '2000 2016'.split(' ');
   const REGULAR_YEARS = '1582 1700 1800 2017'.split(' ');
