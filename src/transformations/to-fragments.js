@@ -8,8 +8,8 @@ import {
 const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
 const toInt = (value) => parseInt(value, 10);
 
-const parseDateUnit = (value) => value ? toInt(value) : 1;
-const parseTimeUnit = (value) => value ? parseFloat(value) : 0;
+const parseDateUnit = (value) => value ? toInt(value) : void 0;
+const parseTimeUnit = (value) => value ? parseFloat(value) : void 0;
 
 const findTimeSeparator = (isoString) => {
   if (containsChar(isoString, TIME_COMPONENT_SEPARATOR_1)) { return TIME_COMPONENT_SEPARATOR_1; }

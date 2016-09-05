@@ -38,20 +38,20 @@ describe('toFragments', () => {
     it('year 2000', () => assertThat(
       toFragments('2000').year, equalTo(2000)));
 
-    it('month 1', () => assertThat(
-      toFragments('2000').month, equalTo(1)));
+    it('month undefined', () => assertThat(
+      toFragments('2000').month, equalTo(void 0)));
 
-    it('day 1', () => assertThat(
-      toFragments('2000').day, equalTo(1)));
+    it('day undefined', () => assertThat(
+      toFragments('2000').day, equalTo(void 0)));
 
-    it('hour 0', () => assertThat(
-      toFragments('2000').hour, equalTo(0)));
+    it('hour undefined', () => assertThat(
+      toFragments('2000').hour, equalTo(void 0)));
 
-    it('minute 0', () => assertThat(
-      toFragments('2000').minute, equalTo(0)));
+    it('minute undefined', () => assertThat(
+      toFragments('2000').minute, equalTo(void 0)));
 
-    it('second 0', () => assertThat(
-      toFragments('2000').second, equalTo(0)));
+    it('second undefined', () => assertThat(
+      toFragments('2000').second, equalTo(void 0)));
   });
 
   describe('`2000-01` responds', () => {
@@ -61,8 +61,8 @@ describe('toFragments', () => {
     it('month 1', () => assertThat(
       toFragments('2000-01').month, equalTo(1)));
 
-    it('day 1', () => assertThat(
-      toFragments('2000-01').day, equalTo(1)));
+    it('day undefined', () => assertThat(
+      toFragments('2000-01').day, equalTo(void 0)));
   });
 
   describe('`2000-01-01` responds', () => {
@@ -94,7 +94,7 @@ describe('toFragments', () => {
     it('`minute is 20`', () => assertThat(
       toFragments('2000-01-01T10:20:30.123').minute, equalTo(20)));
 
-    it('`second is 0`', () => assertThat(
+    it('`second is 30.123`', () => assertThat(
       toFragments('2000-01-01T10:20:30.123').second, equalTo(30.123)));
   });
 
@@ -105,8 +105,8 @@ describe('toFragments', () => {
     it('`minute is 20`', () => assertThat(
       toFragments('2000-01-01 10:20').minute, equalTo(20)));
 
-    it('`second is 0`', () => assertThat(
-      toFragments('2000-01-01 10:20').second, equalTo(0)));
+    it('`second is undefined`', () => assertThat(
+      toFragments('2000-01-01 10:20').second, equalTo(void 0)));
   });
 
   describe('`2000-01-01 10:20` responds', () => {
@@ -116,7 +116,7 @@ describe('toFragments', () => {
     it('`minute is 20`', () => assertThat(
       toFragments('2000-01-01 10:20').minute, equalTo(20)));
 
-    it('`second is 0`', () => assertThat(
-      toFragments('2000-01-01 10:20').second, equalTo(0)));
+    it('`second is undefined`', () => assertThat(
+      toFragments('2000-01-01 10:20').second, equalTo(void 0)));
   });
 });
