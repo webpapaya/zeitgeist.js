@@ -4,11 +4,11 @@ const isEmpty = (value) => value === null || value === void 0;
 const isCollection = (value) => value.map;
 const isCollectionEmpty = (collection) => collection.length === 0;
 
-const buildCollectionMonad = (value) => {
+const buildCollectionMonad = (rawValue) => {
   const map = (fn) => {
-    if(isCollectionEmpty(value)) { return buildCollectionMonad([]); }
+    if(isCollectionEmpty(rawValue)) { return buildCollectionMonad([]); }
 
-    const newValue = value.map((singleValue) => {
+    const newValue = rawValue.map((singleValue) => {
       return buildMaybeMonad(singleValue)
         .map(fn)
         .value;
@@ -18,12 +18,13 @@ const buildCollectionMonad = (value) => {
   };
 
   const concat = (...valuesToBeJoined) =>
-    buildCollectionMonad(value.concat(...valuesToBeJoined));
+    buildCollectionMonad(rawValue.concat(...valuesToBeJoined));
 
 
-  const toValue = () => value;
+  const toValue = () => rawValue;
+  const value = (fn) => fn(rawValue);
 
-  return { map, concat, toValue };
+  return { map, concat, toValue, value };
 };
 
 export const buildMaybeMonad = (value) => {
@@ -94,31 +95,25 @@ describe('maybeMonad', () => {
 
 describe.only('collection monad', () => {
   it('other values can be joined as function', () => {
-    const result = buildCollectionMonad(['test1'])
+    buildCollectionMonad(['test1'])
       .concat(['test2'])
       .map((value) => value.toUpperCase())
-      .toValue();
-
-    assertThat(result, equalTo(['TEST1', 'TEST2']));
+      .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2'])));
   });
 
   it('multiple values can be added', () => {
-    const result = buildCollectionMonad(['test1'])
+    buildCollectionMonad(['test1'])
       .concat(['test2'], ['test3'])
       .map((value) => value.toUpperCase())
-      .toValue();
-
-    assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3']));
+      .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
   });
 
   it('multiple concat can be chained', () => {
-    const result = buildCollectionMonad(['test1'])
+    buildCollectionMonad(['test1'])
       .concat(['test2'])
       .concat(['test3'])
       .map((value) => value.toUpperCase())
-      .toValue();
-
-    assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3']));
+      .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
   });
 });
 
