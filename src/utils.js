@@ -1,12 +1,11 @@
 const isEmpty = (value) => value === null || value === void 0 || value === '';
-const isCollection = (value) => value.map;
 const isCollectionEmpty = (collection) => collection.length === 0;
 
 const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 
 export const buildMaybeMonad = (rawValue) => {
   const map = (fn) => {
-    if(isEmpty(rawValue)) { return buildMaybeMonad(void 0); }
+    if (isEmpty(rawValue)) { return buildMaybeMonad(void 0); }
     return buildMaybeMonad(fn(rawValue));
   };
 
@@ -22,7 +21,7 @@ export const buildMaybeMonad = (rawValue) => {
 export const buildCollectionMonad = (...rawValues) => {
   const rawValue = [].concat(...rawValues);
   const map = (fn) => {
-    if(isCollectionEmpty(rawValue)) { return buildEmptyCollectionMonad(); }
+    if (isCollectionEmpty(rawValue)) { return buildEmptyCollectionMonad(); }
 
     const newValue = rawValue.map((singleValue) => buildMaybeMonad(singleValue).chain(fn));
     return buildCollectionMonad(newValue);
@@ -45,7 +44,7 @@ export const buildCollectionMonad = (...rawValues) => {
 
   const removeAfterEmpty = (filteredArray = rawValue) => {
     const [first, ...rest] = filteredArray;
-    if(isEmpty(first)) { return buildEmptyCollectionMonad(); }
+    if (isEmpty(first)) { return buildEmptyCollectionMonad(); }
     return buildCollectionMonad(first, removeAfterEmpty(rest).toValue());
   };
 

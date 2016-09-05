@@ -3,11 +3,12 @@ import {
   TIME_UNIT_SEPARATOR,
   TIME_COMPONENT_SEPARATOR_1,
 } from '../constants';
+
 import { buildCollectionMonad } from '../utils';
 
 const leftPad = (value) => {
   const string = `${value}`;
-  const pad = "00";
+  const pad = '00';
   return pad.substring(0, pad.length - string.length) + string;
 };
 
@@ -22,7 +23,7 @@ export const toIso = (fragments) => {
   const dateComponent = buildComponent([
     fragments.year,
     fragments.month,
-    fragments.day
+    fragments.day,
   ], DATE_UNIT_SEPARATOR);
 
   const timeComponent = buildComponent([

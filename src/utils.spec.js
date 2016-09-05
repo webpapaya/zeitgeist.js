@@ -9,7 +9,7 @@ describe('maybeMonad', () => {
 
     it('value can be mapped multiple times', () => buildMaybeMonad('test')
       .map((value) => value.toUpperCase())
-      .map((value) => value + '!!!')
+      .map((value) => `${value}!!!`)
       .map((value) => assertThat(value, equalTo('TEST!!!'))));
 
     it('chain works', () => buildMaybeMonad('test')
@@ -108,5 +108,3 @@ describe('collection monad', () => {
     });
   });
 });
-
-
