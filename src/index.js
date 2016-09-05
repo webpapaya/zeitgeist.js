@@ -24,7 +24,7 @@ const separateDateAndTimeComponents = (isoString) => {
   return { dateComponent, timeComponent };
 };
 
-export const parseIso = (isoString) => {
+export const toFragments = (isoString) => {
   const { dateComponent, timeComponent } = separateDateAndTimeComponents(isoString);
   const [year, month, day] = dateComponent.split(DATE_UNIT_SEPARATOR);
   const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
@@ -48,7 +48,7 @@ export const daysInMonth = (isoString, month) => {
 };
 
 export const isLeapYear = (isoString) => {
-  const year = parseIso(isoString).year;
+  const year = toFragments(isoString).year;
   const dividableBy4 = year % 4 === 0;
   const dividableBy100 = year % 100 === 0;
   const dividableBy400 = year % 400 === 0;
