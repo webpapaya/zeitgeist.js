@@ -108,6 +108,16 @@ describe.only('collection monad', () => {
 
     assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3']));
   });
+
+  it('multiple concat can be chained', () => {
+    const result = buildCollectionMonad(['test1'])
+      .concat(['test2'])
+      .concat(['test3'])
+      .map((value) => value.toUpperCase())
+      .value;
+
+    assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3']));
+  });
 });
 
 
