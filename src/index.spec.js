@@ -1,5 +1,11 @@
 import { assertThat, equalTo } from 'hamjest';
-import { daysInMonth, isLeapYear, isFirstDayOfMonth, isLastDayOfMonth } from './index';
+import {
+  daysInMonth,
+  daysInYear,
+  isLeapYear,
+  isFirstDayOfMonth,
+  isLastDayOfMonth
+} from './index';
 
 describe('isLastDayOfMonth', () => {
   it('2000-01-31 is last of month', () => assertThat(
@@ -31,6 +37,15 @@ describe('isLeapYear', () => {
     it(`${year} is NOT a leap year`, () => assertThat(
       isLeapYear(year), equalTo(false)));
   });
+});
+
+
+describe('daysInYear', () => {
+  it('a leap year contains 366 days', () => assertThat(
+    daysInYear('2016-01'), equalTo(366)));
+
+  it('a regular year contains 365 days', () => assertThat(
+    daysInYear('2015-01'), equalTo(365)));
 });
 
 describe('daysInMonth', () => {
