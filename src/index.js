@@ -3,7 +3,7 @@ import {
   DAYS_IN_MONTHS,
 } from './constants';
 
-import { toFragments } from './transformations';
+import { toFragments } from './transformations/index';
 
 const isLeapMonth = (isoString, month) =>
   month === FEBRUARY && isLeapYear(isoString);
@@ -23,4 +23,4 @@ export const isLeapYear = (isoString) => {
   return (dividableBy4 && !dividableBy100) || dividableBy400;
 };
 
-export { toIso, toFragments } from './transformations';
+export { toIso, toFragments } from './transformations/index';
