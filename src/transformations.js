@@ -6,24 +6,24 @@ const leftPad = (value) => {
   return pad.substring(0, pad.length - string.length) + string;
 };
 
-const buildComponent = (fractions, delimiter) => {
-  return buildCollectionMonad(fractions)
+const buildComponent = (fragments, delimiter) => {
+  return buildCollectionMonad(fragments)
     .removeAfterEmpty()
     .map(leftPad)
     .asString(delimiter);
 };
 
-export const toIso = (fractions) => {
+export const toIso = (fragments) => {
   const dateComponent = buildComponent([
-    fractions.year,
-    fractions.month,
-    fractions.day
+    fragments.year,
+    fragments.month,
+    fragments.day
   ], '-');
 
   const timeComponent = buildComponent([
-    fractions.hour,
-    fractions.minute,
-    fractions.second,
+    fragments.hour,
+    fragments.minute,
+    fragments.second,
   ], ':');
 
   return buildCollectionMonad([])
