@@ -49,8 +49,14 @@ const buildCollectionMonad = (...rawValues) => {
       return value.isMonad ? value.toValue() : value;
     });
 
-
     return buildCollectionMonad(rawValue.concat(...normalizedValuesToBeJoined));
+  };
+
+  const chain = (fn) => {
+    return map((value) => {
+      const newValue = fn(value);
+      return newValue.isMonad ? newValue.toValue() : value;
+    });
   };
 
 
@@ -62,7 +68,7 @@ const buildCollectionMonad = (...rawValues) => {
     return buildMaybeMonad(filteredRawValue.join(delimiter));
   };
 
-  return { map, concat, toValue, value, asString, isMonad: true };
+  return { map, concat, toValue, value, asString, chain, isMonad: true };
 };
 
 describe('collection monad', () => {
@@ -116,6 +122,20 @@ describe('collection monad', () => {
         .concat(buildMaybeMonad('test2'))
         .map((value) => value.toUpperCase())
         .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2'])));
+    });
+  });
+
+  describe('chain', () => {
+    it('normalizes monads', () => {
+      buildCollectionMonad('test1', 'test2')
+        .chain((value) => buildMaybeMonad(value))
+        .value((result) => assertThat(result, equalTo(['test1', 'test2'])));
+    });
+
+    it('works with regular values as well', () => {
+      buildCollectionMonad('test1', 'test2')
+        .chain((value) => value)
+        .value((result) => assertThat(result, equalTo(['test1', 'test2'])));
     });
   });
 
