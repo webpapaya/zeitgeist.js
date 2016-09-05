@@ -55,3 +55,5 @@ export const isLeapYear = (isoString) => {
 
   return (dividableBy4 && !dividableBy100) || dividableBy400;
 };
+
+export { toIso } from './transformations';
