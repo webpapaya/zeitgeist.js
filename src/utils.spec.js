@@ -7,22 +7,15 @@ const isCollectionEmpty = (collection) => collection.length === 0;
 export const buildMaybeMonad = (rawValue) => {
   const map = (fn) => {
     if(isEmpty(rawValue)) { return buildMaybeMonad(void 0); }
-    if(isCollection(rawValue)) { return buildCollectionMonad(rawValue).map(fn); }
-
     return buildMaybeMonad(fn(rawValue));
   };
 
-  const chain = (fn) => map(fn).rawValue;
-  const join = (valueToBeJoined) => {
-    const newCollection = isCollection(rawValue)
-      ? [...rawValue, valueToBeJoined]
-      : [rawValue, valueToBeJoined];
-
-    return buildMaybeMonad(newCollection);
-  };
-
   const value = (fn) => fn(rawValue);
-  return { map, join, chain, value };
+  const chain = (fn) => map(fn).toValue();
+  const toValue = () => rawValue;
+  const asString = () => buildMaybeMonad(`${rawValue}`);
+
+  return { map, chain, value, toValue, asString, isMonad: true };
 };
 
 describe('maybeMonad', () => {
@@ -40,54 +33,26 @@ describe('maybeMonad', () => {
       .chain((value) => buildMaybeMonad(value.toUpperCase()))
       .map((value) => assertThat(value, equalTo('TEST'))));
   });
-
-  describe('with am array', () => {
-    it('value can be mapped', () => {
-      const result = buildMaybeMonad(['test'])
-        .map((value) => value.toUpperCase())
-        .value;
-
-      assertThat(result, equalTo(['TEST']));
-    });
-
-    it('value can be mapped', () => {
-      const result = buildMaybeMonad(['test'])
-        .map((value) => value.toUpperCase())
-        .value;
-
-      assertThat(result, equalTo(['TEST']));
-    });
-
-    it('other regular values can be joined', () => {
-      const result = buildMaybeMonad(['test1'])
-        .join('test2')
-        .map((value) => value.toUpperCase())
-        .value;
-
-      assertThat(result, equalTo(['TEST1', 'TEST2']));
-    });
-
-
-  });
 });
-
 
 const buildCollectionMonad = (...rawValues) => {
   const rawValue = [].concat(...rawValues);
   const map = (fn) => {
     if(isCollectionEmpty(rawValue)) { return buildCollectionMonad([]); }
 
-    const newValue = rawValue.map((singleValue) => {
-      return buildMaybeMonad(singleValue)
-        .map(fn)
-        .value((value) => value);
-    });
-
+    const newValue = rawValue.map((singleValue) => buildMaybeMonad(singleValue).chain(fn));
     return buildCollectionMonad(newValue);
   };
 
-  const concat = (...valuesToBeJoined) =>
-    buildCollectionMonad(rawValue.concat(...valuesToBeJoined));
+  const concat = (...valuesToBeJoined) => {
+    const normalizedValuesToBeJoined = valuesToBeJoined.map((value) => {
+      return value.isMonad ? value.toValue() : value;
+    });
+
+
+    return buildCollectionMonad(rawValue.concat(...normalizedValuesToBeJoined));
+  };
+
 
   const toValue = () => rawValue;
   const value = (fn) => fn(rawValue);
@@ -97,10 +62,10 @@ const buildCollectionMonad = (...rawValues) => {
     return buildMaybeMonad(filteredRawValue.join(delimiter));
   };
 
-  return { map, concat, toValue, value, asString };
+  return { map, concat, toValue, value, asString, isMonad: true };
 };
 
-describe.only('collection monad', () => {
+describe('collection monad', () => {
   describe('build', () => {
     it('can be built with a single value', () => {
       buildCollectionMonad(['test1'])
@@ -140,10 +105,17 @@ describe.only('collection monad', () => {
 
     it('multiple concat can be chained', () => {
       buildCollectionMonad(['test1'])
-        .concat(['test2'])
-        .concat(['test3'])
+        .concat('test2')
+        .concat('test3')
         .map((value) => value.toUpperCase())
         .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
+    });
+
+    it('concat a maybe monad', () => {
+      buildCollectionMonad(['test1'])
+        .concat(buildMaybeMonad('test2'))
+        .map((value) => value.toUpperCase())
+        .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2'])));
     });
   });
 
@@ -154,8 +126,8 @@ describe.only('collection monad', () => {
         .value((result) => assertThat(result, equalTo('test1, test2')));
     });
 
-    it('combines a collection to a string and removed undefined', () => {
-      buildCollectionMonad('test1', 'test2', void 0)
+    it('combines a collection to a string and removed empty values', () => {
+      buildCollectionMonad('test1', 'test2', void 0, null)
         .asString(', ')
         .value((result) => assertThat(result, equalTo('test1, test2')));
     });
