@@ -1,3 +1,8 @@
+import {
+  DATE_UNIT_SEPARATOR,
+  TIME_UNIT_SEPARATOR,
+  TIME_COMPONENT_SEPARATOR_1,
+} from '../constants';
 import { buildCollectionMonad } from '../utils';
 
 const leftPad = (value) => {
@@ -18,17 +23,17 @@ export const toIso = (fragments) => {
     fragments.year,
     fragments.month,
     fragments.day
-  ], '-');
+  ], DATE_UNIT_SEPARATOR);
 
   const timeComponent = buildComponent([
     fragments.hour,
     fragments.minute,
     fragments.second,
-  ], ':');
+  ], TIME_UNIT_SEPARATOR);
 
   return buildCollectionMonad([])
     .concat(dateComponent)
     .concat(timeComponent)
-    .asString('T')
+    .asString(TIME_COMPONENT_SEPARATOR_1)
     .toValue();
 };
