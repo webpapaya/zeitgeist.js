@@ -39,7 +39,6 @@ describe('isLeapYear', () => {
   });
 });
 
-
 describe('daysInYear', () => {
   it('a leap year contains 366 days', () => assertThat(
     daysInYear('2016-01'), equalTo(366)));
