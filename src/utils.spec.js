@@ -105,6 +105,16 @@ describe.only('collection monad', () => {
       buildCollectionMonad(['test1'], ['test2'])
         .value((result) => assertThat(result, equalTo(['test1', 'test2'])));
     });
+
+    it('lifts a string to a collection', () => {
+      buildCollectionMonad('test1')
+        .value((result) => assertThat(result, equalTo(['test1'])));
+    });
+
+    it('lifts a list of string to a collection', () => {
+      buildCollectionMonad('test1', 'test2')
+        .value((result) => assertThat(result, equalTo(['test1', 'test2'])));
+    });
   });
 
   describe('concat', () => {
