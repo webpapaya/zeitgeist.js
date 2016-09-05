@@ -19,77 +19,77 @@ describe('isLeapYear', () => {
 describe('daysInMonth', () => {
   describe('in a leap year', () => {
     it('january has 31 days', () => assertThat(
-      daysInMonth('2016', 1), equalTo(31)));
+      daysInMonth('2016-01'), equalTo(31)));
 
     it('february has 29 days', () => assertThat(
-      daysInMonth('2016', 2), equalTo(29)));
+      daysInMonth('2016-02'), equalTo(29)));
 
     it('march has 31 days', () => assertThat(
-      daysInMonth('2016', 3), equalTo(31)));
+      daysInMonth('2016-03'), equalTo(31)));
 
     it('april has 30 days', () => assertThat(
-      daysInMonth('2016', 4), equalTo(30)));
+      daysInMonth('2016-04'), equalTo(30)));
 
     it('may has 31 days', () => assertThat(
-      daysInMonth('2016', 5), equalTo(31)));
+      daysInMonth('2016-05'), equalTo(31)));
 
     it('june has 30 days', () => assertThat(
-      daysInMonth('2016', 6), equalTo(30)));
+      daysInMonth('2016-06'), equalTo(30)));
 
     it('july has 30 days', () => assertThat(
-      daysInMonth('2016', 7), equalTo(30)));
+      daysInMonth('2016-07'), equalTo(30)));
 
     it('august has 31 days', () => assertThat(
-      daysInMonth('2016', 8), equalTo(31)));
+      daysInMonth('2016-08'), equalTo(31)));
 
     it('september has 30 days', () => assertThat(
-      daysInMonth('2016', 9), equalTo(30)));
+      daysInMonth('2016-06'), equalTo(30)));
 
     it('october has 31 days', () => assertThat(
-      daysInMonth('2016', 10), equalTo(31)));
+      daysInMonth('2016-10'), equalTo(31)));
 
     it('november has 30 days', () => assertThat(
-      daysInMonth('2016', 11), equalTo(30)));
+      daysInMonth('2016-11'), equalTo(30)));
 
     it('december has 31 days', () => assertThat(
-      daysInMonth('2016', 12), equalTo(31)));
+      daysInMonth('2016-12'), equalTo(31)));
   });
 
   describe('in a regular year', () => {
     it('january has 31 days', () => assertThat(
-      daysInMonth('2017', 1), equalTo(31)));
+      daysInMonth('2015-01'), equalTo(31)));
 
     it('february has 28 days', () => assertThat(
-      daysInMonth('2017', 2), equalTo(28)));
+      daysInMonth('2015-02'), equalTo(28)));
 
     it('march has 31 days', () => assertThat(
-      daysInMonth('2017', 3), equalTo(31)));
+      daysInMonth('2015-03'), equalTo(31)));
 
     it('april has 30 days', () => assertThat(
-      daysInMonth('2017', 4), equalTo(30)));
+      daysInMonth('2015-04'), equalTo(30)));
 
     it('may has 31 days', () => assertThat(
-      daysInMonth('2017', 5), equalTo(31)));
+      daysInMonth('2015-05'), equalTo(31)));
 
     it('june has 30 days', () => assertThat(
-      daysInMonth('2017', 6), equalTo(30)));
+      daysInMonth('2015-06'), equalTo(30)));
 
     it('july has 30 days', () => assertThat(
-      daysInMonth('2017', 7), equalTo(30)));
+      daysInMonth('2015-07'), equalTo(30)));
 
     it('august has 31 days', () => assertThat(
-      daysInMonth('2017', 8), equalTo(31)));
+      daysInMonth('2015-08'), equalTo(31)));
 
     it('september has 30 days', () => assertThat(
-      daysInMonth('2017', 9), equalTo(30)));
+      daysInMonth('2015-06'), equalTo(30)));
 
     it('october has 31 days', () => assertThat(
-      daysInMonth('2017', 10), equalTo(31)));
+      daysInMonth('2015-10'), equalTo(31)));
 
     it('november has 30 days', () => assertThat(
-      daysInMonth('2017', 11), equalTo(30)));
+      daysInMonth('2015-11'), equalTo(30)));
 
     it('december has 31 days', () => assertThat(
-      daysInMonth('2017', 12), equalTo(31)));
+      daysInMonth('2015-12'), equalTo(31)));
   });
 });

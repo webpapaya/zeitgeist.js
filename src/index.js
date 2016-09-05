@@ -8,7 +8,8 @@ import { toFragments } from './transformations';
 const isLeapMonth = (isoString, month) =>
   month === FEBRUARY && isLeapYear(isoString);
 
-export const daysInMonth = (isoString, month) => {
+export const daysInMonth = (isoString) => {
+  const { month = 1 } = toFragments(isoString);
   if (isLeapMonth(isoString, month)) { return 29; }
   return DAYS_IN_MONTHS[month];
 };
