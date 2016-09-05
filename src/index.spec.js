@@ -8,17 +8,25 @@ const leftPad = (value) => {
   return pad.substring(0, pad.length - string.length) + string;
 };
 
-const toIso = (fractions) => {
-  const dateComponent = buildCollectionMonad([])
-    .concat(fractions.year)
-    .concat(fractions.month)
-    .concat(fractions.day)
+const buildComponent = (fractions, delimiter) => {
+  return buildCollectionMonad(fractions)
     .removeAfterEmpty()
     .map(leftPad)
-    .asString('-')
-    .toValue();
+    .asString(delimiter);
+};
 
-  const timeComponent = fractions.hour;
+const toIso = (fractions) => {
+  const dateComponent = buildComponent([
+    fractions.year,
+    fractions.month,
+    fractions.day
+  ], '-');
+
+  const timeComponent = buildComponent([
+    fractions.hour,
+    fractions.minute,
+    fractions.second,
+  ], ':');
 
   return buildCollectionMonad([])
     .concat(dateComponent)
@@ -46,8 +54,17 @@ describe('toIso', () => {
   it('{ year: 2000, day: 20 } => 2000', () => assertThat(
     toIso({ year: 2000, day: 20 }), equalTo('2000')));
 
-  it('{ hour: 10 } => 2000', () => assertThat(
+  it('{ hour: 10 } => 10', () => assertThat(
     toIso({ hour: 10 }), equalTo('10')));
+
+  it('{ hour: 10, minute: 20 } => 10:20', () => assertThat(
+    toIso({ hour: 10, minute: 20 }), equalTo('10:20')));
+
+  it('{ hour: 10, minute: 20, second: 1 } => 10:20:01', () => assertThat(
+    toIso({ hour: 10, minute: 20, second: 1 }), equalTo('10:20:01')));
+
+  it('{ hour: 10, second: 1 } => 10', () => assertThat(
+    toIso({ hour: 10, second: 1 }), equalTo('10')));
 });
 
 describe('parseIso', () => {
