@@ -4,29 +4,6 @@ const isEmpty = (value) => value === null || value === void 0;
 const isCollection = (value) => value.map;
 const isCollectionEmpty = (collection) => collection.length === 0;
 
-const buildCollectionMonad = (rawValue) => {
-  const map = (fn) => {
-    if(isCollectionEmpty(rawValue)) { return buildCollectionMonad([]); }
-
-    const newValue = rawValue.map((singleValue) => {
-      return buildMaybeMonad(singleValue)
-        .map(fn)
-        .value;
-    });
-
-    return buildCollectionMonad(newValue);
-  };
-
-  const concat = (...valuesToBeJoined) =>
-    buildCollectionMonad(rawValue.concat(...valuesToBeJoined));
-
-
-  const toValue = () => rawValue;
-  const value = (fn) => fn(rawValue);
-
-  return { map, concat, toValue, value };
-};
-
 export const buildMaybeMonad = (value) => {
   const map = (fn) => {
     if(isEmpty(value)) { return buildMaybeMonad(void 0); }
@@ -93,27 +70,65 @@ describe('maybeMonad', () => {
   });
 });
 
+
+const buildCollectionMonad = (...rawValues) => {
+  const rawValue = [].concat(...rawValues);
+  const map = (fn) => {
+    if(isCollectionEmpty(rawValue)) { return buildCollectionMonad([]); }
+
+    const newValue = rawValue.map((singleValue) => {
+      return buildMaybeMonad(singleValue)
+        .map(fn)
+        .value;
+    });
+
+    return buildCollectionMonad(newValue);
+  };
+
+  const concat = (...valuesToBeJoined) =>
+    buildCollectionMonad(rawValue.concat(...valuesToBeJoined));
+
+  const toValue = () => rawValue;
+  const value = (fn) => fn(rawValue);
+
+  return { map, concat, toValue, value };
+};
+
 describe.only('collection monad', () => {
-  it('other values can be joined as function', () => {
-    buildCollectionMonad(['test1'])
-      .concat(['test2'])
-      .map((value) => value.toUpperCase())
-      .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2'])));
+  describe('build', () => {
+    it('can be built with a single value', () => {
+      buildCollectionMonad(['test1'])
+        .value((result) => assertThat(result, equalTo(['test1'])));
+    });
+
+    it('can be built with a multiple values', () => {
+      buildCollectionMonad(['test1'], ['test2'])
+        .value((result) => assertThat(result, equalTo(['test1', 'test2'])));
+    });
   });
 
-  it('multiple values can be added', () => {
-    buildCollectionMonad(['test1'])
-      .concat(['test2'], ['test3'])
-      .map((value) => value.toUpperCase())
-      .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
-  });
+  describe('concat', () => {
+    it('other values can be joined as function', () => {
+      buildCollectionMonad(['test1'])
+        .concat(['test2'])
+        .map((value) => value.toUpperCase())
+        .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2'])));
+    });
 
-  it('multiple concat can be chained', () => {
-    buildCollectionMonad(['test1'])
-      .concat(['test2'])
-      .concat(['test3'])
-      .map((value) => value.toUpperCase())
-      .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
+    it('multiple values can be added', () => {
+      buildCollectionMonad(['test1'])
+        .concat(['test2'], ['test3'])
+        .map((value) => value.toUpperCase())
+        .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
+    });
+
+    it('multiple concat can be chained', () => {
+      buildCollectionMonad(['test1'])
+        .concat(['test2'])
+        .concat(['test3'])
+        .map((value) => value.toUpperCase())
+        .value((result) => assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3'])));
+    });
   });
 });
 
