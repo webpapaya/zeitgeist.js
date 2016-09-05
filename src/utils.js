@@ -41,6 +41,11 @@ export const buildCollectionMonad = (...rawValues) => {
     });
   };
 
+  const removeAfterEmpty = (filteredArray = rawValue) => {
+    const [first, ...rest] = filteredArray;
+    if(isEmpty(first)) { return []; }
+    return buildCollectionMonad(first, removeAfterEmpty(rest));
+  };
 
   const toValue = () => rawValue;
   const value = (fn) => fn(rawValue);
@@ -50,5 +55,5 @@ export const buildCollectionMonad = (...rawValues) => {
     return buildMaybeMonad(filteredRawValue.join(delimiter));
   };
 
-  return { map, concat, toValue, value, asString, chain, isMonad: true };
+  return { map, concat, toValue, value, asString, chain, removeAfterEmpty, isMonad: true };
 };

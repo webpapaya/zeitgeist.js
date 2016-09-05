@@ -14,6 +14,7 @@ const toIso = (fractions) => {
     .concat(fractions.year)
     .concat(fractions.month)
     .concat(fractions.day)
+
     .map(leftPad)
     .asString('-')
     .toValue();
@@ -32,8 +33,6 @@ describe('toIso', () => {
   it('{ year: 2000, month: 10, day: 20 } => 2000-02-20', () => assertThat(
     toIso({ year: 2000, month: 10, day: 20 }), equalTo('2000-10-20')));
 });
-
-
 
 describe('parseIso', () => {
   describe('`2000` responds', () => {
