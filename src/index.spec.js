@@ -9,13 +9,21 @@ const leftPad = (value) => {
 };
 
 const toIso = (fractions) => {
-  return buildCollectionMonad([])
+  const dateComponent = buildCollectionMonad([])
     .concat(fractions.year)
     .concat(fractions.month)
     .concat(fractions.day)
     .removeAfterEmpty()
     .map(leftPad)
     .asString('-')
+    .toValue();
+
+  const timeComponent = fractions.hour;
+
+  return buildCollectionMonad([])
+    .concat(dateComponent)
+    .concat(timeComponent)
+    .asString('T')
     .toValue();
 };
 
@@ -37,6 +45,9 @@ describe('toIso', () => {
 
   it('{ year: 2000, day: 20 } => 2000', () => assertThat(
     toIso({ year: 2000, day: 20 }), equalTo('2000')));
+
+  it('{ hour: 10 } => 2000', () => assertThat(
+    toIso({ hour: 10 }), equalTo('10')));
 });
 
 describe('parseIso', () => {

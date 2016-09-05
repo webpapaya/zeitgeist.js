@@ -1,4 +1,4 @@
-const isEmpty = (value) => value === null || value === void 0;
+const isEmpty = (value) => value === null || value === void 0 || value === '';
 const isCollection = (value) => value.map;
 const isCollectionEmpty = (collection) => collection.length === 0;
 

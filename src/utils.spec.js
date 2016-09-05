@@ -91,10 +91,7 @@ describe('collection monad', () => {
       buildCollectionMonad('test1', 'test2', void 0, 'test3')
         .removeAfterEmpty()
         .value((result) => assertThat(result, equalTo(['test1', 'test2'])));
-
     });
-
-
   });
 
   describe('asString', () => {
