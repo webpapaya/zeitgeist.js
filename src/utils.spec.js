@@ -88,11 +88,13 @@ describe('collection monad', () => {
 
   describe('stripAfterEmpty', () => {
     it('removes every element after the first occurance of an empty value', () => {
-      buildCollectionMonad('test1', void 0, 'test2')
+      buildCollectionMonad('test1', 'test2', void 0, 'test3')
         .removeAfterEmpty()
-        .value((result) => assertThat(result, equalTo(['test1'])));
+        .value((result) => assertThat(result, equalTo(['test1', 'test2'])));
 
     });
+
+
   });
 
   describe('asString', () => {
