@@ -23,4 +23,15 @@ export const isLeapYear = (isoString) => {
   return (dividableBy4 && !dividableBy100) || dividableBy400;
 };
 
+export const isLastDayOfMonth = (isoString) => {
+  const { day } = toFragments(isoString);
+  return daysInMonth(isoString) === day;
+};
+
+export const isFirstDayOfMonth = (isoString) => {
+  const { day } = toFragments(isoString);
+  return day === 1;
+};
+
+
 export { toIso, toFragments } from './transformations/index';

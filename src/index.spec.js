@@ -1,17 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { daysInMonth, isLeapYear } from './index';
-
-import { toFragments } from './index';
-
-const isLastDayOfMonth = (isoString) => {
-  const { day } = toFragments(isoString);
-  return daysInMonth(isoString) === day;
-};
-
-const isFirstDayOfMonth = (isoString) => {
-  const { day } = toFragments(isoString);
-  return day === 1;
-};
+import { daysInMonth, isLeapYear, isFirstDayOfMonth, isLastDayOfMonth } from './index';
 
 describe('isLastDayOfMonth', () => {
   it('2000-01-31 is last of month', () => assertThat(
