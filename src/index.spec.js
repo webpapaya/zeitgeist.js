@@ -1,6 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { parseIso, daysInMonth, isLeapYear } from './index';
-import { buildMaybeMonad } from './utils';
+import { buildMaybeMonad, buildCollectionMonad } from './utils';
 
 
 const leftPad = (value) => {
@@ -10,21 +10,13 @@ const leftPad = (value) => {
 };
 
 const toIso = (fractions) => {
-  const month = buildMaybeMonad(fractions.month)
+  return buildCollectionMonad([])
+    .concat(fractions.year)
+    .concat(fractions.month)
+    .concat(fractions.day)
     .map(leftPad)
-    .value;
-
-  const day = buildMaybeMonad(fractions.day)
-    .map(leftPad)
-    .value;
-
-  const dateComponents = [
-    fractions.year,
-    month,
-    day
-  ].filter((value) => value).join('-');
-
-  return dateComponents;
+    .asString('-')
+    .toValue();
 };
 
 describe('toIso', () => {

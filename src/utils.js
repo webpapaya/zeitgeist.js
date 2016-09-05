@@ -1,11 +1,54 @@
-export const buildMaybeMonad = (value) => {
-  const isEmpty = () =>
-    value === null || value === void 0;
+const isEmpty = (value) => value === null || value === void 0;
+const isCollection = (value) => value.map;
+const isCollectionEmpty = (collection) => collection.length === 0;
 
+export const buildMaybeMonad = (rawValue) => {
   const map = (fn) => {
-    if(isEmpty()) { return buildMaybeMonad(void 0); }
-    return buildMaybeMonad(fn(value));
+    if(isEmpty(rawValue)) { return buildMaybeMonad(void 0); }
+    return buildMaybeMonad(fn(rawValue));
   };
 
-  return { map, value };
+  const value = (fn) => fn(rawValue);
+  const chain = (fn) => map(fn).toValue();
+  const toValue = () => rawValue;
+  const asString = () => buildMaybeMonad(`${rawValue}`);
+
+  return { map, chain, value, toValue, asString, isMonad: true };
+};
+
+
+export const buildCollectionMonad = (...rawValues) => {
+  const rawValue = [].concat(...rawValues);
+  const map = (fn) => {
+    if(isCollectionEmpty(rawValue)) { return buildCollectionMonad([]); }
+
+    const newValue = rawValue.map((singleValue) => buildMaybeMonad(singleValue).chain(fn));
+    return buildCollectionMonad(newValue);
+  };
+
+  const concat = (...valuesToBeJoined) => {
+    const normalizedValuesToBeJoined = valuesToBeJoined.map((value) => {
+      return value && value.isMonad ? value.toValue() : value;
+    });
+
+    return buildCollectionMonad(rawValue.concat(...normalizedValuesToBeJoined));
+  };
+
+  const chain = (fn) => {
+    return map((value) => {
+      const newValue = fn(value);
+      return newValue.isMonad ? newValue.toValue() : value;
+    });
+  };
+
+
+  const toValue = () => rawValue;
+  const value = (fn) => fn(rawValue);
+
+  const asString = (delimiter) => {
+    const filteredRawValue = rawValue.filter((item) => !isEmpty(item));
+    return buildMaybeMonad(filteredRawValue.join(delimiter));
+  };
+
+  return { map, concat, toValue, value, asString, chain, isMonad: true };
 };
