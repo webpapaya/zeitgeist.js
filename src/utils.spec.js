@@ -7,7 +7,6 @@ const isCollectionEmpty = (collection) => collection.length === 0;
 const buildCollectionMonad = (value) => {
   const map = (fn) => {
     if(isCollectionEmpty(value)) { return buildCollectionMonad([]); }
-    if(!isCollection(value)) { return buildMaybeMonad(value).map(fn); }
 
     const newValue = value.map((singleValue) => {
       return buildMaybeMonad(singleValue)
@@ -15,13 +14,16 @@ const buildCollectionMonad = (value) => {
         .value;
     });
 
-    return buildMaybeMonad(newValue);
+    return buildCollectionMonad(newValue);
   };
 
   const concat = (...valuesToBeJoined) =>
     buildCollectionMonad(value.concat(...valuesToBeJoined));
 
-  return { map, concat, value };
+
+  const toValue = () => value;
+
+  return { map, concat, toValue };
 };
 
 export const buildMaybeMonad = (value) => {
@@ -95,7 +97,7 @@ describe.only('collection monad', () => {
     const result = buildCollectionMonad(['test1'])
       .concat(['test2'])
       .map((value) => value.toUpperCase())
-      .value;
+      .toValue();
 
     assertThat(result, equalTo(['TEST1', 'TEST2']));
   });
@@ -104,7 +106,7 @@ describe.only('collection monad', () => {
     const result = buildCollectionMonad(['test1'])
       .concat(['test2'], ['test3'])
       .map((value) => value.toUpperCase())
-      .value;
+      .toValue();
 
     assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3']));
   });
@@ -114,7 +116,7 @@ describe.only('collection monad', () => {
       .concat(['test2'])
       .concat(['test3'])
       .map((value) => value.toUpperCase())
-      .value;
+      .toValue();
 
     assertThat(result, equalTo(['TEST1', 'TEST2', 'TEST3']));
   });
