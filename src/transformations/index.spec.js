@@ -131,4 +131,15 @@ describe('toFragments', () => {
     it('`second is undefined`', () => assertThat(
       toFragments('2000-01-01 10:20').second, equalTo(void 0)));
   });
+
+  describe('`T20:15` responds', () => {
+    it('`hour` is 20', () => assertThat(
+      toFragments('T20:15').hour, equalTo(20)));
+
+    it('`minute` is 15', () => assertThat(
+      toFragments('T20:15').minute, equalTo(15)));
+
+    it('`second` is undefined', () => assertThat(
+      toFragments('T20:15').second, equalTo(void 0)));
+  });
 });

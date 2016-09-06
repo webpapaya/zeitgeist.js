@@ -10,7 +10,6 @@ const isLeapMonth = (isoString, month) =>
 
 export const daysInYear = (isoString) => isLeapYear(isoString) ? 366 : 365;
 
-
 export const daysInMonth = (isoString) => {
   const { month = 1 } = toFragments(isoString);
   if (isLeapMonth(isoString, month)) { return 29; }
@@ -35,7 +34,6 @@ export const isFirstDayOfMonth = (isoString) => {
   const { day } = toFragments(isoString);
   return day === 1;
 };
-
 
 export { toIso, toFragments } from './transformations/index';
 export {
