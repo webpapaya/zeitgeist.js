@@ -31,3 +31,15 @@ export const DAYS_IN_MONTHS = {
   [NOVEMBER]: 30,
   [DECEMBER]: 31,
 };
+
+export const ONE_MICROSECOND = 1;
+export const ONE_MILLISECOND = 1000 * ONE_MICROSECOND;
+export const ONE_SECOND = 1000 * ONE_MILLISECOND;
+export const ONE_MINUTE = 60 * ONE_SECOND;
+export const ONE_HOUR = 60 * ONE_MINUTE;
+
+export const TIME_UNITS = {
+  hour: ONE_HOUR,
+  minute: ONE_MINUTE,
+  second: ONE_SECOND
+};
