@@ -3,7 +3,7 @@ import { assertThat, equalTo } from 'hamjest';
 import { readLeapSeconds } from './leapseconds';
 
 describe('readLeapSeconds', () => {
-  it('removes all comments', () => {
+  it('reads iana leapseconds file correctly', () => {
     const tzLeapSeconds = readFileSync('./scripts/_test-fixtures/leapseconds', 'utf8');
     const leapSecondsAsJson = readLeapSeconds(tzLeapSeconds);
 
