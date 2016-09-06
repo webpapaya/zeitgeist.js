@@ -32,7 +32,7 @@ describe('addMonths', () => {
     addMonths('2000-01-01', 12), equalTo('2001-01-01')));
 
   it('adding 24 months to 2000-01-01 results in 2002-01-01', () => assertThat(
-    addMonths('2000-01-01', 24), equalTo('2002-01-01')));
+    addMonths('2000-01-02', 24), equalTo('2002-01-02')));
 });
 
 describe('subtractDays', () => {

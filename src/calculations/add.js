@@ -63,9 +63,8 @@ export const addMonths = (isoString, months) => {
 
   if(isLastMonthOfYear(isoString)) {
     return addMonths(
-      jumpToFirstDayOfMonth(
         jumpToFirstMonthOfYear(
-          jumpToNextYear(isoString))), months - 1);
+          jumpToNextYear(isoString)), months - 1);
   }
 
   return addMonths(jumpToNextMonth(isoString), months - 1);
