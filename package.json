@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint-crewmeister src",
-    "test": "mocha src/{*,**/*,**/**/*,**/**/**/*}.spec.js --recursive --compilers js:babel-register",
+    "test": "mocha {src,scripts}/{*,**/*,**/**/*,**/**/**/*}.spec.js --recursive --compilers js:babel-register",
     "prepublish": "babel src/ --out-dir lib/ --ignore *.spec.js"
   },
   "repository": {
