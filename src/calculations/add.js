@@ -69,3 +69,9 @@ export const addMonths = (isoString, months) => {
 
   return addMonths(jumpToNextMonth(isoString), months - 1);
 };
+
+
+export const addYears = (isoString, years) => {
+  if(years === 0) { return isoString; }
+  return addYears(jumpToNextYear(isoString), years - 1);
+};
