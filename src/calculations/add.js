@@ -48,7 +48,6 @@ export const addMonths = (isoString, months) => {
 };
 
 export const addYears = (isoString, years) => {
-  if(years === 0) { return toIso(isoString); }
   const fragments = toFragments(isoString);
-  return addYears(jumpToNextYear(fragments), years - 1);
+  return toIso({ ...fragments, year: fragments.year + years });
 };
