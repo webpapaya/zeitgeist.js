@@ -38,3 +38,4 @@ export const isFirstDayOfMonth = (isoString) => {
 
 
 export { toIso, toFragments } from './transformations/index';
+export { addDays, subtractDays } from './calculations/index';
