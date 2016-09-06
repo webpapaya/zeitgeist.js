@@ -5,6 +5,7 @@ import {
   addYears,
 
   subtractDays,
+  subtractMonths,
   subtractYears,
 } from '../index';
 
@@ -71,6 +72,14 @@ describe('subtractDays', () => {
 
   it('subtract -1 day from 2000-12-31 results in 2001-01-01', () => assertThat(
     subtractDays('2000-12-31', -1), equalTo('2001-01-01')));
+});
+
+describe('subtract months', () => {
+  it('subtract 1 month from 2000-02-01 results in 2000-01-01', () => assertThat(
+    subtractMonths('2000-02-01', 1), equalTo('2000-01-01')));
+
+  it('subtract 1 month from 2000-02-01 results in 2000-01-01', () => assertThat(
+    subtractMonths('2001-01-01', 1), equalTo('2000-12-01')));
 });
 
 describe('subtractYears', () => {

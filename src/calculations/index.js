@@ -1,2 +1,2 @@
 export { addDays, addMonths, addYears } from './add';
-export { subtractDays, subtractYears } from './subtract';
+export { subtractDays, subtractMonths, subtractYears } from './subtract';

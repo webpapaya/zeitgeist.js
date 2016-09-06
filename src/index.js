@@ -44,5 +44,6 @@ export {
   addYears,
 
   subtractDays,
+  subtractMonths,
   subtractYears,
 } from './calculations/index';
