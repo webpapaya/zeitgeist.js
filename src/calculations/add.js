@@ -7,6 +7,11 @@ const isLastDayOfYear = (isoString) => {
   return month === DECEMBER && isLastDayOfMonth(isoString);
 };
 
+const isLastMonthOfYear = (isoString) => {
+  const { month } = toFragments(isoString);
+  return month === DECEMBER;
+};
+
 const jumpToFirstMonthOfYear = (isoString) => {
   const fragments = toFragments(isoString);
   return toIso({ ...fragments, month: 1 });
@@ -55,5 +60,13 @@ export const addDays = (isoString, days) => {
 
 export const addMonths = (isoString, months) => {
   if(months === 0) { return isoString; }
+
+  if(isLastMonthOfYear(isoString)) {
+    return addMonths(
+      jumpToFirstDayOfMonth(
+        jumpToFirstMonthOfYear(
+          jumpToNextYear(isoString))), months - 1);
+  }
+
   return addMonths(jumpToNextMonth(isoString), months - 1);
 };

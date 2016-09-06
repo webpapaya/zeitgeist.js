@@ -27,8 +27,13 @@ describe('addDays', () => {
 describe('addMonths', () => {
   it('adding 1 month to 2000-01-01 results in 2000-02-01', () => assertThat(
     addMonths('2000-01-01', 1), equalTo('2000-02-01')));
-});
 
+  it('adding 12 months to 2000-01-01 results in 2001-01-01', () => assertThat(
+    addMonths('2000-01-01', 12), equalTo('2001-01-01')));
+
+  it('adding 24 months to 2000-01-01 results in 2002-01-01', () => assertThat(
+    addMonths('2000-01-01', 24), equalTo('2002-01-01')));
+});
 
 describe('subtractDays', () => {
   it('subtract 1 day from 2000-01-02 results in 2000-01-01', () => assertThat(
