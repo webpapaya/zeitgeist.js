@@ -1,5 +1,5 @@
 import { DECEMBER, JANUARY } from '../constants';
-import { addDays, addMonths, addYears } from './add'
+import { addDays, addMonths } from './add'
 import { toFragments, toIso, daysInMonth } from '../index';
 
 const isFirstDayOfYear = ({ month, day }) => month === JANUARY && day === 1;
@@ -12,11 +12,11 @@ const jumpToLastDayOfMonth = (fragments) => ({ ...fragments, day: daysInMonth(fr
 const jumpToPreviousYear = (fragments) => ({ ...fragments, year: fragments.year - 1 });
 const jumpToPreviousMonth = (fragments) => ({ ...fragments, month: fragments.month - 1 });
 
-export const subtractDays = (isoString, days) => {
-  if(days === 0) { return toIso(isoString); }
-  if(days < 0) { return addDays(isoString, days * -1); }
+export const subtractDays = (isoStringOrFragments, days) => {
+  if(days === 0) { return toIso(isoStringOrFragments); }
+  if(days < 0) { return addDays(isoStringOrFragments, days * -1); }
 
-  const fragments = toFragments(isoString);
+  const fragments = toFragments(isoStringOrFragments);
 
   if(isFirstDayOfYear(fragments)) {
     return subtractDays(
@@ -34,11 +34,11 @@ export const subtractDays = (isoString, days) => {
   return subtractDays(jumpToPreviousDay(fragments), days - 1);
 };
 
-export const subtractMonths = (isoString, months) => {
-  if(months === 0) { return toIso(isoString); }
-  if(months < 0) { return addMonths(isoString, months * -1); }
+export const subtractMonths = (isoStringOrFragments, months) => {
+  if(months === 0) { return toIso(isoStringOrFragments); }
+  if(months < 0) { return addMonths(isoStringOrFragments, months * -1); }
 
-  const fragments = toFragments(isoString);
+  const fragments = toFragments(isoStringOrFragments);
 
   if(isFirstMonthOfYear(fragments)) {
     return subtractMonths(
@@ -49,7 +49,7 @@ export const subtractMonths = (isoString, months) => {
   return subtractMonths(jumpToPreviousMonth(fragments), months - 1);
 };
 
-export const subtractYears = (isoString, years) => {
-  const fragments = toFragments(isoString);
+export const subtractYears = (isoStringOrFragments, years) => {
+  const fragments = toFragments(isoStringOrFragments);
   return toIso({ ...fragments, year: fragments.year - years })
 };

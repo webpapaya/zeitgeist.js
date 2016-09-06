@@ -12,11 +12,11 @@ const jumpToNextYear = (fragments) => ({ ...fragments, year: fragments.year + 1 
 const jumpToNextMonth = (fragments) => ({ ...fragments, month: fragments.month + 1});
 const jumpToNextDay = (fragments) => ({ ...fragments, day: fragments.day + 1 });
 
-export const addDays = (isoString, days) => {
-  if(days === 0) { return toIso(isoString); }
-  if(days < 0) { return subtractDays(isoString, days * -1); }
+export const addDays = (isoStringOrFragments, days) => {
+  if(days === 0) { return toIso(isoStringOrFragments); }
+  if(days < 0) { return subtractDays(isoStringOrFragments, days * -1); }
 
-  const fragments = toFragments(isoString);
+  const fragments = toFragments(isoStringOrFragments);
 
   if(isLastDayOfYear(fragments)) {
     return addDays(
@@ -25,7 +25,7 @@ export const addDays = (isoString, days) => {
           jumpToNextYear(fragments))), days - 1);
   }
 
-  if(isLastDayOfMonth(isoString)) {
+  if(isLastDayOfMonth(isoStringOrFragments)) {
     return addDays(
       jumpToFirstDayOfMonth(
         jumpToNextMonth(fragments)), days - 1);
@@ -34,11 +34,11 @@ export const addDays = (isoString, days) => {
   return addDays(jumpToNextDay(fragments), days - 1);
 };
 
-export const addMonths = (isoString, months) => {
-  if(months === 0) { return toIso(isoString); }
-  if(months < 0) { return subtractMonths(isoString, months * -1); }
+export const addMonths = (isoStringOrFragments, months) => {
+  if(months === 0) { return toIso(isoStringOrFragments); }
+  if(months < 0) { return subtractMonths(isoStringOrFragments, months * -1); }
 
-  const fragments = toFragments(isoString);
+  const fragments = toFragments(isoStringOrFragments);
   if(isLastMonthOfYear(fragments)) {
     return addMonths(
         jumpToFirstMonthOfYear(
@@ -48,7 +48,7 @@ export const addMonths = (isoString, months) => {
   return addMonths(jumpToNextMonth(fragments), months - 1);
 };
 
-export const addYears = (isoString, years) => {
-  const fragments = toFragments(isoString);
+export const addYears = (isoStringOrFragments, years) => {
+  const fragments = toFragments(isoStringOrFragments);
   return toIso({ ...fragments, year: fragments.year + years });
 };
