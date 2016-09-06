@@ -5,7 +5,7 @@ import {
   secondsBetween,
   minutesBetween,
   hoursBetween,
-} from './index';
+} from '../index';
 
 describe('microsecondsBetween', () => {
   it('T10:01 and T10:00 is 60e6 microseconds', () => assertThat(

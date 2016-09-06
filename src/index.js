@@ -44,4 +44,12 @@ export {
   subtractDays,
   subtractMonths,
   subtractYears,
+
+  microsecondsBetween,
+  millisecondsBetween,
+  secondsBetween,
+  minutesBetween,
+  hoursBetween,
 } from './calculations/index';
+
+
