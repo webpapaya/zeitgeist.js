@@ -37,7 +37,12 @@ export const isFirstDayOfMonth = (isoString) => {
 
 export {
   toIso,
-  toFragments
+  toFragments,
+  toIsoDate,
+  toIsoTime,
+
+  removeTimeComponent,
+  removeDateComponent
 } from './transformations/index';
 
 export {

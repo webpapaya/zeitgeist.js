@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { toIso, toFragments, toIsoDate, toIsoTime, removeTimeComponent, removeDateComponent } from './index';
+import { toIso, toFragments, toIsoDate, toIsoTime, removeTimeComponent, removeDateComponent } from '../index';
 
 describe('toIso', () => {
   it('{} => ""', () => assertThat(
