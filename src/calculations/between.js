@@ -28,5 +28,7 @@ export const hoursBetween = (from, to) => microsecondsBetween(from, to) / ONE_HO
 export const datesBetween = (from, to, dates = []) => {
   const newDates = [...dates, from];
   if(from === to) { return newDates; }
-  return datesBetween(subtractDays(from, 1), to, newDates);
+
+  const direction = from > to ? 1 : -1;
+  return datesBetween(subtractDays(from, direction), to, newDates);
 };
