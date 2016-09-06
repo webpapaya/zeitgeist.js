@@ -1,5 +1,5 @@
 import { DECEMBER, JANUARY } from '../constants';
-import { addDays } from './add'
+import { addDays, addMonths, addYears } from './add'
 import { toFragments, toIso, daysInMonth } from '../index';
 
 const isFirstDayOfYear = ({ month, day }) => month === JANUARY && day === 1;
@@ -36,6 +36,8 @@ export const subtractDays = (isoString, days) => {
 
 export const subtractMonths = (isoString, months) => {
   if(months === 0) { return toIso(isoString); }
+  if(months < 0) { return addMonths(isoString, months * -1); }
+
   const fragments = toFragments(isoString);
 
   if(isFirstMonthOfYear(fragments)) {

@@ -41,6 +41,9 @@ describe('addMonths', () => {
 
   it('adding 24 months to 2000-01-01 results in 2002-01-01', () => assertThat(
     addMonths('2000-01-02', 24), equalTo('2002-01-02')));
+
+  it('adding -1 months to 2000-02-01 results in 2000-01-01', () => assertThat(
+    addMonths('2000-02-01', -1), equalTo('2000-01-01')));
 });
 
 describe('addYears', () => {
@@ -49,6 +52,9 @@ describe('addYears', () => {
 
   it('adding 10 year to 2000-01-01 results in 2010-01-01', () => assertThat(
     addYears('2000-01-01', 10), equalTo('2010-01-01')));
+
+  it('add -1 years to 2001-01-01 results in 2000-01-01', () => assertThat(
+    addYears('2001-01-01', -1), equalTo('2000-01-01')));
 });
 
 describe('subtractDays', () => {
@@ -80,6 +86,9 @@ describe('subtract months', () => {
 
   it('subtract 1 month from 2000-02-01 results in 2000-01-01', () => assertThat(
     subtractMonths('2001-01-01', 1), equalTo('2000-12-01')));
+
+  it('subtract -1 month from 2000-01-01 results in 2000-02-01', () => assertThat(
+    subtractMonths('2000-01-01', -1), equalTo('2000-02-01')));
 });
 
 describe('subtractYears', () => {
@@ -88,5 +97,8 @@ describe('subtractYears', () => {
 
   it('adding 10 year to 2010-01-01 results in 2000-01-01', () => assertThat(
     subtractYears('2010-01-01', 10), equalTo('2000-01-01')));
+
+  it('subtract -1 years from 2000-01-01 results in 2001-01-01', () => assertThat(
+    subtractYears('2000-01-01', -1), equalTo('2001-01-01')));
 });
 

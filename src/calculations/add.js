@@ -1,5 +1,5 @@
 import { DECEMBER } from '../constants';
-import { subtractDays } from './subtract'
+import { subtractDays, subtractMonths } from './subtract'
 import { toFragments, toIso, isLastDayOfMonth } from '../index';
 
 const isLastMonthOfYear = ({ month }) => month === DECEMBER;
@@ -36,6 +36,7 @@ export const addDays = (isoString, days) => {
 
 export const addMonths = (isoString, months) => {
   if(months === 0) { return toIso(isoString); }
+  if(months < 0) { return subtractMonths(isoString, months * -1); }
 
   const fragments = toFragments(isoString);
   if(isLastMonthOfYear(fragments)) {
