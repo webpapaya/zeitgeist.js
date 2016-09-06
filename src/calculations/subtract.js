@@ -47,3 +47,8 @@ export const subtractDays = (isoString, days) => {
 
   return subtractDays(jumpToPreviousDay(isoString), days - 1);
 };
+
+export const subtractYears = (isoString, years) => {
+  const fragments = toFragments(isoString);
+  return toIso({ ...fragments, year: fragments.year - years })
+};

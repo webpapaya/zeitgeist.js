@@ -1,5 +1,12 @@
 import { assertThat, equalTo, not, throws } from 'hamjest';
-import { addDays, subtractDays, addMonths, addYears } from '../index';
+import {
+  addDays,
+  addMonths,
+  addYears,
+
+  subtractDays,
+  subtractYears,
+} from '../index';
 
 describe('addDays', () => {
   it('adding 1 day to 2000-01-01 results in 2000-01-02', () => assertThat(
@@ -65,3 +72,12 @@ describe('subtractDays', () => {
   it('subtract -1 day from 2000-12-31 results in 2001-01-01', () => assertThat(
     subtractDays('2000-12-31', -1), equalTo('2001-01-01')));
 });
+
+describe('subtractYears', () => {
+  it('subtract 1 year from 2001-01-01 results in 2000-01-01', () => assertThat(
+    subtractYears('2001-01-01', 1), equalTo('2000-01-01')));
+
+  it('adding 10 year to 2010-01-01 results in 2000-01-01', () => assertThat(
+    subtractYears('2010-01-01', 10), equalTo('2000-01-01')));
+});
+
