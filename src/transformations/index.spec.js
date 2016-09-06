@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { toIso, toFragments, toIsoDate, toIsoTime } from './index';
+import { toIso, toFragments, toIsoDate, toIsoTime, removeTimeComponent, removeDateComponent } from './index';
 
 describe('toIso', () => {
   it('{} => ""', () => assertThat(
@@ -143,3 +143,22 @@ describe('toFragments', () => {
       toFragments('T20:15').second, equalTo(void 0)));
   });
 });
+
+describe('removeTimeComponent', () => {
+  it('2000-01-01T10:00 responds 2000-01-01', () => assertThat(
+    removeTimeComponent('2000-01-01T10:00'), equalTo('2000-01-01')));
+
+  it('T10:00 responds empty string', () => assertThat(
+    removeTimeComponent('T10:00'), equalTo('')));
+});
+
+describe('removeDateComponent', () => {
+  it('2000-01-01T10:00 responds 10:00', () => assertThat(
+    removeDateComponent('2000-01-01T10:00'), equalTo('10:00')));
+
+  it('2000-01-01 responds empty string', () => assertThat(
+    removeDateComponent('2000-01-01'), equalTo('')));
+});
+
+
+

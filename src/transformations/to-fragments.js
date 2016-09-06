@@ -16,7 +16,7 @@ const findTimeSeparator = (isoString) => {
   return TIME_COMPONENT_SEPARATOR_2;
 };
 
-const separateDateAndTimeComponents = (isoString) => {
+export const separateDateAndTimeComponents = (isoString) => {
   const timeSeparator = findTimeSeparator(isoString);
   const [dateComponent, timeComponent = ''] = isoString.split(timeSeparator);
   return { dateComponent, timeComponent };
