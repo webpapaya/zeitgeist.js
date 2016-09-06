@@ -1,4 +1,4 @@
-import { toFragments } from '../index';
+import { toFragments, subtractDays } from '../index';
 import {
   ONE_MILLISECOND,
   ONE_SECOND,
@@ -24,3 +24,9 @@ export const millisecondsBetween = (from, to) => microsecondsBetween(from, to) /
 export const secondsBetween = (from, to) => microsecondsBetween(from, to) / ONE_SECOND;
 export const minutesBetween = (from, to) => microsecondsBetween(from, to) / ONE_MINUTE;
 export const hoursBetween = (from, to) => microsecondsBetween(from, to) / ONE_HOUR;
+
+export const datesBetween = (from, to, dates = []) => {
+  const newDates = [...dates, from];
+  if(from === to) { return newDates; }
+  return datesBetween(subtractDays(from, 1), to, newDates);
+};

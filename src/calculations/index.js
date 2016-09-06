@@ -16,4 +16,5 @@ export {
   secondsBetween,
   minutesBetween,
   hoursBetween,
+  datesBetween
 } from './between';

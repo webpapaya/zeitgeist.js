@@ -5,6 +5,7 @@ import {
   secondsBetween,
   minutesBetween,
   hoursBetween,
+  datesBetween,
 } from '../index';
 
 describe('microsecondsBetween', () => {
@@ -36,4 +37,16 @@ describe('minutes between', () => {
 describe('hours between', () => {
   it('T10:00 and T11:00 is 1 hour ', () => assertThat(
     hoursBetween('T11:00', 'T10:00'), equalTo(1)));
+});
+
+describe('dates between', () => {
+  it('dates between 2000-01-02 and 2000-01-01 responds correct dates', () => assertThat(
+    datesBetween('2000-01-02', '2000-01-01'), equalTo(['2000-01-02', '2000-01-01'])));
+
+  it('dates between 2000-01-03 and 2000-01-01 responds correct dates', () => assertThat(
+    datesBetween('2000-01-03', '2000-01-01'), equalTo([
+      '2000-01-03',
+      '2000-01-02',
+      '2000-01-01',
+    ])));
 });
