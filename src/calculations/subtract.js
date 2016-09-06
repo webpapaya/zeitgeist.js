@@ -1,6 +1,11 @@
 import { DECEMBER, JANUARY } from '../constants';
-import { addDays, addMonths } from './add';
-import { toFragments, toIso, daysInMonth } from '../index';
+import {
+  toFragments,
+  toIso,
+  daysInMonth,
+  addDays,
+  addMonths
+} from '../index';
 
 const isFirstDayOfYear = ({ month, day }) => month === JANUARY && day === 1;
 const isFirstMonthOfYear = ({ month }) => month === JANUARY;

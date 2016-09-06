@@ -1,6 +1,11 @@
 import { DECEMBER } from '../constants';
-import { subtractDays, subtractMonths } from './subtract';
-import { toFragments, toIso, isLastDayOfMonth } from '../index';
+import {
+  toFragments,
+  toIso,
+  isLastDayOfMonth,
+  subtractDays,
+  subtractMonths,
+} from '../index';
 
 const isLastMonthOfYear = ({ month }) => month === DECEMBER;
 const isLastDayOfYear = (fragments) =>
