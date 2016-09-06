@@ -20,7 +20,7 @@ const buildComponent = (fragments, delimiter) => {
 };
 
 export const toIso = (fragments) => {
-  if(typeof fragments === 'string') { return fragments; }
+  if (typeof fragments === 'string') { return fragments; }
 
   const dateComponent = buildComponent([
     fragments.year,

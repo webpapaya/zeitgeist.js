@@ -1,4 +1,4 @@
-import { assertThat, equalTo, not, throws } from 'hamjest';
+import { assertThat, equalTo } from 'hamjest';
 import {
   addDays,
   addMonths,
@@ -101,4 +101,3 @@ describe('subtractYears', () => {
   it('subtract -1 years from 2000-01-01 results in 2001-01-01', () => assertThat(
     subtractYears('2000-01-01', -1), equalTo('2001-01-01')));
 });
-

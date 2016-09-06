@@ -4,7 +4,7 @@ import {
   daysInYear,
   isLeapYear,
   isFirstDayOfMonth,
-  isLastDayOfMonth
+  isLastDayOfMonth,
 } from './index';
 
 describe('isLastDayOfMonth', () => {

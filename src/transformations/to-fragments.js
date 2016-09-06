@@ -23,7 +23,7 @@ const separateDateAndTimeComponents = (isoString) => {
 };
 
 export const toFragments = (isoString) => {
-  if(typeof isoString === 'object') { return isoString; }
+  if (typeof isoString === 'object') { return isoString; }
 
   const { dateComponent, timeComponent } = separateDateAndTimeComponents(isoString);
   const [year, month, day] = dateComponent.split(DATE_UNIT_SEPARATOR);
