@@ -1,6 +1,6 @@
-import { DECEMBER, JANUARY } from '../constants';
+import { DECEMBER } from '../constants';
 import { subtractDays } from './subtract'
-import { toFragments, toIso, daysInMonth, daysInYear, isLastDayOfMonth } from '../index';
+import { toFragments, toIso, isLastDayOfMonth } from '../index';
 
 const isLastDayOfYear = (isoString) => {
   const { month } = toFragments(isoString);
