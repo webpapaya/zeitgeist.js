@@ -1,2 +1,2 @@
 export { toFragments } from './to-fragments';
-export { toIso } from './to-iso';
+export { toIso, toIsoDate, toIsoTime } from './to-iso';

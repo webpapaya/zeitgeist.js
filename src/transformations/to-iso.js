@@ -22,21 +22,25 @@ const buildComponent = (fragments, delimiter) => {
 export const toIso = (fragments) => {
   if (typeof fragments === 'string') { return fragments; }
 
-  const dateComponent = buildComponent([
+  return buildCollectionMonad([])
+    .concat(toIsoDate(fragments))
+    .concat(toIsoTime(fragments))
+    .asString(TIME_COMPONENT_SEPARATOR_1)
+    .toValue();
+};
+
+export const toIsoDate = (fragments) => {
+  return buildComponent([
     fragments.year,
     fragments.month,
     fragments.day,
-  ], DATE_UNIT_SEPARATOR);
+  ], DATE_UNIT_SEPARATOR).toValue();
+};
 
-  const timeComponent = buildComponent([
+export const toIsoTime = (fragments) => {
+  return buildComponent([
     fragments.hour,
     fragments.minute,
     fragments.second,
-  ], TIME_UNIT_SEPARATOR);
-
-  return buildCollectionMonad([])
-    .concat(dateComponent)
-    .concat(timeComponent)
-    .asString(TIME_COMPONENT_SEPARATOR_1)
-    .toValue();
+  ], TIME_UNIT_SEPARATOR).toValue();
 };

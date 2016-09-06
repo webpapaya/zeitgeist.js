@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { toIso, toFragments } from './index';
+import { toIso, toFragments, toIsoDate, toIsoTime } from './index';
 
 describe('toIso', () => {
   it('{} => ""', () => assertThat(
@@ -32,6 +32,18 @@ describe('toIso', () => {
   it('{ hour: 10, second: 1 } => 10', () => assertThat(
     toIso({ hour: 10, second: 1 }), equalTo('10')));
 });
+
+describe('toIsoDate', () => {
+  it('{ year: 2000, month: 10, day: 20, hour: 10 }', () => assertThat(
+    toIsoDate({ year: 2000, month: 10, day: 20, hour: 10 }), equalTo('2000-10-20')));
+});
+
+describe('toIsoTime', () => {
+  it('{ year: 2000, month: 10, day: 20, hour: 10 }', () => assertThat(
+    toIsoTime({ year: 2000, hour: 10, minute: 1 }), equalTo('10:01')));
+});
+
+
 
 describe('toFragments', () => {
   describe('`2000` responds', () => {
