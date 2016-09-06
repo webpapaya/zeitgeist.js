@@ -12,29 +12,30 @@ const isLastMonthOfYear = (isoString) => {
   return month === DECEMBER;
 };
 
-const jumpToFirstMonthOfYear = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, month: 1 });
+const setFragments = (isoString, fragments) => {
+  const originalFragments = toFragments(isoString);
+  return toIso({ ...originalFragments, ...fragments });
 };
 
-const jumpToFirstDayOfMonth = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, day: 1 });
-};
+const jumpToFirstMonthOfYear = (isoString) =>
+  setFragments(isoString, { month: 1 });
+
+const jumpToFirstDayOfMonth = (isoString) =>
+  setFragments(isoString, { day: 1 });
 
 const jumpToNextYear = (isoString) => {
   const fragments = toFragments(isoString);
-  return toIso({ ...fragments, year: fragments.year + 1 });
+  return setFragments(isoString, { year: fragments.year + 1 });
 };
 
 const jumpToNextMonth = (isoString) => {
   const fragments = toFragments(isoString);
-  return toIso({ ...fragments, month: fragments.month + 1 });
+  return setFragments(isoString, { month: fragments.month + 1 });
 };
 
 const jumpToNextDay = (isoString) => {
   const fragments = toFragments(isoString);
-  return toIso({ ...fragments, day: fragments.day + 1 });
+  return setFragments(isoString, { day: fragments.day + 1 });
 };
 
 export const addDays = (isoString, days) => {
@@ -57,7 +58,6 @@ export const addDays = (isoString, days) => {
   return addDays(jumpToNextDay(isoString), days - 1);
 };
 
-
 export const addMonths = (isoString, months) => {
   if(months === 0) { return isoString; }
 
@@ -69,7 +69,6 @@ export const addMonths = (isoString, months) => {
 
   return addMonths(jumpToNextMonth(isoString), months - 1);
 };
-
 
 export const addYears = (isoString, years) => {
   if(years === 0) { return isoString; }
