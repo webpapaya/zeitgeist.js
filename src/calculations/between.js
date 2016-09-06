@@ -1,10 +1,10 @@
-import { toFragments, addDays } from '../index';
+import { toFragments, addDays, removeTimeComponent } from '../index';
 import {
   ONE_MILLISECOND,
   ONE_SECOND,
   ONE_MINUTE,
   ONE_HOUR,
-  TIME_UNITS
+  TIME_UNITS,
 } from '../constants';
 
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
@@ -26,9 +26,13 @@ export const minutesBetween = (from, to) => microsecondsBetween(from, to) / ONE_
 export const hoursBetween = (from, to) => microsecondsBetween(from, to) / ONE_HOUR;
 
 export const datesBetween = (from, to, dates = []) => {
-  const newDates = [...dates, from];
-  if(from === to) { return newDates; }
+  const fromWithoutTimeComponent = removeTimeComponent(from);
+  const toWithoutTimeComponent = removeTimeComponent(to);
 
-  const direction = from < to ? 1 : -1;
-  return datesBetween(addDays(from, direction), to, newDates);
+  const newDates = [...dates, fromWithoutTimeComponent];
+  if(fromWithoutTimeComponent === toWithoutTimeComponent) { return newDates; }
+
+  const direction = fromWithoutTimeComponent < toWithoutTimeComponent ? 1 : -1;
+  const nextFrom = addDays(fromWithoutTimeComponent, direction);
+  return datesBetween(nextFrom, toWithoutTimeComponent, newDates);
 };

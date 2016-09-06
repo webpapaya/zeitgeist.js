@@ -43,6 +43,9 @@ describe('dates between', () => {
   it('dates between 2000-01-01 and 2000-01-02 responds correct dates', () => assertThat(
     datesBetween('2000-01-01', '2000-01-02'), equalTo(['2000-01-01', '2000-01-02'])));
 
+  it('dates between 2000-01-01T10:10 and 2000-01-02 responds correct dates', () => assertThat(
+    datesBetween('2000-01-01T10:10', '2000-01-02'), equalTo(['2000-01-01', '2000-01-02'])));
+
   it('dates between 2000-01-02 and 2000-01-01 responds correct dates', () => assertThat(
     datesBetween('2000-01-02', '2000-01-01'), equalTo(['2000-01-02', '2000-01-01'])));
 
