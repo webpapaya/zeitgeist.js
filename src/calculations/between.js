@@ -1,4 +1,4 @@
-import { toFragments, subtractDays } from '../index';
+import { toFragments, addDays } from '../index';
 import {
   ONE_MILLISECOND,
   ONE_SECOND,
@@ -29,6 +29,6 @@ export const datesBetween = (from, to, dates = []) => {
   const newDates = [...dates, from];
   if(from === to) { return newDates; }
 
-  const direction = from > to ? 1 : -1;
-  return datesBetween(subtractDays(from, direction), to, newDates);
+  const direction = from < to ? 1 : -1;
+  return datesBetween(addDays(from, direction), to, newDates);
 };
