@@ -3,7 +3,6 @@ import {
   addDays,
   removeTimeComponent,
   containsDateComponent,
-  toFloat,
 } from '../index';
 
 import {
@@ -37,7 +36,7 @@ const daysInYear = (isoString) => {
 export const daysBetween = (from, to) => {
   const daysFrom = containsDateComponent(from) ? daysInYear(from) : 0;
   const daysTo = containsDateComponent(to) ? daysInYear(to) : 0;
-  
+
   return daysTo - daysFrom;
 };
 
