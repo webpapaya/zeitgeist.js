@@ -32,6 +32,14 @@ export const DAYS_IN_MONTHS = {
   [DECEMBER]: 31,
 };
 
+export const MONDAY = 1;
+export const TUESDAY = 2;
+export const WEDNESDAY = 3;
+export const THURSDAY = 4;
+export const FRIDAY = 5;
+export const SATURDAY = 6;
+export const SUNDAY = 7;
+
 export const ONE_MICROSECOND = 1;
 export const ONE_MILLISECOND = 1000 * ONE_MICROSECOND;
 export const ONE_SECOND = 1000 * ONE_MILLISECOND;
