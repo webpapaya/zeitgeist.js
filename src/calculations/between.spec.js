@@ -28,7 +28,7 @@ describe('secondsBetween', () => {
   it('seconds between T11:00 and T10:59:00 is 60 seconds', () => assertThat(
     secondsBetween('T11:00', 'T10:59'), equalTo(60)));
 
-  xit('there are 60 seconds between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
+  it('there are 60 seconds between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
     secondsBetween('2000-01-02T00:00', '2000-01-01T23:59'), equalTo(60)));
 });
 

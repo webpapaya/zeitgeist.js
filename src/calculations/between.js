@@ -14,19 +14,27 @@ import {
   ONE_MINUTE,
   ONE_HOUR,
   TIME_UNITS,
+  ONE_REGULAR_DAY,
 } from '../constants';
 
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
+
+const daysBetween = (from, to) => {
+  const dates = datesBetween(from, to);
+  return dates.length ? dates.length - 1 : 0;
+};
 
 export const microsecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);
   const toAsFragments = toFragments(to);
 
+  const microsecondsBetweenDays = daysBetween(from, to) * ONE_REGULAR_DAY;
+
   return Object.keys(TIME_UNITS).reduce((totalSeconds, unit) => {
     const valueToBeAdded = readUnit(fromAsFragments, unit) - readUnit(toAsFragments, unit);
     const multiplier = TIME_UNITS[unit];
-    return totalSeconds + ((valueToBeAdded * multiplier));
-  }, 0);
+    return totalSeconds + (valueToBeAdded * multiplier);
+  }, microsecondsBetweenDays);
 };
 
 export const millisecondsBetween = (from, to) => microsecondsBetween(from, to) / ONE_MILLISECOND;

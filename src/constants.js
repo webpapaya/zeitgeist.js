@@ -37,6 +37,7 @@ export const ONE_MILLISECOND = 1000 * ONE_MICROSECOND;
 export const ONE_SECOND = 1000 * ONE_MILLISECOND;
 export const ONE_MINUTE = 60 * ONE_SECOND;
 export const ONE_HOUR = 60 * ONE_MINUTE;
+export const ONE_REGULAR_DAY = 24 * ONE_HOUR;
 
 export const TIME_UNITS = {
   hour: ONE_HOUR,
