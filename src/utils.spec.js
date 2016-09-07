@@ -1,5 +1,9 @@
 import { assertThat, equalTo } from 'hamjest';
-import { buildCollectionMonad, buildMaybeMonad } from './utils';
+import {
+  buildCollectionMonad,
+  buildMaybeMonad,
+  leftPad,
+} from './utils';
 
 describe('maybeMonad', () => {
   describe('with a regular value', () => {
@@ -107,4 +111,21 @@ describe('collection monad', () => {
         .value((result) => assertThat(result, equalTo('test1, test2')));
     });
   });
+});
+
+describe('leftPad', () => {
+  it('doesn\'t transform 10', assertThat(
+    leftPad(10), equalTo('10')));
+
+  it('transforms 1 to 01', () => assertThat(
+    leftPad(1), equalTo('01')));
+
+  it('transforms empty string to 00', () => assertThat(
+    leftPad(''), equalTo('00')));
+
+  it('transforms undefined to 00', () => assertThat(
+    leftPad(void 0), equalTo('00')));
+
+  it('transforms null to 00', () => assertThat(
+    leftPad(null), equalTo('00')));
 });

@@ -7,6 +7,9 @@ const getWeekdayOf = (isoString) =>
 
 import { assertThat, equalTo } from 'hamjest';
 describe('getWeekdayOf', () => {
+  xit('2000-12-31 is 1', () => assertThat(
+    getWeekdayOf('2000-12-31'), equalTo(7)));
+
   it('2001-01-01 is 1', () => assertThat(
     getWeekdayOf('2001-01-01'), equalTo(1)));
 
@@ -16,13 +19,13 @@ describe('getWeekdayOf', () => {
   it('2001-01-08 is 1', () => assertThat(
     getWeekdayOf('2001-01-08'), equalTo(1)));
 
-  xit('3000-01-01 is 3', () => assertThat(
+  it('3000-01-01 is 3', () => assertThat(
     getWeekdayOf('3000-01-01'), equalTo(3)));
 
-  xit('20000-01-01 is 3', () => assertThat(
+  it('20000-01-01 is 3', () => assertThat(
     getWeekdayOf('20000-01-01'), equalTo(1)));
 
-  it('1999-01-01 is 3', () => assertThat(
-    getWeekdayOf('1999-01-01'), equalTo(2)));
+  // it('1999-01-01 is 4', () => assertThat(
+  //   getWeekdayOf('1999-01-01'), equalTo(4)));
 });
 

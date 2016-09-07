@@ -4,13 +4,10 @@ import {
   TIME_COMPONENT_SEPARATOR_1,
 } from '../constants';
 
-import { buildCollectionMonad } from '../utils';
-
-const leftPad = (value) => {
-  const string = `${value}`;
-  const pad = '00';
-  return pad.substring(0, pad.length - string.length) + string;
-};
+import {
+  buildCollectionMonad,
+  leftPad,
+} from '../utils';
 
 const buildComponent = (fragments, delimiter) => {
   return buildCollectionMonad(fragments)

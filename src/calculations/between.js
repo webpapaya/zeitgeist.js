@@ -2,6 +2,8 @@ import {
   toFragments,
   addDays,
   removeTimeComponent,
+  containsDateComponent,
+  toInt,
 } from '../index';
 
 import {
@@ -19,10 +21,26 @@ import {
 
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
 
-export const daysBetween = (from, to) => {
-  const dates = datesBetween(from, to);
-  return dates.length ? dates.length - 1 : 0;
+// See http://math.stackexchange.com/questions/683312/formula-to-calculate-difference-between-two-dates
+const daysInYear = (isoString) => {
+  const fragments = toFragments(isoString);
+  const month = fragments.month <= 2 ? fragments.month + 12 : fragments.month;
+  const year = fragments.month <= 2 ? fragments.year - 1 : fragments.year;
+
+  const daysOfYear = Math.floor((1461 * year)/4);
+  const daysOfMonth = Math.floor((153 * month)/5);
+
+  return daysOfYear + daysOfMonth + fragments.day;
 };
+
+
+export const daysBetween = (from, to) => {
+  const daysFrom = containsDateComponent(from) ? daysInYear(from) : 0;
+  const daysTo = containsDateComponent(to) ? daysInYear(to) : 0;
+
+  return Math.abs(daysFrom - daysTo);
+};
+
 
 export const microsecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);

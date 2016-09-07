@@ -3,6 +3,12 @@ export const isCollectionEmpty = (collection) => collection.length === 0;
 
 const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 
+export const leftPad = (value) => {
+  const string = isEmpty(value) ? '' : `${value}`;
+  const pad = '00';
+  return pad.substring(0, pad.length - string.length) + string;
+};
+
 export const buildMaybeMonad = (rawValue) => {
   const map = (fn) => {
     if (isEmpty(rawValue)) { return buildMaybeMonad(void 0); }
