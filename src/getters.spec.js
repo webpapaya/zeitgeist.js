@@ -24,8 +24,5 @@ describe('getWeekdayOf', () => {
 
   it('1999-01-01 is 3', () => assertThat(
     getWeekdayOf('1999-01-01'), equalTo(2)));
-
-  it('19-01-01 is 3', () => assertThat(
-    getWeekdayOf('2010-01-01'), equalTo(2)));
 });
 

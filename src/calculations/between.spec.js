@@ -6,6 +6,7 @@ import {
   minutesBetween,
   hoursBetween,
   datesBetween,
+  daysBetween,
 } from '../index';
 
 describe('microsecondsBetween', () => {
@@ -40,6 +41,23 @@ describe('minutes between', () => {
 describe('hours between', () => {
   it('T10:00 and T11:00 is 1 hour ', () => assertThat(
     hoursBetween('T11:00', 'T10:00'), equalTo(1)));
+});
+
+describe('daysBetween responds', () => {
+  it('0 days between 2000-01-01 and 2000-01-01', () => assertThat(
+    daysBetween('2000-01-01', '2000-01-01'), equalTo(0)));
+
+  it('1 days between 2000-01-01 and 2000-01-02', () => assertThat(
+    daysBetween('2000-01-01', '2000-01-02'), equalTo(1)));
+
+  it('1 days between 2000-01-02 and 2000-01-01', () => assertThat(
+    daysBetween('2000-01-02', '2000-01-01'), equalTo(1)));
+
+  it('365 days between a leap year and a regular year', () => assertThat(
+    daysBetween('2000-01-01', '2001-01-01'), equalTo(365)));
+
+  it('364 days between two regular years', () => assertThat(
+    daysBetween('2001-01-01', '2002-01-01'), equalTo(364)));
 });
 
 describe('dates between', () => {
