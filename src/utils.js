@@ -1,5 +1,5 @@
-const isEmpty = (value) => value === null || value === void 0 || value === '';
-const isCollectionEmpty = (collection) => collection.length === 0;
+export const isEmpty = (value) => value === null || value === void 0 || value === '';
+export const isCollectionEmpty = (collection) => collection.length === 0;
 
 const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 

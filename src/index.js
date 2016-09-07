@@ -4,6 +4,8 @@ import {
 } from './constants';
 
 import { toFragments } from './transformations/index';
+import { removeTimeComponent, removeDateComponent } from './transformations/index';
+import { isEmpty } from './utils';
 
 const isLeapMonth = (isoString, month) =>
   month === FEBRUARY && isLeapYear(isoString);
@@ -34,6 +36,10 @@ export const isFirstDayOfMonth = (isoString) => {
   const { day } = toFragments(isoString);
   return day === 1;
 };
+
+export const containsDateComponent = (isoString) => !isEmpty(removeTimeComponent(isoString));
+export const containsTimeComponent = (isoString) => !isEmpty(removeDateComponent(isoString));
+
 
 export {
   toIso,

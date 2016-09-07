@@ -1,5 +1,14 @@
 import { assertThat, equalTo } from 'hamjest';
-import { toIso, toFragments, toIsoDate, toIsoTime, removeTimeComponent, removeDateComponent } from '../index';
+import {
+  toIso,
+  toFragments,
+  toIsoDate,
+  toIsoTime,
+  removeTimeComponent,
+  removeDateComponent,
+  containsDateComponent,
+  containsTimeComponent,
+} from '../index';
 
 describe('toIso', () => {
   it('{} => ""', () => assertThat(
@@ -159,6 +168,31 @@ describe('removeDateComponent', () => {
   it('2000-01-01 responds empty string', () => assertThat(
     removeDateComponent('2000-01-01'), equalTo('')));
 });
+
+describe('containsDateComponent', () => {
+  it('true for 2000-01-01T10:00', () => assertThat(
+    containsDateComponent('2000-01-01T10:00'), equalTo(true)));
+
+  it('true for 2000-01-01', () => assertThat(
+    containsDateComponent('2000-01-01'), equalTo(true)));
+
+  it('false for T10:00', () => assertThat(
+    containsDateComponent('T10:00'), equalTo(false)));
+});
+
+describe('containsTimeComponent', () => {
+  it('true for 2000-01-01T10:00', () => assertThat(
+    containsTimeComponent('2000-01-01T10:00'), equalTo(true)));
+
+  it('false for 2000-01-01', () => assertThat(
+    containsTimeComponent('2000-01-01'), equalTo(false)));
+
+  it('true for T10:00', () => assertThat(
+    containsTimeComponent('T10:00'), equalTo(true)));
+});
+
+
+
 
 
 
