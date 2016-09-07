@@ -70,4 +70,8 @@ export {
   daysBetween,
 } from './calculations/index';
 
+export {
+  getWeekdayOf,
+} from './getters';
+
 
