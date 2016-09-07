@@ -178,6 +178,9 @@ describe('containsDateComponent', () => {
 
   it('false for T10:00', () => assertThat(
     containsDateComponent('T10:00'), equalTo(false)));
+
+  it('false for empty string', () => assertThat(
+    containsDateComponent(''), equalTo(false)));
 });
 
 describe('containsTimeComponent', () => {
@@ -189,10 +192,7 @@ describe('containsTimeComponent', () => {
 
   it('true for T10:00', () => assertThat(
     containsTimeComponent('T10:00'), equalTo(true)));
+
+  it('false for empty string', () => assertThat(
+    containsTimeComponent(''), equalTo(false)));
 });
-
-
-
-
-
-
