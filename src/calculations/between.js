@@ -19,7 +19,7 @@ import {
 
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
 
-const daysBetween = (from, to) => {
+export const daysBetween = (from, to) => {
   const dates = datesBetween(from, to);
   return dates.length ? dates.length - 1 : 0;
 };

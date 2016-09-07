@@ -65,7 +65,8 @@ export {
   minutesBetween,
   hoursBetween,
 
-  datesBetween
+  datesBetween,
+  daysBetween,
 } from './calculations/index';
 
 
