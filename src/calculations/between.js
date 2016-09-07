@@ -3,7 +3,7 @@ import {
   addDays,
   removeTimeComponent,
   containsDateComponent,
-  toInt,
+  toFloat,
 } from '../index';
 
 import {
@@ -20,6 +20,7 @@ import {
 } from '../constants';
 
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
+const floor = (value) => Math.floor(value);
 
 // See http://math.stackexchange.com/questions/683312/formula-to-calculate-difference-between-two-dates
 const daysInYear = (isoString) => {
@@ -27,26 +28,24 @@ const daysInYear = (isoString) => {
   const month = fragments.month <= 2 ? fragments.month + 12 : fragments.month;
   const year = fragments.month <= 2 ? fragments.year - 1 : fragments.year;
 
-  const daysOfYear = Math.floor((1461 * year)/4);
-  const daysOfMonth = Math.floor((153 * month)/5);
+  const daysOfYear = 365 * year + floor(year/4) - floor(year/100) + floor(year/400);
+  const daysOfMonth = floor((153 * month + 8)/5);
 
   return daysOfYear + daysOfMonth + fragments.day;
 };
 
-
 export const daysBetween = (from, to) => {
   const daysFrom = containsDateComponent(from) ? daysInYear(from) : 0;
   const daysTo = containsDateComponent(to) ? daysInYear(to) : 0;
-
-  return Math.abs(daysFrom - daysTo);
+  
+  return daysTo - daysFrom;
 };
-
 
 export const microsecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);
   const toAsFragments = toFragments(to);
 
-  const microsecondsBetweenDays = daysBetween(from, to) * ONE_REGULAR_DAY;
+  const microsecondsBetweenDays = Math.abs(daysBetween(from, to) * ONE_REGULAR_DAY);
 
   return Object.keys(TIME_UNITS).reduce((totalSeconds, unit) => {
     const valueToBeAdded = readUnit(fromAsFragments, unit) - readUnit(toAsFragments, unit);

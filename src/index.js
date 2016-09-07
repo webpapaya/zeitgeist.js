@@ -45,7 +45,7 @@ export {
   toFragments,
   toIsoDate,
   toIsoTime,
-  toInt,
+  toFloat,
 
   removeTimeComponent,
   removeDateComponent

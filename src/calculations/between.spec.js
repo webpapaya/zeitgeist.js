@@ -50,7 +50,13 @@ describe('daysBetween responds', () => {
   it('1 days between 2000-01-01 and 2000-01-02', () => assertThat(
     daysBetween('2000-01-01', '2000-01-02'), equalTo(1)));
 
-  xit('1 days between 2000-01-02 and 2000-01-01', () => assertThat(
+  it('-1 day between 2001-01-01 and 2000-12-31', () => assertThat(
+    daysBetween('2001-01-01', '2000-12-31'), equalTo(-1)));
+
+  it('1 day between 2000-12-31 and 2001-01-01', () => assertThat(
+    daysBetween('2000-12-31', '2001-01-01'), equalTo(1)));
+
+  it('1 days between 2000-01-02 and 2000-01-01', () => assertThat(
     daysBetween('2000-01-02', '2000-01-01'), equalTo(-1)));
 
   it('366 days between a leap year and a regular year', () => assertThat(
