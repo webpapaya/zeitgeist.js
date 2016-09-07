@@ -27,6 +27,9 @@ describe('secondsBetween', () => {
 
   it('seconds between T11:00 and T10:59:00 is 60 seconds', () => assertThat(
     secondsBetween('T11:00', 'T10:59'), equalTo(60)));
+
+  xit('there are 60 seconds between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
+    secondsBetween('2000-01-02T00:00', '2000-01-01T23:59'), equalTo(60)));
 });
 
 describe('minutes between', () => {
@@ -55,4 +58,10 @@ describe('dates between', () => {
       '2000-01-02',
       '2000-01-01',
     ])));
+
+  it('dates between two empty strings is an empty array', () => assertThat(
+    datesBetween('', ''), equalTo([])));
+
+  it('dates between T10:00 and T11:00 is an empty array', () => assertThat(
+    datesBetween('T10:00', 'T11:00'), equalTo([])));
 });

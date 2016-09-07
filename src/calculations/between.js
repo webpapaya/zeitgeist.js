@@ -1,4 +1,13 @@
-import { toFragments, addDays, removeTimeComponent } from '../index';
+import {
+  toFragments,
+  addDays,
+  removeTimeComponent,
+} from '../index';
+
+import {
+  isEmpty
+} from '../utils';
+
 import {
   ONE_MILLISECOND,
   ONE_SECOND,
@@ -29,7 +38,10 @@ export const datesBetween = (from, to, dates = []) => {
   const fromWithoutTimeComponent = removeTimeComponent(from);
   const toWithoutTimeComponent = removeTimeComponent(to);
 
-  const newDates = [...dates, fromWithoutTimeComponent];
+  const newDates = !isEmpty(fromWithoutTimeComponent)
+    ? [...dates, fromWithoutTimeComponent]
+    : [...dates];
+
   if(fromWithoutTimeComponent === toWithoutTimeComponent) { return newDates; }
 
   const direction = fromWithoutTimeComponent < toWithoutTimeComponent ? 1 : -1;

@@ -40,7 +40,6 @@ export const isFirstDayOfMonth = (isoString) => {
 export const containsDateComponent = (isoString) => !isEmpty(removeTimeComponent(isoString));
 export const containsTimeComponent = (isoString) => !isEmpty(removeDateComponent(isoString));
 
-
 export {
   toIso,
   toFragments,
