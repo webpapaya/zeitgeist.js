@@ -7,7 +7,8 @@ import {
 } from '../index';
 
 import {
-  isEmpty
+  isEmpty,
+  tco,
 } from '../utils';
 
 import {
@@ -59,14 +60,14 @@ export const secondsBetween = (from, to) => microsecondsBetween(from, to) / ONE_
 export const minutesBetween = (from, to) => microsecondsBetween(from, to) / ONE_MINUTE;
 export const hoursBetween = (from, to) => microsecondsBetween(from, to) / ONE_HOUR;
 
-const calculateDatesBetween = (from, to, dates = []) => {
+const calculateDatesBetween = tco((from, to, dates = []) => {
   const nextDates = !isEmpty(from) ? [...dates, from] : [...dates];
   if(from === to) { return nextDates; }
 
   const direction = toFloat(from) < toFloat(to) ? 1 : -1;
   const nextFrom = addDays(from, direction);
   return calculateDatesBetween(nextFrom, to, nextDates);
-};
+});
 
 export const datesBetween = (from, to) => {
   const fromWithoutTimeComponent = removeTimeComponent(from);
