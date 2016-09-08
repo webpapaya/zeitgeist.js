@@ -1,4 +1,5 @@
-import { assertThat, equalTo } from 'hamjest';
+import { assertThat, equalTo, not, throws } from 'hamjest';
+import { getCallStackSize } from '../test-helper';
 import {
   addDays,
   addMonths,
@@ -30,6 +31,9 @@ describe('addDays', () => {
 
   it('adding -1 day to 2001-01-01 results in 2000-12-31', () => assertThat(
     addDays('2001-01-01', -1), equalTo('2000-12-31')));
+
+  it('tail call optimisation works', () => assertThat(
+    () => addDays('2000-01-01', getCallStackSize() + 1), not(throws())));
 });
 
 describe('addMonths', () => {
@@ -44,6 +48,9 @@ describe('addMonths', () => {
 
   it('adding -1 months to 2000-02-01 results in 2000-01-01', () => assertThat(
     addMonths('2000-02-01', -1), equalTo('2000-01-01')));
+
+  it('tail call optimisation works', () => assertThat(
+    () => addMonths('2000-01-01', getCallStackSize() + 1), not(throws())));
 });
 
 describe('addYears', () => {
@@ -55,6 +62,9 @@ describe('addYears', () => {
 
   it('add -1 years to 2001-01-01 results in 2000-01-01', () => assertThat(
     addYears('2001-01-01', -1), equalTo('2000-01-01')));
+
+  it('tail call optimisation works', () => assertThat(
+    () => addYears('2000-01-01', getCallStackSize() + 1), not(throws())));
 });
 
 describe('subtractDays', () => {

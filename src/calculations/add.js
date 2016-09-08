@@ -7,6 +7,8 @@ import {
   subtractMonths,
 } from '../index';
 
+import { tco } from '../utils';
+
 const isLastMonthOfYear = ({ month }) => month === DECEMBER;
 const isLastDayOfYear = (fragments) =>
   fragments.month === DECEMBER && isLastDayOfMonth(fragments);
@@ -17,7 +19,7 @@ const jumpToNextYear = (fragments) => ({ ...fragments, year: fragments.year + 1 
 const jumpToNextMonth = (fragments) => ({ ...fragments, month: fragments.month + 1 });
 const jumpToNextDay = (fragments) => ({ ...fragments, day: fragments.day + 1 });
 
-export const addDays = (isoStringOrFragments, days) => {
+export const addDays = tco((isoStringOrFragments, days) => {
   if (days === 0) { return toIso(isoStringOrFragments); }
   if (days < 0) { return subtractDays(isoStringOrFragments, days * -1); }
 
@@ -37,9 +39,9 @@ export const addDays = (isoStringOrFragments, days) => {
   }
 
   return addDays(jumpToNextDay(fragments), days - 1);
-};
+});
 
-export const addMonths = (isoStringOrFragments, months) => {
+export const addMonths = tco((isoStringOrFragments, months) => {
   if (months === 0) { return toIso(isoStringOrFragments); }
   if (months < 0) { return subtractMonths(isoStringOrFragments, months * -1); }
 
@@ -51,7 +53,7 @@ export const addMonths = (isoStringOrFragments, months) => {
   }
 
   return addMonths(jumpToNextMonth(fragments), months - 1);
-};
+});
 
 export const addYears = (isoStringOrFragments, years) => {
   const fragments = toFragments(isoStringOrFragments);
