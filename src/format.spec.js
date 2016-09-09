@@ -1,20 +1,26 @@
 import { toFragments } from './index';
+import { leftPad } from './utils';
 
 
 const formatYYYY = (fragments) => `${fragments.year}`;
 const formatYY = (fragments) => formatYYYY(fragments).slice(-2);
 const formatY = (fragments) => formatYYYY(fragments);
 
+const formatD = (fragments) => `${fragments.day}`;
+const formatDD = (fragments) => leftPad(formatD(fragments));
+
 const tokens = {
   'YYYY': formatYYYY,
   'YY': formatYY,
-  'Y': formatY
+  'Y': formatY,
+  'D': formatD,
+  'DD': formatDD,
 };
 
-const allToken = /YYYY|YY|Y/g;
+const allToken = /YYYY|YY|Y|DD|D/g;
 
 const findToken = (isoString, format) =>
-  format.match(allToken);
+  format.match(allToken) || [];
 
 const format = (isoString, format) => {
   const fragments = toFragments(isoString);
@@ -45,6 +51,17 @@ describe.only('format a date', () => {
   describe('Token "YY"', () => {
     it('2012-01-01 becomes 12', () => assertThat(
       format('2012-01-01', 'YY'), equalTo('12')));
+  });
+
+
+  describe('Token "D"', () => {
+    it('2012-02-01 becomes 1', () => assertThat(
+      format('2012-02-01', 'D'), equalTo('1')));
+  });
+
+  describe('Token "DD"', () => {
+    it('2012-02-01 becomes 01', () => assertThat(
+      format('2012-02-01', 'DD'), equalTo('01')));
   });
 });
 
