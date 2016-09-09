@@ -1,10 +1,19 @@
 import { assertThat, equalTo } from 'hamjest';
 import {
+  isSame,
   isBefore,
   isAfter,
-  isAfterOrEqual,
-  isBeforeOrEqual
+  isSameOrAfter,
+  isSameOrBefore
 } from './index';
+
+describe('isSame', () => {
+  it('2000-01-01 is NOT the same 2000-01-02', () => assertThat(
+    isSame('2000-01-01', '2000-01-02'), equalTo(false)));
+
+  it('2000-01-01 is NOT the same 2000-01-01', () => assertThat(
+    isSame('2000-01-01', '2000-01-01'), equalTo(true)));
+});
 
 describe('isBefore', () => {
   it('2000-01-01 is before 2000-01-02', () => assertThat(
@@ -17,12 +26,12 @@ describe('isBefore', () => {
     isBefore('T10:00', 'T11:00'), equalTo(true)));
 });
 
-describe('isBeforeOrEqual', () => {
+describe('isSameOrBefore', () => {
   it('2000-01-01 is before 2000-01-02', () => assertThat(
-    isBeforeOrEqual('2000-01-01', '2000-01-02'), equalTo(true)));
+    isSameOrBefore('2000-01-01', '2000-01-02'), equalTo(true)));
 
   it('2000-01-01 is equal to 2000-01-01', () => assertThat(
-    isBeforeOrEqual('2000-01-01', '2000-01-01'), equalTo(true)));
+    isSameOrBefore('2000-01-01', '2000-01-01'), equalTo(true)));
 });
 
 describe('isAfter', () => {
@@ -36,10 +45,10 @@ describe('isAfter', () => {
     isAfter('T10:00', 'T11:00'), equalTo(false)));
 });
 
-describe('isBeforeOrEqual', () => {
+describe('isSameOrBefore', () => {
   it('2000-01-01 is NOT after 2000-01-02', () => assertThat(
-    isAfterOrEqual('2000-01-01', '2000-01-02'), equalTo(false)));
+    isSameOrAfter('2000-01-01', '2000-01-02'), equalTo(false)));
 
   it('2000-01-01 is equal to 2000-01-01', () => assertThat(
-    isAfterOrEqual('2000-01-01', '2000-01-01'), equalTo(true)));
+    isSameOrAfter('2000-01-01', '2000-01-01'), equalTo(true)));
 });
