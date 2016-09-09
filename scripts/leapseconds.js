@@ -68,4 +68,6 @@ const fetchAndStoreLeapSeconds = () => {
     });
 };
 
-fetchAndStoreLeapSeconds();
+if(process.argv[2] === 'leapSeconds') {
+  fetchAndStoreLeapSeconds();
+}

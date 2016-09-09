@@ -7,7 +7,7 @@
     "lint": "eslint-crewmeister src",
     "test": "mocha {src,scripts}/{*,**/*,**/**/*,**/**/**/*}.spec.js --recursive --compilers js:babel-register",
     "prepublish": "babel src/ --out-dir lib/ --ignore *.spec.js",
-    "tz:download:leapseconds": "babel-node scripts/leapseconds.js"
+    "tz:download:leapseconds": "babel-node scripts/leapseconds.js leapseconds"
   },
   "repository": {
     "type": "git",
