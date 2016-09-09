@@ -1,10 +1,9 @@
-import { toFragments, toIso, daysBetween } from './index';
+import { toFragments, toIso, daysBetween, getWeekdayOf } from './index';
 import { leftPad } from './utils';
 
 
-// const weekdaysLong = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
-// const weekdaysShort = 'Sun Mon Tue Wed Thu Fri Sat'.split(' ');
-// const weekdayMin = 'Su Mo Tu We Th Fr Sa'.split(' ');
+const weekdaysLong = 'Monday Tuesday Wednesday Thursday Friday Saturday Sunday '.split(' ');
+const weekdaysShort = 'Mon Tue Wed Thu Fri Sat Sun '.split(' ');
 
 const monthsLong = 'January February March April May June July August September October November December'.split(' ');
 const monthsShort = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
@@ -24,6 +23,11 @@ const formatMM = (fragments) => leftPad(formatM(fragments));
 const formatMMM = (fragments) => monthsShort[fragments.month - 1];
 const formatMMMM = (fragments) => monthsLong[fragments.month - 1];
 
+const formatd = (fragments) => getWeekdayOf(toIso(fragments));
+const formatdd = (fragments) => leftPad(formatd(fragments));
+const formatddd = (fragments) => weekdaysShort[formatd(fragments) - 1];
+const formatdddd = (fragments) => weekdaysLong[formatd(fragments) - 1];
+
 const tokens = {
   'YYYY': formatYYYY,
   'YY': formatYY,
@@ -36,6 +40,10 @@ const tokens = {
   'MM': formatMM,
   'MMM': formatMMM,
   'MMMM': formatMMMM,
+  'd': formatd,
+  'dd': formatdd,
+  'ddd': formatddd,
+  'dddd': formatdddd,
 };
 
 const allToken = Object
@@ -97,5 +105,17 @@ describe.only(`format ${DATE} with token`, () => {
 
   it('"MMMM" becomes February', () => assertThat(
     format(DATE, 'MMMM'), equalTo('February')));
+
+  it('"d" becomes 3', () => assertThat(
+    format(DATE, 'd'), equalTo('3')));
+
+  it('"dd" becomes 03', () => assertThat(
+    format(DATE, 'dd'), equalTo('03')));
+
+  it('"ddd" becomes Wed', () => assertThat(
+    format(DATE, 'ddd'), equalTo('Wed')));
+
+  it('"dddd" becomes Wednesday', () => assertThat(
+    format(DATE, 'dddd'), equalTo('Wednesday')));
 });
 
