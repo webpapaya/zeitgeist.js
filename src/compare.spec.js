@@ -64,7 +64,7 @@ describe('isBetween', () => {
   it('T10:00 is between T09:00 and T10:00', () => assertThat(
     isBetween('T10:00', { from: 'T09:00', to: 'T10:00' }), equalTo(true)));
 
-  it.only('1972-06-30T23:59:60 is between 1972-07-01T00:00:00 and 1972-06-30T23:59:59', () => assertThat(
+  it('1972-06-30T23:59:60 is between 1972-07-01T00:00:00 and 1972-06-30T23:59:59', () => assertThat(
     isBetween('1972-06-30T23:59:60', {
       from: '1972-07-01T00:00:00',
       to: '1972-06-30T23:59:59'
