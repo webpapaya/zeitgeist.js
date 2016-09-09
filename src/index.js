@@ -74,4 +74,11 @@ export {
   getWeekdayOf,
 } from './getters';
 
+export {
+  isBefore,
+  isAfter,
+  isAfterOrEqual,
+  isBeforeOrEqual
+} from './compare';
+
 

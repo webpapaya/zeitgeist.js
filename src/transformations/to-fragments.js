@@ -30,7 +30,7 @@ export const toFragments = (isoString) => {
   const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
 
   return {
-    year: toInt(year),
+    year: year ? toInt(year) : void 0,
     month: parseDateUnit(month),
     day: parseDateUnit(day),
     hour: parseTimeUnit(hour),
