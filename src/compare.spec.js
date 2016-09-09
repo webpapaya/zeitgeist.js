@@ -1,5 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import {
+  isBetween,
   isSame,
   isBefore,
   isAfter,
@@ -52,3 +53,15 @@ describe('isSameOrBefore', () => {
   it('2000-01-01 is equal to 2000-01-01', () => assertThat(
     isSameOrAfter('2000-01-01', '2000-01-01'), equalTo(true)));
 });
+
+describe('isBetween', () => {
+  it('2000-01-02 is between 2000-01-01 and 2000-01-03', () => assertThat(
+    isBetween('2000-01-02', { from: '2000-01-01', to: '2000-01-03' }), equalTo(true)));
+
+  it('2000-01-04 is NOT between 2000-01-01 and 2000-01-03', () => assertThat(
+    isBetween('2000-01-04', { from: '2000-01-01', to: '2000-01-03' }), equalTo(false)));
+
+  it('T10:00 is between T09:00 and T10:00', () => assertThat(
+    isBetween('T10:00', { from: 'T09:00', to: 'T10:00' }), equalTo(true)));
+});
+

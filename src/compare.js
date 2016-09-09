@@ -14,3 +14,6 @@ export const isAfter = (maybeBefore, maybeAfter) =>
 
 export const isSameOrAfter = (maybeBefore, maybeAfter) =>
   isSame(maybeBefore, maybeAfter) || isAfter(maybeBefore, maybeAfter);
+
+export const isBetween = (dateToCheck, { from, to }) =>
+  isSameOrAfter(to, dateToCheck) && isSameOrBefore(from, dateToCheck);

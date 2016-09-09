@@ -76,6 +76,7 @@ export {
 
 
 export {
+  isBetween,
   isSame,
   isBefore,
   isAfter,
