@@ -38,10 +38,15 @@ const tokens = {
   'MMMM': formatMMMM,
 };
 
-const allToken = /YYYY|YY|Y|DDDD|DDD|DD|D|MMMM|MMM|MM|M/g;
+const allToken = Object
+    .keys(tokens)
+    .sort((a, b) => b.length - a.length)
+    .join('|');
+
+const tokenRegex = new RegExp(allToken, 'g');
 
 const findToken = (isoString, format) =>
-  format.match(allToken) || [];
+  format.match(tokenRegex) || [];
 
 const format = (isoString, format) => {
   const fragments = toFragments(isoString);
