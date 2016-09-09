@@ -4,7 +4,7 @@ import {
   toIso,
   daysInMonth,
   addDays,
-  addMonths
+  addMonths,
 } from '../index';
 
 const isFirstDayOfYear = ({ month, day }) => month === JANUARY && day === 1;

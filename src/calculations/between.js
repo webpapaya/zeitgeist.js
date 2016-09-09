@@ -29,8 +29,8 @@ const daysInYear = (isoString) => {
   const month = fragments.month <= 2 ? fragments.month + 12 : fragments.month;
   const year = fragments.month <= 2 ? fragments.year - 1 : fragments.year;
 
-  const daysOfYear = 365 * year + floor(year/4) - floor(year/100) + floor(year/400);
-  const daysOfMonth = floor((153 * month + 8)/5);
+  const daysOfYear = 365 * year + floor(year / 4) - floor(year / 100) + floor(year / 400);
+  const daysOfMonth = floor((153 * month + 8) / 5);
 
   return daysOfYear + daysOfMonth + fragments.day;
 };
@@ -62,7 +62,7 @@ export const hoursBetween = (from, to) => microsecondsBetween(from, to) / ONE_HO
 
 const calculateDatesBetween = tco((from, to, dates = []) => {
   const nextDates = !isEmpty(from) ? [...dates, from] : [...dates];
-  if(from === to) { return nextDates; }
+  if (from === to) { return nextDates; }
 
   const direction = isBefore(from, to) ? 1 : -1;
   const nextFrom = addDays(from, direction);

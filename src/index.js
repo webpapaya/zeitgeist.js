@@ -3,8 +3,7 @@ import {
   DAYS_IN_MONTHS,
 } from './constants';
 
-import { toFragments } from './transformations/index';
-import { removeTimeComponent, removeDateComponent } from './transformations/index';
+import { toFragments, removeTimeComponent, removeDateComponent } from './transformations/index';
 import { isEmpty } from './utils';
 
 const isLeapMonth = (isoString, month) =>
@@ -48,7 +47,7 @@ export {
   toFloat,
 
   removeTimeComponent,
-  removeDateComponent
+  removeDateComponent,
 } from './transformations/index';
 
 export {
@@ -83,5 +82,3 @@ export {
   isSameOrAfter,
   isSameOrBefore,
 } from './compare';
-
-

@@ -34,8 +34,6 @@ describe('addDays', () => {
 
   it('tail call optimisation works', () => assertThat(
     () => addDays('2000-01-01', getCallStackSize() + 1), not(throws())));
-
-
 });
 
 describe('addMonths', () => {

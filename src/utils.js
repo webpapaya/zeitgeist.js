@@ -69,7 +69,7 @@ export const buildCollectionMonad = (...rawValues) => {
 export const tco = (f) => {
   let value;
   let active = false;
-  let accumulated = [];
+  const accumulated = [];
 
   return function accumulator() {
     accumulated.push(arguments);
@@ -85,5 +85,5 @@ export const tco = (f) => {
 
       return value;
     }
-  }
+  };
 };

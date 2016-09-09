@@ -5,7 +5,7 @@ import {
   isBefore,
   isAfter,
   isSameOrAfter,
-  isSameOrBefore
+  isSameOrBefore,
 } from './index';
 
 describe('isSame', () => {
@@ -64,4 +64,3 @@ describe('isBetween', () => {
   it('T10:00 is between T09:00 and T10:00', () => assertThat(
     isBetween('T10:00', { from: 'T09:00', to: 'T10:00' }), equalTo(true)));
 });
-

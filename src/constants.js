@@ -50,5 +50,5 @@ export const ONE_REGULAR_DAY = 24 * ONE_HOUR;
 export const TIME_UNITS = {
   hour: ONE_HOUR,
   minute: ONE_MINUTE,
-  second: ONE_SECOND
+  second: ONE_SECOND,
 };

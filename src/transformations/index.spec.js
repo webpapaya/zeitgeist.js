@@ -52,8 +52,6 @@ describe('toIsoTime', () => {
     toIsoTime({ year: 2000, hour: 10, minute: 1 }), equalTo('10:01')));
 });
 
-
-
 describe('toFragments', () => {
   describe('`2000` responds', () => {
     it('year 2000', () => assertThat(
