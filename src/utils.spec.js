@@ -114,6 +114,9 @@ describe('collection monad', () => {
 });
 
 describe('leftPad', () => {
+  it('with length 3 given transforms 12 into 012', () => assertThat(
+    leftPad(12, 3), equalTo('012')));
+
   it('doesn\'t transform 10', () => assertThat(
     leftPad(10), equalTo('10')));
 

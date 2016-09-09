@@ -17,6 +17,7 @@ const formatD = (fragments) => `${fragments.day}`;
 const formatDD = (fragments) => leftPad(formatD(fragments));
 const formatDDD = (fragments) =>
   daysBetween(`${fragments.year}-01-01`, toIso(fragments)) + 1;
+const formatDDDD = (fragments) => leftPad(formatDDD(fragments), 3);
 
 const formatM = (fragments) => `${fragments.month}`;
 const formatMM = (fragments) => leftPad(formatM(fragments));
@@ -30,13 +31,14 @@ const tokens = {
   'D': formatD,
   'DD': formatDD,
   'DDD': formatDDD,
+  'DDDD': formatDDDD,
   'M': formatM,
   'MM': formatMM,
   'MMM': formatMMM,
   'MMMM': formatMMMM,
 };
 
-const allToken = /YYYY|YY|Y|DDD|DD|D|MMMM|MMM|MM|M/g;
+const allToken = /YYYY|YY|Y|DDDD|DDD|DD|D|MMMM|MMM|MM|M/g;
 
 const findToken = (isoString, format) =>
   format.match(allToken) || [];
@@ -73,8 +75,11 @@ describe.only(`format ${DATE} with token`, () => {
   it('"DD" becomes 01', () => assertThat(
     format(DATE, 'DD'), equalTo('01')));
 
-  it('"DDD" becomes 01', () => assertThat(
+  it('"DDD" becomes 32', () => assertThat(
     format(DATE, 'DDD'), equalTo('32')));
+
+  it('"DDDD" becomes 032', () => assertThat(
+    format(DATE, 'DDDD'), equalTo('032')));
 
   it('"M" becomes 2', () => assertThat(
     format(DATE, 'M'), equalTo('2')));

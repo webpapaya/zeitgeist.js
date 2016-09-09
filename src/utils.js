@@ -3,10 +3,10 @@ export const isCollectionEmpty = (collection) => collection.length === 0;
 
 const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 
-export const leftPad = (value) => {
+export const leftPad = (value, length = 2) => {
   const string = isEmpty(value) ? '' : `${value}`;
-  const pad = '00';
-  return pad.substring(0, pad.length - string.length) + string;
+  if(string.length >= length) { return string; }
+  return leftPad(`0${string}`, length)
 };
 
 export const buildMaybeMonad = (rawValue) => {
