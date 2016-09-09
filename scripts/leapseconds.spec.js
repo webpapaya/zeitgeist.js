@@ -7,7 +7,7 @@ describe('readLeapSeconds', () => {
     const tzLeapSeconds = readFileSync('./scripts/_test-fixtures/leapseconds', 'utf8');
     const leapSecondsAsJson = readLeapSeconds(tzLeapSeconds);
 
-    assertThat(leapSecondsAsJson['1972-06-30'], equalTo({ correction: 1, time: '23:59:60' }));
+    assertThat(leapSecondsAsJson['1972-06-30T23:59:60'], equalTo({ correction: 1 }));
   });
 });
 

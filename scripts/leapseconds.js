@@ -46,9 +46,8 @@ export const readLeapSeconds = (fileContents) => {
     .reduce((previous, [ type, year, month, day, time, correction ]) => {
       return {
         ...previous,
-        [`${year}-${TZ_MONTHS[month]}-${day}`]: {
+        [`${year}-${TZ_MONTHS[month]}-${day}T${time}`]: {
           correction: correction === '+' ? 1 : -1,
-          time: time
         }
       };
     }, {});
