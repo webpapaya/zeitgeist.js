@@ -9,15 +9,20 @@ const formatY = (fragments) => formatYYYY(fragments);
 const formatD = (fragments) => `${fragments.day}`;
 const formatDD = (fragments) => leftPad(formatD(fragments));
 
+const formatM = (fragments) => `${fragments.month}`;
+const formatMM = (fragments) => leftPad(formatM(fragments));
+
 const tokens = {
   'YYYY': formatYYYY,
   'YY': formatYY,
   'Y': formatY,
   'D': formatD,
   'DD': formatDD,
+  'M': formatM,
+  'MM': formatMM,
 };
 
-const allToken = /YYYY|YY|Y|DD|D/g;
+const allToken = /YYYY|YY|Y|DD|D|MM|M/g;
 
 const findToken = (isoString, format) =>
   format.match(allToken) || [];
@@ -62,6 +67,16 @@ describe.only('format a date', () => {
   describe('Token "DD"', () => {
     it('2012-02-01 becomes 01', () => assertThat(
       format('2012-02-01', 'DD'), equalTo('01')));
+  });
+
+  describe('Token "M"', () => {
+    it('2012-02-01 becomes 2', () => assertThat(
+      format('2012-02-01', 'M'), equalTo('2')));
+  });
+
+  describe('Token "MM"', () => {
+    it('2012-02-01 becomes 02', () => assertThat(
+      format('2012-02-01', 'MM'), equalTo('02')));
   });
 });
 
