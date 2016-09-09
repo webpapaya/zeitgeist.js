@@ -3,7 +3,7 @@ import {
   addDays,
   removeTimeComponent,
   containsDateComponent,
-  toFloat,
+  isBefore,
 } from '../index';
 
 import {
@@ -64,7 +64,7 @@ const calculateDatesBetween = tco((from, to, dates = []) => {
   const nextDates = !isEmpty(from) ? [...dates, from] : [...dates];
   if(from === to) { return nextDates; }
 
-  const direction = toFloat(from) < toFloat(to) ? 1 : -1;
+  const direction = isBefore(from, to) ? 1 : -1;
   const nextFrom = addDays(from, direction);
   return calculateDatesBetween(nextFrom, to, nextDates);
 });
