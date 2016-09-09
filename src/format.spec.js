@@ -2,6 +2,13 @@ import { toFragments } from './index';
 import { leftPad } from './utils';
 
 
+// const weekdaysLong = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
+// const weekdaysShort = 'Sun Mon Tue Wed Thu Fri Sat'.split(' ');
+// const weekdayMin = 'Su Mo Tu We Th Fr Sa'.split(' ');
+
+const monthsLong = 'January February March April May June July August September October November December'.split(' ');
+const monthsShort = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
+
 const formatYYYY = (fragments) => `${fragments.year}`;
 const formatYY = (fragments) => formatYYYY(fragments).slice(-2);
 const formatY = (fragments) => formatYYYY(fragments);
@@ -11,6 +18,8 @@ const formatDD = (fragments) => leftPad(formatD(fragments));
 
 const formatM = (fragments) => `${fragments.month}`;
 const formatMM = (fragments) => leftPad(formatM(fragments));
+const formatMMM = (fragments) => monthsShort[fragments.month - 1];
+const formatMMMM = (fragments) => monthsLong[fragments.month - 1];
 
 const tokens = {
   'YYYY': formatYYYY,
@@ -20,9 +29,11 @@ const tokens = {
   'DD': formatDD,
   'M': formatM,
   'MM': formatMM,
+  'MMM': formatMMM,
+  'MMMM': formatMMMM,
 };
 
-const allToken = /YYYY|YY|Y|DD|D|MM|M/g;
+const allToken = /YYYY|YY|Y|DD|D|MMMM|MMM|MM|M/g;
 
 const findToken = (isoString, format) =>
   format.match(allToken) || [];
@@ -64,5 +75,11 @@ describe.only(`format ${DATE} with token`, () => {
 
   it('"MM" becomes 02', () => assertThat(
     format(DATE, 'MM'), equalTo('02')));
+
+  it('"MMM" becomes Feb', () => assertThat(
+    format(DATE, 'MMM'), equalTo('Feb')));
+
+  it('"MMMM" becomes February', () => assertThat(
+    format(DATE, 'MMMM'), equalTo('February')));
 });
 
