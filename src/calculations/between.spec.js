@@ -31,6 +31,9 @@ describe('secondsBetween', () => {
 
   it('there are 60 seconds between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
     secondsBetween('2000-01-02T00:00', '2000-01-01T23:59'), equalTo(60)));
+
+  it.skip('there are -60 seconds between 2000-01-01T23:59 and 2000-01-02T00:00', () => assertThat(
+    secondsBetween('2000-01-01T23:59', '2000-01-02T00:00'), equalTo(60)));
 });
 
 describe('minutes between', () => {
