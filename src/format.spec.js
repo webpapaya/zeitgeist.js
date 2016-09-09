@@ -37,46 +37,32 @@ const format = (isoString, format) => {
 };
 
 import { assertThat, equalTo } from 'hamjest';
-describe.only('format a date', () => {
-  describe('Token "YYYY"', () => {
-    it('2012-01-01 becomes 2012', () => assertThat(
-      format('2012-01-01', 'YYYY'), equalTo('2012')));
-  });
 
-  describe('Token "YYYY-YY"', () => {
-    it('2012-01-01 becomes 2012-12', () => assertThat(
-      format('2012-01-01', 'YYYY-YY'), equalTo('2012-12')));
-  });
+const DATE = '2012-02-01T14:15:16';
 
-  describe('Token "Y"', () => {
-    it('2012-01-01 becomes 2012', () => assertThat(
-      format('2012-01-01', 'Y'), equalTo('2012')));
-  });
+describe.only(`format ${DATE} with token`, () => {
+  it('"YYYY" becomes 2012', () => assertThat(
+    format(DATE, 'YYYY'), equalTo('2012')));
 
-  describe('Token "YY"', () => {
-    it('2012-01-01 becomes 12', () => assertThat(
-      format('2012-01-01', 'YY'), equalTo('12')));
-  });
+  it('"YYYY-YY" becomes 2012-12', () => assertThat(
+    format(DATE, 'YYYY-YY'), equalTo('2012-12')));
 
+  it('"Y" 2012', () => assertThat(
+    format(DATE, 'Y'), equalTo('2012')));
 
-  describe('Token "D"', () => {
-    it('2012-02-01 becomes 1', () => assertThat(
-      format('2012-02-01', 'D'), equalTo('1')));
-  });
+  it('"YY" becomes 12', () => assertThat(
+    format(DATE, 'YY'), equalTo('12')));
 
-  describe('Token "DD"', () => {
-    it('2012-02-01 becomes 01', () => assertThat(
-      format('2012-02-01', 'DD'), equalTo('01')));
-  });
+  it('"D" becomes 1', () => assertThat(
+    format(DATE, 'D'), equalTo('1')));
 
-  describe('Token "M"', () => {
-    it('2012-02-01 becomes 2', () => assertThat(
-      format('2012-02-01', 'M'), equalTo('2')));
-  });
+  it('"DD" becomes 01', () => assertThat(
+    format(DATE, 'DD'), equalTo('01')));
 
-  describe('Token "MM"', () => {
-    it('2012-02-01 becomes 02', () => assertThat(
-      format('2012-02-01', 'MM'), equalTo('02')));
-  });
+  it('"M" becomes 2', () => assertThat(
+    format(DATE, 'M'), equalTo('2')));
+
+  it('"MM" becomes 02', () => assertThat(
+    format(DATE, 'MM'), equalTo('02')));
 });
 
