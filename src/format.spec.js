@@ -2,8 +2,8 @@ import { toFragments, toIso, daysBetween, getWeekdayOf } from './index';
 import { leftPad } from './utils';
 
 
-const weekdaysLong = 'Monday Tuesday Wednesday Thursday Friday Saturday Sunday '.split(' ');
-const weekdaysShort = 'Mon Tue Wed Thu Fri Sat Sun '.split(' ');
+const weekdaysLong = 'Monday Tuesday Wednesday Thursday Friday Saturday Sunday'.split(' ');
+const weekdaysShort = 'Mon Tue Wed Thu Fri Sat Sun'.split(' ');
 
 const monthsLong = 'January February March April May June July August September October November December'.split(' ');
 const monthsShort = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
@@ -14,8 +14,7 @@ const formatY = (fragments) => formatYYYY(fragments);
 
 const formatD = (fragments) => `${fragments.day}`;
 const formatDD = (fragments) => leftPad(formatD(fragments));
-const formatDDD = (fragments) =>
-  daysBetween(`${fragments.year}-01-01`, toIso(fragments)) + 1;
+const formatDDD = (fragments) => daysBetween(`${fragments.year}-01-01`, toIso(fragments)) + 1;
 const formatDDDD = (fragments) => leftPad(formatDDD(fragments), 3);
 
 const formatM = (fragments) => `${fragments.month}`;
@@ -28,10 +27,12 @@ const formatdd = (fragments) => leftPad(formatd(fragments));
 const formatddd = (fragments) => weekdaysShort[formatd(fragments) - 1];
 const formatdddd = (fragments) => weekdaysLong[formatd(fragments) - 1];
 
+const formatE = (fragments) => getWeekdayOf(toIso(fragments));
+
 const tokens = {
-  'YYYY': formatYYYY,
-  'YY': formatYY,
   'Y': formatY,
+  'YY': formatYY,
+  'YYYY': formatYYYY,
   'D': formatD,
   'DD': formatDD,
   'DDD': formatDDD,
@@ -44,6 +45,7 @@ const tokens = {
   'dd': formatdd,
   'ddd': formatddd,
   'dddd': formatdddd,
+  'E': formatE,
 };
 
 const allToken = Object
@@ -117,5 +119,8 @@ describe.only(`format ${DATE} with token`, () => {
 
   it('"dddd" becomes Wednesday', () => assertThat(
     format(DATE, 'dddd'), equalTo('Wednesday')));
+
+  it('"E" becomes 3', () => assertThat(
+    format(DATE, 'E'), equalTo('3')));
 });
 
