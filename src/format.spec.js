@@ -1,4 +1,4 @@
-import { toFragments, toIso, daysBetween, getWeekday } from './index';
+import { toFragments, toIso, daysBetween, getWeekday, getWeekOfYear } from './index';
 import { leftPad } from './utils';
 
 
@@ -28,6 +28,7 @@ const formatddd = (fragments) => weekdaysShort[formatd(fragments) - 1];
 const formatdddd = (fragments) => weekdaysLong[formatd(fragments) - 1];
 
 const formatE = (fragments) => getWeekday(toIso(fragments));
+const formatW = (fragments) => getWeekOfYear(toIso(fragments));
 
 const tokens = {
   'Y': formatY,
@@ -46,6 +47,7 @@ const tokens = {
   'ddd': formatddd,
   'dddd': formatdddd,
   'E': formatE,
+  'W': formatW,
 };
 
 const allToken = Object
@@ -122,5 +124,8 @@ describe(`format ${DATE} with token`, () => {
 
   it('"E" becomes 3', () => assertThat(
     format(DATE, 'E'), equalTo('3')));
+
+  it('"W" becomes 3', () => assertThat(
+    format(DATE, 'W'), equalTo('5')));
 });
 
