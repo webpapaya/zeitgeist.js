@@ -84,7 +84,7 @@ const allToken = Object
 const tokenRegex = new RegExp(allToken, 'g');
 
 const findToken = (isoString, format) =>
-format.match(tokenRegex) || [];
+  format.match(tokenRegex) || [];
 
 export const format = (isoString, format) => {
   const fragments = toFragments(isoString);
