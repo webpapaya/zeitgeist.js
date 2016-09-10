@@ -39,6 +39,15 @@ const formatGGGG = (fragments) => {
 };
 const formatGG = (fragments) => formatGGGG(fragments).slice(-2);
 
+const formatH = (fragments) => `${fragments.hour}`;
+const formatHH = (fragments) => leftPad(formatH(fragments));
+
+const formatm = (fragments) => `${fragments.minute}`;
+const formatmm = (fragments) => leftPad(formatm(fragments));
+
+const formats = (fragments) => `${Math.floor(fragments.second)}`;
+const formatss = (fragments) => leftPad(formats(fragments));
+
 const tokens = {
   'Y': formatY,
   'YY': formatYY,
@@ -60,6 +69,12 @@ const tokens = {
   'WW': formatWW,
   'GG': formatGG,
   'GGGG': formatGGGG,
+  'H': formatH,
+  'HH': formatHH,
+  'm': formatm,
+  'mm': formatmm,
+  's': formats,
+  'ss': formatss,
 };
 
 const allToken = Object
@@ -83,7 +98,7 @@ const format = (isoString, format) => {
 
 import { assertThat, equalTo } from 'hamjest';
 
-const DATE = '2012-02-01T14:15:16+01:00RP1Y';
+const DATE = '2012-02-01T09:08:07.123';
 
 describe(`format ${DATE} with token`, () => {
   it('"YYYY" becomes 2012', () => assertThat(
@@ -148,8 +163,25 @@ describe(`format ${DATE} with token`, () => {
 
   it('"GG" becomes 12', () => assertThat(
     format(DATE, 'GG'), equalTo('12')));
-});
 
+  it('"H" becomes 0', () => assertThat(
+    format(DATE, 'H'), equalTo('9')));
+
+  it('"HH" becomes 09', () => assertThat(
+    format(DATE, 'HH'), equalTo('09')));
+
+  it('"m" becomes 8', () => assertThat(
+    format(DATE, 'm'), equalTo('8')));
+
+  it('"mm" becomes 08', () => assertThat(
+    format(DATE, 'mm'), equalTo('08')));
+
+  it('"s" becomes 7', () => assertThat(
+    format(DATE, 's'), equalTo('7')));
+
+  it('"ss" becomes 07', () => assertThat(
+    format(DATE, 'ss'), equalTo('07')));
+});
 
 describe('format 2000-01-01 with token', () => {
   it('GGGG responds 1999, because week belongs to previous year', () => assertThat(
