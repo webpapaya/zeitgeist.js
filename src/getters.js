@@ -9,13 +9,17 @@ export const getWeekday = (isoString) => {
   return fixNegativeDaysBetween(days % DAYS_IN_ONE_WEEK) + 1;
 };
 
-// See: https://en.wikipedia.org/wiki/ISO_week_date#Relation_with_the_Gregorian_calendar
-// Only support ISO week of the year for now.
-export const getWeekOfYear = (isoString) => {
-  const weekOfYear = Math.floor((getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7);
-  if(weekOfYear === 0) { return 53; }
-  return weekOfYear;
-};
-
 export const getDayOfYear = (isoString) =>
   daysBetween(toIso({ year: toFragments(isoString).year, month: 1, day: 1 }), isoString) + 1;
+
+// See: https://en.wikipedia.org/wiki/ISO_week_date#Relation_with_the_Gregorian_calendar
+// Only support ISO week of the year for now.
+const calculateWeekOfYear = (isoString) =>
+  Math.floor((getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7);
+
+const doesWeekBelongToPreviousYear = (isoString) =>
+  calculateWeekOfYear(isoString) === 0;
+
+export const getWeekOfYear = (isoString) =>
+  doesWeekBelongToPreviousYear(isoString) ? 53 : calculateWeekOfYear(isoString);
+
