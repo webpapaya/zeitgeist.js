@@ -70,7 +70,7 @@ export {
 } from './calculations/index';
 
 export {
-  getWeekdayOf,
+  getWeekday,
 } from './getters';
 
 

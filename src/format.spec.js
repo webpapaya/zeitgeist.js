@@ -1,4 +1,4 @@
-import { toFragments, toIso, daysBetween, getWeekdayOf } from './index';
+import { toFragments, toIso, daysBetween, getWeekday } from './index';
 import { leftPad } from './utils';
 
 
@@ -22,12 +22,12 @@ const formatMM = (fragments) => leftPad(formatM(fragments));
 const formatMMM = (fragments) => monthsShort[fragments.month - 1];
 const formatMMMM = (fragments) => monthsLong[fragments.month - 1];
 
-const formatd = (fragments) => getWeekdayOf(toIso(fragments));
+const formatd = (fragments) => getWeekday(toIso(fragments));
 const formatdd = (fragments) => leftPad(formatd(fragments));
 const formatddd = (fragments) => weekdaysShort[formatd(fragments) - 1];
 const formatdddd = (fragments) => weekdaysLong[formatd(fragments) - 1];
 
-const formatE = (fragments) => getWeekdayOf(toIso(fragments));
+const formatE = (fragments) => getWeekday(toIso(fragments));
 
 const tokens = {
   'Y': formatY,
@@ -69,7 +69,7 @@ const format = (isoString, format) => {
 
 import { assertThat, equalTo } from 'hamjest';
 
-const DATE = '2012-02-01T14:15:16';
+const DATE = '2012-02-01T14:15:16+01:00RP1Y';
 
 describe.only(`format ${DATE} with token`, () => {
   it('"YYYY" becomes 2012', () => assertThat(
