@@ -29,6 +29,7 @@ const formatdddd = (fragments) => weekdaysLong[formatd(fragments) - 1];
 
 const formatE = (fragments) => getWeekday(toIso(fragments));
 const formatW = (fragments) => getWeekOfYear(toIso(fragments));
+const formatWW = (fragments) => leftPad(formatW(fragments));
 
 const tokens = {
   'Y': formatY,
@@ -48,6 +49,7 @@ const tokens = {
   'dddd': formatdddd,
   'E': formatE,
   'W': formatW,
+  'WW': formatWW,
 };
 
 const allToken = Object
@@ -127,5 +129,8 @@ describe(`format ${DATE} with token`, () => {
 
   it('"W" becomes 3', () => assertThat(
     format(DATE, 'W'), equalTo('5')));
+
+  it('"WW" becomes 03', () => assertThat(
+    format(DATE, 'WW'), equalTo('05')));
 });
 
