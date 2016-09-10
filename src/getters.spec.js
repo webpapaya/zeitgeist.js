@@ -72,7 +72,7 @@ describe('getIsoWeekOfYear', () => {
 
 });
 
-describe('getGregorianWeekOfYear', () => {
-  it.skip('2000-01-01 responds 1', () => assertThat(
+describe.skip('getGregorianWeekOfYear', () => {
+  it('2000-01-01 responds 1', () => assertThat(
     getGregorianWeekOfYear('2000-01-01'), equalTo(1)));
 });

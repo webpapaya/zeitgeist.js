@@ -10,11 +10,11 @@ export const getWeekday = (isoString) => {
 };
 
 export const getGregorianWeekOfYear = (isoString) => {
-
+  return (getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7;
 };
 
 export const getIsoWeekOfYear = (isoString) => {
-
+  return (getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7;
 };
 
 export const getDayOfYear = (isoString) =>
