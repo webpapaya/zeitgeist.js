@@ -2,12 +2,6 @@ import { doesWeekBelongToPreviousYear } from '../getters';
 import { toIso, daysBetween, getWeekday, getWeekOfYear } from '../index';
 import { leftPad } from '../utils';
 
-const weekdaysLong = 'Monday Tuesday Wednesday Thursday Friday Saturday Sunday'.split(' ');
-const weekdaysShort = 'Mon Tue Wed Thu Fri Sat Sun'.split(' ');
-
-const monthsLong = 'January February March April May June July August September October November December'.split(' ');
-const monthsShort = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
-
 const formatYYYY = (fragments) => `${fragments.year}`;
 const formatYY = (fragments) => formatYYYY(fragments).slice(-2);
 const formatY = (fragments) => formatYYYY(fragments);
@@ -19,13 +13,13 @@ const formatDDDD = (fragments) => leftPad(formatDDD(fragments), 3);
 
 const formatM = (fragments) => `${fragments.month}`;
 const formatMM = (fragments) => leftPad(formatM(fragments));
-const formatMMM = (fragments) => monthsShort[fragments.month - 1];
-const formatMMMM = (fragments) => monthsLong[fragments.month - 1];
+const formatMMM = (fragments, { monthsShort }) => monthsShort[fragments.month - 1];
+const formatMMMM = (fragments, { monthsLong }) => monthsLong[fragments.month - 1];
 
 const formatd = (fragments) => getWeekday(toIso(fragments));
 const formatdd = (fragments) => leftPad(formatd(fragments));
-const formatddd = (fragments) => weekdaysShort[formatd(fragments) - 1];
-const formatdddd = (fragments) => weekdaysLong[formatd(fragments) - 1];
+const formatddd = (fragments, { weekdaysShort }) => weekdaysShort[formatd(fragments) - 1];
+const formatdddd = (fragments, { weekdaysLong }) => weekdaysLong[formatd(fragments) - 1];
 
 const formatE = (fragments) => getWeekday(toIso(fragments));
 const formatW = (fragments) => getWeekOfYear(toIso(fragments));
