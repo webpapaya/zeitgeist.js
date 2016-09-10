@@ -1,8 +1,7 @@
 import { assertThat, equalTo } from 'hamjest';
 import {
   getWeekday,
-  getGregorianWeekOfYear,
-  getIsoWeekOfYear,
+  getWeekOfYear,
   getDayOfYear,
 } from './index';
 
@@ -68,11 +67,19 @@ describe('getDayOfYear', () => {
     getDayOfYear('2001-12-31'), equalTo(365)));
 });
 
-describe('getIsoWeekOfYear', () => {
+describe('getWeekOfYear', () => {
+  it('2000-01-01 responds 53', () => assertThat(
+    getWeekOfYear('2000-01-01'), equalTo(53)));
 
-});
+  it('2008-09-26 responds 39', () => assertThat(
+    getWeekOfYear('2008-09-26'), equalTo(39)));
 
-describe.skip('getGregorianWeekOfYear', () => {
-  it('2000-01-01 responds 1', () => assertThat(
-    getGregorianWeekOfYear('2000-01-01'), equalTo(1)));
+  it('2001-01-01 responds 1', () => assertThat(
+    getWeekOfYear('2001-01-01'), equalTo(1)));
+
+  it('2001-01-07 responds 1', () => assertThat(
+    getWeekOfYear('2001-01-07'), equalTo(1)));
+
+  it('2001-12-31 responds 53', () => assertThat(
+    getWeekOfYear('2001-12-31'), equalTo(53)));
 });

@@ -71,8 +71,7 @@ export {
 
 export {
   getWeekday,
-  getGregorianWeekOfYear,
-  getIsoWeekOfYear,
+  getWeekOfYear,
   getDayOfYear,
 } from './getters';
 

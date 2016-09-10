@@ -9,12 +9,12 @@ export const getWeekday = (isoString) => {
   return fixNegativeDaysBetween(days % DAYS_IN_ONE_WEEK) + 1;
 };
 
-export const getGregorianWeekOfYear = (isoString) => {
-  return (getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7;
-};
-
-export const getIsoWeekOfYear = (isoString) => {
-  return (getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7;
+// See: https://en.wikipedia.org/wiki/ISO_week_date#Relation_with_the_Gregorian_calendar
+// Only support ISO week of the year for now.
+export const getWeekOfYear = (isoString) => {
+  const weekOfYear = Math.floor((getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7);
+  if(weekOfYear === 0) { return 53; }
+  return weekOfYear;
 };
 
 export const getDayOfYear = (isoString) =>
