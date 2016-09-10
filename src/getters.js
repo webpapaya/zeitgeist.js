@@ -1,4 +1,4 @@
-import { daysBetween } from './index';
+import { daysBetween, toFragments, toIso } from './index';
 
 const WEEKDAY_REFERENCE_DATE = '2001-01-01';
 const DAYS_IN_ONE_WEEK = 7;
@@ -8,3 +8,14 @@ export const getWeekday = (isoString) => {
   const days = daysBetween(WEEKDAY_REFERENCE_DATE, isoString);
   return fixNegativeDaysBetween(days % DAYS_IN_ONE_WEEK) + 1;
 };
+
+export const getGregorianWeekOfYear = (isoString) => {
+
+};
+
+export const getIsoWeekOfYear = (isoString) => {
+
+};
+
+export const getDayOfYear = (isoString) =>
+  daysBetween(toIso({ year: toFragments(isoString).year, month: 1, day: 1 }), isoString) + 1;

@@ -71,7 +71,7 @@ import { assertThat, equalTo } from 'hamjest';
 
 const DATE = '2012-02-01T14:15:16+01:00RP1Y';
 
-describe.only(`format ${DATE} with token`, () => {
+describe(`format ${DATE} with token`, () => {
   it('"YYYY" becomes 2012', () => assertThat(
     format(DATE, 'YYYY'), equalTo('2012')));
 
