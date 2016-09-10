@@ -1,3 +1,4 @@
+import { doesWeekBelongToPreviousYear } from './getters';
 import { toFragments, toIso, daysBetween, getWeekday, getWeekOfYear } from './index';
 import { leftPad } from './utils';
 
@@ -30,6 +31,13 @@ const formatdddd = (fragments) => weekdaysLong[formatd(fragments) - 1];
 const formatE = (fragments) => getWeekday(toIso(fragments));
 const formatW = (fragments) => getWeekOfYear(toIso(fragments));
 const formatWW = (fragments) => leftPad(formatW(fragments));
+const formatGGGG = (fragments) => {
+  if(doesWeekBelongToPreviousYear(toIso(fragments))) {
+    return `${fragments.year - 1}`;
+  }
+  return formatYYYY(fragments)
+};
+const formatGG = (fragments) => formatGGGG(fragments).slice(-2);
 
 const tokens = {
   'Y': formatY,
@@ -50,6 +58,8 @@ const tokens = {
   'E': formatE,
   'W': formatW,
   'WW': formatWW,
+  'GG': formatGG,
+  'GGGG': formatGGGG,
 };
 
 const allToken = Object
@@ -132,5 +142,22 @@ describe(`format ${DATE} with token`, () => {
 
   it('"WW" becomes 03', () => assertThat(
     format(DATE, 'WW'), equalTo('05')));
+
+  it('"GGGG" becomes 2012', () => assertThat(
+    format(DATE, 'GGGG'), equalTo('2012')));
+
+  it('"GG" becomes 12', () => assertThat(
+    format(DATE, 'GG'), equalTo('12')));
 });
+
+
+describe('format 2000-01-01 with token', () => {
+  it('GGGG responds 1999, because week belongs to previous year', () => assertThat(
+    format('2000-01-01', 'GGGG'), equalTo('1999')));
+
+  it('YYYY responds 2000', () => assertThat(
+    format('2000-01-01', 'YYYY'), equalTo('2000')));
+});
+
+
 

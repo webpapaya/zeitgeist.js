@@ -17,7 +17,7 @@ export const getDayOfYear = (isoString) =>
 const calculateWeekOfYear = (isoString) =>
   Math.floor((getDayOfYear(isoString) - getWeekday(isoString) + 10) / 7);
 
-const doesWeekBelongToPreviousYear = (isoString) =>
+export const doesWeekBelongToPreviousYear = (isoString) =>
   calculateWeekOfYear(isoString) === 0;
 
 export const getWeekOfYear = (isoString) =>
