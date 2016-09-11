@@ -44,6 +44,9 @@ const formatmm = (fragments) => leftPad(formatm(fragments));
 const formats = (fragments) => `${Math.floor(fragments.second)}`;
 const formatss = (fragments) => leftPad(formats(fragments));
 
+const formatA = (fragments) => fragments.hour <= 12 ? 'AM' : 'PM';
+const formata = (fragments) => formatA(fragments).toLowerCase();
+
 export const token = {
   'Y': formatY,
   'YY': formatYY,
@@ -73,4 +76,8 @@ export const token = {
   'mm': formatmm,
   's': formats,
   'ss': formatss,
+
+  // Maybe move to locale as am/pm is english specific
+  'A': formatA,
+  'a': formata,
 };

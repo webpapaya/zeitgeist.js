@@ -90,6 +90,13 @@ describe(`format ${DATE} with token`, () => {
 
   it('"hh" becomes 09', () => assertThat(
     format(DATE, 'hh'), equalTo('09')));
+
+
+  it('"A" becomes AM', () => assertThat(
+    format(DATE, 'A'), equalTo('AM')));
+
+  it('"a" becomes am', () => assertThat(
+    format(DATE, 'a'), equalTo('am')));
 });
 
 describe('format 2000-01-01 with token', () => {
