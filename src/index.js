@@ -84,3 +84,5 @@ export {
   isSameOrAfter,
   isSameOrBefore,
 } from './compare';
+
+export { format } from './format';

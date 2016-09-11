@@ -35,6 +35,9 @@ const formatGG = (fragments) => formatGGGG(fragments).slice(-2);
 const formatH = (fragments) => `${fragments.hour}`;
 const formatHH = (fragments) => leftPad(formatH(fragments));
 
+const formath = (fragments) => fragments.hour <= 12 ? `${fragments.hour}` : `${fragments.hour - 12}`;
+const formathh = (fragments) => leftPad(formath(fragments));
+
 const formatm = (fragments) => `${fragments.minute}`;
 const formatmm = (fragments) => leftPad(formatm(fragments));
 
@@ -64,6 +67,8 @@ export const token = {
   'GGGG': formatGGGG,
   'H': formatH,
   'HH': formatHH,
+  'h': formath,
+  'hh': formathh,
   'm': formatm,
   'mm': formatmm,
   's': formats,
