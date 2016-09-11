@@ -1,7 +1,7 @@
 import { assertThat, equalTo, hasProperty } from 'hamjest';
 import { readdirSync } from 'fs';
 
-describe.only('locale', () => {
+describe('locale', () => {
   readdirSync('./src/locales')
     .filter((filename) => !filename.startsWith('default'))
     .filter((filename) => filename.indexOf('spec') === -1)
