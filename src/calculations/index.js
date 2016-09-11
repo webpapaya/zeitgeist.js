@@ -20,3 +20,12 @@ export {
   datesBetween,
   daysBetween,
 } from './between';
+
+export {
+  floorSecond,
+  floorMinute,
+  floorHour,
+  floorDay,
+  floorMonth,
+  floorYear,
+} from './round';
