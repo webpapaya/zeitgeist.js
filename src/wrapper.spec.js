@@ -1,31 +1,5 @@
-import {
-  toFragments,
-
-  addYears,
-  addMonths,
-  addDays,
-
-  subtractYears,
-  subtractMonths,
-  subtractDays,
-} from './index';
-
-const wrapper = (isoString) => {
-  return {
-    toIso: () => isoString,
-    toFragments: () => toFragments(isoString),
-
-    addYears: (amount) => wrapper(addYears(isoString, amount)),
-    addMonths: (amount) => wrapper(addMonths(isoString, amount)),
-    addDays: (amount) => wrapper(addDays(isoString, amount)),
-
-    subtractYears: (amount) => wrapper(subtractYears(isoString, amount)),
-    subtractMonths: (amount) => wrapper(subtractMonths(isoString, amount)),
-    subtractDays: (amount) => wrapper(subtractDays(isoString, amount)),
-  }
-};
-
 import { assertThat, not, throws, equalTo } from 'hamjest';
+import { wrapper } from './wrapper';
 
 describe('Wrapper', () => {
   it('toFragments works', () => assertThat(
@@ -52,4 +26,3 @@ describe('Wrapper', () => {
   it('subtractDays works', () => assertThat(
     () => wrapper('2010-01-15T11:12:13.456').subtractDays(1), not(throws())));
 });
-
