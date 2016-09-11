@@ -22,7 +22,8 @@
     "babel-register": "^6.9.0",
     "eslint-config-crewmeister": "latest",
     "hamjest": "^2.13.0",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "node-fetch": "^1.6.0"
   },
   "keywords": [
     "time",
