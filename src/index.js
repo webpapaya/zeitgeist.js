@@ -51,6 +51,9 @@ export {
 } from './transformations/index';
 
 export {
+  addSeconds,
+  addMinutes,
+  addHours,
   addDays,
   addMonths,
   addYears,

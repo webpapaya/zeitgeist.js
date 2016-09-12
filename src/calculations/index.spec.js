@@ -1,14 +1,24 @@
 import { assertThat, equalTo, not, throws } from 'hamjest';
 import { getCallStackSize } from '../test-helper';
 import {
+  addSeconds,
+  addMinutes,
+  addHours,
+
   addDays,
   addMonths,
   addYears,
+
 
   subtractDays,
   subtractMonths,
   subtractYears,
 } from '../index';
+
+describe('addSeconds', () => {
+  it('adding one second to 2001-01-01T00:00:00 results in 2001-01-01T00:00:01', () => assertThat(
+    addSeconds('2001-01-01T00:00:00', 1), equalTo('2001-01-01T00:00:01')));
+});
 
 describe('addDays', () => {
   it('adding 1 day to 2000-01-01 results in 2000-01-02', () => assertThat(

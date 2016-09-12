@@ -19,6 +19,14 @@ const jumpToNextYear = (fragments) => ({ ...fragments, year: fragments.year + 1 
 const jumpToNextMonth = (fragments) => ({ ...fragments, month: fragments.month + 1 });
 const jumpToNextDay = (fragments) => ({ ...fragments, day: fragments.day + 1 });
 
+export const addSeconds = (isoStringOrFragments, seconds) => {
+  const fragments = toFragments(isoStringOrFragments);
+  return toIso({ ...fragments, second: fragments.second + 1 });
+};
+
+export const addMinutes = () => {};
+export const addHours = () => {};
+
 export const addDays = tco((isoStringOrFragments, days) => {
   if (days === 0) { return toIso(isoStringOrFragments); }
   if (days < 0) { return subtractDays(isoStringOrFragments, days * -1); }

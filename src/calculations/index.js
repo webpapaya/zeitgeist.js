@@ -1,4 +1,7 @@
 export {
+  addSeconds,
+  addMinutes,
+  addHours,
   addDays,
   addMonths,
   addYears,
