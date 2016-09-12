@@ -1,35 +1,11 @@
 import { assertThat, equalTo } from 'hamjest';
-import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './constants';
 import {
   daysInMonth,
   daysInYear,
   isLeapYear,
   isFirstDayOfMonth,
   isLastDayOfMonth,
-  toMicroseconds,
 } from './index';
-
-describe('toFloat', () => {
-  it('from 0000-01-01 responds 0', () => assertThat(
-    toMicroseconds('0000-01-01'), equalTo(0)));
-
-  it('from 0000-01-01T00:00:00 responds 0', () => assertThat(
-    toMicroseconds('0000-01-01T00:00:00'), equalTo(0)));
-
-  it('from 0000-01-01T00:00:01 responds 1 second', () => assertThat(
-    toMicroseconds('0000-01-01T00:00:01'), equalTo(ONE_SECOND)));
-
-  it('from 0000-01-01T00:01:00 responds 1 minute', () => assertThat(
-    toMicroseconds('0000-01-01T00:01:00'), equalTo(ONE_MINUTE)));
-
-  it('from 0000-01-01T01:00:00 responds 1 hour', () => assertThat(
-    toMicroseconds('0000-01-01T01:00:00'), equalTo(ONE_HOUR)));
-
-  it('takes leap seconds into account', () => assertThat(
-    toMicroseconds('1972-07-01T00:00:00'), equalTo(62246016000000000 - ONE_SECOND)));
-});
-
-
 
 describe('isLastDayOfMonth', () => {
   it('2000-01-31 is last of month', () => assertThat(
