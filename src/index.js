@@ -70,6 +70,13 @@ export {
 
   datesBetween,
   daysBetween,
+
+  floorSecond,
+  floorMinute,
+  floorHour,
+  floorDay,
+  floorMonth,
+  floorYear,
 } from './calculations/index';
 
 export {
