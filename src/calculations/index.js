@@ -14,6 +14,8 @@ export {
 } from './subtract';
 
 export {
+  leapMicrosecondsBetween,
+
   microsecondsBetween,
   millisecondsBetween,
   secondsBetween,

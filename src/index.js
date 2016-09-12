@@ -45,6 +45,7 @@ export {
   toIsoDate,
   toIsoTime,
   toFloat,
+  toMicroseconds,
 
   removeTimeComponent,
   removeDateComponent,
