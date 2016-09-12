@@ -21,7 +21,7 @@ const jumpToNextDay = (fragments) => ({ ...fragments, day: fragments.day + 1 });
 
 export const addSeconds = (isoStringOrFragments, seconds) => {
   const fragments = toFragments(isoStringOrFragments);
-  return toIso({ ...fragments, second: fragments.second + 1 });
+  return toIso({ ...fragments, second: fragments.second + seconds });
 };
 
 export const addMinutes = () => {};
