@@ -27,6 +27,15 @@ describe.only('addSeconds', () => {
 
   it('adding 1 seconds to 2001-01-01T00:59:59 results in 2001-01-01T01:00:00', () => assertThat(
     addSeconds('2001-01-01T00:59:59', 1), equalTo('2001-01-01T01:00:00')));
+
+  it('adding 1 seconds to 2001-01-01T00:59:58 results in 2001-01-01T00:59:59', () => assertThat(
+    addSeconds('2001-01-01T00:59:58', 1), equalTo('2001-01-01T00:59:59')));
+
+  it('adding 1 seconds to 2001-01-01T23:59:59 results in 2001-01-02T00:00:00', () => assertThat(
+    addSeconds('2001-01-01T23:59:59', 1), equalTo('2001-01-02T00:00:00')));
+
+  it('adding 1 seconds to 2001-01-01T23:59:58 results in 2001-01-01T23:59:59', () => assertThat(
+    addSeconds('2001-01-01T23:59:58', 1), equalTo('2001-01-01T23:59:59')));
 });
 
 describe('addDays', () => {

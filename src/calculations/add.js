@@ -7,13 +7,15 @@ import {
   subtractMonths,
   floorMinute,
   floorHour,
+  floorDay,
 } from '../index';
 
 import { tco } from '../utils';
 
 // TODO: add leap seconds
 const isLastSecondOfMinute = ({ second }) => second === 59;
-const isLastMinuteOfHour = ({ minute }) => minute === 59;
+const isLastSecondOfHour = ({ second, minute }) => second === 59 && minute === 59;
+const isLastSecondOfDay = ({ second, minute, hour }) => second === 59 && minute === 59 && hour === 23;
 
 const isLastMonthOfYear = ({ month }) => month === DECEMBER;
 const isLastDayOfYear = (fragments) =>
@@ -34,7 +36,13 @@ export const addSeconds = tco((isoStringOrFragments, seconds) => {
   if (seconds === 0) { return toIso(isoStringOrFragments); }
   const fragments = toFragments(isoStringOrFragments);
 
-  if (isLastMinuteOfHour(fragments)) {
+  if(isLastSecondOfDay(fragments)) {
+    return addSeconds(
+      floorDay(
+        jumpToNextDay(fragments)), seconds - 1);
+  }
+
+  if (isLastSecondOfHour(fragments)) {
     return addSeconds(
       floorHour(
         jumpToNextHour(fragments)), seconds - 1);
@@ -45,8 +53,6 @@ export const addSeconds = tco((isoStringOrFragments, seconds) => {
       floorMinute(
         jumpToNextMinute(fragments, 1)), seconds - 1);
   }
-
-
 
   return addSeconds(jumpToNextSecond(fragments), seconds - 1);
 });
