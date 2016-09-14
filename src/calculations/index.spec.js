@@ -15,7 +15,7 @@ import {
   subtractYears,
 } from '../index';
 
-describe('addSeconds', () => {
+describe.only('addSeconds', () => {
   it('adding 1 second to 2001-01-01T00:00:00 results in 2001-01-01T00:00:01', () => assertThat(
     addSeconds('2001-01-01T00:00:00', 1), equalTo('2001-01-01T00:00:01')));
 
@@ -24,6 +24,9 @@ describe('addSeconds', () => {
 
   it('adding 60 seconds to 2001-01-01T00:00:00 results in 2001-01-01T00:01:00', () => assertThat(
     addSeconds('2001-01-01T00:00:00', 60), equalTo('2001-01-01T00:01:00')));
+
+  it('adding 1 seconds to 2001-01-01T00:59:59 results in 2001-01-01T01:00:00', () => assertThat(
+    addSeconds('2001-01-01T00:59:59', 1), equalTo('2001-01-01T01:00:00')));
 });
 
 describe('addDays', () => {
