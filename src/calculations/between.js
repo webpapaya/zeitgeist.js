@@ -38,6 +38,7 @@ const daysInYear = (isoString) => {
   return daysOfYear + daysOfMonth + fragments.day;
 };
 
+
 export const daysBetween = (from, to) => {
   const daysFrom = containsDateComponent(from) ? daysInYear(from) : 0;
   const daysTo = containsDateComponent(to) ? daysInYear(to) : 0;
