@@ -17,27 +17,8 @@ const jumpToLastDayOfMonth = (fragments) => ({ ...fragments, day: daysInMonth(fr
 const jumpToPreviousYear = (fragments) => ({ ...fragments, year: fragments.year - 1 });
 const jumpToPreviousMonth = (fragments) => ({ ...fragments, month: fragments.month - 1 });
 
-export const subtractDays = (isoStringOrFragments, days) => {
-  if (days === 0) { return toIso(isoStringOrFragments); }
-  if (days < 0) { return addDays(isoStringOrFragments, days * -1); }
-
-  const fragments = toFragments(isoStringOrFragments);
-
-  if (isFirstDayOfYear(fragments)) {
-    return subtractDays(
-      jumpToLastDayOfMonth(
-        jumpToLastMonthOfYear(
-          jumpToPreviousYear(fragments))), days - 1);
-  }
-
-  if (isFirstDayOfMonth(fragments)) {
-    return subtractDays(
-      jumpToLastDayOfMonth(
-        jumpToPreviousMonth(fragments)), days - 1);
-  }
-
-  return subtractDays(jumpToPreviousDay(fragments), days - 1);
-};
+export const subtractDays = (isoString, days) =>
+  addDays(isoString, days * -1);
 
 export const subtractMonths = (isoStringOrFragments, months) => {
   if (months === 0) { return toIso(isoStringOrFragments); }

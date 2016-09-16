@@ -60,8 +60,8 @@ export const addSeconds = tco((isoStringOrFragments, seconds) => {
 export const addMinutes = () => {};
 export const addHours = () => {};
 
-export const addDays = (isoStringOrFragments, days) =>
-  fromJulianDate(toJulianDate(isoStringOrFragments) + days);
+export const addDays = (isoString, days) =>
+  fromJulianDate(toJulianDate(isoString) + days);
 
 export const addMonths = tco((isoStringOrFragments, months) => {
   if (months === 0) { return toIso(isoStringOrFragments); }
