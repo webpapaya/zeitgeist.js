@@ -21,11 +21,8 @@ const isLastSecondOfHour = ({ second, minute }) => second === 59 && minute === 5
 const isLastSecondOfDay = ({ second, minute, hour }) => second === 59 && minute === 59 && hour === 23;
 
 const isLastMonthOfYear = ({ month }) => month === DECEMBER;
-const isLastDayOfYear = (fragments) =>
-  fragments.month === DECEMBER && isLastDayOfMonth(fragments);
 
 const jumpToFirstMonthOfYear = (fragments) => ({ ...fragments, month: 1 });
-const jumpToFirstDayOfMonth = (fragments) => ({ ...fragments, day: 1 });
 
 const jumpToNextSecond = (fragments) => ({ ...fragments, second: fragments.second + 1 });
 const jumpToNextMinute = (fragments) => ({ ...fragments, minute: fragments.minute + 1 });
