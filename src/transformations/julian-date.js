@@ -4,7 +4,7 @@ const floor = (value) => Math.floor(value);
 const fraction = (value) => value % 1;
 
 // https://www.wikiwand.com/de/Julianisches_Datum
-export const toJulian = (isoString) => {
+export const toJulianDate = (isoString) => {
   const fragments = toFragments(isoString);
   const month = fragments.month <= 2 ? fragments.month + 12 : fragments.month;
   const year = fragments.month <= 2 ? fragments.year - 1 : fragments.year;
@@ -19,7 +19,7 @@ export const toJulian = (isoString) => {
 };
 
 // https://www.wikiwand.com/de/Julianisches_Datum
-export const fromJulian = (julianDate) => {
+export const fromJulianDate = (julianDate) => {
   const fullDays = floor(julianDate + 0.5);
   const fractionsOfDay = fraction(julianDate + 0.5);
 
