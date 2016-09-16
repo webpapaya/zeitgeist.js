@@ -22,3 +22,4 @@ export const toFloat = (isoString) => {
 
 export { toFragments } from './to-fragments';
 export { toIso, toIsoDate, toIsoTime } from './to-iso';
+export { fromJulian, toJulian } from './julian-date';

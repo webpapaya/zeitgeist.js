@@ -48,6 +48,9 @@ export {
 
   removeTimeComponent,
   removeDateComponent,
+
+  fromJulian,
+  toJulian,
 } from './transformations/index';
 
 export {
