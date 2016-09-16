@@ -1,5 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { fromJulianDate, toJulianDate } from '../index';
+
 describe('toJulianDate', () => {
   it('ISO 2000-01-01 is 2451544.5 in Julian date', () => assertThat(
     toJulianDate('2000-01-01'), equalTo(2451544.5)));

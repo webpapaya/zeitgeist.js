@@ -8,6 +8,9 @@ import {
   floorMinute,
   floorHour,
   floorDay,
+
+  fromJulianDate,
+  toJulianDate,
 } from '../index';
 
 import { tco } from '../utils';
@@ -60,27 +63,8 @@ export const addSeconds = tco((isoStringOrFragments, seconds) => {
 export const addMinutes = () => {};
 export const addHours = () => {};
 
-export const addDays = tco((isoStringOrFragments, days) => {
-  if (days === 0) { return toIso(isoStringOrFragments); }
-  if (days < 0) { return subtractDays(isoStringOrFragments, days * -1); }
-
-  const fragments = toFragments(isoStringOrFragments);
-
-  if (isLastDayOfYear(fragments)) {
-    return addDays(
-      jumpToFirstMonthOfYear(
-        jumpToFirstDayOfMonth(
-          jumpToNextYear(fragments))), days - 1);
-  }
-
-  if (isLastDayOfMonth(isoStringOrFragments)) {
-    return addDays(
-      jumpToFirstDayOfMonth(
-        jumpToNextMonth(fragments)), days - 1);
-  }
-
-  return addDays(jumpToNextDay(fragments), days - 1);
-});
+export const addDays = (isoStringOrFragments, days) =>
+  fromJulianDate(toJulianDate(isoStringOrFragments) + days);
 
 export const addMonths = tco((isoStringOrFragments, months) => {
   if (months === 0) { return toIso(isoStringOrFragments); }

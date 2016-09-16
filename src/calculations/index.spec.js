@@ -38,7 +38,7 @@ describe('addSeconds', () => {
     addSeconds('2001-01-01T23:59:58', 1), equalTo('2001-01-01T23:59:59')));
 });
 
-describe('addDays', () => {
+describe.only('addDays', () => {
   it('adding 1 day to 2000-01-01 results in 2000-01-02', () => assertThat(
     addDays('2000-01-01', 1), equalTo('2000-01-02')));
 
@@ -55,7 +55,7 @@ describe('addDays', () => {
     addDays('2000-01-31', 2), equalTo('2000-02-02')));
 
   it('adding 365 days to 2000-01-01 results in 2001-01-01', () => assertThat(
-    addDays('2000-01-01', 365), equalTo('2001-01-01')));
+    addDays('2000-01-01', 366), equalTo('2001-01-01')));
 
   it('adding -1 day to 2001-01-01 results in 2000-12-31', () => assertThat(
     addDays('2001-01-01', -1), equalTo('2000-12-31')));
