@@ -1,24 +1,35 @@
 import { assertThat, equalTo } from 'hamjest';
 import { fromJulianDate, toJulianDate } from '../index';
 
-describe('toJulianDate', () => {
-  it('ISO 2000-01-01 is 2451544.5 in Julian date', () => assertThat(
-    toJulianDate('2000-01-01'), equalTo(2451544.5)));
+// Test cases from https://www.wikiwand.com/de/Julianisches_Datum
+const JULIAN_DAY_GREGORIAN_DAY = [
+  { julianDay: 2299160.50, isoDate: '1582-10-15T00:00:00' },
+  { julianDay: 2415020.50, isoDate: '1900-01-01T00:00:00' },
+  { julianDay: 2447893.00, isoDate: '1990-01-01T12:00:00' },
+  { julianDay: 2447893.25, isoDate: '1990-01-01T18:00:00' },
+  { julianDay: 2451545, isoDate: '2000-01-01T12:00:00' },
+  { julianDay: 2453750.1875, isoDate: '2006-01-14T16:30:00' },
+  { julianDay: 2453820.1875, isoDate: '2006-03-25T16:30:00' },
+  { julianDay: 2453947.6556944447, isoDate: '2006-07-31T03:44:12' },
+];
 
-  it('ISO 2000-01-01T10:20:30 is 2451544.9309027777 in Julian date', () => assertThat(
-    toJulianDate('2000-01-01T10:20:30'), equalTo(2451544.9309027777)));
+describe('julian date', () => {
+  describe('toJulianDate', () => {
+    JULIAN_DAY_GREGORIAN_DAY.forEach(({ julianDay, isoDate }) => {
+      it(`ISO ${isoDate} is julian day ${julianDay}`, () => assertThat(
+        toJulianDate(isoDate), equalTo(julianDay)));
+    });
+  });
 
-  it('is inverse of fromJulianDate', () => assertThat(
-    fromJulianDate(toJulianDate('2000-01-01')), equalTo('2000-01-01')));
+  describe('fromJulianDay', () => {
+    JULIAN_DAY_GREGORIAN_DAY.forEach(({ julianDay, isoDate }) => {
+      it(`julian day ${julianDay} is ISO date ${isoDate}`, () => assertThat(
+        fromJulianDate(julianDay), equalTo(isoDate)));
+    });
+  });
 });
 
-describe('fromJulianDate', () => {
-  it('julian date 2451544.5 is ISO 2000-01-01', () => assertThat(
-    fromJulianDate(2451544.5), equalTo('2000-01-01')));
 
-  it('is inverse of toJulianDate', () => assertThat(
-    toJulianDate(fromJulianDate(2451544.5)), equalTo(2451544.5)));
-});
 
 
 
