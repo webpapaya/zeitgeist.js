@@ -94,6 +94,6 @@ describe('dates between', () => {
   it('dates between T10:00 and T11:00 is an empty array', () => assertThat(
     datesBetween('T10:00', 'T11:00'), equalTo([])));
 
-  xit('tail call optimisation works', () => assertThat(
+  it('@slow tail call optimisation works', () => assertThat(
     () => datesBetween('2000-01-01', '2015-01-01'), not(throws())));
 });
