@@ -5,6 +5,7 @@ import {
   daysInMonth,
   addDays,
   addMonths,
+  addYears,
 } from '../index';
 
 const isFirstDayOfYear = ({ month, day }) => month === JANUARY && day === 1;

@@ -70,8 +70,8 @@ export const addDays = (isoString, days) => {
     : removeTimeComponent(calculatedIsoString);
 };
 
-export const addMonths = (isoStringOrFragments, months) => {
-  const fragments = toFragments(isoStringOrFragments);
+export const addMonths = (isoString, months) => {
+  const fragments = toFragments(isoString);
   const yearsOffset = months >= 0 ? Math.floor(months / 12) : Math.ceil(months / 12);
   const monthsOffset = months - yearsOffset * 12;
 
