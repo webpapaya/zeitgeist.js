@@ -6,6 +6,7 @@ import {
   containsDateComponent,
   isBefore,
   isBetween,
+  isSame,
 } from '../index';
 
 import {
@@ -65,7 +66,7 @@ export const hoursBetween = (from, to) => microsecondsBetween(from, to) / ONE_HO
 
 const calculateDatesBetween = tco((from, to, dates = []) => {
   const nextDates = !isEmpty(from) ? [...dates, from] : [...dates];
-  if (from === to) { return nextDates; }
+  if (isSame(from, to)) { return nextDates; }
 
   const direction = isBefore(from, to) ? 1 : -1;
   const nextFrom = addDays(from, direction);

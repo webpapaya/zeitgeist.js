@@ -11,6 +11,8 @@ import {
 
   fromJulianDay,
   toJulianDay,
+  containsTimeComponent,
+  removeTimeComponent,
 } from '../index';
 
 import { tco } from '../utils';
@@ -60,8 +62,14 @@ export const addSeconds = tco((isoStringOrFragments, seconds) => {
 export const addMinutes = () => {};
 export const addHours = () => {};
 
-export const addDays = (isoString, days) =>
-  fromJulianDay(toJulianDay(isoString) + days);
+export const addDays = (isoString, days) => {
+  const calculatedIsoString = fromJulianDay(toJulianDay(isoString) + days);
+
+  return containsTimeComponent(isoString)
+    ? calculatedIsoString
+    : removeTimeComponent(calculatedIsoString);
+};
+
 
 export const addMonths = tco((isoStringOrFragments, months) => {
   if (months === 0) { return toIso(isoStringOrFragments); }
