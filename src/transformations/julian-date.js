@@ -33,11 +33,16 @@ export const toJulianDate = (isoString) => {
   ]);
 };
 
-
 // https://www.wikiwand.com/de/Julianisches_Datum
 export const fromJulianDate = (julianDate) => {
+  return toIso({
+    ...dateComponentFromJulianDay(julianDate),
+    ...timeComponentFromJulianDay(julianDate),
+  });
+};
+
+const dateComponentFromJulianDay = (julianDate) => {
   const fullDays = floor(julianDate + 0.5);
-  const fractionsOfDay = fraction(julianDate + 0.5);
 
   let g = floor((fullDays - 1867216.25) / 36524.25);
   let A = fullDays + 1 + g - floor(g/4);
@@ -51,10 +56,14 @@ export const fromJulianDate = (julianDate) => {
   const month = E < 14 ? E - 1 : E - 13;
   const year = month > 2 ? C - 4716 : C - 4715;
 
+  return { year, month, day };
+};
+
+const timeComponentFromJulianDay = (julianDay) => {
+  const fractionsOfDay = fraction(julianDay + 0.5);
   const hour = floor(fractionsOfDay * 24);
   const minute = floor((fractionsOfDay - hour / 24) * 24 * 60);
   const second = floor((fractionsOfDay - hour / 24 - minute / (24 * 60)) * 24 * 60 * 60);
 
-  return toIso({ year: year, month: month, day: day, hour: hour, minute, second });
+  return { hour, minute, second };
 };
-
