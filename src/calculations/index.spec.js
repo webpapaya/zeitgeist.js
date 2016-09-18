@@ -58,12 +58,12 @@ describe('addDays', () => {
 
   it('adding -1 day to 2001-01-01 results in 2000-12-31', () => assertThat(
     addDays('2001-01-01T00:00:00', -1), equalTo('2000-12-31T00:00:00')));
-
-  it('@slow tail call optimisation works', () => assertThat(
-    () => addDays('2000-01-01T00:00:00', getCallStackSize() + 1), not(throws())));
 });
 
 describe('addMonths', () => {
+  it('adding 0 months to 2000-01-01 results in 2000-01-01', () => assertThat(
+    addMonths('2000-01-01', 0), equalTo('2000-01-01')));
+
   it('adding 1 month to 2000-01-01 results in 2000-02-01', () => assertThat(
     addMonths('2000-01-01', 1), equalTo('2000-02-01')));
 
@@ -76,11 +76,17 @@ describe('addMonths', () => {
   it('adding 13 months to 2000-01-01 results in 2001-02-01', () => assertThat(
     addMonths('2000-01-01', 13), equalTo('2001-02-01')));
 
+  it('adding -13 months to 2001-02-01 results in 2000-01-01', () => assertThat(
+    addMonths('2001-02-01', -13), equalTo('2000-01-01')));
+
   it('adding 14 months to 2000-01-01 results in 2001-03-01', () => assertThat(
     addMonths('2000-01-01', 14), equalTo('2001-03-01')));
 
   it('adding 24 months to 2000-01-01 results in 2002-01-01', () => assertThat(
     addMonths('2000-01-02', 24), equalTo('2002-01-02')));
+
+  it('adding 12000 months (1000 years) to 2000-01-01 results in 3000-01-01', () => assertThat(
+    addMonths('2000-01-01', 12 * 1000), equalTo('3000-01-01')));
 
   it('adding -1 months to 2000-02-01 results in 2000-01-01', () => assertThat(
     addMonths('2000-02-01', -1), equalTo('2000-01-01')));
