@@ -71,7 +71,7 @@ export const addDays = (isoString, days) => {
 };
 
 
-export const addMonths = tco((isoStringOrFragments, months) => {
+export const addMonths = (isoStringOrFragments, months) => {
   const fragments = toFragments(isoStringOrFragments);
   const monthsInThisYearLeft = 12 - fragments.month + 1;
 
@@ -85,7 +85,7 @@ export const addMonths = tco((isoStringOrFragments, months) => {
     year: fragments.year + year,
     month: fragments.month + months - (year * 12),
   });
-});
+};
 
 export const addYears = (isoStringOrFragments, years) => {
   const fragments = toFragments(isoStringOrFragments);

@@ -84,9 +84,6 @@ describe('addMonths', () => {
 
   it('adding -1 months to 2000-02-01 results in 2000-01-01', () => assertThat(
     addMonths('2000-02-01', -1), equalTo('2000-01-01')));
-
-  it('@slow tail call optimisation works', () => assertThat(
-    () => addMonths('2000-01-01', getCallStackSize() + 1), not(throws())));
 });
 
 describe('addYears', () => {
