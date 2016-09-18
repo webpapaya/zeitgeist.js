@@ -31,7 +31,5 @@ export const subtractMonths = (isoStringOrFragments, months) => {
   return subtractMonths(jumpToPreviousMonth(fragments), months - 1);
 };
 
-export const subtractYears = (isoStringOrFragments, years) => {
-  const fragments = toFragments(isoStringOrFragments);
-  return toIso({ ...fragments, year: fragments.year - years });
-};
+export const subtractYears = (isoString, years) =>
+  addYears(isoString, years * -1);
