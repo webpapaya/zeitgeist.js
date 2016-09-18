@@ -1,4 +1,5 @@
 import {
+  toJulianDate,
   toFragments,
   addDays,
   removeTimeComponent,
@@ -26,24 +27,10 @@ import leapSecondData from '../data/leapseconds.json';
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
 const floor = (value) => Math.floor(value);
 
-// See http://math.stackexchange.com/questions/683312/formula-to-calculate-difference-between-two-dates
-const daysInYear = (isoString) => {
-  const fragments = toFragments(isoString);
-  const month = fragments.month <= 2 ? fragments.month + 12 : fragments.month;
-  const year = fragments.month <= 2 ? fragments.year - 1 : fragments.year;
-
-  const daysOfYear = 365 * year + floor(year / 4) - floor(year / 100) + floor(year / 400);
-  const daysOfMonth = floor((153 * month + 8) / 5);
-
-  return daysOfYear + daysOfMonth + fragments.day;
-};
-
-
 export const daysBetween = (from, to) => {
-  const daysFrom = containsDateComponent(from) ? daysInYear(from) : 0;
-  const daysTo = containsDateComponent(to) ? daysInYear(to) : 0;
-
-  return daysTo - daysFrom;
+  const daysFrom = containsDateComponent(from) ? toJulianDate(from) : 0;
+  const daysTo = containsDateComponent(to) ? toJulianDate(to) : 0;
+  return floor(daysTo - daysFrom);
 };
 
 const leapMicrosecondsBetween = (from, to) => {
