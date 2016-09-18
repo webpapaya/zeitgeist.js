@@ -1,10 +1,6 @@
-import { DECEMBER } from '../constants';
 import {
   toFragments,
   toIso,
-  isLastDayOfMonth,
-  subtractDays,
-  subtractMonths,
   floorMinute,
   floorHour,
   floorDay,
@@ -21,18 +17,10 @@ import { tco } from '../utils';
 const isLastSecondOfMinute = ({ second }) => second === 59;
 const isLastSecondOfHour = ({ second, minute }) => second === 59 && minute === 59;
 const isLastSecondOfDay = ({ second, minute, hour }) => second === 59 && minute === 59 && hour === 23;
-
-const isLastMonthOfYear = ({ month }) => month === DECEMBER;
-
-const jumpToFirstMonthOfYear = (fragments) => ({ ...fragments, month: 1 });
-
 const jumpToNextSecond = (fragments) => ({ ...fragments, second: fragments.second + 1 });
 const jumpToNextMinute = (fragments) => ({ ...fragments, minute: fragments.minute + 1 });
 const jumpToNextHour = (fragments) => ({ ...fragments, hour: fragments.hour + 1 });
-
 const jumpToNextDay = (fragments) => ({ ...fragments, day: fragments.day + 1 });
-const jumpToNextMonth = (fragments) => ({ ...fragments, month: fragments.month + 1 });
-const jumpToNextYear = (fragments) => ({ ...fragments, year: fragments.year + 1 });
 
 export const addSeconds = tco((isoStringOrFragments, seconds) => {
   if (seconds === 0) { return toIso(isoStringOrFragments); }
