@@ -101,9 +101,6 @@ describe('addYears', () => {
 
   it('add -1 years to 2001-01-01 results in 2000-01-01', () => assertThat(
     addYears('2001-01-01', -1), equalTo('2000-01-01')));
-
-  it('@slow tail call optimisation works', () => assertThat(
-    () => addYears('2000-01-01', getCallStackSize() + 1), not(throws())));
 });
 
 describe('subtractDays', () => {
