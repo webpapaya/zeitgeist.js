@@ -61,6 +61,9 @@ describe('addDays', () => {
 });
 
 describe('addMonths', () => {
+  it('adding -1 months to 2000-01-01 results in 1999-12-01', () => assertThat(
+    addMonths('2000-01-01', -1), equalTo('1999-12-01')));
+
   it('adding 0 months to 2000-01-01 results in 2000-01-01', () => assertThat(
     addMonths('2000-01-01', 0), equalTo('2000-01-01')));
 

@@ -72,13 +72,10 @@ export const addDays = (isoString, days) => {
 
 export const addMonths = (isoString, months) => {
   const fragments = toFragments(isoString);
-  const yearsOffset = months >= 0 ? Math.floor(months / 12) : Math.ceil(months / 12);
-  const monthsOffset = months - yearsOffset * 12;
-
   return toIso({
     ...fragments,
-    year: (fragments.year + yearsOffset),
-    month: (fragments.month + monthsOffset) % 12,
+    year: (fragments.year + Math.floor((fragments.month + months - 1) / 12)),
+    month: (fragments.month + months + 11) % 12 + 1,
   });
 };
 
