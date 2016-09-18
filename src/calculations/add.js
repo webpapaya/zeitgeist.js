@@ -72,17 +72,19 @@ export const addDays = (isoString, days) => {
 
 
 export const addMonths = tco((isoStringOrFragments, months) => {
-  if (months === 0) { return toIso(isoStringOrFragments); }
-  if (months < 0) { return subtractMonths(isoStringOrFragments, months * -1); }
-
   const fragments = toFragments(isoStringOrFragments);
-  if (isLastMonthOfYear(fragments)) {
-    return addMonths(
-        jumpToFirstMonthOfYear(
-          jumpToNextYear(fragments)), months - 1);
-  } 
+  const monthsInThisYearLeft = 12 - fragments.month + 1;
 
-  return addMonths(jumpToNextMonth(fragments), months - 1);
+  if(months - monthsInThisYearLeft < 0) {
+    return toIso({ ...fragments, month: fragments.month + months });
+  }
+
+  const year = Math.floor(months / 12);
+  return toIso({
+    ...fragments,
+    year: fragments.year + year,
+    month: fragments.month + months - (year * 12),
+  });
 });
 
 export const addYears = (isoStringOrFragments, years) => {
