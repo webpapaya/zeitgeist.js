@@ -9,7 +9,6 @@ import {
   addMonths,
   addYears,
 
-
   subtractDays,
   subtractMonths,
   subtractYears,
@@ -39,29 +38,29 @@ describe('addSeconds', () => {
 });
 
 describe('addDays', () => {
-  it('adding 1 day to 2000-01-01 results in 2000-01-02', () => assertThat(
-    addDays('2000-01-01', 1), equalTo('2000-01-02')));
+  it('adding 1 day to 2000-01-01T00:00:00 results in 2000-01-02', () => assertThat(
+    addDays('2000-01-01T00:00:00', 1), equalTo('2000-01-02T00:00:00')));
 
-  it('adding 31 days to 2000-01-01 results in 2000-02-01', () => assertThat(
-    addDays('2000-01-01', 31), equalTo('2000-02-01')));
+  it('adding 31 days to 2000-01-01T00:00:00 results in 2000-02-01T00:00:00', () => assertThat(
+    addDays('2000-01-01T00:00:00', 31), equalTo('2000-02-01T00:00:00')));
 
   it('adding 31 + 29 days to 2000-01-01 results in 2000-03-01', () => assertThat(
-    addDays('2000-01-01', 60), equalTo('2000-03-01')));
+    addDays('2000-01-01T00:00:00', 60), equalTo('2000-03-01T00:00:00')));
 
   it('adding 1 day to 2000-01-31 results in 2000-02-01', () => assertThat(
-    addDays('2000-01-31', 1), equalTo('2000-02-01')));
+    addDays('2000-01-31T00:00:00', 1), equalTo('2000-02-01T00:00:00')));
 
   it('adding 2 days to 2000-01-31 results in 2000-02-02', () => assertThat(
-    addDays('2000-01-31', 2), equalTo('2000-02-02')));
+    addDays('2000-01-31T00:00:00', 2), equalTo('2000-02-02T00:00:00')));
 
   it('adding 365 days to 2000-01-01 results in 2001-01-01', () => assertThat(
-    addDays('2000-01-01', 366), equalTo('2001-01-01')));
+    addDays('2000-01-01T00:00:00', 366), equalTo('2001-01-01T00:00:00')));
 
   it('adding -1 day to 2001-01-01 results in 2000-12-31', () => assertThat(
-    addDays('2001-01-01', -1), equalTo('2000-12-31')));
+    addDays('2001-01-01T00:00:00', -1), equalTo('2000-12-31T00:00:00')));
 
   it('tail call optimisation works', () => assertThat(
-    () => addDays('2000-01-01', getCallStackSize() + 1), not(throws())));
+    () => addDays('2000-01-01T00:00:00', getCallStackSize() + 1), not(throws())));
 });
 
 describe('addMonths', () => {
@@ -97,25 +96,25 @@ describe('addYears', () => {
 
 describe('subtractDays', () => {
   it('subtract 1 day from 2000-01-02 results in 2000-01-01', () => assertThat(
-    subtractDays('2000-01-02', 1), equalTo('2000-01-01')));
+    subtractDays('2000-01-02T00:00:00', 1), equalTo('2000-01-01T00:00:00')));
 
   it('subtract 31 days from 2000-02-01 results in 2000-01-01', () => assertThat(
-    subtractDays('2000-02-01', 31), equalTo('2000-01-01')));
+    subtractDays('2000-02-01T00:00:00', 31), equalTo('2000-01-01T00:00:00')));
 
   it('subtract 31 + 29 days from 2000-03-01 results in 2000-01-01', () => assertThat(
-    subtractDays('2000-03-01', 60), equalTo('2000-01-01')));
+    subtractDays('2000-03-01T00:00:00', 60), equalTo('2000-01-01T00:00:00')));
 
   it('subtract 1 day from 2001-01-01 results in 2000-12-31', () => assertThat(
-    subtractDays('2001-01-01', 1), equalTo('2000-12-31')));
+    subtractDays('2001-01-01T00:00:00', 1), equalTo('2000-12-31T00:00:00')));
 
   it('subtract 2 days from 2000-02-02 results in 2000-01-31', () => assertThat(
-    subtractDays('2000-02-02', 2), equalTo('2000-01-31')));
+    subtractDays('2000-02-02T00:00:00', 2), equalTo('2000-01-31T00:00:00')));
 
   it('subtract 365 days from 2001-01-01 results in 2000-01-01', () => assertThat(
-    subtractDays('2001-01-01', 366), equalTo('2000-01-01')));
+    subtractDays('2001-01-01T00:00:00', 366), equalTo('2000-01-01T00:00:00')));
 
   it('subtract -1 day from 2000-12-31 results in 2001-01-01', () => assertThat(
-    subtractDays('2000-12-31', -1), equalTo('2001-01-01')));
+    subtractDays('2000-12-31T00:00:00', -1), equalTo('2001-01-01T00:00:00')));
 });
 
 describe('subtract months', () => {

@@ -48,7 +48,7 @@ describe('hours between', () => {
     hoursBetween('T11:00', 'T10:00'), equalTo(1)));
 });
 
-describe('daysBetween responds', () => {
+describe.skip('daysBetween responds', () => {
   it('0 days between 2000-01-01 and 2000-01-01', () => assertThat(
     daysBetween('2000-01-01', '2000-01-01'), equalTo(0)));
 
@@ -71,7 +71,7 @@ describe('daysBetween responds', () => {
     daysBetween('2001-01-01', '2002-01-01'), equalTo(365)));
 });
 
-describe('dates between', () => {
+describe.skip('dates between', () => {
   it('dates between 2000-01-01 and 2000-01-02 responds correct dates', () => assertThat(
     datesBetween('2000-01-01', '2000-01-02'), equalTo(['2000-01-01', '2000-01-02'])));
 
