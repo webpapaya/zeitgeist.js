@@ -8,13 +8,8 @@ import {
   addYears,
 } from '../index';
 
-const isFirstDayOfYear = ({ month, day }) => month === JANUARY && day === 1;
 const isFirstMonthOfYear = ({ month }) => month === JANUARY;
-const isFirstDayOfMonth = ({ day }) => day === 1;
-
-const jumpToPreviousDay = (fragments) => ({ ...fragments, day: fragments.day - 1 });
 const jumpToLastMonthOfYear = (fragments) => ({ ...fragments, month: DECEMBER });
-const jumpToLastDayOfMonth = (fragments) => ({ ...fragments, day: daysInMonth(fragments) });
 const jumpToPreviousYear = (fragments) => ({ ...fragments, year: fragments.year - 1 });
 const jumpToPreviousMonth = (fragments) => ({ ...fragments, month: fragments.month - 1 });
 
