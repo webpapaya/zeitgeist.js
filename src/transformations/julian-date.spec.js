@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { fromJulianDate, toJulianDate } from '../index';
+import { fromJulianDay, toJulianDay } from '../index';
 
 // Test cases from https://www.wikiwand.com/de/Julianisches_Datum
 const JULIAN_DAY_GREGORIAN_DAY = [
@@ -14,17 +14,17 @@ const JULIAN_DAY_GREGORIAN_DAY = [
 ];
 
 describe('julian date', () => {
-  describe('toJulianDate', () => {
+  describe('toJulianDay', () => {
     JULIAN_DAY_GREGORIAN_DAY.forEach(({ julianDay, isoDate }) => {
       it(`ISO ${isoDate} is julian day ${julianDay}`, () => assertThat(
-        toJulianDate(isoDate), equalTo(julianDay)));
+        toJulianDay(isoDate), equalTo(julianDay)));
     });
   });
 
   describe('fromJulianDay', () => {
     JULIAN_DAY_GREGORIAN_DAY.forEach(({ julianDay, isoDate }) => {
       it(`julian day ${julianDay} is ISO date ${isoDate}`, () => assertThat(
-        fromJulianDate(julianDay), equalTo(isoDate)));
+        fromJulianDay(julianDay), equalTo(isoDate)));
     });
   });
 });

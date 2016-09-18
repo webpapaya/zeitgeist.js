@@ -1,5 +1,5 @@
 import {
-  toJulianDate,
+  toJulianDay,
   toFragments,
   addDays,
   removeTimeComponent,
@@ -28,8 +28,8 @@ const readUnit = (fragments, unit) => (fragments[unit] || 0);
 const floor = (value) => Math.floor(value);
 
 export const daysBetween = (from, to) => {
-  const daysFrom = containsDateComponent(from) ? toJulianDate(from) : 0;
-  const daysTo = containsDateComponent(to) ? toJulianDate(to) : 0;
+  const daysFrom = containsDateComponent(from) ? toJulianDay(from) : 0;
+  const daysTo = containsDateComponent(to) ? toJulianDay(to) : 0;
   return floor(daysTo - daysFrom);
 };
 

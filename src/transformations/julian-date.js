@@ -20,7 +20,7 @@ const AVERAGE_YEAR_DURATION = 365.25;
 const AVERAGE_MONTH_DURATION = 30.6001;
 
 // https://www.wikiwand.com/de/Julianisches_Datum
-export const toJulianDate = (isoString) => {
+export const toJulianDay = (isoString) => {
   const fragments = toCalculationFragments(isoString);
 
   return sum([
@@ -34,24 +34,24 @@ export const toJulianDate = (isoString) => {
 };
 
 // https://www.wikiwand.com/de/Julianisches_Datum
-export const fromJulianDate = (julianDate) => {
+export const fromJulianDay = (julianDay) => {
   return toIso({
-    ...dateComponentFromJulianDay(julianDate),
-    ...timeComponentFromJulianDay(julianDate),
+    ...dateComponentFromJulianDay(julianDay),
+    ...timeComponentFromJulianDay(julianDay),
   });
 };
 
-const dateComponentFromJulianDay = (julianDate) => {
-  const fullDays = floor(julianDate + 0.5);
+const dateComponentFromJulianDay = (julianDay) => {
+  const fullDays = floor(julianDay + 0.5);
 
   let g = floor((fullDays - 1867216.25) / 36524.25);
   let A = fullDays + 1 + g - floor(g/4);
   let B = A + 1524;
-  let C = floor((B-122.1) / 365.25);
-  let D = floor(365.25 * C);
-  let E = floor((B-D) / 30.6001);
+  let C = floor((B-122.1) / AVERAGE_YEAR_DURATION);
+  let D = floor(AVERAGE_YEAR_DURATION * C);
+  let E = floor((B-D) / AVERAGE_MONTH_DURATION);
 
-  let day = B - D - floor(30.6001*E);
+  let day = B - D - floor(AVERAGE_MONTH_DURATION*E);
 
   const month = E < 14 ? E - 1 : E - 13;
   const year = month > 2 ? C - 4716 : C - 4715;
