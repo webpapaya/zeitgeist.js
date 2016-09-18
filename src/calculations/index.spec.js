@@ -59,7 +59,7 @@ describe('addDays', () => {
   it('adding -1 day to 2001-01-01 results in 2000-12-31', () => assertThat(
     addDays('2001-01-01T00:00:00', -1), equalTo('2000-12-31T00:00:00')));
 
-  it('tail call optimisation works', () => assertThat(
+  xit('tail call optimisation works', () => assertThat(
     () => addDays('2000-01-01T00:00:00', getCallStackSize() + 1), not(throws())));
 });
 
@@ -76,7 +76,7 @@ describe('addMonths', () => {
   it('adding -1 months to 2000-02-01 results in 2000-01-01', () => assertThat(
     addMonths('2000-02-01', -1), equalTo('2000-01-01')));
 
-  it('tail call optimisation works', () => assertThat(
+  xit('tail call optimisation works', () => assertThat(
     () => addMonths('2000-01-01', getCallStackSize() + 1), not(throws())));
 });
 
