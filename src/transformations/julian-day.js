@@ -1,6 +1,8 @@
 import { toFragments, toIso } from '../index'
 
 const floor = (value) => Math.floor(value);
+const ceil = (value) => Math.ceil(value);
+
 const fraction = (value) => value % 1;
 const sum = (array) => array.reduce((sum, value) => sum + value, 0);
 
@@ -62,8 +64,8 @@ const dateComponentFromJulianDay = (julianDay) => {
 const timeComponentFromJulianDay = (julianDay) => {
   const fractionsOfDay = fraction(julianDay + 0.5);
   const hour = floor(fractionsOfDay * 24);
-  const minute = floor((fractionsOfDay - hour / 24) * 24 * 60);
-  const second = floor((fractionsOfDay - hour / 24 - minute / (24 * 60)) * 24 * 60 * 60);
+  const minute = floor((fractionsOfDay - hour / 24) * 1440);
+  const second = (fractionsOfDay - hour / 24 - minute / 1440) * 86400;
 
-  return { hour, minute, second };
+  return { hour, minute, second: (fraction(second * 10000) > 0.9) ? ceil(second) : floor(second) };
 };

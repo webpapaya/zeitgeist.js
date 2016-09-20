@@ -10,6 +10,7 @@ const JULIAN_DAY_GREGORIAN_DAY = [
   { julianDay: 2451545, isoDate: '2000-01-01T12:00:00' },
   { julianDay: 2453750.1875, isoDate: '2006-01-14T16:30:00' },
   { julianDay: 2453820.1875, isoDate: '2006-03-25T16:30:00' },
+  { julianDay: 2299160.500011574, isoDate: '1582-10-15T00:00:01' },
   { julianDay: 2453947.6556944447, isoDate: '2006-07-31T03:44:12' },
 ];
 
