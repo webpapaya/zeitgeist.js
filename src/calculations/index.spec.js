@@ -46,6 +46,20 @@ describe('addSeconds', () => {
     addSeconds('2001-01-01T23:59:58', 1), equalTo('2001-01-01T23:59:59')));
 });
 
+describe('addMinutes', () => {
+  it('adding 1 minute to 2001-01-01T00:00:00 results in 2001-01-01T00:01:00', () => assertThat(
+    addMinutes('2001-01-01T00:00:00', 1), equalTo('2001-01-01T00:01:00')));
+
+  it('adding 1 minute to 2001-01-01T00:59:00 results in 2001-01-01T01:00:00', () => assertThat(
+    addMinutes('2001-01-01T00:59:00', 1), equalTo('2001-01-01T01:00:00')));
+
+  it('adding -1 minute to 2001-01-01T01:00:00 results in 2001-01-01T00:59:00', () => assertThat(
+    addMinutes('2001-01-01T01:00:00', -1), equalTo('2001-01-01T00:59:00')));
+
+  it('adding 0.5 minutes to 2001-01-01T00:00:00 results in 2001-01-01T00:00:30', () => assertThat(
+    addMinutes('2001-01-01T00:00:00', 0.5), equalTo('2001-01-01T00:00:30')));
+});
+
 describe('addDays', () => {
   it('adding 1 day to 2000-01-01T00:00:00 results in 2000-01-02', () => assertThat(
     addDays('2000-01-01T00:00:00', 1), equalTo('2000-01-02T00:00:00')));
