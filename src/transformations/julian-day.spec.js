@@ -1,5 +1,33 @@
 import { assertThat, equalTo } from 'hamjest';
-import { fromJulianDay, toJulianDay } from '../index';
+import { toIso, fromJulianDay, toJulianDay } from '../index';
+
+describe('Test all days', () => {
+  const defaultFragments = {  year: 2000, month: 1, day: 1, hour: 0, minute: 0, second: 0 };
+
+  describe('hours', () => {
+    for(let hour = 0; hour < 24; hour++) {
+      const isoString = toIso({ ...defaultFragments, hour });
+      it(`${isoString} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+    }
+  });
+
+  describe('minutes', () => {
+    for(let minute = 0; minute < 60; minute++) {
+      const isoString = toIso({ ...defaultFragments, minute });
+      it(`${isoString} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+    }
+  });
+
+  describe('seconds', () => {
+    for(let second = 0; second < 60; second++) {
+      const isoString = toIso({ ...defaultFragments, second });
+      it(`${isoString} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+    }
+  });
+});
 
 // Test cases from https://www.wikiwand.com/de/Julianisches_Datum
 const JULIAN_DAY_GREGORIAN_DAY = [
