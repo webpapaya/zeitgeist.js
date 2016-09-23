@@ -1,9 +1,6 @@
 import {
   toFragments,
   toIso,
-  floorMinute,
-  floorHour,
-  floorDay,
 
   fromJulianDay,
   toJulianDay,
@@ -16,6 +13,9 @@ export const addSeconds = (isoString, seconds) =>
 
 export const addMinutes = (isoString, minutes) =>
   addDays(isoString, minutes / 1440);
+
+export const addHours = (isoString, hours) =>
+  addDays(isoString, hours / 24);
 
 export const addDays = (isoString, days) => {
   const calculatedIsoString = fromJulianDay(toJulianDay(isoString) + days);
