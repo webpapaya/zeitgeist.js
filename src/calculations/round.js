@@ -1,4 +1,16 @@
-import { toIso, toFragments, fromJulianDay, toJulianDay } from '../index';
+import {
+  toIso,
+  toFragments,
+  fromJulianDay,
+  toJulianDay,
+
+  addSeconds,
+  addMinutes,
+  addHours,
+  addDays,
+  addMonths,
+  addYears,
+} from '../index';
 
 export const normalize = (isoString) => fromJulianDay(toJulianDay(isoString));
 
@@ -31,3 +43,11 @@ export const floorYear = (isoString) => {
   const fragments = toFragments(isoString);
   return toIso({ ...fragments, month: 1, day: 1, hour: 0, minute: 0, second: 0 });
 };
+
+export const ceilSecond = (isoString) => floorSecond(addSeconds(isoString, 1));
+export const ceilMinute = (isoString) => floorMinute(addMinutes(isoString, 1));
+export const ceilHour = (isoString) => floorHour(addHours(isoString, 1));
+
+export const ceilDay = (isoString) => floorDay(addDays(isoString, 1));
+export const ceilMonth = (isoString) => floorMonth(addMonths(isoString, 1));
+export const ceilYear = (isoString) => floorYear(addYears(isoString, 1));
