@@ -1,6 +1,7 @@
 import { assertThat, equalTo, not, throws } from 'hamjest';
-import { getCallStackSize } from '../test-helper';
 import {
+  normalize,
+
   addSeconds,
   addMinutes,
   addHours,
@@ -13,6 +14,14 @@ import {
   subtractMonths,
   subtractYears,
 } from '../index';
+
+describe('normalize', () => {
+  it('2001-01-01T00:00:60 gets normalized to 2001-01-01T00:01:00', () => assertThat(
+    normalize('2001-01-01T00:00:60', 1), equalTo('2001-01-01T00:01:00')));
+
+  it('2001-01-01T00:00:90 gets normalized to 2001-01-01T00:01:30', () => assertThat(
+    normalize('2001-01-01T00:00:90', 1), equalTo('2001-01-01T00:01:30')));
+});
 
 describe('addSeconds', () => {
   it('adding 1 second to 2001-01-01T00:00:00 results in 2001-01-01T00:00:01', () => assertThat(

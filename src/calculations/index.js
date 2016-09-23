@@ -31,4 +31,5 @@ export {
   floorDay,
   floorMonth,
   floorYear,
+  normalize,
 } from './round';

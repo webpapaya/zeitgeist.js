@@ -1,4 +1,6 @@
-import { toIso, toFragments } from '../index';
+import { toIso, toFragments, fromJulianDay, toJulianDay } from '../index';
+
+export const normalize = (isoString) => fromJulianDay(toJulianDay(isoString));
 
 export const floorSecond = (isoString) => {
   const fragments = toFragments(isoString);

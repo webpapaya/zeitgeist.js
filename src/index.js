@@ -61,6 +61,8 @@ export {
   addMonths,
   addYears,
 
+  normalize,
+
   subtractDays,
   subtractMonths,
   subtractYears,
