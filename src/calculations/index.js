@@ -42,11 +42,14 @@ export {
   ceilMonth,
   ceilYear,
 
+  normalize,
+} from './round';
+
+export {
   floorSecond,
   floorMinute,
   floorHour,
   floorDay,
   floorMonth,
   floorYear,
-  normalize,
-} from './round';
+} from './floor';
