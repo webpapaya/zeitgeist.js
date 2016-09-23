@@ -8,6 +8,9 @@ export {
 } from './add';
 
 export {
+  subtractSeconds,
+  subtractMinutes,
+  subtractHours,
   subtractDays,
   subtractMonths,
   subtractYears,

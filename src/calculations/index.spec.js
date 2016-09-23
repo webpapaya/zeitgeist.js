@@ -10,6 +10,10 @@ import {
   addMonths,
   addYears,
 
+  subtractSeconds,
+  subtractMinutes,
+  subtractHours,
+
   subtractDays,
   subtractMonths,
   subtractYears,
@@ -67,8 +71,6 @@ describe('addHours', () => {
   it('adding -1 hour to 2001-01-01T01:00:00 results in 2001-01-01T00:00:00', () => assertThat(
     addHours('2001-01-01T01:00:00', -1), equalTo('2001-01-01T00:00:00')));
 });
-
-
 
 describe('addDays', () => {
   it('adding 1 day to 2000-01-01T00:00:00 results in 2000-01-02', () => assertThat(
@@ -160,6 +162,21 @@ describe('subtractDays', () => {
 
   it('subtract -1 day from 2000-12-31 results in 2001-01-01', () => assertThat(
     subtractDays('2000-12-31T00:00:00', -1), equalTo('2001-01-01T00:00:00')));
+});
+
+describe('subtractSeconds', () => {
+  it('subtract 1 second from 2001-01-01T00:00:01 results in 2001-01-01T00:00:00', () => assertThat(
+    subtractSeconds('2001-01-01T00:00:01', 1), equalTo('2001-01-01T00:00:00')));
+});
+
+describe('subtractMinutes', () => {
+  it('subtract 1 minute from 2001-01-01T00:01:00 results in 2001-01-01T00:00:00', () => assertThat(
+    subtractMinutes('2001-01-01T00:01:00', 1), equalTo('2001-01-01T00:00:00')));
+});
+
+describe('subtractHours', () => {
+  it('subtract 1 hour from 2001-01-01T01:00:00 results in 2001-01-01T00:00:00', () => assertThat(
+    subtractHours('2001-01-01T01:00:00', 1), equalTo('2001-01-01T00:00:00')));
 });
 
 describe('subtract months', () => {

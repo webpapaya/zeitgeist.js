@@ -63,6 +63,10 @@ export {
 
   normalize,
 
+  subtractSeconds,
+  subtractMinutes,
+  subtractHours,
+
   subtractDays,
   subtractMonths,
   subtractYears,
