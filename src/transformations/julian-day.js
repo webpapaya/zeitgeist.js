@@ -1,3 +1,9 @@
+import {
+  SECONDS_IN_REGULAR_DAY,
+  MINUTES_IN_REGULAR_DAY,
+  HOURS_IN_REGULAR_DAY,
+} from '../constants';
+
 import { toFragments, toIso } from '../index';
 
 const floor = (value) => Math.floor(value);
@@ -8,7 +14,7 @@ const sum = (array) => array.reduce((totalValue, value) => totalValue + value, 0
 
 const calculateLeapDayOffset = ({ year }) => 2 - floor(year / 100) + floor(year / 400);
 const calculateDayFraction = ({ hour = 0, minute = 0, second = 0 }) =>
-  hour / 24 + minute / 1440 + second / 86400;
+  hour / HOURS_IN_REGULAR_DAY + minute / MINUTES_IN_REGULAR_DAY + second / SECONDS_IN_REGULAR_DAY;
 
 const toCalculationFragments = (isoString) => {
   const fragments = toFragments(isoString);
@@ -70,7 +76,7 @@ const dateComponentFromJulianDay = (julianDay) => {
 };
 
 const timeComponentFromJulianDay = (julianDay) => {
-  const fractionOfDayInSeconds = round(fraction(julianDay + 0.5) * 86400);
+  const fractionOfDayInSeconds = round(fraction(julianDay + 0.5) * SECONDS_IN_REGULAR_DAY);
   const secondsWithoutHours = fractionOfDayInSeconds % 3600;
 
   const hour = floor(fractionOfDayInSeconds / 3600);

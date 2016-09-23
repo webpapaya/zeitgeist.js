@@ -7,9 +7,15 @@ import {
   removeTimeComponent,
 } from '../index';
 
-export const addSeconds = (isoString, seconds) => addDays(isoString, seconds / 86400);
-export const addMinutes = (isoString, minutes) => addDays(isoString, minutes / 1440);
-export const addHours = (isoString, hours) => addDays(isoString, hours / 24);
+import {
+  SECONDS_IN_REGULAR_DAY,
+  MINUTES_IN_REGULAR_DAY,
+  HOURS_IN_REGULAR_DAY,
+} from '../constants';
+
+export const addSeconds = (isoString, seconds) => addDays(isoString, seconds / SECONDS_IN_REGULAR_DAY);
+export const addMinutes = (isoString, minutes) => addDays(isoString, minutes / MINUTES_IN_REGULAR_DAY);
+export const addHours = (isoString, hours) => addDays(isoString, hours / HOURS_IN_REGULAR_DAY);
 
 export const addDays = (isoString, days) => {
   const calculatedIsoString = fromJulianDay(toJulianDay(isoString) + days);
