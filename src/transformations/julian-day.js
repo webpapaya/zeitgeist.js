@@ -1,7 +1,6 @@
 import { toFragments, toIso } from '../index'
 
 const floor = (value) => Math.floor(value);
-const ceil = (value) => Math.ceil(value);
 const round = (value) => Math.round(value);
 
 const fraction = (value) => value % 1;
