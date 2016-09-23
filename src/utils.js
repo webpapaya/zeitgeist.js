@@ -5,8 +5,8 @@ const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 
 export const leftPad = (value, length = 2) => {
   const string = isEmpty(value) ? '' : `${value}`;
-  if(string.length >= length) { return string; }
-  return leftPad(`0${string}`, length)
+  if (string.length >= length) { return string; }
+  return leftPad(`0${string}`, length);
 };
 
 export const buildMaybeMonad = (rawValue) => {

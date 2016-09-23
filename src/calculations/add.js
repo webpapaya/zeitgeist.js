@@ -1,7 +1,6 @@
 import {
   toFragments,
   toIso,
-
   fromJulianDay,
   toJulianDay,
   containsTimeComponent,

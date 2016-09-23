@@ -22,5 +22,5 @@ export const wrapper = (isoString) => {
     subtractYears: (amount) => wrapper(subtractYears(isoString, amount)),
     subtractMonths: (amount) => wrapper(subtractMonths(isoString, amount)),
     subtractDays: (amount) => wrapper(subtractDays(isoString, amount)),
-  }
+  };
 };

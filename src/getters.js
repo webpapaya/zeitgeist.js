@@ -22,4 +22,3 @@ export const doesWeekBelongToPreviousYear = (isoString) =>
 
 export const getWeekOfYear = (isoString) =>
   doesWeekBelongToPreviousYear(isoString) ? 53 : calculateWeekOfYear(isoString);
-

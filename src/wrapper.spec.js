@@ -1,4 +1,4 @@
-import { assertThat, not, throws, equalTo } from 'hamjest';
+import { assertThat, not, throws } from 'hamjest';
 import { wrapper } from './wrapper';
 
 describe('Wrapper', () => {

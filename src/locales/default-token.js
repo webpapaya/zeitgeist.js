@@ -25,17 +25,19 @@ const formatE = (fragments) => getWeekday(toIso(fragments));
 const formatW = (fragments) => getWeekOfYear(toIso(fragments));
 const formatWW = (fragments) => leftPad(formatW(fragments));
 const formatGGGG = (fragments) => {
-  if(doesWeekBelongToPreviousYear(toIso(fragments))) {
+  if (doesWeekBelongToPreviousYear(toIso(fragments))) {
     return `${fragments.year - 1}`;
   }
-  return formatYYYY(fragments)
+  return formatYYYY(fragments);
 };
 const formatGG = (fragments) => formatGGGG(fragments).slice(-2);
 
 const formatH = (fragments) => `${fragments.hour}`;
 const formatHH = (fragments) => leftPad(formatH(fragments));
 
-const formath = (fragments) => fragments.hour <= 12 ? `${fragments.hour}` : `${fragments.hour - 12}`;
+const formath = (fragments) =>
+  fragments.hour <= 12 ? `${fragments.hour}` : `${fragments.hour - 12}`;
+
 const formathh = (fragments) => leftPad(formath(fragments));
 
 const formatm = (fragments) => `${fragments.minute}`;
@@ -48,36 +50,36 @@ const formatA = (fragments) => fragments.hour <= 12 ? 'AM' : 'PM';
 const formata = (fragments) => formatA(fragments).toLowerCase();
 
 export const token = {
-  'Y': formatY,
-  'YY': formatYY,
-  'YYYY': formatYYYY,
-  'D': formatD,
-  'DD': formatDD,
-  'DDD': formatDDD,
-  'DDDD': formatDDDD,
-  'M': formatM,
-  'MM': formatMM,
-  'MMM': formatMMM,
-  'MMMM': formatMMMM,
-  'd': formatd,
-  'dd': formatdd,
-  'ddd': formatddd,
-  'dddd': formatdddd,
-  'E': formatE,
-  'W': formatW,
-  'WW': formatWW,
-  'GG': formatGG,
-  'GGGG': formatGGGG,
-  'H': formatH,
-  'HH': formatHH,
-  'h': formath,
-  'hh': formathh,
-  'm': formatm,
-  'mm': formatmm,
-  's': formats,
-  'ss': formatss,
+  Y: formatY,
+  YY: formatYY,
+  YYYY: formatYYYY,
+  D: formatD,
+  DD: formatDD,
+  DDD: formatDDD,
+  DDDD: formatDDDD,
+  M: formatM,
+  MM: formatMM,
+  MMM: formatMMM,
+  MMMM: formatMMMM,
+  d: formatd,
+  dd: formatdd,
+  ddd: formatddd,
+  dddd: formatdddd,
+  E: formatE,
+  W: formatW,
+  WW: formatWW,
+  GG: formatGG,
+  GGGG: formatGGGG,
+  H: formatH,
+  HH: formatHH,
+  h: formath,
+  hh: formathh,
+  m: formatm,
+  mm: formatmm,
+  s: formats,
+  ss: formatss,
 
   // Maybe move to locale as am/pm is english specific
-  'A': formatA,
-  'a': formata,
+  A: formatA,
+  a: formata,
 };

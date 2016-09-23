@@ -1,4 +1,4 @@
-import { assertThat, equalTo, not, throws } from 'hamjest';
+import { assertThat, equalTo } from 'hamjest';
 import {
   microsecondsBetween,
   millisecondsBetween,

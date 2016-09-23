@@ -1,14 +1,14 @@
-import { toFragments, toIso } from '../index'
+import { toFragments, toIso } from '../index';
 
 const floor = (value) => Math.floor(value);
 const round = (value) => Math.round(value);
 
 const fraction = (value) => value % 1;
-const sum = (array) => array.reduce((sum, value) => sum + value, 0);
+const sum = (array) => array.reduce((totalValue, value) => totalValue + value, 0);
 
-const calculateLeapDayOffset = ({ year }) => 2 - floor(year/100) + floor(year/400);
+const calculateLeapDayOffset = ({ year }) => 2 - floor(year / 100) + floor(year / 400);
 const calculateDayFraction = ({ hour = 0, minute = 0, second = 0 }) =>
-  hour/24 + minute/1440 + second/86400;
+  hour / 24 + minute / 1440 + second / 86400;
 
 const toCalculationFragments = (isoString) => {
   const fragments = toFragments(isoString);
@@ -31,7 +31,7 @@ export const toJulianDay = (isoString) => {
     calculateLeapDayOffset(fragments),
     calculateDayFraction(fragments),
     fragments.day,
-    -1524.5
+    -1524.5,
   ]);
 };
 
@@ -58,12 +58,12 @@ const fromCalculationFragments = (fragments) => {
 const dateComponentFromJulianDay = (julianDay) => {
   const fullDays = floor(julianDay + 0.5);
   const normalizedDays = floor((fullDays - 1867216.25) / 36524.25);
-  const daysSinceJulianCalendar = fullDays + 1 + normalizedDays - floor(normalizedDays/4) + 1524;
+  const daysSinceJulianCalendar = fullDays + 1 + normalizedDays - floor(normalizedDays / 4) + 1524;
 
-  const year = floor((daysSinceJulianCalendar-122.1) / AVERAGE_YEAR_DURATION);
+  const year = floor((daysSinceJulianCalendar - 122.1) / AVERAGE_YEAR_DURATION);
   const daysWithoutYear = floor(AVERAGE_YEAR_DURATION * year);
 
-  const month = floor((daysSinceJulianCalendar-daysWithoutYear) / AVERAGE_MONTH_DURATION);
+  const month = floor((daysSinceJulianCalendar - daysWithoutYear) / AVERAGE_MONTH_DURATION);
   const day = daysSinceJulianCalendar - daysWithoutYear - floor(AVERAGE_MONTH_DURATION * month);
 
   return fromCalculationFragments({ year, month, day });
