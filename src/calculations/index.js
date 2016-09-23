@@ -28,6 +28,8 @@ export {
 } from './between';
 
 export {
+  roundSecond,
+
   ceilSecond,
   ceilMinute,
   ceilHour,

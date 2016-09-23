@@ -51,3 +51,10 @@ export const ceilHour = (isoString) => floorHour(addHours(isoString, 1));
 export const ceilDay = (isoString) => floorDay(addDays(isoString, 1));
 export const ceilMonth = (isoString) => floorMonth(addMonths(isoString, 1));
 export const ceilYear = (isoString) => floorYear(addYears(isoString, 1));
+
+export const roundSecond = (isoString) => {
+  const { second } = toFragments(isoString);
+  return second % 1 >= 0.5
+    ? ceilSecond(isoString)
+    : floorSecond(isoString);
+};

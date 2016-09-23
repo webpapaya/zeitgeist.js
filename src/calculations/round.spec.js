@@ -13,6 +13,8 @@ import {
   floorDay,
   floorMonth,
   floorYear,
+
+  roundSecond,
 } from './index';
 
 describe('floor', () => {
@@ -78,3 +80,15 @@ describe('ceil', () => {
       ceilYear('2000-01-01T11:12:13.123'), equalTo('2001-01-01T00:00:00')));
   });
 });
+
+describe('round', () => {
+  describe('roundSecond', () => {
+    it('2000-01-01T11:12:13.123 results in 2000-01-01T11:12:13', () => assertThat(
+      roundSecond('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:13')));
+
+    it('2000-01-01T11:12:31.123 results in 2000-01-01T11:13:00', () => assertThat(
+      roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14')));
+  });
+});
+
+
