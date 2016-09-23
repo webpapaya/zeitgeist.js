@@ -29,6 +29,11 @@ export {
 
 export {
   roundSecond,
+  roundMinute,
+  roundHour,
+  roundDay,
+  roundMonth,
+  roundYear,
 
   ceilSecond,
   ceilMinute,

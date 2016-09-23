@@ -15,6 +15,11 @@ import {
   floorYear,
 
   roundSecond,
+  roundMinute,
+  roundHour,
+  roundDay,
+  roundMonth,
+  roundYear,
 } from './index';
 
 describe('floor', () => {
@@ -83,12 +88,50 @@ describe('ceil', () => {
 
 describe('round', () => {
   describe('roundSecond', () => {
-    it('2000-01-01T11:12:13.123 results in 2000-01-01T11:12:13', () => assertThat(
+    it('2000-01-01T11:12:13.123 is floored', () => assertThat(
       roundSecond('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:13')));
 
-    it('2000-01-01T11:12:31.123 results in 2000-01-01T11:13:00', () => assertThat(
+    it('2000-01-01T11:12:31.123 is ceiled', () => assertThat(
       roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14')));
   });
+
+  describe('roundMinute', () => {
+    it('2000-01-01T11:12:13.123 is floored', () => assertThat(
+      roundMinute('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:00')));
+
+    it('2000-01-01T11:31:13.123 ceiled', () => assertThat(
+      roundMinute('2000-01-01T11:31:31.123'), equalTo('2000-01-01T11:32:00')));
+  });
+
+  describe('roundHour', () => {
+    it('2000-01-01T11:12:13.123 is floored', () => assertThat(
+      roundHour('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:00:00')));
+
+    it('2000-01-01T11:31:13.123 is ceiled', () => assertThat(
+      roundHour('2000-01-01T12:31:13.123'), equalTo('2000-01-01T13:00:00')));
+  });
+
+  describe('roundDay', () => {
+    it('2000-01-01T11:12:13.123 is floored', () => assertThat(
+      roundDay('2000-01-01T11:12:13.123'), equalTo('2000-01-01T00:00:00')));
+
+    it('2000-01-01T12:31:13.123 is ceiled', () => assertThat(
+      roundDay('2000-01-01T12:31:13.123'), equalTo('2000-01-02T00:00:00')));
+  });
+
+  describe('roundMonth', () => {
+    it('2000-01-02T11:12:13.123 is floored', () => assertThat(
+      roundMonth('2000-01-02T11:12:13.123'), equalTo('2000-01-01T00:00:00')));
+
+    it('2000-01-16T12:31:13.123 is ceiled', () => assertThat(
+      roundMonth('2000-01-16T12:31:13.123'), equalTo('2000-02-01T00:00:00')));
+  });
+
+  describe('roundYear', () => {
+    it('2000-02-01T11:12:13.123 is floored', () => assertThat(
+      roundYear('2000-02-01T11:12:13.123'), equalTo('2000-01-01T00:00:00')));
+
+    it('2000-06-16T12:31:13.123 is ceiled', () => assertThat(
+      roundYear('2000-06-16T12:31:13.123'), equalTo('2001-01-01T00:00:00')));
+  });
 });
-
-
