@@ -6,31 +6,18 @@ import {
   floorMonth,
   floorYear,
 
-  toFragments,
-  fromJulianDay,
-  toJulianDay,
+  ceilSecond,
+  ceilMinute,
+  ceilHour,
+  ceilDay,
+  ceilMonth,
+  ceilYear,
 
+  toFragments,
   isSameOrAfter,
   daysBetween,
-
-  addSeconds,
-  addMinutes,
-  addHours,
   addDays,
-  addMonths,
-  addYears,
 } from '../index';
-
-export const normalize = (isoString) => fromJulianDay(toJulianDay(isoString));
-
-
-export const ceilSecond = (isoString) => floorSecond(addSeconds(isoString, 1));
-export const ceilMinute = (isoString) => floorMinute(addMinutes(isoString, 1));
-export const ceilHour = (isoString) => floorHour(addHours(isoString, 1));
-
-export const ceilDay = (isoString) => floorDay(addDays(isoString, 1));
-export const ceilMonth = (isoString) => floorMonth(addMonths(isoString, 1));
-export const ceilYear = (isoString) => floorYear(addYears(isoString, 1));
 
 export const roundSecond = (isoString) => {
   const { second } = toFragments(isoString);

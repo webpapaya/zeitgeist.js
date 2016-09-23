@@ -86,6 +86,13 @@ export {
   floorDay,
   floorMonth,
   floorYear,
+
+  ceilSecond,
+  ceilMinute,
+  ceilHour,
+  ceilDay,
+  ceilMonth,
+  ceilYear,
 } from './calculations/index';
 
 export {
