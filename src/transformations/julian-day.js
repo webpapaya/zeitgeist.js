@@ -43,22 +43,30 @@ export const fromJulianDay = (julianDay) => {
   });
 };
 
+const fromCalculationFragments = (fragments) => {
+  const month = fragments.month < 14
+    ? fragments.month - 1
+    : fragments.month - 13;
+
+  const year = month > 2
+    ? fragments.year - 4716
+    : fragments.year - 4715;
+
+  return { month, year, day: fragments.day };
+};
+
 const dateComponentFromJulianDay = (julianDay) => {
   const fullDays = floor(julianDay + 0.5);
+  const normalizedDays = floor((fullDays - 1867216.25) / 36524.25);
+  const daysSinceJulianCalendar = fullDays + 1 + normalizedDays - floor(normalizedDays/4) + 1524;
 
-  let g = floor((fullDays - 1867216.25) / 36524.25);
-  let A = fullDays + 1 + g - floor(g/4);
-  let B = A + 1524;
-  let C = floor((B-122.1) / AVERAGE_YEAR_DURATION);
-  let D = floor(AVERAGE_YEAR_DURATION * C);
-  let E = floor((B-D) / AVERAGE_MONTH_DURATION);
+  const year = floor((daysSinceJulianCalendar-122.1) / AVERAGE_YEAR_DURATION);
+  const daysWithoutYear = floor(AVERAGE_YEAR_DURATION * year);
 
-  let day = B - D - floor(AVERAGE_MONTH_DURATION*E);
+  const month = floor((daysSinceJulianCalendar-daysWithoutYear) / AVERAGE_MONTH_DURATION);
+  const day = daysSinceJulianCalendar - daysWithoutYear - floor(AVERAGE_MONTH_DURATION * month);
 
-  const month = E < 14 ? E - 1 : E - 13;
-  const year = month > 2 ? C - 4716 : C - 4715;
-
-  return { year, month, day };
+  return fromCalculationFragments({ year, month, day });
 };
 
 const timeComponentFromJulianDay = (julianDay) => {
