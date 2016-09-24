@@ -34,6 +34,7 @@ describe('endOfWeek', () => {
     endOfWeek('2000-01-01T10:11:12.12'), equalTo('2000-01-02T23:59:59.999999')));
 });
 
+
 describe('endOfMonth', () => {
   it('2000-01-01T10:11:12.12 results in 2000-01-31T23:59:59.999999', () => assertThat(
     endOfMonth('2000-01-01T10:11:12.12'), equalTo('2000-01-31T23:59:59.999999')));
