@@ -92,6 +92,7 @@ export {
   ceilMinute,
   ceilHour,
   ceilDay,
+  ceilWeek,
   ceilMonth,
   ceilYear,
 } from './calculations/index';

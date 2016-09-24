@@ -4,6 +4,7 @@ import {
   endOfMinute,
   endOfHour,
   endOfDay,
+  endOfWeek,
   endOfMonth,
   endOfYear,
 } from './end-of';
@@ -27,6 +28,12 @@ describe('endOfDay', () => {
   it('2000-01-01T10:11:12.12 results in 2000-01-01T23:59:59.999999', () => assertThat(
     endOfDay('2000-01-01T10:11:12.12'), equalTo('2000-01-01T23:59:59.999999')));
 });
+
+describe('endOfWeek', () => {
+  it('2000-01-01T10:11:12.12 results in 2000-01-02T23:59:59.999999', () => assertThat(
+    endOfWeek('2000-01-01T10:11:12.12'), equalTo('2000-01-02T23:59:59.999999')));
+});
+
 
 describe('endOfMonth', () => {
   it('2000-01-01T10:11:12.12 results in 2000-01-31T23:59:59.999999', () => assertThat(

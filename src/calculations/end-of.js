@@ -1,4 +1,7 @@
 import {
+  getWeekday,
+  addDays,
+
   toFragments,
   toIso,
 
@@ -7,13 +10,13 @@ import {
   ceilDay,
   ceilMonth,
   ceilYear,
+  ceilWeek,
 
   subtractSeconds,
   subtractMinutes,
   subtractHours,
   subtractDays,
   subtractMonths,
-  subtractYears,
 } from '../index';
 
 export const endOfSecond = (isoString) => {
@@ -26,6 +29,6 @@ export const endOfHour = (isoString) => endOfMinute(subtractMinutes(ceilHour(iso
 export const endOfDay = (isoString) => endOfHour(subtractHours(ceilDay(isoString), 1));
 export const endOfMonth = (isoString) => endOfDay(subtractDays(ceilMonth(isoString), 1));
 export const endOfYear = (isoString) => endOfMonth(subtractMonths(ceilYear(isoString), 1));
-
+export const endOfWeek = (isoString) => endOfDay(subtractDays(ceilWeek(isoString), 1));
 
 
