@@ -1,6 +1,9 @@
 import {
   toIso,
   toFragments,
+
+  getWeekday,
+  subtractDays,
 } from '../index';
 
 export const floorSecond = (isoString) => {
@@ -16,6 +19,11 @@ export const floorMinute = (isoString) => {
 export const floorHour = (isoString) => {
   const fragments = toFragments(isoString);
   return toIso({ ...fragments, minute: 0, second: 0 });
+};
+
+export const floorWeek = (isoString) => {
+  const weekDay = getWeekday(isoString);
+  return floorDay(subtractDays(isoString, weekDay - 1));
 };
 
 export const floorDay = (isoString) => {

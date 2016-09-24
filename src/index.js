@@ -84,6 +84,7 @@ export {
   floorMinute,
   floorHour,
   floorDay,
+  floorWeek,
   floorMonth,
   floorYear,
 
