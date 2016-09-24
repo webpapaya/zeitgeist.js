@@ -95,6 +95,22 @@ export {
   ceilWeek,
   ceilMonth,
   ceilYear,
+
+  startOfSecond,
+  startOfMinute,
+  startOfHour,
+  startOfDay,
+  startOfWeek,
+  startOfMonth,
+  startOfYear,
+
+  endOfSecond,
+  endOfMinute,
+  endOfHour,
+  endOfDay,
+  endOfWeek,
+  endOfMonth,
+  endOfYear,
 } from './calculations/index';
 
 export {

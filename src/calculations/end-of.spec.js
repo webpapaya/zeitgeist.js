@@ -7,7 +7,7 @@ import {
   endOfWeek,
   endOfMonth,
   endOfYear,
-} from './end-of';
+} from '../index';
 
 describe('endOfSecond', () => {
   it('2000-01-01T10:11:12.12 results in 2000-01-01T10:11:12.999999', () => assertThat(

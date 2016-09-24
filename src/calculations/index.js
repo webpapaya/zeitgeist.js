@@ -59,3 +59,23 @@ export {
 export {
   normalize,
 } from './normalize';
+
+export {
+  endOfSecond,
+  endOfMinute,
+  endOfHour,
+  endOfDay,
+  endOfWeek,
+  endOfMonth,
+  endOfYear,
+} from './end-of';
+
+export {
+  startOfSecond,
+  startOfMinute,
+  startOfHour,
+  startOfDay,
+  startOfWeek,
+  startOfMonth,
+  startOfYear,
+} from './start-of';

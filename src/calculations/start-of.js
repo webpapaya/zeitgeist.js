@@ -1,17 +1,10 @@
-import {
-  floorSecond,
-  floorMinute,
-  floorHour,
-  floorDay,
-  floorWeek,
-  floorMonth,
-  floorYear,
+export {
+  floorSecond as startOfSecond,
+  floorMinute as startOfMinute,
+  floorHour as startOfHour,
+  floorDay as startOfDay,
+  floorMonth as startOfMonth,
+  floorYear as startOfYear,
+  floorWeek as startOfWeek,
 } from '../index';
 
-export const startOfSecond = floorSecond;
-export const startOfMinute = floorMinute;
-export const startOfHour = floorHour;
-export const startOfDay = floorDay;
-export const startOfMonth = floorMonth;
-export const startOfYear = floorYear;
-export const startOfWeek = floorWeek;
