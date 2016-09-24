@@ -24,4 +24,3 @@ export const ceilDay = (isoString) => floorDay(addDays(isoString, 1));
 export const ceilWeek = (isoString) => floorDay(addDays(isoString, 7 - getWeekday(isoString) + 1));
 export const ceilMonth = (isoString) => floorMonth(addMonths(isoString, 1));
 export const ceilYear = (isoString) => floorYear(addYears(isoString, 1));
-

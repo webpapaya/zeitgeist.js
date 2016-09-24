@@ -13,9 +13,14 @@ import {
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
 
-export const addSeconds = (isoString, seconds) => addDays(isoString, seconds / SECONDS_IN_REGULAR_DAY);
-export const addMinutes = (isoString, minutes) => addDays(isoString, minutes / MINUTES_IN_REGULAR_DAY);
-export const addHours = (isoString, hours) => addDays(isoString, hours / HOURS_IN_REGULAR_DAY);
+export const addSeconds = (isoString, seconds) =>
+  addDays(isoString, seconds / SECONDS_IN_REGULAR_DAY);
+
+export const addMinutes = (isoString, minutes) =>
+  addDays(isoString, minutes / MINUTES_IN_REGULAR_DAY);
+
+export const addHours = (isoString, hours) =>
+  addDays(isoString, hours / HOURS_IN_REGULAR_DAY);
 
 export const addDays = (isoString, days) => {
   const calculatedIsoString = fromJulianDay(toJulianDay(isoString) + days);
