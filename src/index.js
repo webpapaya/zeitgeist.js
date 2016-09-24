@@ -18,7 +18,7 @@ export const daysInMonth = (isoString) => {
 };
 
 export const isLeapYear = (isoString) => {
-  const year = toFragments(isoString).year;
+  const { year } = toFragments(isoString);
   const dividableBy4 = year % 4 === 0;
   const dividableBy100 = year % 100 === 0;
   const dividableBy400 = year % 400 === 0;
