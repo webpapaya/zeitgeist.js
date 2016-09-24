@@ -6,37 +6,31 @@ import {
   subtractDays,
 } from '../index';
 
-export const floorSecond = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, second: Math.floor(fragments.second) });
+const convertIsoStringToFragments = (fn, ...rest) => {
+  return (isoString) => {
+    return fn(toFragments(isoString), ...rest);
+  };
 };
 
-export const floorMinute = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, second: 0 });
-};
+export const floorSecond = convertIsoStringToFragments((fragments) =>
+  toIso({ ...fragments, second: Math.floor(fragments.second) }));
 
-export const floorHour = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, minute: 0, second: 0 });
-};
+export const floorMinute = convertIsoStringToFragments((fragments) =>
+  toIso({ ...fragments, second: 0 }));
+
+export const floorHour = convertIsoStringToFragments((fragments) =>
+  toIso({ ...fragments, minute: 0, second: 0 }));
 
 export const floorWeek = (isoString) => {
   const weekDay = getWeekday(isoString);
   return floorDay(subtractDays(isoString, weekDay - 1));
 };
 
-export const floorDay = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, hour: 0, minute: 0, second: 0 });
-};
+export const floorDay = convertIsoStringToFragments((fragments) =>
+  toIso({ ...fragments, hour: 0, minute: 0, second: 0 }));
 
-export const floorMonth = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, day: 1, hour: 0, minute: 0, second: 0 });
-};
+export const floorMonth = convertIsoStringToFragments((fragments) =>
+  toIso({ ...fragments, day: 1, hour: 0, minute: 0, second: 0 }));
 
-export const floorYear = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, month: 1, day: 1, hour: 0, minute: 0, second: 0 });
-};
+export const floorYear = convertIsoStringToFragments((fragments) =>
+  toIso({ ...fragments, month: 1, day: 1, hour: 0, minute: 0, second: 0 }));
