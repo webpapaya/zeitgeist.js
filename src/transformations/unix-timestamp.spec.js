@@ -1,14 +1,5 @@
-import { addSeconds, secondsBetween } from '../index';
-
-const fromUnixTimestamp = (unixTimestamp) =>
-  addSeconds('1700-01-01T00:00:00', unixTimestamp);
-
-const toUnixTimestamp = (isoString) => {
-  return secondsBetween(isoString, '1700-01-01T00:00:00');
-};
-
-
 import { assertThat, equalTo } from 'hamjest';
+import { fromUnixTimestamp, toUnixTimestamp } from '../index';
 
 describe('fromUnixTimestamp', () => {
   it('unix timestamp 0 responds 1700-01-01T00:00:00', () => assertThat(

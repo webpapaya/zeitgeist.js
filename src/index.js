@@ -56,6 +56,9 @@ export {
 
   fromJulianDay,
   toJulianDay,
+
+  fromUnixTimestamp,
+  toUnixTimestamp,
 } from './transformations/index';
 
 export {

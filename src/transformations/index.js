@@ -23,3 +23,4 @@ export const toFloat = (isoString) => {
 export { toFragments } from './to-fragments';
 export { toIso, toIsoDate, toIsoTime } from './to-iso';
 export { fromJulianDay, toJulianDay } from './julian-day';
+export { fromUnixTimestamp, toUnixTimestamp } from './unix-timestamp';
