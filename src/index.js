@@ -59,6 +59,9 @@ export {
 
   fromUnixTimestamp,
   toUnixTimestamp,
+
+  toJsDate,
+  fromJsDate,
 } from './transformations/index';
 
 export {
@@ -174,12 +177,12 @@ export {
 
 export {
   isBetween,
-  isSame,
   isBefore,
   isAfter,
   isSameOrAfter,
   isSameOrBefore,
 
+  isSame,
   isSameYear,
   isSameMonth,
   isSameDay,
