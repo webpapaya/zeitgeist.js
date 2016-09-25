@@ -2,8 +2,35 @@
 import { assertThat, equalTo } from 'hamjest';
 import { toIso, fromJulianDay, toJulianDay } from '../index';
 
-describe('Test all days', () => {
+describe('fromJulianDay is the inverse function of toJulianDay', () => {
   const defaultFragments = { year: 2000, month: 1, day: 1, hour: 0, minute: 0, second: 0 };
+
+  describe('years', () => {
+    for (let year = 2000; year <= 2010; year++) {
+      const isoString = toIso({ ...defaultFragments, year });
+
+      it(`${isoString} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+    }
+  });
+
+  describe('months', () => {
+    for (let month = 1; month <= 12; month++) {
+      const isoString = toIso({ ...defaultFragments, month });
+
+      it(`${isoString} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+    }
+  });
+
+  describe('days', () => {
+    for (let day = 1; day <= 31; day++) {
+      const isoString = toIso({ ...defaultFragments, day });
+
+      it(`${isoString} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+    }
+  });
 
   describe('hours', () => {
     for (let hour = 0; hour < 24; hour++) {
