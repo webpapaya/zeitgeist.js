@@ -163,6 +163,13 @@ export {
   getWeekday,
   getWeekOfYear,
   getDayOfYear,
+
+  getYear,
+  getMonth,
+  getDay,
+  getHour,
+  getMinute,
+  getSecond,
 } from './getters';
 
 export {

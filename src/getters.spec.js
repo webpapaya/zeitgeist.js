@@ -3,6 +3,13 @@ import {
   getWeekday,
   getWeekOfYear,
   getDayOfYear,
+
+  getYear,
+  getMonth,
+  getDay,
+  getHour,
+  getMinute,
+  getSecond,
 } from './index';
 
 import {
@@ -28,8 +35,8 @@ describe('getWeekday', () => {
   it('2001-01-04 is a Thursday', () => assertThat(
     getWeekday('2001-01-04'), equalTo(THURSDAY)));
 
-  it('2001-01-05 is a Friday', () => assertThat(
-    getWeekday('2001-01-05'), equalTo(FRIDAY)));
+  it('2001-01-05.6 is a Friday', () => assertThat(
+    getWeekday('2001-01-05.6'), equalTo(FRIDAY)));
 
   it('2001-01-06 is a Saturday', () => assertThat(
     getWeekday('2001-01-06'), equalTo(SATURDAY)));
@@ -83,3 +90,34 @@ describe('getWeekOfYear', () => {
   it('2001-12-31 responds 53', () => assertThat(
     getWeekOfYear('2001-12-31'), equalTo(53)));
 });
+
+describe('getYear', () => {
+  it('2000-01-02T03:04:05.6 responds 2000', () => assertThat(
+    getYear('2000-01-02T03:04:05.6'), equalTo(2000)));
+});
+
+describe('getMonth', () => {
+  it('2000-01-02T03:04:05.6 responds 1', () => assertThat(
+    getMonth('2000-01-02T03:04:05.6'), equalTo(1)));
+});
+
+describe('getDay', () => {
+  it('2000-01-02T03:04:05.6 responds 2', () => assertThat(
+    getDay('2000-01-02T03:04:05.6'), equalTo(2)));
+});
+
+describe('getHour', () => {
+  it('2000-01-02T03:04:05.6 responds 3', () => assertThat(
+    getHour('2000-01-02T03:04:05.6'), equalTo(3)));
+});
+
+describe('getMinute', () => {
+  it('2000-01-02T03:04:05.6 responds 4', () => assertThat(
+    getMinute('2000-01-02T03:04:05.6'), equalTo(4)));
+});
+
+describe('getSecond', () => {
+  it('2000-01-02T03:04:05.6 responds 4', () => assertThat(
+    getSecond('2000-01-02T03:04:05.6'), equalTo(5.6)));
+});
+
