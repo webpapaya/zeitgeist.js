@@ -5,11 +5,10 @@ import {
 } from '../constants';
 
 import { toFragments, toIso } from '../index';
+import { fractionOfNumber } from '../utils';
 
 const floor = (value) => Math.floor(value);
 const round = (value) => Math.round(value);
-
-const fraction = (value) => value % 1;
 const sum = (array) => array.reduce((totalValue, value) => totalValue + value, 0);
 
 const calculateLeapDayOffset = ({ year }) => 2 - floor(year / 100) + floor(year / 400);
@@ -76,7 +75,7 @@ const dateComponentFromJulianDay = (julianDay) => {
 };
 
 const timeComponentFromJulianDay = (julianDay) => {
-  const fractionOfDayInSeconds = round(fraction(julianDay + 0.5) * SECONDS_IN_REGULAR_DAY);
+  const fractionOfDayInSeconds = round(fractionOfNumber(julianDay + 0.5) * SECONDS_IN_REGULAR_DAY);
   const secondsWithoutHours = fractionOfDayInSeconds % 3600;
 
   const hour = floor(fractionOfDayInSeconds / 3600);

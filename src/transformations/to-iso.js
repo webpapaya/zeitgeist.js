@@ -7,10 +7,11 @@ import {
 import {
   buildCollectionMonad,
   leftPad,
+  fractionOfNumber,
 } from '../utils';
 
 const leftPadFullNumber = (value) => {
-  const fraction = Math.round((value % 1) * 10e6) / 10e6;
+  const fraction = fractionOfNumber(value);
   const full = Math.floor(value/1);
 
   return fraction === 0

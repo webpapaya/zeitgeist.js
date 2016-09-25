@@ -3,6 +3,7 @@ import {
   buildCollectionMonad,
   buildMaybeMonad,
   leftPad,
+  fractionOfNumber,
 } from './utils';
 
 describe('maybeMonad', () => {
@@ -132,3 +133,19 @@ describe('leftPad', () => {
   it('transforms null to 00', () => assertThat(
     leftPad(null), equalTo('00')));
 });
+
+describe('fractionOfNumber', () => {
+  it('1.3 responds 3', () => assertThat(
+    fractionOfNumber(1.3), equalTo(0.3)));
+
+  it('1.33 responds 33', () => assertThat(
+    fractionOfNumber(1.33), equalTo(0.33)));
+
+  it('1.333 responds 333', () => assertThat(
+    fractionOfNumber(1.333), equalTo(0.333)));
+
+  it('1 responds 0', () => assertThat(
+    fractionOfNumber(1), equalTo(0)));
+});
+
+

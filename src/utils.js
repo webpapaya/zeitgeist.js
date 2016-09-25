@@ -3,6 +3,11 @@ export const isCollectionEmpty = (collection) => collection.length === 0;
 
 const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 
+export const fractionOfNumber = (number) => {
+  const fractionAsString = number.toString().split('.')[1] || '0';
+  return parseFloat(fractionAsString) / (10 ** fractionAsString.length)
+};
+
 export const leftPad = (value, length = 2) => {
   const string = isEmpty(value) ? '' : `${value}`;
   if (string.length >= length) { return string; }
