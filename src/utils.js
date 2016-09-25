@@ -5,7 +5,7 @@ const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 
 export const fractionOfNumber = (number) => {
   const fractionAsString = number.toString().split('.')[1] || '0';
-  return parseFloat(fractionAsString) / (10 ** fractionAsString.length)
+  return parseFloat(fractionAsString) / (10 ** fractionAsString.length);
 };
 
 export const leftPad = (value, length = 2) => {

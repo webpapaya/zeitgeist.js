@@ -120,4 +120,3 @@ describe('getSecond', () => {
   it('2000-01-02T03:04:05.6 responds 4', () => assertThat(
     getSecond('2000-01-02T03:04:05.6'), equalTo(5.6)));
 });
-

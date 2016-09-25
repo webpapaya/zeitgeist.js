@@ -147,5 +147,3 @@ describe('fractionOfNumber', () => {
   it('1 responds 0', () => assertThat(
     fractionOfNumber(1), equalTo(0)));
 });
-
-

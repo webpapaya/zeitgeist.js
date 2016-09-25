@@ -50,9 +50,6 @@ export const microsecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);
   const toAsFragments = toFragments(to);
 
-
-
-
   const microsecondsBetweenDays = Math.abs(daysBetween(from, to) * ONE_REGULAR_DAY);
   const leapSeconds = leapMicrosecondsBetween(from, to);
 

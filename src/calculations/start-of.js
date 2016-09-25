@@ -7,4 +7,3 @@ export {
   floorYear as startOfYear,
   floorWeek as startOfWeek,
 } from '../index';
-

@@ -29,7 +29,7 @@ describe('toJsDate', () => {
       day: 8,
       hour: 1,
       minute: 2,
-      second: 3.4
+      second: 3.4,
     }), equalTo(new Date('2000-09-08T01:02:03.4'))));
 });
 

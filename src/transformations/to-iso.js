@@ -12,7 +12,7 @@ import {
 
 const leftPadFullNumber = (value) => {
   const fraction = fractionOfNumber(value);
-  const full = Math.floor(value/1);
+  const full = Math.floor(value / 1);
 
   return fraction === 0
     ? `${leftPad(full)}`
