@@ -9,6 +9,9 @@ import {
   isSameYear,
   isSameMonth,
   isSameDay,
+  isSameHour,
+  isSameMinute,
+  isSameSecond,
 } from './index';
 
 describe('isSame', () => {
@@ -98,3 +101,26 @@ describe('isSameDay', () => {
     isSameDay('2000-02-03', '2000-02-01'), equalTo(false)));
 });
 
+describe('isSameHour', () => {
+  it('2000-01-03T01:02:03 and 2000-01-03T01:03:04 is same hour', () => assertThat(
+    isSameHour('2000-01-03T01:02:03', '2000-01-03T01:03:04'), equalTo(true)));
+
+  it('2000-01-03T01:03:04 and 2000-01-03T02:03:04 is NOT same hour', () => assertThat(
+    isSameHour('2000-01-03T01:03:04', '2000-01-03T02:03:04'), equalTo(false)));
+});
+
+describe('isSameMinute', () => {
+  it('2000-01-03T01:02:03 and 2000-01-03T01:02:05 is same minute', () => assertThat(
+    isSameMinute('2000-01-03T01:02:03', '2000-01-03T01:02:05'), equalTo(true)));
+
+  it('2000-01-03T01:03:04 and 2000-01-03T01:04:04 is NOT same minute', () => assertThat(
+    isSameMinute('2000-01-03T01:03:04', '2000-01-03T01:04:04'), equalTo(false)));
+});
+
+describe('isSameSecond', () => {
+  it('2000-01-03T01:02:03 and 2000-01-03T01:02:03 is same minute', () => assertThat(
+    isSameSecond('2000-01-03T01:02:03', '2000-01-03T01:02:03'), equalTo(true)));
+
+  it('2000-01-03T01:03:04 and 2000-01-03T01:03:05 is NOT same minute', () => assertThat(
+    isSameSecond('2000-01-03T01:03:04', '2000-01-03T01:03:05'), equalTo(false)));
+});

@@ -183,6 +183,9 @@ export {
   isSameYear,
   isSameMonth,
   isSameDay,
+  isSameHour,
+  isSameMinute,
+  isSameSecond,
 } from './compare';
 
 export { format } from './format';

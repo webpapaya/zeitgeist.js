@@ -3,10 +3,10 @@ import {
   floorYear,
   floorMonth,
   floorDay,
+  floorHour,
+  floorMinute,
+  floorSecond,
 } from './index';
-
-export const isSame = (firstDate, secondDate) =>
-  toFloat(firstDate) === toFloat(secondDate);
 
 export const isBefore = (maybeBefore, maybeAfter) =>
   toFloat(maybeBefore) < toFloat(maybeAfter);
@@ -26,6 +26,9 @@ export const isBetween = (dateToCheck, { from, to }) => {
     : isSameOrAfter(from, dateToCheck) && isSameOrBefore(to, dateToCheck);
 };
 
+export const isSame = (firstDate, secondDate) =>
+  toFloat(firstDate) === toFloat(secondDate);
+
 export const isSameYear = (firstDate, secondDate) =>
   isSame(floorYear(firstDate), floorYear(secondDate));
 
@@ -34,3 +37,12 @@ export const isSameMonth = (firstDate, secondDate) =>
 
 export const isSameDay = (firstDate, secondDate) =>
   isSame(floorDay(firstDate), floorDay(secondDate));
+
+export const isSameHour = (firstDate, secondDate) =>
+  isSame(floorHour(firstDate), floorHour(secondDate));
+
+export const isSameMinute = (firstDate, secondDate) =>
+  isSame(floorMinute(firstDate), floorMinute(secondDate));
+
+export const isSameSecond = (firstDate, secondDate) =>
+  isSame(floorSecond(firstDate), floorSecond(secondDate));
