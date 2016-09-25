@@ -179,6 +179,10 @@ export {
   isAfter,
   isSameOrAfter,
   isSameOrBefore,
+
+  isSameYear,
+  isSameMonth,
+  isSameDay,
 } from './compare';
 
 export { format } from './format';

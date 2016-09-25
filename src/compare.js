@@ -1,4 +1,9 @@
-import { toFloat } from './index';
+import {
+  toFloat,
+  floorYear,
+  floorMonth,
+  floorDay,
+} from './index';
 
 export const isSame = (firstDate, secondDate) =>
   toFloat(firstDate) === toFloat(secondDate);
@@ -20,3 +25,12 @@ export const isBetween = (dateToCheck, { from, to }) => {
     ? isSameOrAfter(to, dateToCheck) && isSameOrBefore(from, dateToCheck)
     : isSameOrAfter(from, dateToCheck) && isSameOrBefore(to, dateToCheck);
 };
+
+export const isSameYear = (firstDate, secondDate) =>
+  isSame(floorYear(firstDate), floorYear(secondDate));
+
+export const isSameMonth = (firstDate, secondDate) =>
+  isSame(floorMonth(firstDate), floorMonth(secondDate));
+
+export const isSameDay = (firstDate, secondDate) =>
+  isSame(floorDay(firstDate), floorDay(secondDate));

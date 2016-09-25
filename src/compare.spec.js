@@ -6,6 +6,9 @@ import {
   isAfter,
   isSameOrAfter,
   isSameOrBefore,
+  isSameYear,
+  isSameMonth,
+  isSameDay,
 } from './index';
 
 describe('isSame', () => {
@@ -70,3 +73,28 @@ describe('isBetween', () => {
       to: '1972-06-30T23:59:59',
     }), equalTo(true)));
 });
+
+describe('isSameYear', () => {
+  it('2000-02-03 and 2000-01-03 is same year', () => assertThat(
+    isSameYear('2000-02-03', '2000-01-03'), equalTo(true)));
+
+  it('2000-02-03 and 2001-01-03 is NOT same year', () => assertThat(
+    isSameYear('2000-02-03', '2001-02-03'), equalTo(false)));
+});
+
+describe('isSameMonth', () => {
+  it('2000-02-03 and 2000-01-03 is NOT same month', () => assertThat(
+    isSameMonth('2000-02-03', '2000-01-03'), equalTo(false)));
+
+  it('2000-02-03 and 2000-02-01 is same month', () => assertThat(
+    isSameMonth('2000-02-03', '2000-02-01'), equalTo(true)));
+});
+
+describe('isSameDay', () => {
+  it('2000-01-03 and 2000-01-03 is same day', () => assertThat(
+    isSameDay('2000-01-03', '2000-01-03'), equalTo(true)));
+
+  it('2000-01-03 and 2000-02-01 is NOT same month', () => assertThat(
+    isSameDay('2000-02-03', '2000-02-01'), equalTo(false)));
+});
+
