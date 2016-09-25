@@ -3,7 +3,12 @@ import {
   DAYS_IN_MONTHS,
 } from './constants';
 
-import { toFragments, removeTimeComponent, removeDateComponent } from './transformations/index';
+import {
+  toFragments,
+  removeTimeComponent,
+  removeDateComponent,
+} from './transformations/index';
+
 import { isEmpty } from './utils';
 
 const isLeapMonth = (isoString, month) =>
