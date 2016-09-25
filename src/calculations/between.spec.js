@@ -29,11 +29,11 @@ describe('secondsBetween', () => {
   it('seconds between T11:00 and T10:59:00 is 60 seconds', () => assertThat(
     secondsBetween('T11:00', 'T10:59'), equalTo(60)));
 
-  it.skip('there are 60 seconds between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
+  it('there are 60 seconds between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
     secondsBetween('2000-01-02T00:00', '2000-01-01T23:59'), equalTo(60)));
 
   describe('handles leap seconds', () => {
-    it.skip('there are 2 seconds between 1972-07-01T00:00:00 and 1972-06-30T23:59:59', () => assertThat(
+    it('there are 2 seconds between 1972-07-01T00:00:00 and 1972-06-30T23:59:59', () => assertThat(
       secondsBetween('1972-07-01T00:00:00', '1972-06-30T23:59:59'), equalTo(2)));
   });
 });
@@ -49,6 +49,9 @@ describe('hours between', () => {
 });
 
 describe('daysBetween responds', () => {
+  it('1 days between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
+    daysBetween('2000-01-02T00:00', '2000-01-01T23:59'), equalTo(-1)));
+
   it('0 days between 1700-01-01T00:00:00 and 1700-01-01T00:00:01', () => assertThat(
     daysBetween('1700-01-01T00:00:01', '1700-01-01T00:00:00'), equalTo(0)));
 

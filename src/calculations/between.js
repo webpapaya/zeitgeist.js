@@ -31,7 +31,8 @@ const floor = (value) => Math.floor(value);
 export const daysBetween = (from, to) => {
   const daysFrom = containsDateComponent(from) ? toJulianDay(from) : 0;
   const daysTo = containsDateComponent(to) ? toJulianDay(to) : 0;
-  return floor(daysTo) - floor(daysFrom);
+
+  return floor(daysTo + 0.5) - floor(daysFrom + 0.5);
 };
 
 const leapMicrosecondsBetween = (from, to) => {
@@ -48,6 +49,9 @@ const leapMicrosecondsBetween = (from, to) => {
 export const microsecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);
   const toAsFragments = toFragments(to);
+
+
+
 
   const microsecondsBetweenDays = Math.abs(daysBetween(from, to) * ONE_REGULAR_DAY);
   const leapSeconds = leapMicrosecondsBetween(from, to);
