@@ -5,7 +5,7 @@ const fromUnixTimestamp = (unixTimestamp) =>
 
 const toUnixTimestamp = (isoString) => {
   return secondsBetween(isoString, '1700-01-01T00:00:00');
-}
+};
 
 
 import { assertThat, equalTo } from 'hamjest';
@@ -22,6 +22,6 @@ describe('toUnixTimestamp', () => {
   it('1700-01-01T00:00:00 responds 0', () => assertThat(
     toUnixTimestamp('1700-01-01T00:00:00'), equalTo(0)));
 
-  it.skip('unix timestamp 1 responds 1700-01-01T00:00:01', () => assertThat(
+  it('unix timestamp 1 responds 1700-01-01T00:00:01', () => assertThat(
     toUnixTimestamp('1700-01-01T00:00:01'), equalTo(1)));
 });

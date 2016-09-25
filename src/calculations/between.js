@@ -31,7 +31,7 @@ const floor = (value) => Math.floor(value);
 export const daysBetween = (from, to) => {
   const daysFrom = containsDateComponent(from) ? toJulianDay(from) : 0;
   const daysTo = containsDateComponent(to) ? toJulianDay(to) : 0;
-  return floor(daysTo - daysFrom);
+  return floor(daysTo) - floor(daysFrom);
 };
 
 const leapMicrosecondsBetween = (from, to) => {
