@@ -157,7 +157,6 @@ export {
   getDayOfYear,
 } from './getters';
 
-
 export {
   isBetween,
   isSame,
