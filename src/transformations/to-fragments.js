@@ -29,12 +29,12 @@ export const toFragments = (isoString) => {
   const [year, month, day] = dateComponent.split(DATE_UNIT_SEPARATOR);
   const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
 
-  return {
+  return Object.freeze({
     year: year ? toInt(year) : void 0,
     month: parseDateUnit(month),
     day: parseDateUnit(day),
     hour: parseTimeUnit(hour),
     minute: parseTimeUnit(minute),
     second: parseTimeUnit(second),
-  };
+  });
 };
