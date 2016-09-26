@@ -5,6 +5,15 @@ import {
   TIME_UNIT_SEPARATOR,
 } from '../constants';
 
+const containsTimezone = (isoString) => isoString.match(/[T|\s].*[+|-]/);
+const extractTimezone = (isoString) => isoString
+  .replace(/.*\+/, '+')
+  .replace(/.*-/, '-');
+
+export const getTimezoneAsTime = (isoString) =>
+  containsTimezone(isoString) ? extractTimezone(isoString) : '+00:00';
+
+
 const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
 const toInt = (value) => parseInt(value, 10);
 

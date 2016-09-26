@@ -1,7 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import {
   toIso,
-  toFragments,
   toIsoDate,
   toIsoTime,
   removeTimeComponent,
@@ -50,105 +49,6 @@ describe('toIsoDate', () => {
 describe('toIsoTime', () => {
   it('{ year: 2000, month: 10, day: 20, hour: 10 }', () => assertThat(
     toIsoTime({ year: 2000, hour: 10, minute: 1 }), equalTo('10:01')));
-});
-
-describe('toFragments', () => {
-  describe('`2000` responds', () => {
-    it('year 2000', () => assertThat(
-      toFragments('2000').year, equalTo(2000)));
-
-    it('month undefined', () => assertThat(
-      toFragments('2000').month, equalTo(void 0)));
-
-    it('day undefined', () => assertThat(
-      toFragments('2000').day, equalTo(void 0)));
-
-    it('hour undefined', () => assertThat(
-      toFragments('2000').hour, equalTo(void 0)));
-
-    it('minute undefined', () => assertThat(
-      toFragments('2000').minute, equalTo(void 0)));
-
-    it('second undefined', () => assertThat(
-      toFragments('2000').second, equalTo(void 0)));
-  });
-
-  describe('`2000-01` responds', () => {
-    it('year 2000', () => assertThat(
-      toFragments('2000-01').year, equalTo(2000)));
-
-    it('month 1', () => assertThat(
-      toFragments('2000-01').month, equalTo(1)));
-
-    it('day undefined', () => assertThat(
-      toFragments('2000-01').day, equalTo(void 0)));
-  });
-
-  describe('`2000-01-01` responds', () => {
-    it('year 2000', () => assertThat(
-      toFragments('2000-01-01').year, equalTo(2000)));
-
-    it('month 1', () => assertThat(
-      toFragments('2000-01-01').month, equalTo(1)));
-
-    it('day 1', () => assertThat(
-      toFragments('2000-01-01').day, equalTo(1)));
-  });
-
-  describe('`2000-01-01` responds', () => {
-    it('year 2000', () => assertThat(
-      toFragments('2000-01-01').year, equalTo(2000)));
-
-    it('month 1', () => assertThat(
-      toFragments('2000-01-01').month, equalTo(1)));
-
-    it('day 1', () => assertThat(
-      toFragments('2000-01-01').day, equalTo(1)));
-  });
-
-  describe('`2000-01-01T10:20:30.123` responds', () => {
-    it('`hour is 10`', () => assertThat(
-      toFragments('2000-01-01T10:20:30.123').hour, equalTo(10)));
-
-    it('`minute is 20`', () => assertThat(
-      toFragments('2000-01-01T10:20:30.123').minute, equalTo(20)));
-
-    it('`second is 30.123`', () => assertThat(
-      toFragments('2000-01-01T10:20:30.123').second, equalTo(30.123)));
-  });
-
-  describe('`2000-01-01 10:20` responds', () => {
-    it('`hour is 10`', () => assertThat(
-      toFragments('2000-01-01 10:20').hour, equalTo(10)));
-
-    it('`minute is 20`', () => assertThat(
-      toFragments('2000-01-01 10:20').minute, equalTo(20)));
-
-    it('`second is undefined`', () => assertThat(
-      toFragments('2000-01-01 10:20').second, equalTo(void 0)));
-  });
-
-  describe('`2000-01-01 10:20` responds', () => {
-    it('`hour is 10`', () => assertThat(
-      toFragments('2000-01-01 10:20').hour, equalTo(10)));
-
-    it('`minute is 20`', () => assertThat(
-      toFragments('2000-01-01 10:20').minute, equalTo(20)));
-
-    it('`second is undefined`', () => assertThat(
-      toFragments('2000-01-01 10:20').second, equalTo(void 0)));
-  });
-
-  describe('`T20:15` responds', () => {
-    it('`hour` is 20', () => assertThat(
-      toFragments('T20:15').hour, equalTo(20)));
-
-    it('`minute` is 15', () => assertThat(
-      toFragments('T20:15').minute, equalTo(15)));
-
-    it('`second` is undefined', () => assertThat(
-      toFragments('T20:15').second, equalTo(void 0)));
-  });
 });
 
 describe('removeTimeComponent', () => {
