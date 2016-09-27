@@ -19,6 +19,52 @@ describe('getTimezoneAsTime', () => {
     getTimezoneAsTime('2000-01-01T00:00:00'), equalTo('+00:00')));
 });
 
+const extractDate = (isoString) =>
+  isoString.replace(/[T|\s].*/, '');
+
+describe('extractDate', () => {
+  [
+    { isoString: '2000', date: '2000' },
+    { isoString: '2000-01', date: '2000-01' },
+    { isoString: '2000-01-01', date: '2000-01-01' },
+    { isoString: '2000-01-01T10', date: '2000-01-01' },
+    { isoString: '2000-01-01 10', date: '2000-01-01' },
+    { isoString: '2000-01-01 10:10', date: '2000-01-01' },
+    { isoString: '2000-01-01 10:10:10', date: '2000-01-01' },
+    { isoString: '2000-01-01 10:10:10Z', date: '2000-01-01' },
+    { isoString: '2000-01-01 10:10:10+01:00', date: '2000-01-01' },
+  ].forEach(({ isoString, date }) => {
+    it(`${isoString} responds ${date}`, () => assertThat(
+      extractDate(isoString), equalTo(date)));
+  });
+});
+
+const extractTime = (isoString) => {
+  return isoString
+    .replace(/^.*[T\s]|.*/, '')
+    .replace(/Z$/, '')
+    .replace(/[\+-].*$/, '')
+};
+
+describe('extractTime', () => {
+  [
+    { isoString: '2000', time: '' },
+    { isoString: '2000-01', time: '' },
+    { isoString: '2000-01-01', time: '' },
+    { isoString: '2000-01-01T10', time: '10' },
+    { isoString: '2000-01-01 10', time: '10' },
+    { isoString: '2000-01-01 10:10', time: '10:10' },
+    { isoString: '2000-01-01 10:10:10', time: '10:10:10' },
+    { isoString: '2000-01-01 10:10:10Z', time: '10:10:10' },
+    { isoString: '2000-01-01 10:10:10+01:00', time: '10:10:10' },
+    { isoString: '2000-01-01 10:10:10-01:00', time: '10:10:10' },
+  ].forEach(({ isoString, time }) => {
+    it(`${isoString} responds ${time}`, () => assertThat(
+      extractTime(isoString), equalTo(time)));
+  });
+});
+
+
 describe('toFragments', () => {
   describe('`2000` responds', () => {
     it('year 2000', () => assertThat(
