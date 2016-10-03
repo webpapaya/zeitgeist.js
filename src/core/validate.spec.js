@@ -28,11 +28,24 @@ describe('isValid', () => {
     { isoString: '2xxx', valid: false },
     { isoString: '2000-123', valid: false },
     { isoString: '2000-12-124', valid: false },
-
   ].forEach(({ isoString, valid }) => {
     it(`"${isoString}" is ${valid ? 'valid' : 'invalid'}`, () => assertThat(
       isValid(isoString), equalTo(valid)));
-
   });
 });
 
+const validateFirstArg = (fn) => {
+  return (isoString, ...args) => isValid(isoString)
+    ? fn(isoString, ...args)
+    : 'Invalid Format';
+};
+
+describe('validateFormat', () => {
+  const validatedFn = validateFirstArg((value) => value);
+
+  it('validatedFn responds given value when valid', () => assertThat(
+    validatedFn('2000-01-01'), equalTo('2000-01-01')));
+
+  it('validatedFn responds `Invalid Format` when invalid', () => assertThat(
+    validatedFn('xxxx'), equalTo('Invalid Format')));
+});
