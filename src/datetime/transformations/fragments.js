@@ -66,7 +66,7 @@ export const toFragments = (isoString) => {
   const [timezoneHour, timezoneMinute] = timezoneComponent.split(TIME_UNIT_SEPARATOR);
 
   return Object.freeze({
-    year: year ? parseInt(year) : void 0,
+    year: toInteger(year),
     month: toInteger(month),
     day: toInteger(day),
     hour: toInteger(hour),

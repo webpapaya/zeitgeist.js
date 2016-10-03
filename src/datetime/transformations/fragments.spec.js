@@ -3,7 +3,7 @@ import { toFragments } from '../index';
 import {
   extractTime,
   extractDate,
-  extractTimezoneAsTime
+  extractTimezoneAsTime,
 } from './fragments';
 
 describe('extractTimezoneAsTime', () => {
@@ -49,7 +49,7 @@ describe('extractDate', () => {
 
 describe('extractTime', () => {
   [
-    { isoString: 'T20:15', time: '20:15'},
+    { isoString: 'T20:15', time: '20:15' },
     { isoString: '2000', time: '' },
     { isoString: '2000-01', time: '' },
     { isoString: '2000-01-01', time: '' },

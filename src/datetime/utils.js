@@ -26,7 +26,7 @@ export const buildMaybeMonad = (rawValue) => {
   const asString = () => buildMaybeMonad(`${rawValue}`);
   const setIfBlank = (newValue) => buildMaybeMonad(isEmpty(rawValue) ? newValue : rawValue);
   const debug = () => {
-    console.log(rawValue);
+    console.log(rawValue); // eslint-disable-line no-console
     return buildMaybeMonad(rawValue);
   };
 
