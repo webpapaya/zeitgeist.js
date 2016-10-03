@@ -1,5 +1,5 @@
-import { token as defaultToken } from './locales/default-token';
-import { locale as defaultLocale } from './locales/default-locale';
+import { token as defaultToken } from '../locales/default-token';
+import { locale as defaultLocale } from '../locales/default-locale';
 
 import { toFragments } from './index';
 
