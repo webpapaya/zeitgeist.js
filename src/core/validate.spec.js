@@ -1,5 +1,9 @@
 import { assertThat, equalTo } from 'hamjest';
-import { isValid } from './validate';
+import {
+  isValid,
+  validateFirstArg,
+  validateFirstAndSecondArg,
+} from './validate';
 
 describe('isValid', () => {
   [
@@ -34,11 +38,6 @@ describe('isValid', () => {
   });
 });
 
-export const validateFirstArg = (fn) => {
-  return (isoString, ...args) => isValid(isoString)
-    ? fn(isoString, ...args)
-    : 'Invalid Format';
-};
 
 describe('validateFirstArg', () => {
   const validatedFn = validateFirstArg((value) => value);
@@ -50,13 +49,6 @@ describe('validateFirstArg', () => {
     validatedFn('xxxx'), equalTo('Invalid Format')));
 });
 
-export const validateFirstAndSecondArg = (fn) => {
-  return (firstArg, secondArg, ...args) => {
-    const firstValidated = isValid(firstArg) ? firstArg : 'Invalid Format';
-    const secondValidated = isValid(secondArg) ? secondArg : 'Invalid Format';
-    return fn(firstValidated, secondValidated, ...args);
-  };
-};
 
 describe('validateFirstAndSecondArg', () => {
   const validatedFn = validateFirstAndSecondArg((first, second) => [first, second]);

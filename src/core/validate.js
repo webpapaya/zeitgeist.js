@@ -26,3 +26,17 @@ const THE_MOTHER_OF_ISO8601 = new RegExp([
 ].join('|'));
 
 export const isValid = (isoString) => THE_MOTHER_OF_ISO8601.test(isoString);
+
+export const validateFirstArg = (fn) => {
+  return (isoString, ...args) => isValid(isoString)
+    ? fn(isoString, ...args)
+    : 'Invalid Format';
+};
+
+export const validateFirstAndSecondArg = (fn) => {
+  return (firstArg, secondArg, ...args) => {
+    const firstValidated = isValid(firstArg) ? firstArg : 'Invalid Format';
+    const secondValidated = isValid(secondArg) ? secondArg : 'Invalid Format';
+    return fn(firstValidated, secondValidated, ...args);
+  };
+};
