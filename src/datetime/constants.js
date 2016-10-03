@@ -56,3 +56,4 @@ export const TIME_UNITS = {
 export const SECONDS_IN_REGULAR_DAY = 86400;
 export const MINUTES_IN_REGULAR_DAY = 1440;
 export const HOURS_IN_REGULAR_DAY = 24;
+

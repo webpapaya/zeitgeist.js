@@ -1,3 +1,5 @@
+import { INVALID_FORMAT } from './constants';
+
 const MATCH_YEAR = /[+-]?\d+\b/.source;
 const MATCH_MONTH = /[+-]?\d{2}/.source;
 const MATCH_DAY = /[+-]?\d{2}/.source;
@@ -27,7 +29,7 @@ const THE_MOTHER_OF_ISO8601_DATE_TIME = new RegExp([
 
 export const isValid = (isoString) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoString);
 
-const INVALID_FORMAT = 'Invalid Format';
+
 export const validateFirstArg = (fn) => {
   return (isoString, ...args) => isValid(isoString)
     ? fn(isoString, ...args)
