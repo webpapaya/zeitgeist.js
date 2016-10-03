@@ -5,24 +5,16 @@ import {
   TIME_UNIT_SEPARATOR,
 } from '../constants';
 
-const MATCH_DATE = /-?\d+(--?\d{2})?(--?\d{2})?/;
-const MATCH_TIMEZONE = /[\d\sT][+-]\d{2}(:\d{2})?/;
+import { buildMaybeMonad } from '../utils';
 
+const MATCH_DATE = /-?\d+(--?\d{2})?(--?\d{2})?/;
+const MATCH_TIMEZONE = /[\d\sT][+-]\d{2}(:\d{2})?$/;
+const MATCH_UTC_TIMEZONE_SHORTHAND = /Z$/;
 
 const matchFirst = (string, regex) => {
   const matchedValues = string.match(regex);
   return matchedValues ? matchedValues[0] : '';
 };
-
-const containsTimezone = (isoString) => isoString
-    .replace(/.*:[-+].*/, '')
-    .match(/[T|\s].*[+|-]/);
-
-const extractTimezone = (isoString) => isoString
-  .replace(/Z$/, ' +00:00')
-  .replace(/.*:[-+].*/, '')
-  .replace(/.*\+/, '+')
-  .replace(/.*-/, '-');
 
 export const extractDate = (isoString) => matchFirst(isoString, MATCH_DATE);
 
@@ -31,8 +23,15 @@ export const extractTime = (isoString) => isoString
   .replace(/Z$/, '')
   .replace(/[+-].*$/, '');
 
-export const getTimezoneAsTime = (isoString) =>
-  containsTimezone(isoString) ? extractTimezone(isoString) : '+00:00';
+
+export const getTimezoneAsTime = (isoString) => buildMaybeMonad(isoString)
+  .map((value) => value.trim())
+  .map((value) => value.replace(MATCH_DATE, ''))
+  .map((value) => value.replace(MATCH_UTC_TIMEZONE_SHORTHAND, ' +00:00'))
+  .map((value) => value.match(MATCH_TIMEZONE))
+  .map((value) => value[0].slice(1))
+  .setIfBlank('')
+  .toValue();
 
 const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
 const toInt = (value) => parseInt(value, 10);

@@ -3,20 +3,10 @@ import { toFragments } from '../index';
 import {
   extractTime,
   extractDate,
-  // getTimezoneAsTime
+  getTimezoneAsTime
 } from './fragments';
 
-import {
-  buildMaybeMonad
-} from '../utils';
 
-const getTimezoneAsTime = (isoString) => buildMaybeMonad(isoString)
-  .map((value) => value.replace(/-?\d+(--?\d{2})?(--?\d{2})?/, ''))
-  .map((value) => value.replace(/Z$/, ' +00:00'))
-  .map((value) => value.match(/[\d\sT][+-]\d{2}(:\d{2})?$/))
-  .map((value) => value[0].slice(1))
-  .setIfBlank('')
-  .toValue();
 
 describe('getTimezoneAsTime', () => {
   [
@@ -28,6 +18,7 @@ describe('getTimezoneAsTime', () => {
     { isoString: '2000-01-01 10:10', timezone: '' },
     { isoString: '2000-01-01 10:10:-01', timezone: '' },
     { isoString: '2000-01-01 10:10:10Z', timezone: '+00:00' },
+    { isoString: '2000-01-01 10:10:10Z ', timezone: '+00:00' },
     { isoString: '2000-01-01 10:10:10+01:00', timezone: '+01:00' },
     { isoString: '2000-01-01T10:10:10-01:00', timezone: '-01:00' },
     { isoString: '2000-01-01 10:10:10+00:00', timezone: '+00:00' },
