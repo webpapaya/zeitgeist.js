@@ -23,7 +23,7 @@ import {
   ONE_REGULAR_DAY,
 } from '../constants';
 
-import leapSecondData from '../data/leapseconds.json';
+import leapSecondData from '../../data/leapseconds.json';
 
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
 const floor = (value) => Math.floor(value);
