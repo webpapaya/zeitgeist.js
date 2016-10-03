@@ -5,7 +5,7 @@ import {
   TIME_UNIT_SEPARATOR,
 } from '../constants';
 
-import { buildMaybeMonad } from '../utils';
+import { buildMaybeMonad } from '../../utils';
 
 const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
 

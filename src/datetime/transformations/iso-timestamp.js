@@ -8,7 +8,7 @@ import {
   buildCollectionMonad,
   leftPad,
   fractionOfNumber,
-} from '../utils';
+} from '../../utils';
 
 const leftPadFullNumber = (value) => {
   const fraction = fractionOfNumber(value);

@@ -1,5 +1,5 @@
 import { separateDateAndTimeComponents, toFragments } from './fragments';
-import { leftPad } from '../utils';
+import { leftPad } from '../../utils';
 
 export const removeTimeComponent = (isoString) =>
   separateDateAndTimeComponents(isoString).dateComponent;

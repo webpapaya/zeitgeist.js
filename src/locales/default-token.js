@@ -1,6 +1,6 @@
 import { doesWeekBelongToPreviousYear } from '../datetime/getters';
 import { toIso, daysBetween, getWeekday, getWeekOfYear } from '../datetime/index';
-import { leftPad } from '../datetime/utils';
+import { leftPad } from '../utils';
 
 const formatYYYY = (fragments) => `${fragments.year}`;
 const formatYY = (fragments) => formatYYYY(fragments).slice(-2);

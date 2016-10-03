@@ -5,7 +5,7 @@ import {
 } from '../constants';
 
 import { toFragments, toIso } from '../index';
-import { fractionOfNumber } from '../utils';
+import { fractionOfNumber } from '../../utils';
 
 const floor = (value) => Math.floor(value);
 const round = (value) => Math.round(value);
