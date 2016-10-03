@@ -13,13 +13,11 @@ const MATCH_TIME = /^(([+-]?\d{2})?((:[+-]?\d{2})?((:[+-]?\d{2}(\.\d+)?)?)))/;
 const MATCH_DATE_TIME_SEPERATOR = /[T\s]/;
 const MATCH_UTC_TIMEZONE_SHORTHAND = /Z$/;
 
-const matchFirst = (string, regex) => {
-  const matchedValues = string.match(regex);
-  return matchedValues ? matchedValues[0] : '';
-};
-
-export const extractDate = (isoString) =>
-  matchFirst(isoString, MATCH_DATE);
+export const extractDate = (isoString) => buildMaybeMonad(isoString)
+  .map((value) => value.match(MATCH_DATE))
+  .map((value) => value[0])
+  .setIfBlank('')
+  .toValue();
 
 export const extractTime = (isoString) => buildMaybeMonad(isoString)
   .map((value) => value.trim())
