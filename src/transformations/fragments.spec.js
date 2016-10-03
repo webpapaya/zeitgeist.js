@@ -14,6 +14,7 @@ describe('getTimezoneAsTime', () => {
     { isoString: '2000-01-01T10', timezone: '+00:00' },
     { isoString: '2000-01-01 10', timezone: '+00:00' },
     { isoString: '2000-01-01 10:10', timezone: '+00:00' },
+    { isoString: '2000-01-01 10:10:-01', timezone: '+00:00' },
     { isoString: '2000-01-01 10:10:10Z', timezone: '+00:00' },
     { isoString: '2000-01-01 10:10:10+01:00', timezone: '+01:00' },
     { isoString: '2000-01-01T10:10:10-01:00', timezone: '-01:00' },
