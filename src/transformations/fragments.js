@@ -5,7 +5,7 @@ import {
   TIME_UNIT_SEPARATOR,
 } from '../constants';
 
-const MATCH_DATE = /-?\d+(-\d{2})?(-\d{2})?/;
+const MATCH_DATE = /-?\d+(--?\d{2})?(--?\d{2})?/;
 
 const matchFirst = (string, regex) => {
   const matchedValues = string.match(regex);
