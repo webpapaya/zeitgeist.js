@@ -34,13 +34,13 @@ describe('isValid', () => {
   });
 });
 
-const validateFirstArg = (fn) => {
+export const validateFirstArg = (fn) => {
   return (isoString, ...args) => isValid(isoString)
     ? fn(isoString, ...args)
     : 'Invalid Format';
 };
 
-describe('validateFormat', () => {
+describe('validateFirstArg', () => {
   const validatedFn = validateFirstArg((value) => value);
 
   it('validatedFn responds given value when valid', () => assertThat(
@@ -49,3 +49,22 @@ describe('validateFormat', () => {
   it('validatedFn responds `Invalid Format` when invalid', () => assertThat(
     validatedFn('xxxx'), equalTo('Invalid Format')));
 });
+
+export const validateFirstAndSecondArg = (fn) => {
+  return (firstArg, secondArg, ...args) => {
+    const firstValidated = isValid(firstArg) ? firstArg : 'Invalid Format';
+    const secondValidated = isValid(secondArg) ? secondArg : 'Invalid Format';
+    return fn(firstValidated, secondValidated, ...args);
+  };
+};
+
+describe('validateFirstAndSecondArg', () => {
+  const validatedFn = validateFirstAndSecondArg((first, second) => [first, second]);
+
+  it('validatedFn responds given value when valid', () => assertThat(
+    validatedFn('2000-01', '2000-01'), equalTo(['2000-01', '2000-01'])));
+
+  it('validatedFn responds `Invalid Format` when invalid', () => assertThat(
+    validatedFn('xxxx', '2000-01'), equalTo(['Invalid Format', '2000-01'])));
+});
+
