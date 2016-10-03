@@ -129,19 +129,19 @@ describe('toFragments', () => {
 
     it('`second is 30.123`', () => assertThat(
       toFragments('2000-01-01T10:20:30.123Z').second, equalTo(30.123)));
-
-    it.skip('`timezoneOffset is 0`', () => assertThat(
-      toFragments('2000-01-01T10:20:30.123Z').timezoneOffset, equalTo(0)));
   });
 
-  describe.skip('`2000-01-01T10:20:30.123+01:00` responds', () => {
-    it('`timezoneOffset is 1`', () => assertThat(
-      toFragments('2000-01-01T10:20:30.123+01:00').timezoneOffset, equalTo(1)));
+  describe('`2000-01-01T10:20:30.123+01:15` responds', () => {
+    it('`timezoneHour is 1`', () => assertThat(
+      toFragments('2000-01-01T10:20:30.123+01:15').timezoneHour, equalTo(1)));
+
+    it('`timezoneMinute is 0`', () => assertThat(
+      toFragments('2000-01-01T10:20:30.123+01:00').timezoneMinute, equalTo(0)));
   });
 
-  describe.skip('`2000-01-01T10:20:30.123-01:00` responds', () => {
+  describe('`2000-01-01T10:20:30.123-01:15` responds', () => {
     it('`timezoneOffset is -1`', () => assertThat(
-      toFragments('2000-01-01T10:20:30.123-01:00').timezoneOffset, equalTo(-1)));
+      toFragments('2000-01-01T10:20:30.123-01:00').timezoneHour, equalTo(-1)));
   });
 
   describe('`2000-01-01 10:20` responds', () => {

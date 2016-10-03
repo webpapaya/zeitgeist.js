@@ -59,9 +59,11 @@ export const toFragments = (isoString) => {
 
   const dateComponent = extractDate(isoString);
   const timeComponent = extractTime(isoString);
+  const timezoneComponent = extractTimezoneAsTime(isoString);
 
   const [year, month, day] = dateComponent.split(DATE_UNIT_SEPARATOR);
   const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
+  const [timezoneHour, timezoneMinute] = timezoneComponent.split(TIME_UNIT_SEPARATOR);
 
   return Object.freeze({
     year: year ? parseInt(year) : void 0,
@@ -70,5 +72,7 @@ export const toFragments = (isoString) => {
     hour: toInteger(hour),
     minute: toInteger(minute),
     second: toFloat(second),
+    timezoneHour: toInteger(timezoneHour),
+    timezoneMinute: toInteger(timezoneMinute),
   });
 };
