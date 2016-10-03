@@ -6,8 +6,6 @@ import {
   getTimezoneAsTime
 } from './fragments';
 
-
-
 describe('getTimezoneAsTime', () => {
   [
     { isoString: '2000', timezone: '' },
@@ -50,6 +48,7 @@ describe('extractDate', () => {
 
 describe('extractTime', () => {
   [
+    { isoString: 'T20:15', time: '20:15'},
     { isoString: '2000', time: '' },
     { isoString: '2000-01', time: '' },
     { isoString: '2000-01-01', time: '' },

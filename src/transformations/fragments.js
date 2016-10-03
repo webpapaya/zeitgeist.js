@@ -9,6 +9,8 @@ import { buildMaybeMonad } from '../utils';
 
 const MATCH_DATE = /-?\d+(--?\d{2})?(--?\d{2})?/;
 const MATCH_TIMEZONE = /[\d\sT][+-]\d{2}(:\d{2})?$/;
+const MATCH_TIME = /^(([+-]?\d{2})?((:[+-]?\d{2})?((:[+-]?\d{2}(\.\d+)?)?)))/;
+const MATCH_DATE_TIME_SEPERATOR = /[T\s]/;
 const MATCH_UTC_TIMEZONE_SHORTHAND = /Z$/;
 
 const matchFirst = (string, regex) => {
@@ -16,13 +18,17 @@ const matchFirst = (string, regex) => {
   return matchedValues ? matchedValues[0] : '';
 };
 
-export const extractDate = (isoString) => matchFirst(isoString, MATCH_DATE);
+export const extractDate = (isoString) =>
+  matchFirst(isoString, MATCH_DATE);
 
-export const extractTime = (isoString) => isoString
-  .replace(/^.*[T\s]|.*/, '')
-  .replace(/Z$/, '')
-  .replace(/[+-].*$/, '');
-
+export const extractTime = (isoString) => buildMaybeMonad(isoString)
+  .map((value) => value.trim())
+  .map((value) => value.split(MATCH_DATE_TIME_SEPERATOR))
+  .map((value) => value[1])
+  .map((value) => value.match(MATCH_TIME))
+  .map((value) => value[0])
+  .setIfBlank('')
+  .toValue();
 
 export const getTimezoneAsTime = (isoString) => buildMaybeMonad(isoString)
   .map((value) => value.trim())
