@@ -42,7 +42,7 @@ export const extractTime = (isoString) => buildMaybeMonad(isoString)
   .setIfBlank('')
   .toValue();
 
-export const getTimezoneAsTime = (isoString) => buildMaybeMonad(isoString)
+export const extractTimezoneAsTime = (isoString) => buildMaybeMonad(isoString)
   .map((value) => value.trim())
   .map((value) => value.replace(MATCH_DATE, ''))
   .map((value) => value.replace(MATCH_UTC_TIMEZONE_SHORTHAND, '+00:00'))

@@ -3,10 +3,10 @@ import { toFragments } from '../index';
 import {
   extractTime,
   extractDate,
-  getTimezoneAsTime
+  extractTimezoneAsTime
 } from './fragments';
 
-describe('getTimezoneAsTime', () => {
+describe('extractTimezoneAsTime', () => {
   [
     { isoString: '2000', timezone: '' },
     { isoString: '2000-01', timezone: '' },
@@ -22,7 +22,7 @@ describe('getTimezoneAsTime', () => {
     { isoString: '2000-01-01 10:10:10+00:00', timezone: '+00:00' },
   ].forEach(({ isoString, timezone }) => {
     it(`${isoString} responds ${timezone}`, () => assertThat(
-      getTimezoneAsTime(isoString), equalTo(timezone)));
+      extractTimezoneAsTime(isoString), equalTo(timezone)));
   });
 });
 
