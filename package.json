@@ -1,7 +1,7 @@
 {
-  "name": "pomeranian-datetime",
+  "name": "zeitgeist",
   "version": "0.0.0",
-  "description": "An immutable date and time library based on the ISO-8601 format",
+  "description": "An immutable date, time and duration library based on the ISO-8601 format",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint-crewmeister src",
@@ -28,6 +28,7 @@
   "keywords": [
     "time",
     "date",
+    "duration",
     "ISO-8601",
     "ISO",
     "8601"
