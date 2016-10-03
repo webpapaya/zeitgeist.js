@@ -3,18 +3,34 @@ import { toFragments } from '../index';
 import {
   extractTime,
   extractDate,
-  getTimezoneAsTime
+  // getTimezoneAsTime
 } from './fragments';
 
-describe('getTimezoneAsTime', () => {
+import {
+  buildMaybeMonad
+} from '../utils';
+
+
+const getTimezoneAsTime = (isoString) => {
+  const timezone = buildMaybeMonad(isoString)
+    .map((value) => value.replace(/-?\d+(--?\d{2})?(--?\d{2})?/, ''))
+    .map((value) => value.replace(/Z$/, ' +00:00'))
+    .map((value) => value.match(/[\d\sT][+-]\d{2}(:\d{2})?$/))
+    .map((value) => value[0].slice(1))
+    .toValue();
+
+  return timezone || '';
+};
+
+describe.only('getTimezoneAsTime', () => {
   [
-    { isoString: '2000', timezone: '+00:00' },
-    { isoString: '2000-01', timezone: '+00:00' },
-    { isoString: '2000-01-01', timezone: '+00:00' },
-    { isoString: '2000-01-01T10', timezone: '+00:00' },
-    { isoString: '2000-01-01 10', timezone: '+00:00' },
-    { isoString: '2000-01-01 10:10', timezone: '+00:00' },
-    { isoString: '2000-01-01 10:10:-01', timezone: '+00:00' },
+    { isoString: '2000', timezone: '' },
+    { isoString: '2000-01', timezone: '' },
+    { isoString: '2000-01-01', timezone: '' },
+    { isoString: '2000-01-01T10', timezone: '' },
+    { isoString: '2000-01-01 10', timezone: '' },
+    { isoString: '2000-01-01 10:10', timezone: '' },
+    { isoString: '2000-01-01 10:10:-01', timezone: '' },
     { isoString: '2000-01-01 10:10:10Z', timezone: '+00:00' },
     { isoString: '2000-01-01 10:10:10+01:00', timezone: '+01:00' },
     { isoString: '2000-01-01T10:10:10-01:00', timezone: '-01:00' },
@@ -28,8 +44,8 @@ describe('getTimezoneAsTime', () => {
 describe('extractDate', () => {
   [
     { isoString: '10', date: '10' },
-    { isoString: '999999', date: '999999' },
     { isoString: '2000', date: '2000' },
+    { isoString: '999999', date: '999999' },
     { isoString: '2000-01', date: '2000-01' },
     { isoString: '2000-01-01', date: '2000-01-01' },
     { isoString: '2000-01-01T10', date: '2000-01-01' },

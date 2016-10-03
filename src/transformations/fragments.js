@@ -6,6 +6,8 @@ import {
 } from '../constants';
 
 const MATCH_DATE = /-?\d+(--?\d{2})?(--?\d{2})?/;
+const MATCH_TIMEZONE = /[\d\sT][+-]\d{2}(:\d{2})?/;
+
 
 const matchFirst = (string, regex) => {
   const matchedValues = string.match(regex);
@@ -17,6 +19,7 @@ const containsTimezone = (isoString) => isoString
     .match(/[T|\s].*[+|-]/);
 
 const extractTimezone = (isoString) => isoString
+  .replace(/Z$/, ' +00:00')
   .replace(/.*:[-+].*/, '')
   .replace(/.*\+/, '+')
   .replace(/.*-/, '-');
