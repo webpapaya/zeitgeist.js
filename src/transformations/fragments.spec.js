@@ -3,20 +3,21 @@ import { toFragments } from '../index';
 import { getTimezoneAsTime } from './fragments';
 
 describe('getTimezoneAsTime', () => {
-  it('2000-01-00 00:00:00+01:00 responds +01:00', () => assertThat(
-    getTimezoneAsTime('2000-01-01 00:00:00+01:00'), equalTo('+01:00')));
-
-  it('2000-01-01T00:00:00+01:00 responds +01:00', () => assertThat(
-    getTimezoneAsTime('2000-01-01T00:00:00+01:00'), equalTo('+01:00')));
-
-  it('2000-01-01T00:00:00-01:00 responds -01:00', () => assertThat(
-    getTimezoneAsTime('2000-01-01T00:00:00-01:00'), equalTo('-01:00')));
-
-  it('2000-01-01T00:00:00Z responds +00:00', () => assertThat(
-    getTimezoneAsTime('2000-01-01T00:00:00Z'), equalTo('+00:00')));
-
-  it('2000-01-01T00:00:00 responds +00:00', () => assertThat(
-    getTimezoneAsTime('2000-01-01T00:00:00'), equalTo('+00:00')));
+  [
+    { isoString: '2000', timezone: '+00:00' },
+    { isoString: '2000-01', timezone: '+00:00' },
+    { isoString: '2000-01-01', timezone: '+00:00' },
+    { isoString: '2000-01-01T10', timezone: '+00:00' },
+    { isoString: '2000-01-01 10', timezone: '+00:00' },
+    { isoString: '2000-01-01 10:10', timezone: '+00:00' },
+    { isoString: '2000-01-01 10:10:10Z', timezone: '+00:00' },
+    { isoString: '2000-01-01 10:10:10+01:00', timezone: '+01:00' },
+    { isoString: '2000-01-01T10:10:10-01:00', timezone: '-01:00' },
+    { isoString: '2000-01-01 10:10:10+00:00', timezone: '+00:00' },
+  ].forEach(({ isoString, timezone }) => {
+    it(`${isoString} responds ${timezone}`, () => assertThat(
+      getTimezoneAsTime(isoString), equalTo(timezone)));
+  });
 });
 
 const extractDate = (isoString) =>
@@ -30,7 +31,7 @@ describe('extractDate', () => {
     { isoString: '2000-01-01T10', date: '2000-01-01' },
     { isoString: '2000-01-01 10', date: '2000-01-01' },
     { isoString: '2000-01-01 10:10', date: '2000-01-01' },
-    { isoString: '2000-01-01 10:10:10', date: '2000-01-01' },
+    { isoString: '2000-01-01T10:10:10', date: '2000-01-01' },
     { isoString: '2000-01-01 10:10:10Z', date: '2000-01-01' },
     { isoString: '2000-01-01 10:10:10+01:00', date: '2000-01-01' },
   ].forEach(({ isoString, date }) => {
