@@ -10,17 +10,13 @@ import {
   buildMaybeMonad
 } from '../utils';
 
-
-const getTimezoneAsTime = (isoString) => {
-  const timezone = buildMaybeMonad(isoString)
-    .map((value) => value.replace(/-?\d+(--?\d{2})?(--?\d{2})?/, ''))
-    .map((value) => value.replace(/Z$/, ' +00:00'))
-    .map((value) => value.match(/[\d\sT][+-]\d{2}(:\d{2})?$/))
-    .map((value) => value[0].slice(1))
-    .toValue();
-
-  return timezone || '';
-};
+const getTimezoneAsTime = (isoString) => buildMaybeMonad(isoString)
+  .map((value) => value.replace(/-?\d+(--?\d{2})?(--?\d{2})?/, ''))
+  .map((value) => value.replace(/Z$/, ' +00:00'))
+  .map((value) => value.match(/[\d\sT][+-]\d{2}(:\d{2})?$/))
+  .map((value) => value[0].slice(1))
+  .setIfBlank('')
+  .toValue();
 
 describe('getTimezoneAsTime', () => {
   [
