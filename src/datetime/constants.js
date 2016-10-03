@@ -1,3 +1,13 @@
+import {
+  ONE_MICROSECOND,
+  ONE_MILLISECOND,
+  ONE_SECOND,
+  ONE_MINUTE,
+  ONE_HOUR,
+  ONE_DAY,
+} from '../core/constants';
+
+
 export const DATE_UNIT_SEPARATOR = '-';
 export const TIME_UNIT_SEPARATOR = ':';
 
@@ -40,12 +50,6 @@ export const FRIDAY = 5;
 export const SATURDAY = 6;
 export const SUNDAY = 7;
 
-export const ONE_MICROSECOND = 1;
-export const ONE_MILLISECOND = 1000 * ONE_MICROSECOND;
-export const ONE_SECOND = 1000 * ONE_MILLISECOND;
-export const ONE_MINUTE = 60 * ONE_SECOND;
-export const ONE_HOUR = 60 * ONE_MINUTE;
-export const ONE_REGULAR_DAY = 24 * ONE_HOUR;
 
 export const TIME_UNITS = {
   hour: ONE_HOUR,
@@ -57,3 +61,11 @@ export const SECONDS_IN_REGULAR_DAY = 86400;
 export const MINUTES_IN_REGULAR_DAY = 1440;
 export const HOURS_IN_REGULAR_DAY = 24;
 
+export {
+  ONE_MICROSECOND,
+  ONE_MILLISECOND,
+  ONE_SECOND,
+  ONE_MINUTE,
+  ONE_HOUR,
+  ONE_DAY as ONE_REGULAR_DAY,
+} from '../core/constants';
