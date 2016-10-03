@@ -27,6 +27,8 @@ describe('getTimezoneAsTime', () => {
 
 describe('extractDate', () => {
   [
+    { isoString: '10', date: '10' },
+    { isoString: '999999', date: '999999' },
     { isoString: '2000', date: '2000' },
     { isoString: '2000-01', date: '2000-01' },
     { isoString: '2000-01-01', date: '2000-01-01' },
