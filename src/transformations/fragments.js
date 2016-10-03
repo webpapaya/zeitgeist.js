@@ -7,6 +7,20 @@ import {
 
 import { buildMaybeMonad } from '../utils';
 
+const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
+
+const findTimeSeparator = (isoString) => {
+  if (containsChar(isoString, TIME_COMPONENT_SEPARATOR_1)) { return TIME_COMPONENT_SEPARATOR_1; }
+  return TIME_COMPONENT_SEPARATOR_2;
+};
+
+// TODO: maybe remove
+export const separateDateAndTimeComponents = (isoString) => {
+  const timeSeparator = findTimeSeparator(isoString);
+  const [dateComponent, timeComponent = ''] = isoString.split(timeSeparator);
+  return { dateComponent, timeComponent };
+};
+
 const MATCH_DATE = /-?\d+(--?\d{2})?(--?\d{2})?/;
 const MATCH_TIMEZONE = /[\d\sT][+-]\d{2}(:\d{2})?$/;
 const MATCH_TIME = /^(([+-]?\d{2})?((:[+-]?\d{2})?((:[+-]?\d{2}(\.\d+)?)?)))/;
@@ -31,28 +45,14 @@ export const extractTime = (isoString) => buildMaybeMonad(isoString)
 export const getTimezoneAsTime = (isoString) => buildMaybeMonad(isoString)
   .map((value) => value.trim())
   .map((value) => value.replace(MATCH_DATE, ''))
-  .map((value) => value.replace(MATCH_UTC_TIMEZONE_SHORTHAND, ' +00:00'))
+  .map((value) => value.replace(MATCH_UTC_TIMEZONE_SHORTHAND, '+00:00'))
   .map((value) => value.match(MATCH_TIMEZONE))
   .map((value) => value[0].slice(1))
   .setIfBlank('')
   .toValue();
 
-const containsChar = (isoString, s) => isoString.indexOf(s) !== -1;
-const toInt = (value) => parseInt(value, 10);
-
-const parseDateUnit = (value) => value ? toInt(value) : void 0;
-const parseTimeUnit = (value) => value ? parseFloat(value) : void 0;
-
-const findTimeSeparator = (isoString) => {
-  if (containsChar(isoString, TIME_COMPONENT_SEPARATOR_1)) { return TIME_COMPONENT_SEPARATOR_1; }
-  return TIME_COMPONENT_SEPARATOR_2;
-};
-
-export const separateDateAndTimeComponents = (isoString) => {
-  const timeSeparator = findTimeSeparator(isoString);
-  const [dateComponent, timeComponent = ''] = isoString.split(timeSeparator);
-  return { dateComponent, timeComponent };
-};
+const toInteger = (value) => value ? parseInt(value, 10) : void 0;
+const toFloat = (value) => value ? parseFloat(value) : void 0;
 
 export const toFragments = (isoString) => {
   if (typeof isoString === 'object') { return isoString; }
@@ -64,11 +64,11 @@ export const toFragments = (isoString) => {
   const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
 
   return Object.freeze({
-    year: year ? toInt(year) : void 0,
-    month: parseDateUnit(month),
-    day: parseDateUnit(day),
-    hour: parseTimeUnit(hour),
-    minute: parseTimeUnit(minute),
-    second: parseTimeUnit(second),
+    year: year ? parseInt(year) : void 0,
+    month: toInteger(month),
+    day: toInteger(day),
+    hour: toInteger(hour),
+    minute: toInteger(minute),
+    second: toFloat(second),
   });
 };
