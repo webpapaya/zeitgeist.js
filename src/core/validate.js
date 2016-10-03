@@ -13,7 +13,7 @@ const MATCH_YEAR_MONTH_DAY = `${MATCH_YEAR}-${MATCH_MONTH}-${MATCH_DAY}`;
 const MATCH_HOUR_MINUTE_SECOND = `${MATCH_HOUR}:${MATCH_MINUTE}:${MATCH_SECOND}`;
 const MATCH_DATE_AND_TIME = `${MATCH_YEAR_MONTH_DAY}${MATCH_TIME_SEPARATOR}${MATCH_HOUR_MINUTE_SECOND}`;
 
-const THE_MOTHER_OF_ISO8601 = new RegExp([
+const THE_MOTHER_OF_ISO8601_DATE_TIME = new RegExp([
   `^${MATCH_YEAR}$`,
   `^${MATCH_YEAR}-${MATCH_MONTH}$`,
   `^${MATCH_YEAR}-${MATCH_MONTH}-${MATCH_DAY}$`,
@@ -25,7 +25,7 @@ const THE_MOTHER_OF_ISO8601 = new RegExp([
   `^${MATCH_DATE_AND_TIME}${MATCH_TIMEZONE}`,
 ].join('|'));
 
-export const isValid = (isoString) => THE_MOTHER_OF_ISO8601.test(isoString);
+export const isValid = (isoString) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoString);
 
 export const validateFirstArg = (fn) => {
   return (isoString, ...args) => isValid(isoString)
