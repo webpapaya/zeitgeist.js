@@ -1,6 +1,10 @@
 import { assertThat, equalTo } from 'hamjest';
 import { toFragments } from '../index';
-import { getTimezoneAsTime } from './fragments';
+import {
+  extractTime,
+  extractDate,
+  getTimezoneAsTime
+} from './fragments';
 
 describe('getTimezoneAsTime', () => {
   [
@@ -20,9 +24,6 @@ describe('getTimezoneAsTime', () => {
   });
 });
 
-const extractDate = (isoString) =>
-  isoString.replace(/[T|\s].*/, '');
-
 describe('extractDate', () => {
   [
     { isoString: '2000', date: '2000' },
@@ -39,13 +40,6 @@ describe('extractDate', () => {
       extractDate(isoString), equalTo(date)));
   });
 });
-
-const extractTime = (isoString) => {
-  return isoString
-    .replace(/^.*[T\s]|.*/, '')
-    .replace(/Z$/, '')
-    .replace(/[\+-].*$/, '')
-};
 
 describe('extractTime', () => {
   [
@@ -64,7 +58,6 @@ describe('extractTime', () => {
       extractTime(isoString), equalTo(time)));
   });
 });
-
 
 describe('toFragments', () => {
   describe('`2000` responds', () => {
