@@ -20,6 +20,10 @@ describe('maybeMonad', () => {
     it('chain works', () => buildMaybeMonad('test')
       .chain((value) => buildMaybeMonad(value.toUpperCase()))
       .map((value) => assertThat(value, equalTo('TEST'))));
+
+    it('toValue from 0 responds 0', () => buildMaybeMonad(void 0)
+      .setIfBlank('value')
+      .value((value) => assertThat(value, equalTo('value'))));
   });
 });
 

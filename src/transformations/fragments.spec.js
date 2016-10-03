@@ -22,7 +22,7 @@ const getTimezoneAsTime = (isoString) => {
   return timezone || '';
 };
 
-describe.only('getTimezoneAsTime', () => {
+describe('getTimezoneAsTime', () => {
   [
     { isoString: '2000', timezone: '' },
     { isoString: '2000-01', timezone: '' },
