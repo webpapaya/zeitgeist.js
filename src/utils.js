@@ -25,8 +25,12 @@ export const buildMaybeMonad = (rawValue) => {
   const toValue = () => rawValue;
   const asString = () => buildMaybeMonad(`${rawValue}`);
   const setIfBlank = (newValue) => buildMaybeMonad(isEmpty(rawValue) ? newValue : rawValue);
+  const debug = () => {
+    console.log(rawValue);
+    return buildMaybeMonad(rawValue);
+  };
 
-  return { map, chain, value, toValue, asString, setIfBlank, isMonad: true };
+  return { map, chain, value, toValue, asString, debug, setIfBlank, isMonad: true };
 };
 
 
