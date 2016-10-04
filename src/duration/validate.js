@@ -20,5 +20,5 @@ export const isValid = (isoString) => {
     MATCH_DATE,
     MATCH_TIME,
     '$'
-  ].join('')).test(isoString);
+  ].join('')).test(isoString.toUpperCase());
 };

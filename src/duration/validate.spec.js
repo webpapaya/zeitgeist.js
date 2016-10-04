@@ -3,6 +3,7 @@ import { isValid } from './validate';
 
 describe('isValid iso8601 duration', () => {
   [
+    { isoString: 'P1y', valid: true },
     { isoString: 'P1Y', valid: true },
     { isoString: 'P1.5Y', valid: true },
     { isoString: 'P11Y', valid: true },
@@ -33,7 +34,6 @@ describe('isValid iso8601 duration', () => {
     { isoString: '2000-123', valid: false },
     { isoString: '2000-12-124', valid: false },
   ].forEach(({ isoString, valid }) => {
-
     it(`"${isoString}" is ${valid ? 'valid' : 'invalid'}`, () => assertThat(
       isValid(isoString), equalTo(valid)));
   });
