@@ -29,19 +29,14 @@ const THE_MOTHER_OF_ISO8601_DATE_TIME = new RegExp([
 
 export const isValid = (isoString) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoString);
 
-export const validateFirstArg = (fn) => {
-  return (isoString, ...args) => isValid(isoString)
-    ? fn(isoString, ...args)
-    : INVALID_FORMAT;
-};
+export const validateFirstArg = (fn) => (isoString, ...args) =>
+  isValid(isoString) ? fn(isoString, ...args) : INVALID_FORMAT;
 
-export const validateFirstAndSecondArg = (fn) => {
-  return (firstArg, secondArg, ...args) => {
-    const isFirstValid = isValid(firstArg);
-    const isSecondValid = isValid(secondArg);
+export const validateFirstAndSecondArg = (fn) => (firstArg, secondArg, ...args) => {
+  const isFirstValid = isValid(firstArg);
+  const isSecondValid = isValid(secondArg);
 
-    return isFirstValid && isSecondValid
-      ? fn(firstArg, secondArg, ...args)
-      : [ isFirstValid ? firstArg : INVALID_FORMAT, isSecondValid ? secondArg : INVALID_FORMAT ];
-  };
+  return isFirstValid && isSecondValid
+    ? fn(firstArg, secondArg, ...args)
+    : [ isFirstValid ? firstArg : INVALID_FORMAT, isSecondValid ? secondArg : INVALID_FORMAT ];
 };

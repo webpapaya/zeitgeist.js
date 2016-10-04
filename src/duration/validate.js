@@ -14,6 +14,13 @@ const MATCH_DATE = `${MATCH_YEAR}${MATCH_MONTH}${MATCH_WEEK}${MATCH_DAY}`;
 const MATCH_TIME = `(${TIME_DESIGNATOR}${MATCH_HOUR}${MATCH_MINUTE}${MATCH_SECOND})?`;
 
 export const isValid = (isoString) => {
+  console.log([
+    '^',
+    DURATION_DESIGNATOR,
+    MATCH_DATE,
+    MATCH_TIME,
+    '$'
+  ].join(''))
   return new RegExp([
     '^',
     DURATION_DESIGNATOR,
