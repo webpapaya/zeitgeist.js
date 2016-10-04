@@ -1,13 +1,16 @@
 import { TIME_DESIGNATOR, DURATION_DESIGNATOR } from './constants';
-const MATCH_YEAR = /(\d+Y)?/.source;
-const MATCH_MONTH = /(\d+M)?/.source;
-const MATCH_DAY = /(\d+D)?/.source;
 
-const MATCH_HOUR = /(\d+H)?/.source;
-const MATCH_MINUTE = /(\d+M)?/.source;
-const MATCH_SECOND = /(\d+S)?/.source;
+const MATCH_NUMBER = /\d+(\.\d+)?/.source;
+const MATCH_YEAR = `(${MATCH_NUMBER}Y)?`;
+const MATCH_MONTH = `(${MATCH_NUMBER}M)?`;
+const MATCH_WEEK = `(${MATCH_NUMBER}W)?`;
+const MATCH_DAY = `(${MATCH_NUMBER}D)?`;
 
-const MATCH_DATE = new RegExp(`${MATCH_YEAR}${MATCH_MONTH}${MATCH_DAY}`);
+const MATCH_HOUR = `(${MATCH_NUMBER}H)?`;
+const MATCH_MINUTE = `(${MATCH_NUMBER}M)?`;
+const MATCH_SECOND = `(${MATCH_NUMBER}S)?`;
+
+const MATCH_DATE = new RegExp(`${MATCH_YEAR}${MATCH_MONTH}${MATCH_WEEK}${MATCH_DAY}`);
 const MATCH_TIME = new RegExp(`(${TIME_DESIGNATOR}${MATCH_HOUR}${MATCH_MINUTE}${MATCH_SECOND})?`);
 
 const isValid = (isoString) => {
@@ -20,18 +23,26 @@ const isValid = (isoString) => {
   ].join('')).test(isoString);
 };
 
+
 import { assertThat, equalTo } from 'hamjest';
 describe.only('isValid iso8601 duration', () => {
   [
     { isoString: 'P1Y', valid: true },
+    { isoString: 'P1.5Y', valid: true },
     { isoString: 'P11Y', valid: true },
+    { isoString: 'P11Y1W', valid: true },
     { isoString: 'P1M', valid: true },
+    { isoString: 'P1.5M', valid: true },
     { isoString: 'P11M', valid: true },
+    { isoString: 'P1W', valid: true },
+    { isoString: 'P1.5W', valid: true },
     { isoString: 'P1D', valid: true },
+    { isoString: 'P1.5D', valid: true },
     { isoString: 'P11D', valid: true },
     { isoString: 'P1Y11D', valid: true },
     { isoString: 'PT1H', valid: true },
     { isoString: 'PT1M', valid: true },
+    { isoString: 'P3Y6M1W4DT12H30M17.5S', valid: true },
 
     { isoString: 'P1H', valid: false },
     { isoString: 'P1S', valid: false },
@@ -43,6 +54,7 @@ describe.only('isValid iso8601 duration', () => {
     { isoString: '2000-123', valid: false },
     { isoString: '2000-12-124', valid: false },
   ].forEach(({ isoString, valid }) => {
+
     it(`"${isoString}" is ${valid ? 'valid' : 'invalid'}`, () => assertThat(
       isValid(isoString), equalTo(valid)));
   });
