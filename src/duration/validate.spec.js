@@ -1,6 +1,6 @@
 import { TIME_DESIGNATOR, DURATION_DESIGNATOR } from './constants';
 
-const MATCH_NUMBER = /\d+(\.\d+)?/.source;
+const MATCH_NUMBER = /[+-]?\d+(\.\d+)?/.source;
 const MATCH_YEAR = `(${MATCH_NUMBER}Y)?`;
 const MATCH_MONTH = `(${MATCH_NUMBER}M)?`;
 const MATCH_WEEK = `(${MATCH_NUMBER}W)?`;
@@ -42,6 +42,9 @@ describe.only('isValid iso8601 duration', () => {
     { isoString: 'PT1H', valid: true },
     { isoString: 'PT1M', valid: true },
     { isoString: 'P3Y6M1W4DT12H30M17.5S', valid: true },
+
+    { isoString: 'PT-1S', valid: true },
+    { isoString: 'PT+1S', valid: true },
 
     { isoString: 'P1H', valid: false },
     { isoString: 'P1S', valid: false },
