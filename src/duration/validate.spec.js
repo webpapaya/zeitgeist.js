@@ -1,30 +1,7 @@
-import { TIME_DESIGNATOR, DURATION_DESIGNATOR } from './constants';
-
-const MATCH_NUMBER = /[+-]?\d+(\.\d+)?/.source;
-const MATCH_YEAR = `(${MATCH_NUMBER}Y)?`;
-const MATCH_MONTH = `(${MATCH_NUMBER}M)?`;
-const MATCH_WEEK = `(${MATCH_NUMBER}W)?`;
-const MATCH_DAY = `(${MATCH_NUMBER}D)?`;
-
-const MATCH_HOUR = `(${MATCH_NUMBER}H)?`;
-const MATCH_MINUTE = `(${MATCH_NUMBER}M)?`;
-const MATCH_SECOND = `(${MATCH_NUMBER}S)?`;
-
-const MATCH_DATE = `${MATCH_YEAR}${MATCH_MONTH}${MATCH_WEEK}${MATCH_DAY}`;
-const MATCH_TIME = `(${TIME_DESIGNATOR}${MATCH_HOUR}${MATCH_MINUTE}${MATCH_SECOND})?`;
-
-const isValid = (isoString) => {
-  return new RegExp([
-    '^',
-    DURATION_DESIGNATOR,
-    MATCH_DATE,
-    MATCH_TIME,
-    '$'
-  ].join('')).test(isoString);
-};
-
 import { assertThat, equalTo } from 'hamjest';
-describe.only('isValid iso8601 duration', () => {
+import { isValid } from './validate';
+
+describe('isValid iso8601 duration', () => {
   [
     { isoString: 'P1Y', valid: true },
     { isoString: 'P1.5Y', valid: true },
