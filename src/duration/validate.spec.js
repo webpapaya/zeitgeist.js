@@ -10,19 +10,18 @@ const MATCH_HOUR = `(${MATCH_NUMBER}H)?`;
 const MATCH_MINUTE = `(${MATCH_NUMBER}M)?`;
 const MATCH_SECOND = `(${MATCH_NUMBER}S)?`;
 
-const MATCH_DATE = new RegExp(`${MATCH_YEAR}${MATCH_MONTH}${MATCH_WEEK}${MATCH_DAY}`);
-const MATCH_TIME = new RegExp(`(${TIME_DESIGNATOR}${MATCH_HOUR}${MATCH_MINUTE}${MATCH_SECOND})?`);
+const MATCH_DATE = `${MATCH_YEAR}${MATCH_MONTH}${MATCH_WEEK}${MATCH_DAY}`;
+const MATCH_TIME = `(${TIME_DESIGNATOR}${MATCH_HOUR}${MATCH_MINUTE}${MATCH_SECOND})?`;
 
 const isValid = (isoString) => {
   return new RegExp([
     '^',
     DURATION_DESIGNATOR,
-    MATCH_DATE.source,
-    MATCH_TIME.source,
+    MATCH_DATE,
+    MATCH_TIME,
     '$'
   ].join('')).test(isoString);
 };
-
 
 import { assertThat, equalTo } from 'hamjest';
 describe.only('isValid iso8601 duration', () => {
