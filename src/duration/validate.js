@@ -17,12 +17,14 @@ const MATCH_TIME = createRegexBuilder()
   );
 
 const MATCH_DURATION = createRegexBuilder()
-  .and('^')
+  .startOfLine()
   .and(DURATION_DESIGNATOR)
   .and(MATCH_TIME)
   .and(MATCH_DATE)
   .and(MATCH_TIME)
-  .and('$');
+  .endOfLine();
+
 
 export const isValid = (isoString) =>
   MATCH_DURATION.test(isoString.toUpperCase());
+
