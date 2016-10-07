@@ -1,16 +1,18 @@
 export const isEmpty = (value) => value === null || value === void 0 || value === '';
 export const isCollectionEmpty = (collection) => collection.length === 0;
 export const createRegexBuilder = (regex = '') => {
-  const maybe = (regexBuilder) => createRegexBuilder(`(${regexBuilder.toValue()})?`);
-  const and = (andRegex) => createRegexBuilder(`${regex}${andRegex}`);
-  const or = (orRegex) => createRegexBuilder(`${regex}|${orRegex}`);
+  const convertToValue = (fn) => (regexBuilder) =>
+    createRegexBuilder(regexBuilder.isBuilder ? fn(regexBuilder.toValue()) : fn(regexBuilder));
+
+  const maybe = convertToValue((regexBuilder) => `(${regexBuilder})?`);
+  const and = convertToValue((andRegex) => `${regex}${andRegex}`);
+  const or = convertToValue((orRegex) => `${regex}|${orRegex}`);
+
   const toValue = () => regex;
   const test = (value) => (new RegExp(toValue())).test(value);
 
-  return { maybe, and, or, toValue, test };
+  return { maybe, and, or, toValue, test, isBuilder: true };
 };
-
-// export const combineRegex = (delimiter, regexp) => new RegExp(args.join(''));
 
 const buildEmptyCollectionMonad = () => buildCollectionMonad([]);
 
