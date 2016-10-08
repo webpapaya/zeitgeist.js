@@ -2,8 +2,10 @@ export const isEmpty = (value) => value === null || value === void 0 || value ==
 export const isCollectionEmpty = (collection) => collection.length === 0;
 
 export const createRegexBuilder = (regex = '') => {
+  const valueOf = (value) => value.isBuilder ? value.toValue() : value;
+
   const convertToValue = (fn) => (regexBuilder) =>
-    createRegexBuilder(regexBuilder.isBuilder ? fn(regexBuilder.toValue()) : fn(regexBuilder));
+    createRegexBuilder(fn(valueOf(regexBuilder)));
 
   const maybe = convertToValue(
     (newRegex) => `(${newRegex})?`);
@@ -14,6 +16,8 @@ export const createRegexBuilder = (regex = '') => {
   const or = convertToValue(
     (newRegex) => isEmpty(regex) ? `${newRegex}` : `${regex}|${newRegex}`);
 
+  const join = (...array) => createRegexBuilder([regex, ...array].join(''));
+
   const startOfLine = () => and('^');
   const endOfLine = () => and('$');
 
@@ -21,6 +25,7 @@ export const createRegexBuilder = (regex = '') => {
   const test = (value) => (new RegExp(toValue())).test(value);
 
   return {
+    join,
     startOfLine,
     endOfLine,
     maybe,

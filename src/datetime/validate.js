@@ -21,38 +21,72 @@ const MATCH_TIMEZONE = createRegexBuilder()
 
 const MATCH_TIME_SEPARATOR = /[\sT]/.source;
 
-const MATCH_YEAR_MONTH_DAY = createRegexBuilder()
-  .and(MATCH_YEAR)
-  .and('-')
-  .and(MATCH_MONTH)
-  .and('-')
-  .and(MATCH_DAY)
-  .toValue();
-
-const MATCH_HOUR_MINUTE_SECOND = createRegexBuilder()
-  .and(MATCH_HOUR)
-  .and(':')
-  .and(MATCH_MINUTE)
-  .and(':')
-  .and(MATCH_SECOND)
-  .toValue();
-
-const MATCH_DATE_AND_TIME = createRegexBuilder()
-  .and(MATCH_YEAR_MONTH_DAY)
-  .and(MATCH_TIME_SEPARATOR)
-  .and(MATCH_HOUR_MINUTE_SECOND)
-  .toValue();
-
 const THE_MOTHER_OF_ISO8601_DATE_TIME = createRegexBuilder()
-  .or(`^${MATCH_YEAR}$`)
-  .or(`^${MATCH_YEAR}-${MATCH_MONTH}$`)
-  .or(`^${MATCH_YEAR}-${MATCH_MONTH}-${MATCH_DAY}$`)
-  .or(`^${MATCH_YEAR_MONTH_DAY}${MATCH_TIME_SEPARATOR}${MATCH_HOUR}$`)
-  .or(`^${MATCH_YEAR_MONTH_DAY}${MATCH_TIME_SEPARATOR}${MATCH_HOUR}:${MATCH_MINUTE}$`)
-  .or(`^${MATCH_YEAR_MONTH_DAY}${MATCH_TIME_SEPARATOR}${MATCH_HOUR}:${MATCH_MINUTE}:${MATCH_SECOND}$`)
-  .or(`^${MATCH_YEAR_MONTH_DAY}${MATCH_TIME_SEPARATOR}${MATCH_HOUR}:${MATCH_MINUTE}${MATCH_TIMEZONE}$`)
-  .or(`^${MATCH_YEAR_MONTH_DAY}${MATCH_TIME_SEPARATOR}${MATCH_HOUR}${MATCH_TIMEZONE}$`)
-  .or(`^${MATCH_DATE_AND_TIME}${MATCH_TIMEZONE}`);
+  .or(createRegexBuilder()
+    .startOfLine()
+    .and(MATCH_YEAR)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .and(MATCH_TIME_SEPARATOR)
+    .join(MATCH_HOUR)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .and(MATCH_TIME_SEPARATOR)
+    .join(MATCH_HOUR, ':', MATCH_MINUTE)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .and(MATCH_TIME_SEPARATOR)
+    .join(MATCH_HOUR, ':', MATCH_MINUTE, ':', MATCH_SECOND)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .and(MATCH_TIME_SEPARATOR)
+    .join(MATCH_HOUR, ':', MATCH_MINUTE, ':', MATCH_SECOND)
+    .and(MATCH_TIMEZONE)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .and(MATCH_TIME_SEPARATOR)
+    .join(MATCH_HOUR, ':', MATCH_MINUTE)
+    .and(MATCH_TIMEZONE)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .and(MATCH_TIME_SEPARATOR)
+    .join(MATCH_HOUR)
+    .and(MATCH_TIMEZONE)
+    .endOfLine())
+
+  .or(createRegexBuilder()
+    .startOfLine()
+    .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
+    .and(MATCH_TIMEZONE)
+    .endOfLine());
 
 export const isValid = (isoString) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoString);
 
