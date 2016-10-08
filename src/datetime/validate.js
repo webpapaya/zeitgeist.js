@@ -1,14 +1,23 @@
 import { createRegexBuilder } from '../utils';
 import { INVALID_FORMAT } from '../core/constants';
 
-
 const MATCH_YEAR = /[+-]?\d+/.source;
-const MATCH_MONTH = /[+-]?\d{2}/.source;
-const MATCH_DAY = /[+-]?\d{2}/.source;
+const MATCH_INT = createRegexBuilder()
+  .and(/[+-]?\d+/.source);
 
-const MATCH_HOUR = /[+-]?\d{2}/.source;
-const MATCH_MINUTE = /[+-]?\d{2}/.source;
-const MATCH_SECOND = /[+-]?\d{2}(\.\d+)?/.source;
+const MATCH_NUMBER = createRegexBuilder()
+  .and(MATCH_INT)
+  .and(/(\.\d+)?/.source)
+
+
+
+
+const MATCH_MONTH = MATCH_INT.toValue();
+const MATCH_DAY = MATCH_INT.toValue();
+const MATCH_HOUR = MATCH_INT.toValue();
+const MATCH_MINUTE = MATCH_INT.toValue();
+const MATCH_SECOND = MATCH_NUMBER.toValue();
+
 
 const MATCH_TIMEZONE = /[+-]\d{2}(:\d{2})?|Z/.source;
 const MATCH_TIME_SEPARATOR = /[\sT]/.source;
@@ -29,7 +38,11 @@ const MATCH_HOUR_MINUTE_SECOND = createRegexBuilder()
   .and(MATCH_SECOND)
   .toValue();
 
-const MATCH_DATE_AND_TIME = `${MATCH_YEAR_MONTH_DAY}${MATCH_TIME_SEPARATOR}${MATCH_HOUR_MINUTE_SECOND}`;
+const MATCH_DATE_AND_TIME = createRegexBuilder()
+  .and(MATCH_YEAR_MONTH_DAY)
+  .and(MATCH_TIME_SEPARATOR)
+  .and(MATCH_HOUR_MINUTE_SECOND)
+  .toValue();
 
 const THE_MOTHER_OF_ISO8601_DATE_TIME = createRegexBuilder()
   .or(`^${MATCH_YEAR}$`)
