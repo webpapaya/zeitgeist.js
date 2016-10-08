@@ -5,9 +5,15 @@ export const createRegexBuilder = (regex = '') => {
   const convertToValue = (fn) => (regexBuilder) =>
     createRegexBuilder(regexBuilder.isBuilder ? fn(regexBuilder.toValue()) : fn(regexBuilder));
 
-  const maybe = convertToValue((newRegex) => `(${newRegex})?`);
-  const and = convertToValue((newRegex) => `${regex}${newRegex}`);
-  const or = convertToValue((newRegex) => isEmpty(regex) ? `${newRegex}` : `${regex}|${newRegex}`);
+  const maybe = convertToValue(
+    (newRegex) => `(${newRegex})?`);
+
+  const and = convertToValue(
+    (newRegex) => `${regex}${newRegex}`);
+
+  const or = convertToValue(
+    (newRegex) => isEmpty(regex) ? `${newRegex}` : `${regex}|${newRegex}`);
+
   const startOfLine = () => and('^');
   const endOfLine = () => and('$');
 
