@@ -1,10 +1,7 @@
 import {
-  ONE_MICROSECOND,
-  ONE_MILLISECOND,
   ONE_SECOND,
   ONE_MINUTE,
   ONE_HOUR,
-  ONE_DAY,
 } from '../core/constants';
 
 

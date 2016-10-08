@@ -6,7 +6,7 @@ const MATCH_INT = createRegexBuilder()
 
 const MATCH_NUMBER = createRegexBuilder()
   .and(MATCH_INT)
-  .and(/(\.\d+)?/.source)
+  .and(/(\.\d+)?/.source);
 
 const MATCH_YEAR = MATCH_INT.toValue();
 const MATCH_MONTH = MATCH_INT.toValue();
@@ -65,5 +65,5 @@ export const validateFirstAndSecondArg = (fn) => (firstArg, secondArg, ...args) 
 
   return isFirstValid && isSecondValid
     ? fn(firstArg, secondArg, ...args)
-    : [ isFirstValid ? firstArg : INVALID_FORMAT, isSecondValid ? secondArg : INVALID_FORMAT ];
+    : [isFirstValid ? firstArg : INVALID_FORMAT, isSecondValid ? secondArg : INVALID_FORMAT];
 };

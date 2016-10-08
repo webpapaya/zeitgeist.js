@@ -22,7 +22,7 @@ export const createRegexBuilder = (regex = '') => {
     or,
     toValue,
     test,
-    isBuilder: true
+    isBuilder: true,
   };
 };
 

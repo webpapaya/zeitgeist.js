@@ -27,7 +27,7 @@ describe('isValid iso8601 duration', () => {
     { isoString: 'P1H', valid: false },
     { isoString: 'P1S', valid: false },
     { isoString: 'P1Y11D1M', valid: false },
-    { isoString: 'P11D1Y', valid: false},
+    { isoString: 'P11D1Y', valid: false },
     { isoString: '', valid: false },
     { isoString: 'Invalid Data', valid: false },
     { isoString: '2xxx', valid: false },
@@ -38,5 +38,4 @@ describe('isValid iso8601 duration', () => {
       isValid(isoString), equalTo(valid)));
   });
 });
-
 
