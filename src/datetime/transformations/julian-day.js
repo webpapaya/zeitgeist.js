@@ -1,3 +1,5 @@
+import Big from 'big.js';
+
 import {
   SECONDS_IN_REGULAR_DAY,
   MINUTES_IN_REGULAR_DAY,
@@ -10,14 +12,16 @@ import { fractionOfNumber } from '../../utils';
 export const createBig = (input = 0) => {
   const normalize = (value) => value.toValue ? value.toValue() : value;
   const normalizeInput = (fn) => (value) => fn(normalize(value));
+  const normalizeAndBuild = (fn) => (value) => createBig(fn(normalize(input), normalize(value)));
 
   const a = normalize(input);
 
-  const add = normalizeInput((b) => createBig(a + b));
-  const minus = normalizeInput((b) => createBig(a - b));
-  const mod = normalizeInput((b) => createBig(a % b));
-  const div = normalizeInput((b) => createBig(a / b));
-  const times = normalizeInput((b) => createBig(a * b));
+
+  const add = normalizeAndBuild((a, b) => a + b);
+  const minus = normalizeAndBuild((a, b) => a - b);
+  const mod = normalizeAndBuild((a, b) => a % b);
+  const div = normalizeAndBuild((a, b) => a / b);
+  const times = normalizeAndBuild((a, b) => a * b);
 
   const lt = normalizeInput((b) => a < b);
   const lte = normalizeInput((b) => a <= b);
