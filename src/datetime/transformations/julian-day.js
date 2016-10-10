@@ -24,7 +24,7 @@ const createBig = (input = 0) => {
   const round = () => createBig(Math.round(a));
 
   const toValue = () => a;
-  const toFractions = () => fractionOfNumber(a);
+  const toFractions = () => createBig(fractionOfNumber(a));
 
   return {
     lt,
@@ -67,8 +67,12 @@ const toCalculationFragments = (isoString) => {
 const AVERAGE_YEAR_DURATION = 365.25;
 const AVERAGE_MONTH_DURATION = 30.6001;
 
+
+export const toJulianDay = (isoString) =>
+  toJulianDayPrecise(isoString).toValue();
+
 // https://www.wikiwand.com/de/Julianisches_Datum
-export const toJulianDay = (isoString) => {
+export const toJulianDayPrecise = (isoString) => {
   const fragments = toCalculationFragments(isoString);
 
   return createBig()
@@ -77,15 +81,15 @@ export const toJulianDay = (isoString) => {
     .add(calculateLeapDayOffset(fragments))
     .add(calculateDayFraction(fragments))
     .add(fragments.day)
-    .add(-1524.5)
-    .toValue();
+    .add(-1524.5);
 };
+
 
 // https://www.wikiwand.com/de/Julianisches_Datum
 export const fromJulianDay = (julianDay) => {
   return toIso({
-    ...dateComponentFromJulianDay(julianDay),
-    ...timeComponentFromJulianDay(julianDay),
+    ...dateComponentFromJulianDay(createBig(julianDay)),
+    ...timeComponentFromJulianDay(createBig(julianDay)),
   });
 };
 
@@ -102,9 +106,7 @@ const fromCalculationFragments = (fragments) => {
 };
 
 const dateComponentFromJulianDay = (julianDay) => {
-  const _julianDay = createBig(julianDay);
-
-  const fullDays = _julianDay.add(0.5).floor().toValue();
+  const fullDays = julianDay.add(0.5).floor().toValue();
   const normalizedDays = createBig(fullDays)
     .minus(1867216.25)
     .div(36524.25)
@@ -148,11 +150,17 @@ const dateComponentFromJulianDay = (julianDay) => {
     .minus(monthsInDays)
     .toValue();
 
-  return fromCalculationFragments({ year, month, day });
+  return fromCalculationFragments({
+    year,
+    month,
+    day
+  });
 };
 
 const timeComponentFromJulianDay = (julianDay) => {
-  const fractionOfDayInSeconds = createBig(fractionOfNumber(julianDay + 0.5))
+  const fractionOfDayInSeconds = createBig(julianDay)
+    .add(0.5)
+    .toFractions()
     .times(SECONDS_IN_REGULAR_DAY)
     .round();
 
