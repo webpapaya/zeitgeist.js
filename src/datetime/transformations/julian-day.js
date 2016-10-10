@@ -9,8 +9,10 @@ import {
 import { toFragments, toIso } from '../index';
 import { fractionOfNumber } from '../../utils';
 
-export const createBig = (input = 0) => {
+const createBig = (input = 0) => {
   const normalize = (value) => value && value.toValue ? value.toValue() : value;
+
+
   const normalizeInput = (fn) => (value) => fn(normalize(input), normalize(value));
   const normalizeAndBuild = (fn) => (value) => createBig(fn(normalize(input), normalize(value)));
 

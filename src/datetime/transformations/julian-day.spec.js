@@ -2,16 +2,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { toIso, fromJulianDay, toJulianDay } from '../index';
 
-import { createBig } from './julian-day'
-
-describe('hallo', () => {
-  it('test', () => {
-    console.log(createBig(1).add(createBig(1).add(1)).toValue())
-  });
-});
-
-
-
 describe('fromJulianDay is the inverse function of toJulianDay', () => {
   const defaultFragments = { year: 2000, month: 1, day: 1, hour: 0, minute: 0, second: 0 };
 
