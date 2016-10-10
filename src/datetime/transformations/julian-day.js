@@ -17,13 +17,29 @@ const createBig = (input = 0) => {
   const div = normalize((b) => createBig(a / b));
   const times = normalize((b) => createBig(a * b));
 
+  const lt = normalize((b) => a < b);
+  const gt = normalize((b) => a > b);
+
   const floor = () => createBig(Math.floor(a));
   const round = () => createBig(Math.round(a));
 
   const toValue = () => a;
   const toFractions = () => fractionOfNumber(a);
 
-  return { add, minus, mod, floor, round, div, times, toValue, toFractions };
+  return {
+    lt,
+    gt,
+
+    add,
+    minus,
+    mod,
+    floor,
+    round,
+    div,
+    times,
+    toValue,
+    toFractions
+  };
 };
 
 const floor = (value) => Math.floor(value);
@@ -74,13 +90,13 @@ export const fromJulianDay = (julianDay) => {
 };
 
 const fromCalculationFragments = (fragments) => {
-  const month = fragments.month < 14
-    ? fragments.month - 1
-    : fragments.month - 13;
+  const month = createBig(fragments.month).lt(14)
+    ? createBig(fragments.month).minus(1).toValue()
+    : createBig(fragments.month).minus(13).toValue();
 
-  const year = month > 2
-    ? fragments.year - 4716
-    : fragments.year - 4715;
+  const year = createBig(month).gt(2)
+    ? createBig(fragments.year).minus(4716).toValue()
+    : createBig(fragments.year).minus(4715).toValue();
 
   return { month, year, day: fragments.day };
 };
