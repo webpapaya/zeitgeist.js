@@ -7,13 +7,38 @@ import {
 import { toFragments, toIso } from '../index';
 import { fractionOfNumber } from '../../utils';
 
+const createBig = (input = 0) => {
+  const normalize = (value) => value.toValue ? value.toValue() : value;
+  const a = normalize(input);
+
+  const add = normalize((b) => createBig(a + b));
+  const minus = normalize((b) => createBig(a - b));
+  const mod = normalize((b) => createBig(a % b));
+  const div = normalize((b) => createBig(a / b));
+  const times = normalize((b) => createBig(a * b));
+
+  const floor = () => createBig(Math.floor(a));
+  const round = () => createBig(Math.round(a));
+
+  const toValue = () => a;
+  const toFractions = () => fractionOfNumber(a);
+
+  return { add, minus, mod, floor, round, div, times, toValue, toFractions };
+};
+
 const floor = (value) => Math.floor(value);
 const round = (value) => Math.round(value);
-const sum = (array) => array.reduce((totalValue, value) => totalValue + value, 0);
 
-const calculateLeapDayOffset = ({ year }) => 2 - floor(year / 100) + floor(year / 400);
-const calculateDayFraction = ({ hour = 0, minute = 0, second = 0 }) =>
-  hour / HOURS_IN_REGULAR_DAY + minute / MINUTES_IN_REGULAR_DAY + second / SECONDS_IN_REGULAR_DAY;
+const calculateLeapDayOffset = ({ year }) => createBig(2)
+  .minus(floor(year/100))
+  .add((floor(year/400)))
+  .toValue();
+
+const calculateDayFraction = ({ hour = 0, minute = 0, second = 0 }) => createBig()
+  .add(hour / HOURS_IN_REGULAR_DAY)
+  .add(minute / MINUTES_IN_REGULAR_DAY)
+  .add(second / SECONDS_IN_REGULAR_DAY)
+  .toValue();
 
 const toCalculationFragments = (isoString) => {
   const fragments = toFragments(isoString);
@@ -30,14 +55,14 @@ const AVERAGE_MONTH_DURATION = 30.6001;
 export const toJulianDay = (isoString) => {
   const fragments = toCalculationFragments(isoString);
 
-  return sum([
-    floor(AVERAGE_YEAR_DURATION * (fragments.year + 4716)),
-    floor(AVERAGE_MONTH_DURATION * (fragments.month + 1)),
-    calculateLeapDayOffset(fragments),
-    calculateDayFraction(fragments),
-    fragments.day,
-    -1524.5,
-  ]);
+  return createBig()
+    .add(floor(AVERAGE_YEAR_DURATION * (fragments.year + 4716)))
+    .add(floor(AVERAGE_MONTH_DURATION * (fragments.month + 1)))
+    .add(calculateLeapDayOffset(fragments))
+    .add(calculateDayFraction(fragments))
+    .add(fragments.day)
+    .add(-1524.5)
+    .toValue();
 };
 
 // https://www.wikiwand.com/de/Julianisches_Datum
@@ -61,26 +86,68 @@ const fromCalculationFragments = (fragments) => {
 };
 
 const dateComponentFromJulianDay = (julianDay) => {
-  const fullDays = floor(julianDay + 0.5);
-  const normalizedDays = floor((fullDays - 1867216.25) / 36524.25);
-  const daysSinceJulianCalendar = fullDays + 1 + normalizedDays - floor(normalizedDays / 4) + 1524;
+  const _julianDay = createBig(julianDay);
 
-  const year = floor((daysSinceJulianCalendar - 122.1) / AVERAGE_YEAR_DURATION);
-  const daysWithoutYear = floor(AVERAGE_YEAR_DURATION * year);
+  const fullDays = _julianDay.add(0.5).floor().toValue();
+  const normalizedDays = createBig(fullDays)
+    .minus(1867216.25)
+    .div(36524.25)
+    .floor()
+    .toValue();
 
-  const month = floor((daysSinceJulianCalendar - daysWithoutYear) / AVERAGE_MONTH_DURATION);
-  const day = daysSinceJulianCalendar - daysWithoutYear - floor(AVERAGE_MONTH_DURATION * month);
+  const daysSinceJulianCalendar = createBig()
+    .add(fullDays)
+    .add(1)
+    .add(normalizedDays)
+    .minus(createBig(normalizedDays / 4).floor().toValue())
+    .add(1524)
+    .toValue();
+
+  const year = createBig(daysSinceJulianCalendar - 122.1)
+    .div(AVERAGE_YEAR_DURATION)
+    .floor()
+    .toValue();
+
+  const daysWithoutYear = createBig(AVERAGE_YEAR_DURATION)
+    .times(year)
+    .floor()
+    .toValue();
+
+  const month = createBig()
+    .add(daysSinceJulianCalendar)
+    .minus(daysWithoutYear)
+    .div(AVERAGE_MONTH_DURATION)
+    .floor()
+    .toValue();
+
+  const monthsInDays = createBig()
+    .add(AVERAGE_MONTH_DURATION)
+    .times(month)
+    .floor()
+    .toValue();
+
+  const day = createBig()
+    .add(daysSinceJulianCalendar)
+    .minus(daysWithoutYear)
+    .minus(monthsInDays)
+    .toValue();
 
   return fromCalculationFragments({ year, month, day });
 };
 
 const timeComponentFromJulianDay = (julianDay) => {
-  const fractionOfDayInSeconds = round(fractionOfNumber(julianDay + 0.5) * SECONDS_IN_REGULAR_DAY);
-  const secondsWithoutHours = fractionOfDayInSeconds % 3600;
+  const fractionOfDayInSeconds = createBig(fractionOfNumber(julianDay + 0.5))
+    .times(SECONDS_IN_REGULAR_DAY)
+    .round();
 
-  const hour = floor(fractionOfDayInSeconds / 3600);
-  const minute = floor(secondsWithoutHours / 60);
-  const second = secondsWithoutHours % 60;
+  const secondsWithoutHours = createBig(fractionOfDayInSeconds).mod(3600);
+  const hour = createBig(fractionOfDayInSeconds).div(3600).floor();
+  const minute = createBig(secondsWithoutHours).div(60).floor();
+  const second = createBig(secondsWithoutHours).mod(60);
 
-  return { hour, minute, second };
+  return {
+    hour: hour.toValue(),
+    minute: minute.toValue(),
+    second: second.toValue()
+  };
 };
