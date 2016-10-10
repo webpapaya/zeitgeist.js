@@ -10,12 +10,9 @@ import { toFragments, toIso } from '../index';
 import { fractionOfNumber } from '../../utils';
 
 export const createBig = (input = 0) => {
-  const normalize = (value) => value.toValue ? value.toValue() : value;
-  const normalizeInput = (fn) => (value) => fn(normalize(value));
+  const normalize = (value) => value && value.toValue ? value.toValue() : value;
+  const normalizeInput = (fn) => (value) => fn(normalize(input), normalize(value));
   const normalizeAndBuild = (fn) => (value) => createBig(fn(normalize(input), normalize(value)));
-
-  const a = normalize(input);
-
 
   const add = normalizeAndBuild((a, b) => a + b);
   const minus = normalizeAndBuild((a, b) => a - b);
@@ -23,16 +20,17 @@ export const createBig = (input = 0) => {
   const div = normalizeAndBuild((a, b) => a / b);
   const times = normalizeAndBuild((a, b) => a * b);
 
-  const lt = normalizeInput((b) => a < b);
-  const lte = normalizeInput((b) => a <= b);
-  const gt = normalizeInput((b) => a > b);
-  const gte = normalizeInput((b) => a >= b);
+  const floor = normalizeAndBuild((a) => Math.floor(a));
+  const round = normalizeAndBuild((a) => Math.round(a));
 
-  const floor = () => createBig(Math.floor(a));
-  const round = () => createBig(Math.round(a));
+  const lt = normalizeInput((a, b) => a < b);
+  const lte = normalizeInput((a, b) => a <= b);
+  const gt = normalizeInput((a, b) => a > b);
+  const gte = normalizeInput((a, b) => a >= b);
 
-  const toValue = () => a;
-  const toFractions = () => createBig(fractionOfNumber(a));
+
+  const toValue = () => normalize(input);
+  const toFractions = normalizeAndBuild((a) => fractionOfNumber(a));
 
   return {
     lt,
