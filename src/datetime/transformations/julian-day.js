@@ -10,20 +10,23 @@ import { toFragments, toIso } from '../index';
 import { fractionOfNumber } from '../../utils';
 
 const createBig = (input = 0) => {
-  const normalize = (value) => value && value.toValue ? value.toValue() : value;
-
-
+  const normalize = (value) => value && value.isBig ? parseFloat(value.toString()) : parseFloat(value);
   const normalizeInput = (fn) => (value) => fn(normalize(input), normalize(value));
   const normalizeAndBuild = (fn) => (value) => createBig(fn(normalize(input), normalize(value)));
 
-  const add = normalizeAndBuild((a, b) => a + b);
-  const minus = normalizeAndBuild((a, b) => a - b);
-  const mod = normalizeAndBuild((a, b) => a % b);
-  const div = normalizeAndBuild((a, b) => a / b);
-  const times = normalizeAndBuild((a, b) => a * b);
+  const normalizeBig = (fn) => (value) => createBig(new Big(fn(
+    new Big(normalize(input)),
+    value ? new Big(normalize(value)) : void 0
+  )));
 
-  const floor = normalizeAndBuild((a) => Math.floor(a));
-  const round = normalizeAndBuild((a) => Math.round(a));
+  const add = normalizeBig((a, b) => a.add(b));
+  const minus = normalizeBig((a, b) => a.minus(b));
+  const mod = normalizeBig((a, b) => a.mod(b));
+  const div = normalizeBig((a, b) => a.div(b));
+  const times = normalizeBig((a, b) => a.times(b));
+
+  const floor = normalizeBig((a) => Math.floor(a));
+  const round = normalizeBig((a) => a.round());
 
   const lt = normalizeInput((a, b) => a < b);
   const lte = normalizeInput((a, b) => a <= b);
@@ -31,7 +34,7 @@ const createBig = (input = 0) => {
   const gte = normalizeInput((a, b) => a >= b);
 
 
-  const toValue = () => normalize(input);
+  const toString = () => normalize(input);
   const toFractions = normalizeAndBuild((a) => fractionOfNumber(a));
 
   return {
@@ -47,8 +50,9 @@ const createBig = (input = 0) => {
     round,
     div,
     times,
-    toValue,
-    toFractions
+    toString,
+    toFractions,
+    isBig: true
   };
 };
 
@@ -80,7 +84,7 @@ const AVERAGE_MONTH_DURATION = 30.6001;
 
 
 export const toJulianDay = (isoString) =>
-  toJulianDayPrecise(isoString).toValue();
+  toJulianDayPrecise(isoString).toString();
 
 // https://www.wikiwand.com/de/Julianisches_Datum
 export const toJulianDayPrecise = (isoString) => {
@@ -114,18 +118,18 @@ export const fromJulianDay = (julianDay) => {
 
 const fromCalculationFragments = (fragments) => {
   const month = createBig(fragments.month).lt(14)
-    ? createBig(fragments.month).minus(1).toValue()
-    : createBig(fragments.month).minus(13).toValue();
+    ? createBig(fragments.month).minus(1).toString()
+    : createBig(fragments.month).minus(13).toString();
 
   const year = createBig(month).gt(2)
-    ? createBig(fragments.year).minus(4716).toValue()
-    : createBig(fragments.year).minus(4715).toValue();
+    ? createBig(fragments.year).minus(4716).toString()
+    : createBig(fragments.year).minus(4715).toString();
 
-  return { month, year, day: fragments.day.toValue() };
+  return { month, year, day: fragments.day.toString() };
 };
 
 const dateComponentFromJulianDay = (julianDay) => {
-  const fullDays = julianDay.add(0.5).floor().toValue();
+  const fullDays = julianDay.add(0.5).floor().toString();
   const normalizedDays = createBig(fullDays)
     .minus(1867216.25)
     .div(36524.25)
@@ -183,8 +187,8 @@ const timeComponentFromJulianDay = (julianDay) => {
   const second = createBig(secondsWithoutHours).mod(60);
 
   return {
-    hour: hour.toValue(),
-    minute: minute.toValue(),
-    second: second.toValue()
+    hour: hour.toString(),
+    minute: minute.toString(),
+    second: second.toString()
   };
 };
