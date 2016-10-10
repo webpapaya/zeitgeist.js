@@ -7,18 +7,22 @@ import {
 import { toFragments, toIso } from '../index';
 import { fractionOfNumber } from '../../utils';
 
-const createBig = (input = 0) => {
+export const createBig = (input = 0) => {
   const normalize = (value) => value.toValue ? value.toValue() : value;
+  const normalizeInput = (fn) => (value) => fn(normalize(value));
+
   const a = normalize(input);
 
-  const add = normalize((b) => createBig(a + b));
-  const minus = normalize((b) => createBig(a - b));
-  const mod = normalize((b) => createBig(a % b));
-  const div = normalize((b) => createBig(a / b));
-  const times = normalize((b) => createBig(a * b));
+  const add = normalizeInput((b) => createBig(a + b));
+  const minus = normalizeInput((b) => createBig(a - b));
+  const mod = normalizeInput((b) => createBig(a % b));
+  const div = normalizeInput((b) => createBig(a / b));
+  const times = normalizeInput((b) => createBig(a * b));
 
-  const lt = normalize((b) => a < b);
-  const gt = normalize((b) => a > b);
+  const lt = normalizeInput((b) => a < b);
+  const lte = normalizeInput((b) => a <= b);
+  const gt = normalizeInput((b) => a > b);
+  const gte = normalizeInput((b) => a >= b);
 
   const floor = () => createBig(Math.floor(a));
   const round = () => createBig(Math.round(a));
@@ -28,7 +32,9 @@ const createBig = (input = 0) => {
 
   return {
     lt,
+    lte,
     gt,
+    gte,
 
     add,
     minus,
@@ -42,24 +48,25 @@ const createBig = (input = 0) => {
   };
 };
 
-const floor = (value) => Math.floor(value);
-const round = (value) => Math.round(value);
-
 const calculateLeapDayOffset = ({ year }) => createBig(2)
-  .minus(floor(year/100))
-  .add((floor(year/400)))
-  .toValue();
+  .minus(createBig(year).div(100).floor())
+  .add(createBig(year).div(400).floor());
 
 const calculateDayFraction = ({ hour = 0, minute = 0, second = 0 }) => createBig()
-  .add(hour / HOURS_IN_REGULAR_DAY)
-  .add(minute / MINUTES_IN_REGULAR_DAY)
-  .add(second / SECONDS_IN_REGULAR_DAY)
-  .toValue();
+  .add(createBig(hour).div(HOURS_IN_REGULAR_DAY))
+  .add(createBig(minute).div(MINUTES_IN_REGULAR_DAY))
+  .add(createBig(second).div(SECONDS_IN_REGULAR_DAY));
 
 const toCalculationFragments = (isoString) => {
   const fragments = toFragments(isoString);
-  const month = fragments.month <= 2 ? fragments.month + 12 : fragments.month;
-  const year = fragments.month <= 2 ? fragments.year - 1 : fragments.year;
+
+  const month = createBig(fragments.month).lte(2)
+    ? createBig(fragments.month).add(12)
+    : createBig(fragments.month);
+
+  const year = createBig(fragments.month).lte(2)
+    ? createBig(fragments.year).minus(1)
+    : createBig(fragments.year);
 
   return { ...fragments, month, year };
 };
@@ -76,8 +83,16 @@ export const toJulianDayPrecise = (isoString) => {
   const fragments = toCalculationFragments(isoString);
 
   return createBig()
-    .add(floor(AVERAGE_YEAR_DURATION * (fragments.year + 4716)))
-    .add(floor(AVERAGE_MONTH_DURATION * (fragments.month + 1)))
+    .add(createBig(fragments.year)
+      .add(4716)
+      .times(AVERAGE_YEAR_DURATION)
+      .floor())
+
+    .add(createBig(fragments.month)
+      .add(1)
+      .times(AVERAGE_MONTH_DURATION)
+      .floor())
+
     .add(calculateLeapDayOffset(fragments))
     .add(calculateDayFraction(fragments))
     .add(fragments.day)
@@ -102,7 +117,7 @@ const fromCalculationFragments = (fragments) => {
     ? createBig(fragments.year).minus(4716).toValue()
     : createBig(fragments.year).minus(4715).toValue();
 
-  return { month, year, day: fragments.day };
+  return { month, year, day: fragments.day.toValue() };
 };
 
 const dateComponentFromJulianDay = (julianDay) => {
@@ -110,45 +125,39 @@ const dateComponentFromJulianDay = (julianDay) => {
   const normalizedDays = createBig(fullDays)
     .minus(1867216.25)
     .div(36524.25)
-    .floor()
-    .toValue();
+    .floor();
 
   const daysSinceJulianCalendar = createBig()
     .add(fullDays)
     .add(1)
     .add(normalizedDays)
-    .minus(createBig(normalizedDays / 4).floor().toValue())
-    .add(1524)
-    .toValue();
+    .minus(createBig(normalizedDays).div(4).floor())
+    .add(1524);
 
-  const year = createBig(daysSinceJulianCalendar - 122.1)
+  const year = createBig(daysSinceJulianCalendar)
+    .minus(122.1)
     .div(AVERAGE_YEAR_DURATION)
-    .floor()
-    .toValue();
+    .floor();
 
   const daysWithoutYear = createBig(AVERAGE_YEAR_DURATION)
     .times(year)
-    .floor()
-    .toValue();
+    .floor();
 
   const month = createBig()
     .add(daysSinceJulianCalendar)
     .minus(daysWithoutYear)
     .div(AVERAGE_MONTH_DURATION)
-    .floor()
-    .toValue();
+    .floor();
 
   const monthsInDays = createBig()
     .add(AVERAGE_MONTH_DURATION)
     .times(month)
-    .floor()
-    .toValue();
+    .floor();
 
   const day = createBig()
     .add(daysSinceJulianCalendar)
     .minus(daysWithoutYear)
-    .minus(monthsInDays)
-    .toValue();
+    .minus(monthsInDays);
 
   return fromCalculationFragments({
     year,
