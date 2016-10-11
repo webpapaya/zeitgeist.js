@@ -4,10 +4,8 @@ import {
   buildMaybeMonad,
   leftPad,
   fractionOfNumber,
+  compose,
 } from './utils';
-
-const compose = (...fns) => (input) =>
-  fns.reduce((value, currentFn) => currentFn(value), input);
 
 describe('compose', () => {
   it('responds a new fn', () => {
