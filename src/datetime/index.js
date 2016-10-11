@@ -76,6 +76,8 @@ export {
   datesBetween,
   daysBetween,
 
+  addDuration,
+
   addSeconds,
   addSeconds as addSecond,
   addMinutes,
@@ -88,6 +90,8 @@ export {
   addMonths as addMonth,
   addYears,
   addYears as addYear,
+
+
 
   subtractSeconds,
   subtractSeconds as subtractSecond,

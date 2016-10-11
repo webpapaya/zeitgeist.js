@@ -1,5 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import {
+  addDuration,
   addSeconds,
   addMinutes,
   addHours,
@@ -7,6 +8,15 @@ import {
   addMonths,
   addYears,
 } from '../index';
+
+describe('addDuration', () => {
+  [
+    { date: '2000-01-01T00:00:00', plusDuration: 'P1Y', resultsIn: '2001-01-01T00:00:00' },
+  ].forEach(({ date, plusDuration, resultsIn }) => {
+    it(`${plusDuration} to ${date} results in ${resultsIn}`, () => assertThat(
+      addDuration(date, plusDuration), equalTo(resultsIn)));
+  });
+});
 
 describe('addSeconds', () => {
   [

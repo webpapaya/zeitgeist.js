@@ -1,4 +1,7 @@
 import {
+  toFragments as toDurationFragments
+} from '../../duration/index';
+import {
   toFragments,
   toIso,
   fromJulianDay,
@@ -7,11 +10,18 @@ import {
   removeTimeComponent,
 } from '../index';
 
+
+
 import {
   SECONDS_IN_REGULAR_DAY,
   MINUTES_IN_REGULAR_DAY,
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
+
+export const addDuration = (isoString, isoDuration) => {
+  const { years } = toDurationFragments(isoDuration);
+  return addYears(isoString, years);
+};
 
 export const addSeconds = (isoString, seconds) =>
   addDays(isoString, seconds / SECONDS_IN_REGULAR_DAY);

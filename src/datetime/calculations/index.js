@@ -1,4 +1,5 @@
 export {
+  addDuration,
   addSeconds,
   addMinutes,
   addHours,
