@@ -25,8 +25,8 @@ export const addDuration = (isoString, isoDuration) => {
   const _addYears = (years) => (isoString) => addYears(isoString, years);
   const _addDays = (days) => (isoString) => addDays(isoString, days);
   const _addHours = (hours) => (isoString) => addHours(isoString, hours);
-  const _addMinutes = (hours) => (isoString) => addMinutes(isoString, hours);
-  const _addSeconds = (hours) => (isoString) => addSeconds(isoString, hours);
+  const _addMinutes = (minutes) => (isoString) => addMinutes(isoString, minutes);
+  const _addSeconds = (seconds) => (isoString) => addSeconds(isoString, seconds);
 
   return compose(
     _addDays(days),
