@@ -14,11 +14,10 @@ describe('compose', () => {
     const first = (input) => input + 'First';
     const second = (input) => input + 'Second';
     const composed = compose(first, second);
+
     assertThat(composed('init'), equalTo(second(first('init'))))
   });
 });
-
-
 
 describe('maybeMonad', () => {
   describe('with a regular value', () => {
