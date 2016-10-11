@@ -12,7 +12,6 @@ import {
   removeTimeComponent,
 } from '../index';
 
-
 import {
   SECONDS_IN_REGULAR_DAY,
   MINUTES_IN_REGULAR_DAY,
@@ -20,18 +19,22 @@ import {
 } from '../constants';
 
 export const addDuration = (isoString, isoDuration) => {
-  const { years, months, days, hours } = toDurationFragments(isoDuration);
+  const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
 
   const _addMonths = (months) => (isoString) => addMonths(isoString, months);
   const _addYears = (years) => (isoString) => addYears(isoString, years);
   const _addDays = (days) => (isoString) => addDays(isoString, days);
   const _addHours = (hours) => (isoString) => addHours(isoString, hours);
+  const _addMinutes = (hours) => (isoString) => addMinutes(isoString, hours);
+  const _addSeconds = (hours) => (isoString) => addSeconds(isoString, hours);
 
   return compose(
     _addDays(days),
     _addMonths(months),
     _addYears(years),
     _addHours(hours),
+    _addMinutes(minutes),
+    _addSeconds(seconds),
   )(isoString);
 };
 
