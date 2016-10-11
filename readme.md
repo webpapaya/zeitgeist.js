@@ -4,6 +4,11 @@
 - [x] Round/Ceil/Floor fns
 - [ ] Time Zones/Daylight Saving Time
 - [ ] Formatting including localisation.
+- [ ] Fix JavaScripts floating point precision issue in calculations.
+
+
+# Datetime
+## Usage
 
 
 # Durations
@@ -11,9 +16,15 @@ An immutable duration library based on the ISO-8601 format for durations.
 
 ## Usage
 
-```js
-npm install pomeranian-durations
+### Calculations
+
+```md
+Note: Due to JavaScripts floating point precision issue milliseconds and 
+microseconds can't be handled correctly by this library. In the future
+there will be a high precision mode which will require decimal.js or
+any other arbitrary-precision decimal library.
 ```
+
 
 ### Public API
 
