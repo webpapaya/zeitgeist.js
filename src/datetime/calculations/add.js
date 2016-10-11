@@ -1,6 +1,8 @@
+import { compose } from '../../utils';
 import {
   toFragments as toDurationFragments
 } from '../../duration/index';
+
 import {
   toFragments,
   toIso,
@@ -11,7 +13,6 @@ import {
 } from '../index';
 
 
-
 import {
   SECONDS_IN_REGULAR_DAY,
   MINUTES_IN_REGULAR_DAY,
@@ -19,8 +20,19 @@ import {
 } from '../constants';
 
 export const addDuration = (isoString, isoDuration) => {
-  const { years } = toDurationFragments(isoDuration);
-  return addYears(isoString, years);
+  const { years, months, days, hours } = toDurationFragments(isoDuration);
+
+  const _addMonths = (months) => (isoString) => addMonths(isoString, months);
+  const _addYears = (years) => (isoString) => addYears(isoString, years);
+  const _addDays = (days) => (isoString) => addDays(isoString, days);
+  const _addHours = (hours) => (isoString) => addHours(isoString, hours);
+
+  return compose(
+    _addDays(days),
+    _addMonths(months),
+    _addYears(years),
+    _addHours(hours),
+  )(isoString);
 };
 
 export const addSeconds = (isoString, seconds) =>
