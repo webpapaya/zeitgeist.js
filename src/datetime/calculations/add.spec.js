@@ -98,7 +98,7 @@ describe('addYears', () => {
     { date: '2000-01-01', plusYears: 1, resultsIn: '2001-01-01' },
     { date: '2001-01-01', plusYears: -1, resultsIn: '2000-01-01' },
     { date: '2000-01-01', plusYears: 10, resultsIn: '2010-01-01' },
-  ].forEach(({date, plusYears, resultsIn }) => {
+  ].forEach(({ date, plusYears, resultsIn }) => {
     it(`${plusYears} to ${date} results in ${resultsIn}`, () => assertThat(
       addYears(date, plusYears), equalTo(resultsIn)));
   });

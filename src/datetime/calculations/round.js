@@ -20,7 +20,7 @@ import {
 } from '../index';
 
 import {
-  fractionOfNumber
+  fractionOfNumber,
 } from '../../utils';
 
 const prepareArgs = (fn) => (isoString) => fn(toFragments(isoString), isoString);

@@ -52,7 +52,7 @@ const createBig = (input = 0) => {
     times,
     toString,
     toFractions,
-    isBig: true
+    isBig: true,
   };
 };
 
@@ -170,7 +170,7 @@ const dateComponentFromJulianDay = (julianDay) => {
   return fromCalculationFragments({
     year,
     month,
-    day
+    day,
   });
 };
 
@@ -189,6 +189,6 @@ const timeComponentFromJulianDay = (julianDay) => {
   return {
     hour: hour.toString(),
     minute: minute.toString(),
-    second: second.toString()
+    second: second.toString(),
   };
 };

@@ -9,11 +9,11 @@ import {
 
 describe('compose', () => {
   it('responds a new fn', () => {
-    const first = (input) => input + 'First';
-    const second = (input) => input + 'Second';
+    const first = (input) => `${input }First`;
+    const second = (input) => `${input }Second`;
     const composed = compose(first, second);
 
-    assertThat(composed('init'), equalTo(second(first('init'))))
+    assertThat(composed('init'), equalTo(second(first('init'))));
   });
 });
 

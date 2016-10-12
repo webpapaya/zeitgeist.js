@@ -23,7 +23,6 @@ export const doesWeekBelongToPreviousYear = (isoString) =>
 export const getWeekOfYear = (isoString) =>
   doesWeekBelongToPreviousYear(isoString) ? 53 : calculateWeekOfYear(isoString);
 
-
 const parseIsoString = (fn) => (isoString) => fn(toFragments(isoString));
 
 export const getYear = parseIsoString(({ year }) => year);
