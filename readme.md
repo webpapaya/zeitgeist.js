@@ -1,11 +1,13 @@
 # This Package is not production ready yet.
 
-# Roadmap
+# Roadmap to v0.0.1
 - [x] Round/Ceil/Floor fns
 - [ ] Time Zones/Daylight Saving Time
 - [ ] Formatting including localisation.
 - [ ] Fix JavaScripts floating point precision issue in calculations.
-
+- [ ] Curry all fns.
+- [ ] Validate ISO format for all public fns.
+- [ ] Docs for datetime.
 
 # Datetime
 ## Usage
