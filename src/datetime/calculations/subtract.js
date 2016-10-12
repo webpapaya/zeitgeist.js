@@ -13,15 +13,15 @@ import {
   addYears,
 } from '../index';
 
+const _addMonths = (months) => (isoString) => addMonths(isoString, months);
+const _addYears = (years) => (isoString) => addYears(isoString, years);
+const _addDays = (days) => (isoString) => addDays(isoString, days);
+const _addHours = (hours) => (isoString) => addHours(isoString, hours);
+const _addMinutes = (minutes) => (isoString) => addMinutes(isoString, minutes);
+const _addSeconds = (seconds) => (isoString) => addSeconds(isoString, seconds);
+
 export const subtractDuration = (isoString, isoDuration) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
-
-  const _addMonths = (months) => (isoString) => addMonths(isoString, months);
-  const _addYears = (years) => (isoString) => addYears(isoString, years);
-  const _addDays = (days) => (isoString) => addDays(isoString, days);
-  const _addHours = (hours) => (isoString) => addHours(isoString, hours);
-  const _addMinutes = (minutes) => (isoString) => addMinutes(isoString, minutes);
-  const _addSeconds = (seconds) => (isoString) => addSeconds(isoString, seconds);
 
   return compose(
     _addDays(days * -1),
