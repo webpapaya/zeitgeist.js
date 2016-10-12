@@ -50,11 +50,13 @@ describe('addMinutes', () => {
 });
 
 describe('addHours', () => {
-  it('1 hour to 2001-01-01T00:00:00 results in 2001-01-01T01:00:00', () => assertThat(
-    addHours('2001-01-01T00:00:00', 1), equalTo('2001-01-01T01:00:00')));
-
-  it('-1 hour to 2001-01-01T01:00:00 results in 2001-01-01T00:00:00', () => assertThat(
-    addHours('2001-01-01T01:00:00', -1), equalTo('2001-01-01T00:00:00')));
+  [
+    { date: '2000-01-01T00:00:00', plusHours: 1, resultsIn: '2000-01-01T01:00:00' },
+    { date: '2000-01-01T01:00:00', plusHours: -1, resultsIn: '2000-01-01T00:00:00' },
+  ].forEach(({ date, plusHours, resultsIn }) => {
+    it(`${plusHours} to ${date} results in ${resultsIn}`, () => assertThat(
+      addHours(date, plusHours), equalTo(resultsIn)));
+  });
 });
 
 describe('addDays', () => {
