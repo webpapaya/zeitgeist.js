@@ -1,7 +1,5 @@
 import { compose } from '../../utils';
-import {
-  toFragments as toDurationFragments
-} from '../../duration/index';
+import { toFragments as toDurationFragments } from '../../duration/index';
 
 import {
   toFragments,
