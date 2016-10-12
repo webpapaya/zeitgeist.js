@@ -6,37 +6,27 @@ import {
   subtractDays,
 } from '../index';
 
-export const floorSecond = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, second: Math.floor(fragments.second) });
-};
+const parseArgAsFragments = (fn) => (isoString) => fn(toFragments(isoString));
 
-export const floorMinute = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, second: 0 });
-};
+export const floorSecond = parseArgAsFragments((fragments) =>
+  toIso({ ...fragments, second: Math.floor(fragments.second) }));
 
-export const floorHour = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, minute: 0, second: 0 });
-};
+export const floorMinute = parseArgAsFragments((fragments) =>
+  toIso({ ...fragments, second: 0 }));
+
+export const floorHour = parseArgAsFragments((fragments) =>
+  toIso({ ...fragments, minute: 0, second: 0 }));
 
 export const floorWeek = (isoString) => {
   const weekDay = getWeekday(isoString);
   return floorDay(subtractDays(isoString, weekDay - 1));
 };
 
-export const floorDay = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, hour: 0, minute: 0, second: 0 });
-};
+export const floorDay = parseArgAsFragments((fragments) =>
+  toIso({ ...fragments, hour: 0, minute: 0, second: 0 }));
 
-export const floorMonth = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, day: 1, hour: 0, minute: 0, second: 0 });
-};
+export const floorMonth = parseArgAsFragments((fragments) =>
+  toIso({ ...fragments, day: 1, hour: 0, minute: 0, second: 0 }));
 
-export const floorYear = (isoString) => {
-  const fragments = toFragments(isoString);
-  return toIso({ ...fragments, month: 1, day: 1, hour: 0, minute: 0, second: 0 });
-};
+export const floorYear = parseArgAsFragments((fragments) =>
+  toIso({ ...fragments, month: 1, day: 1, hour: 0, minute: 0, second: 0 }));
