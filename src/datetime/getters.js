@@ -23,9 +23,12 @@ export const doesWeekBelongToPreviousYear = (isoString) =>
 export const getWeekOfYear = (isoString) =>
   doesWeekBelongToPreviousYear(isoString) ? 53 : calculateWeekOfYear(isoString);
 
-export const getYear = (isoString) => toFragments(isoString).year;
-export const getMonth = (isoString) => toFragments(isoString).month;
-export const getDay = (isoString) => toFragments(isoString).day;
-export const getHour = (isoString) => toFragments(isoString).hour;
-export const getMinute = (isoString) => toFragments(isoString).minute;
-export const getSecond = (isoString) => toFragments(isoString).second;
+
+const parseIsoString = (fn) => (isoString) => fn(toFragments(isoString));
+
+export const getYear = parseIsoString(({ year }) => year);
+export const getMonth = parseIsoString(({ month }) => month);
+export const getDay = parseIsoString(({ day }) => day);
+export const getHour = parseIsoString(({ hour }) => hour);
+export const getMinute = parseIsoString(({ minute }) => minute);
+export const getSecond = parseIsoString(({ second }) => second);
