@@ -19,33 +19,35 @@ import {
   addDays,
 } from '../index';
 
-export const roundSecond = (isoString) => {
-  const { second } = toFragments(isoString);
-  return second % 1 >= 0.5
+import {
+  fractionOfNumber
+} from '../../utils';
+
+const prepareArgs = (fn) => (isoString) => fn(toFragments(isoString), isoString);
+
+export const roundSecond = prepareArgs(({ second }, isoString) => {
+  return fractionOfNumber(second) >= 0.5
     ? ceilSecond(isoString)
     : floorSecond(isoString);
-};
+});
 
-export const roundMinute = (isoString) => {
-  const { second } = toFragments(isoString);
+export const roundMinute = prepareArgs(({ second }, isoString) => {
   return second >= 30
     ? ceilMinute(isoString)
     : floorMinute(isoString);
-};
+});
 
-export const roundHour = (isoString) => {
-  const { minute } = toFragments(isoString);
+export const roundHour = prepareArgs(({ minute }, isoString) => {
   return minute >= 30
     ? ceilHour(isoString)
     : floorHour(isoString);
-};
+});
 
-export const roundDay = (isoString) => {
-  const { hour } = toFragments(isoString);
+export const roundDay = prepareArgs(({ hour }, isoString) => {
   return hour >= 12
     ? ceilDay(isoString)
     : floorDay(isoString);
-};
+});
 
 export const roundMonth = (isoString) => {
   const startOfThisMonth = floorMonth(isoString);
@@ -58,9 +60,8 @@ export const roundMonth = (isoString) => {
     : floorMonth(isoString);
 };
 
-export const roundYear = (isoString) => {
-  const { month } = toFragments(isoString);
+export const roundYear = prepareArgs(({ month }, isoString) => {
   return month >= 6
     ? ceilYear(isoString)
     : floorYear(isoString);
-};
+});
