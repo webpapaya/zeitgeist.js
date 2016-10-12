@@ -92,12 +92,12 @@ describe('addMonths', () => {
 });
 
 describe('addYears', () => {
-  it('1 to 2000-01-01 results in 2001-01-01', () => assertThat(
-    addYears('2000-01-01', 1), equalTo('2001-01-01')));
-
-  it('10 to 2000-01-01 results in 2010-01-01', () => assertThat(
-    addYears('2000-01-01', 10), equalTo('2010-01-01')));
-
-  it('-1 to 2001-01-01 results in 2000-01-01', () => assertThat(
-    addYears('2001-01-01', -1), equalTo('2000-01-01')));
+  [
+    { date: '2000-01-01', plusYears: 1, resultsIn: '2001-01-01' },
+    { date: '2001-01-01', plusYears: -1, resultsIn: '2000-01-01' },
+    { date: '2000-01-01', plusYears: 10, resultsIn: '2010-01-01' },
+  ].forEach(({date, plusYears, resultsIn }) => {
+    it(`${plusYears} to ${date} results in ${resultsIn}`, () => assertThat(
+      addYears(date, plusYears), equalTo(resultsIn)));
+  });
 });
