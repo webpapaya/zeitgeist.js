@@ -19,9 +19,26 @@ import {
   subtractWeeks,
   subtractMonths,
   subtractYears,
+
+  normalize,
 } from './calculations';
 
+
+
 describe('calculations', () => {
+  describe('normalize', () => {
+    it('PT61S results in PT1M1S', () => assertThat(
+      normalize('PT61S'), equalTo('PT1M1S')));
+
+    it('PT61M results in PT1H1M', () => assertThat(
+      normalize('PT61M'), equalTo('PT1H1M')));
+
+    it('P1DT61M results in PT1H1M', () => assertThat(
+      normalize('P1DT61M'), equalTo('P1DT1H1M')));
+  });
+
+
+
   describe('add', () => {
     describe('milliseconds', () => {
       it('adding 1 millisecond to PT0S results in PT0.001S', () => assertThat(
