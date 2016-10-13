@@ -21,9 +21,9 @@ export const isSameOrAfter = (maybeBefore, maybeAfter) =>
   isSame(maybeBefore, maybeAfter) || isAfter(maybeBefore, maybeAfter);
 
 export const isBetween = (dateToCheck, { from, to }) => {
-  return !isSameOrAfter(from, to)
-    ? isSameOrAfter(to, dateToCheck) && isSameOrBefore(from, dateToCheck)
-    : isSameOrAfter(from, dateToCheck) && isSameOrBefore(to, dateToCheck);
+  return isSameOrAfter(from, to)
+    ? isSameOrAfter(from, dateToCheck) && isSameOrBefore(to, dateToCheck)
+    : isSameOrAfter(to, dateToCheck) && isSameOrBefore(from, dateToCheck);
 };
 
 export const isSame = (firstDate, secondDate) =>
