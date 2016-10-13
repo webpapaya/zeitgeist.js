@@ -2,20 +2,16 @@ export const isEmpty = (value) => value === null || value === void 0 || value ==
 export const isCollectionEmpty = (collection) => collection.length === 0;
 
 export const createRegexBuilder = (regex = '') => {
-  const valueOf = (value) => value.isBuilder ? value.toValue() : value;
+  const valueOf = (value) => value.isBuilder
+    ? value.toValue()
+    : value;
 
   const convertToValue = (fn) => (regexBuilder) =>
     createRegexBuilder(fn(valueOf(regexBuilder)));
 
-  const maybe = convertToValue(
-    (newRegex) => `(${newRegex})?`);
-
-  const and = convertToValue(
-    (newRegex) => `${regex}${newRegex}`);
-
-  const or = convertToValue(
-    (newRegex) => isEmpty(regex) ? `${newRegex}` : `${regex}|${newRegex}`);
-
+  const maybe = convertToValue((newRegex) => `(${newRegex})?`);
+  const and = convertToValue((newRegex) => `${regex}${newRegex}`);
+  const or = convertToValue((newRegex) => isEmpty(regex) ? `${newRegex}` : `${regex}|${newRegex}`);
   const join = (...array) => createRegexBuilder([regex, ...array].join(''));
 
   const startOfLine = () => and('^');
