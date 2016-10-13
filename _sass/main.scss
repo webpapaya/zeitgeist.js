@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'aileronsregular';
+  src: url('/fonts/ailerons-typeface-webfont.woff2') format('woff2'),
+  url('/fonts/ailerons-typeface-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+.header {
+  background-image: url('/images/header.jpg');
+  background-size: cover;
+  padding: 130px 0;
+  font-family: 'aileronsregular', sans-serif;
+  font-size: 80px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  letter-spacing: 2px;
+}
