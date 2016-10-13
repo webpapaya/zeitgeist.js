@@ -70,7 +70,7 @@ const calculateDatesBetween = tco((from, to, dates = []) => {
   if (isSame(from, to)) { return nextDates; }
 
   const direction = isBefore(from, to) ? 1 : -1;
-  const nextFrom = addDays(from, direction);
+  const nextFrom = addDays(direction, from);
   return calculateDatesBetween(nextFrom, to, nextDates);
 });
 

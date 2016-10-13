@@ -15,12 +15,12 @@ export const wrapper = (isoString) => {
     toIso: () => isoString,
     toFragments: () => toFragments(isoString),
 
-    addYears: (amount) => wrapper(addYears(isoString, amount)),
-    addMonths: (amount) => wrapper(addMonths(isoString, amount)),
-    addDays: (amount) => wrapper(addDays(isoString, amount)),
+    addYears: (amount) => wrapper(addYears(amount, isoString)),
+    addMonths: (amount) => wrapper(addMonths(amount, isoString)),
+    addDays: (amount) => wrapper(addDays(amount, isoString)),
 
-    subtractYears: (amount) => wrapper(subtractYears(isoString, amount)),
-    subtractMonths: (amount) => wrapper(subtractMonths(isoString, amount)),
-    subtractDays: (amount) => wrapper(subtractDays(isoString, amount)),
+    subtractYears: (amount) => wrapper(subtractYears(amount, isoString)),
+    subtractMonths: (amount) => wrapper(subtractMonths(amount, isoString)),
+    subtractDays: (amount) => wrapper(subtractDays(amount, isoString)),
   };
 };

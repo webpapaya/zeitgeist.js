@@ -16,12 +16,12 @@ import {
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
 
-const _addMonths = (months) => (isoString) => addMonths(isoString, months);
-const _addYears = (years) => (isoString) => addYears(isoString, years);
-const _addDays = (days) => (isoString) => addDays(isoString, days);
-const _addHours = (hours) => (isoString) => addHours(isoString, hours);
-const _addMinutes = (minutes) => (isoString) => addMinutes(isoString, minutes);
-const _addSeconds = (seconds) => (isoString) => addSeconds(isoString, seconds);
+const _addMonths = (months) => (isoString) => addMonths(months, isoString);
+const _addYears = (years) => (isoString) => addYears(years, isoString);
+const _addDays = (days) => (isoString) => addDays(days, isoString);
+const _addHours = (hours) => (isoString) => addHours(hours, isoString);
+const _addMinutes = (minutes) => (isoString) => addMinutes(minutes, isoString);
+const _addSeconds = (seconds) => (isoString) => addSeconds(seconds, isoString);
 
 export const addDuration = (isoString, isoDuration) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
@@ -36,16 +36,16 @@ export const addDuration = (isoString, isoDuration) => {
   )(isoString);
 };
 
-export const addSeconds = (isoString, seconds) =>
-  addDays(isoString, seconds / SECONDS_IN_REGULAR_DAY);
+export const addSeconds = (seconds, isoString) =>
+  addDays(seconds / SECONDS_IN_REGULAR_DAY, isoString);
 
-export const addMinutes = (isoString, minutes) =>
-  addDays(isoString, minutes / MINUTES_IN_REGULAR_DAY);
+export const addMinutes = (minutes, isoString) =>
+  addDays(minutes / MINUTES_IN_REGULAR_DAY, isoString);
 
-export const addHours = (isoString, hours) =>
-  addDays(isoString, hours / HOURS_IN_REGULAR_DAY);
+export const addHours = (hours, isoString) =>
+  addDays(hours / HOURS_IN_REGULAR_DAY, isoString);
 
-export const addDays = (isoString, days) => {
+export const addDays = (days, isoString) => {
   const calculatedIsoString = fromJulianDay(toJulianDay(isoString) + days);
 
   return containsTimeComponent(isoString)
@@ -53,7 +53,7 @@ export const addDays = (isoString, days) => {
     : removeTimeComponent(calculatedIsoString);
 };
 
-export const addMonths = (isoString, months) => {
+export const addMonths = (months, isoString) => {
   const fragments = toFragments(isoString);
   return toIso({
     ...fragments,
@@ -62,7 +62,7 @@ export const addMonths = (isoString, months) => {
   });
 };
 
-export const addYears = (isoStringOrFragments, years) => {
+export const addYears = (years, isoStringOrFragments) => {
   const fragments = toFragments(isoStringOrFragments);
   return toIso({ ...fragments, year: fragments.year + years });
 };

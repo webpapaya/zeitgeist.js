@@ -25,60 +25,60 @@ describe('subtractDuration', () => {
 
 describe('subtractDays', () => {
   it('subtract 1 day from 2000-01-02 results in 2000-01-01', () => assertThat(
-    subtractDays('2000-01-02T00:00:00', 1), equalTo('2000-01-01T00:00:00')));
+    subtractDays(1, '2000-01-02T00:00:00'), equalTo('2000-01-01T00:00:00')));
 
   it('subtract 31 days from 2000-02-01 results in 2000-01-01', () => assertThat(
-    subtractDays('2000-02-01T00:00:00', 31), equalTo('2000-01-01T00:00:00')));
+    subtractDays(31, '2000-02-01T00:00:00'), equalTo('2000-01-01T00:00:00')));
 
   it('subtract 31 + 29 days from 2000-03-01 results in 2000-01-01', () => assertThat(
-    subtractDays('2000-03-01T00:00:00', 60), equalTo('2000-01-01T00:00:00')));
+    subtractDays(60, '2000-03-01T00:00:00'), equalTo('2000-01-01T00:00:00')));
 
   it('subtract 1 day from 2001-01-01 results in 2000-12-31', () => assertThat(
-    subtractDays('2001-01-01T00:00:00', 1), equalTo('2000-12-31T00:00:00')));
+    subtractDays(1, '2001-01-01T00:00:00'), equalTo('2000-12-31T00:00:00')));
 
   it('subtract 2 days from 2000-02-02 results in 2000-01-31', () => assertThat(
-    subtractDays('2000-02-02T00:00:00', 2), equalTo('2000-01-31T00:00:00')));
+    subtractDays(2, '2000-02-02T00:00:00'), equalTo('2000-01-31T00:00:00')));
 
   it('subtract 365 days from 2001-01-01 results in 2000-01-01', () => assertThat(
-    subtractDays('2001-01-01T00:00:00', 366), equalTo('2000-01-01T00:00:00')));
+    subtractDays(366, '2001-01-01T00:00:00'), equalTo('2000-01-01T00:00:00')));
 
   it('subtract -1 day from 2000-12-31 results in 2001-01-01', () => assertThat(
-    subtractDays('2000-12-31T00:00:00', -1), equalTo('2001-01-01T00:00:00')));
+    subtractDays(-1, '2000-12-31T00:00:00'), equalTo('2001-01-01T00:00:00')));
 });
 
 describe('subtractSeconds', () => {
   it('subtract 1 second from 2001-01-01T00:00:01 results in 2001-01-01T00:00:00', () => assertThat(
-    subtractSeconds('2001-01-01T00:00:01', 1), equalTo('2001-01-01T00:00:00')));
+    subtractSeconds(1, '2001-01-01T00:00:01'), equalTo('2001-01-01T00:00:00')));
 });
 
 describe('subtractMinutes', () => {
   it('subtract 1 minute from 2001-01-01T00:01:00 results in 2001-01-01T00:00:00', () => assertThat(
-    subtractMinutes('2001-01-01T00:01:00', 1), equalTo('2001-01-01T00:00:00')));
+    subtractMinutes(1, '2001-01-01T00:01:00'), equalTo('2001-01-01T00:00:00')));
 });
 
 describe('subtractHours', () => {
   it('subtract 1 hour from 2001-01-01T01:00:00 results in 2001-01-01T00:00:00', () => assertThat(
-    subtractHours('2001-01-01T01:00:00', 1), equalTo('2001-01-01T00:00:00')));
+    subtractHours(1, '2001-01-01T01:00:00'), equalTo('2001-01-01T00:00:00')));
 });
 
 describe('subtract months', () => {
   it('subtract 1 month from 2000-02-01 results in 2000-01-01', () => assertThat(
-    subtractMonths('2000-02-01', 1), equalTo('2000-01-01')));
+    subtractMonths(1, '2000-02-01'), equalTo('2000-01-01')));
 
   it('subtract 1 month from 2000-02-01 results in 2000-01-01', () => assertThat(
-    subtractMonths('2001-01-01', 1), equalTo('2000-12-01')));
+    subtractMonths(1, '2001-01-01'), equalTo('2000-12-01')));
 
   it('subtract -1 month from 2000-01-01 results in 2000-02-01', () => assertThat(
-    subtractMonths('2000-01-01', -1), equalTo('2000-02-01')));
+    subtractMonths(-1, '2000-01-01'), equalTo('2000-02-01')));
 });
 
 describe('subtractYears', () => {
   it('subtract 1 year from 2001-01-01 results in 2000-01-01', () => assertThat(
-    subtractYears('2001-01-01', 1), equalTo('2000-01-01')));
+    subtractYears(1, '2001-01-01'), equalTo('2000-01-01')));
 
   it('adding 10 year to 2010-01-01 results in 2000-01-01', () => assertThat(
-    subtractYears('2010-01-01', 10), equalTo('2000-01-01')));
+    subtractYears(10, '2010-01-01'), equalTo('2000-01-01')));
 
   it('subtract -1 years from 2000-01-01 results in 2001-01-01', () => assertThat(
-    subtractYears('2000-01-01', -1), equalTo('2001-01-01')));
+    subtractYears(-1, '2000-01-01'), equalTo('2001-01-01')));
 });

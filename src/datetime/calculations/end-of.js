@@ -21,9 +21,9 @@ export const endOfSecond = (isoString) => {
   return toIso({ ...fragments, second: Math.floor(fragments.second) + 0.999999 });
 };
 
-export const endOfMinute = (isoString) => endOfSecond(subtractSeconds(ceilMinute(isoString), 1));
-export const endOfHour = (isoString) => endOfMinute(subtractMinutes(ceilHour(isoString), 1));
-export const endOfDay = (isoString) => endOfHour(subtractHours(ceilDay(isoString), 1));
-export const endOfMonth = (isoString) => endOfDay(subtractDays(ceilMonth(isoString), 1));
-export const endOfYear = (isoString) => endOfMonth(subtractMonths(ceilYear(isoString), 1));
-export const endOfWeek = (isoString) => endOfDay(subtractDays(ceilWeek(isoString), 1));
+export const endOfMinute = (isoString) => endOfSecond(subtractSeconds(1, ceilMinute(isoString)));
+export const endOfHour = (isoString) => endOfMinute(subtractMinutes(1, ceilHour(isoString)));
+export const endOfDay = (isoString) => endOfHour(subtractHours(1, ceilDay(isoString)));
+export const endOfMonth = (isoString) => endOfDay(subtractDays(1, ceilMonth(isoString)));
+export const endOfYear = (isoString) => endOfMonth(subtractMonths(1, ceilYear(isoString)));
+export const endOfWeek = (isoString) => endOfDay(subtractDays(1, ceilWeek(isoString)));

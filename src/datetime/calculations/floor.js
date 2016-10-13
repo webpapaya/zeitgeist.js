@@ -19,7 +19,7 @@ export const floorHour = parseArgAsFragments((fragments) =>
 
 export const floorWeek = (isoString) => {
   const weekDay = getWeekday(isoString);
-  return floorDay(subtractDays(isoString, weekDay - 1));
+  return floorDay(subtractDays(weekDay - 1, isoString));
 };
 
 export const floorDay = parseArgAsFragments((fragments) =>

@@ -53,7 +53,7 @@ export const roundMonth = (isoString) => {
   const startOfThisMonth = floorMonth(isoString);
   const startOfNextMonth = ceilMonth(isoString);
   const daysInThisMonth = daysBetween(startOfThisMonth, startOfNextMonth);
-  const middleOfMonth = floorDay(addDays(startOfThisMonth, daysInThisMonth / 2));
+  const middleOfMonth = floorDay(addDays(daysInThisMonth / 2, startOfThisMonth));
 
   return isSameOrAfter(isoString, middleOfMonth)
     ? ceilMonth(isoString)

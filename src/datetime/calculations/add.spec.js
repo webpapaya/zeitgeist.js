@@ -33,7 +33,7 @@ describe('addSeconds', () => {
     { date: '2001-01-01T00:00:00', plusSeconds: 60, resultsIn: '2001-01-01T00:01:00' },
   ].forEach(({ date, plusSeconds, resultsIn }) => {
     it(`${plusSeconds} to ${date} results in ${resultsIn}`, () => assertThat(
-      addSeconds(date, plusSeconds), equalTo(resultsIn)));
+      addSeconds(plusSeconds, date), equalTo(resultsIn)));
   });
 });
 
@@ -45,7 +45,7 @@ describe('addMinutes', () => {
     { date: '2001-01-01T00:59:00', plusMinutes: 1, resultsIn: '2001-01-01T01:00:00' },
   ].forEach(({ date, plusMinutes, resultsIn }) => {
     it(`${plusMinutes} to ${date} results in ${resultsIn}`, () => assertThat(
-      addMinutes(date, plusMinutes), equalTo(resultsIn)));
+      addMinutes(plusMinutes, date), equalTo(resultsIn)));
   });
 });
 
@@ -55,7 +55,7 @@ describe('addHours', () => {
     { date: '2000-01-01T01:00:00', plusHours: -1, resultsIn: '2000-01-01T00:00:00' },
   ].forEach(({ date, plusHours, resultsIn }) => {
     it(`${plusHours} to ${date} results in ${resultsIn}`, () => assertThat(
-      addHours(date, plusHours), equalTo(resultsIn)));
+      addHours(plusHours, date), equalTo(resultsIn)));
   });
 });
 
@@ -71,7 +71,7 @@ describe('addDays', () => {
     { date: '2001-01-01T00:00:00', plusDays: -1, resultsIn: '2000-12-31T00:00:00' },
   ].forEach(({ date, plusDays, resultsIn }) => {
     it(`${plusDays} to ${date} results in ${resultsIn}`, () => assertThat(
-      addDays(date, plusDays), equalTo(resultsIn)));
+      addDays(plusDays, date), equalTo(resultsIn)));
   });
 });
 
@@ -89,7 +89,7 @@ describe('addMonths', () => {
     { date: '2000-01-01', plusMonths: 12 * 1000, resultsIn: '3000-01-01' },
   ].forEach(({ date, plusMonths, resultsIn }) => {
     it(`${plusMonths} to ${date} results in ${resultsIn}`, () => assertThat(
-      addMonths(date, plusMonths), equalTo(resultsIn)));
+      addMonths(plusMonths, date), equalTo(resultsIn)));
   });
 });
 
@@ -100,6 +100,6 @@ describe('addYears', () => {
     { date: '2000-01-01', plusYears: 10, resultsIn: '2010-01-01' },
   ].forEach(({ date, plusYears, resultsIn }) => {
     it(`${plusYears} to ${date} results in ${resultsIn}`, () => assertThat(
-      addYears(date, plusYears), equalTo(resultsIn)));
+      addYears(plusYears, date), equalTo(resultsIn)));
   });
 });
