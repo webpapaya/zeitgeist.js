@@ -49,7 +49,7 @@ export {
 
 #### Calculations
 
-All calculations accept an ISO-8601 duration string and respond an ISO-8601 duration string. eg.: `addSeconds('PT0S', 1) // => 'PT1S'`
+All calculations accept an ISO-8601 duration string and respond an ISO-8601 duration string. eg.: `addSeconds(1, 'PT0S') // => 'PT1S'`
 
 ```js
 export {
@@ -78,7 +78,7 @@ export {
 
 #### Conversions
 
-All conversions accept an ISO-8601 duration string and respond a number. eg.: `asSeconds('PT1M1S', 1) // => 61`
+All conversions accept an ISO-8601 duration string and respond a number. eg.: `asSeconds(1, 'PT1M1S') // => 61`
 
 ```js
 export {
