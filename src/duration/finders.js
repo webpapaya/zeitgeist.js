@@ -37,6 +37,12 @@ const findDateUnit = (isoString, unit) => {
   return findUnit(dateComponent, unit);
 };
 
+export const removeDateComponent = (isoString) =>
+  `${DURATION_DESIGNATOR}${TIME_DESIGNATOR}${extractTimeComponents(isoString)}`;
+
+export const removeTimeComponent = (isoString) =>
+  `${DURATION_DESIGNATOR}${extractDateComponents(isoString)}`;
+
 export const findSeconds = (isoString) => findTimeUnit(isoString, UNITS.seconds);
 export const findMinutes = (isoString) => findTimeUnit(isoString, UNITS.minutes);
 export const findHours = (isoString) => findTimeUnit(isoString, UNITS.hours);

@@ -8,7 +8,26 @@ import {
   findHours,
   findMinutes,
   findSeconds,
+
+  removeDateComponent,
+  removeTimeComponent,
 } from './finders';
+
+describe('removeDateComponent', () => {
+  it('P1DT1M results in PT1M', () => assertThat(
+    removeDateComponent('P1DT1M'), equalTo('PT1M')));
+
+  it('P1D results in PT', () => assertThat(
+    removeDateComponent('PT'), equalTo('PT')));
+});
+
+describe('removeTimeComponent', () => {
+  it('P1DT1M results in P1D', () => assertThat(
+    removeTimeComponent('P1DT1M'), equalTo('P1D')));
+
+  it('PT results in P', () => assertThat(
+    removeTimeComponent('PT'), equalTo('P')));
+});
 
 describe('unit finders for P3Y6M1W4DT12H30M17.5S', () => {
   it('finds 3 years', () => assertThat(
