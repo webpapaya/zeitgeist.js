@@ -28,6 +28,9 @@ export {
   findWeeks,
   findMonths,
   findYears,
+
+  removeDateComponent,
+  removeTimeComponent,
 } from './finders';
 
 export {

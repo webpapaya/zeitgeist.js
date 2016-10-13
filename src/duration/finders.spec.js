@@ -11,7 +11,7 @@ import {
 
   removeDateComponent,
   removeTimeComponent,
-} from './finders';
+} from './index';
 
 describe('removeDateComponent', () => {
   it('P1DT1M results in PT1M', () => assertThat(
