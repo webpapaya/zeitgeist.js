@@ -28,7 +28,6 @@ export const normalize = (isoString) => {
   });
 };
 
-
 const addUnit = (isoString, amount, unit) => {
   const fragments = toFragments(isoString);
   fragments[unit] += amount;
