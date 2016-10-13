@@ -10,7 +10,10 @@ import { toFragments, toIso } from '../index';
 import { fractionOfNumber } from '../../utils';
 
 const createBig = (input = 0) => {
-  const normalize = (value) => value && value.isBig ? parseFloat(value.toString()) : parseFloat(value);
+  const normalize = (value) => value && value.isBig
+    ? parseFloat(value.toString())
+    : parseFloat(value);
+
   const normalizeInput = (fn) => (value) => fn(normalize(input), normalize(value));
   const normalizeAndBuild = (fn) => (value) => createBig(fn(normalize(input), normalize(value)));
 

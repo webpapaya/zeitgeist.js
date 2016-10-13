@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import { UNIT_NAMES } from './constants';
 import { toIso, toFragments } from './index';
 
