@@ -11,9 +11,10 @@
 $maxWidth: 980px;
 $main: #2b1e09;
 
-html {
+html, body {
   color: $main;
   font-family: 'Droid Sans', sans-serif;
+  overflow-x: hidden;
 }
 
 .header {
@@ -25,6 +26,8 @@ html {
   height: 40vh;
   position: relative;
   z-index: 1;
+
+
 }
 
 .header-sticky {
@@ -40,7 +43,7 @@ html {
 .header-sticker--title {
   font-family: 'aileronsregular', sans-serif;
   color: white;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .header-sticker--link {
@@ -59,12 +62,16 @@ html {
 
 .header--title {
   font-family: 'aileronsregular', sans-serif;
-  font-size: 80px;
+  font-size: 40px;
   font-weight: 900;
   color: white;
   text-align: center;
   letter-spacing: 2px;
   text-shadow: #1bb0bf 0 0 300px;
+
+  @media (min-width: 600px) {
+    font-size: 80px;
+  }
 }
 
 .header--links {
