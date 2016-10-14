@@ -6,6 +6,12 @@
   font-style: normal;
 }
 
+
+$main: #2b1e09;
+html {
+  color: $main;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -42,4 +48,10 @@
     background-color: white;
     color: #4e4e4e;
   }
+}
+
+.content {
+  max-width: 980px;
+  padding: 20px;
+  margin: auto;
 }
