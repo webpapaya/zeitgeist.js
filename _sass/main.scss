@@ -33,6 +33,7 @@ html {
   left: 0;
   width: 100%;
   background-image: url('../images/header.jpg');
+  background-size: cover;
   z-index: 0;
 }
 
@@ -40,7 +41,11 @@ html {
   font-family: 'aileronsregular', sans-serif;
   color: white;
   font-size: 30px;
-  padding: 0 30px;
+}
+
+.header-sticker--link {
+  color: white;
+  text-decoration: none;
 }
 
 .header-sticky--container {
