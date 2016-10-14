@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: 'aileronsregular';
-  src: url('/fonts/ailerons-typeface-webfont.woff2') format('woff2'),
-  url('/fonts/ailerons-typeface-webfont.woff') format('woff');
+  src: url('../fonts/ailerons-typeface-webfont.woff2') format('woff2'),
+  url('../fonts/ailerons-typeface-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -20,7 +20,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url('/images/header.jpg');
+  background-image: url('../images/header.jpg');
   background-size: cover;
   height: 40vh;
   position: relative;
@@ -32,7 +32,7 @@ html {
   top: 0;
   left: 0;
   width: 100%;
-  background-image: url('/images/header.jpg');
+  background-image: url('../images/header.jpg');
   z-index: 0;
 }
 
