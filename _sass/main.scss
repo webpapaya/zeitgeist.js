@@ -7,9 +7,15 @@
 }
 
 .header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-image: url('/images/header.jpg');
   background-size: cover;
-  padding: 130px 0;
+  height: 40vh;
+}
+
+.header--title {
   font-family: 'aileronsregular', sans-serif;
   font-size: 80px;
   font-weight: 900;
@@ -17,4 +23,23 @@
   text-align: center;
   letter-spacing: 2px;
   text-shadow: #1bb0bf 0 0 300px;
+}
+
+.header--links {
+  display: flex;
+  justify-content: center;
+}
+
+.header--link {
+  color: white;
+  border: 1px solid white;
+  padding: 10px 30px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 200ms;
+
+  &:hover {
+    background-color: white;
+    color: #4e4e4e;
+  }
 }
