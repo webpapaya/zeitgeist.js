@@ -1,3 +1,5 @@
+
+
 @font-face {
   font-family: 'aileronsregular';
   src: url('/fonts/ailerons-typeface-webfont.woff2') format('woff2'),
@@ -6,10 +8,12 @@
   font-style: normal;
 }
 
-
+$maxWidth: 980px;
 $main: #2b1e09;
+
 html {
   color: $main;
+  font-family: 'Droid Sans', sans-serif;
 }
 
 .header {
@@ -19,6 +23,33 @@ html {
   background-image: url('/images/header.jpg');
   background-size: cover;
   height: 40vh;
+  position: relative;
+  z-index: 1;
+}
+
+.header-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-image: url('/images/header.jpg');
+  z-index: 0;
+}
+
+.header-sticker--title {
+  font-family: 'aileronsregular', sans-serif;
+  color: white;
+  font-size: 30px;
+  padding: 0 30px;
+}
+
+.header-sticky--container {
+  max-width: $maxWidth;
+  padding: 0 20px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header--title {
@@ -51,7 +82,7 @@ html {
 }
 
 .content {
-  max-width: 980px;
+  max-width: $maxWidth;
   padding: 20px;
   margin: auto;
 }
