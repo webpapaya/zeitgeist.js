@@ -1,4 +1,4 @@
-import { curry, pipe } from 'ramda';
+import { curry, pipe } from '../../utils';
 import { toFragments as toDurationFragments } from '../../duration/index';
 
 import {
