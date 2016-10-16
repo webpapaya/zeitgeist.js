@@ -19,7 +19,7 @@ describe('addDuration', () => {
     { date: '2000-01-01T00:00:00', plusDuration: 'PT1S', resultsIn: '2000-01-01T00:00:01' },
   ].forEach(({ date, plusDuration, resultsIn }) => {
     it(`${plusDuration} to ${date} results in ${resultsIn}`, () => assertThat(
-      addDuration(date, plusDuration), equalTo(resultsIn)));
+      addDuration(plusDuration, date), equalTo(resultsIn)));
   });
 });
 

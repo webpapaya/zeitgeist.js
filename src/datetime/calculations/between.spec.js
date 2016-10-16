@@ -12,11 +12,17 @@ import {
 describe('microsecondsBetween', () => {
   it('T10:01 and T10:00 is 60e6 microseconds', () => assertThat(
     microsecondsBetween('T10:01', 'T10:00'), equalTo(60e6)));
+
+  it('can be curried', () => assertThat(
+    microsecondsBetween('T10:01')('T10:00'), equalTo(60e6)));
 });
 
 describe('millisecondsBetween', () => {
   it('T10:01 and T10:00 is 60e3 milliseconds', () => assertThat(
     millisecondsBetween('T10:01', 'T10:00'), equalTo(60e3)));
+
+  it('can be curried', () => assertThat(
+    millisecondsBetween('T10:01')('T10:00'), equalTo(60e3)));
 });
 
 describe('secondsBetween', () => {
@@ -32,6 +38,9 @@ describe('secondsBetween', () => {
   it('there are 60 seconds between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
     secondsBetween('2000-01-02T00:00', '2000-01-01T23:59'), equalTo(60)));
 
+  it('can be curried', () => assertThat(
+    secondsBetween('2000-01-02T00:00')('2000-01-01T23:59'), equalTo(60)));
+
   describe('handles leap seconds', () => {
     it('there are 2 seconds between 1972-07-01T00:00:00 and 1972-06-30T23:59:59', () => assertThat(
       secondsBetween('1972-07-01T00:00:00', '1972-06-30T23:59:59'), equalTo(2)));
@@ -41,11 +50,17 @@ describe('secondsBetween', () => {
 describe('minutes between', () => {
   it('T10:00 and T11:00 is 60 minutes', () => assertThat(
     minutesBetween('T11:00', 'T10:00'), equalTo(60)));
+
+  it('can be curried', () => assertThat(
+    minutesBetween('T11:00')('T10:00'), equalTo(60)));
 });
 
 describe('hours between', () => {
   it('T10:00 and T11:00 is 1 hour ', () => assertThat(
     hoursBetween('T11:00', 'T10:00'), equalTo(1)));
+
+  it('can be curried ', () => assertThat(
+    hoursBetween('T11:00')('T10:00'), equalTo(1)));
 });
 
 describe('daysBetween responds', () => {
@@ -75,6 +90,9 @@ describe('daysBetween responds', () => {
 
   it('365 days between two regular years', () => assertThat(
     daysBetween('2001-01-01', '2002-01-01'), equalTo(365)));
+
+  it('can be curried', () => assertThat(
+    daysBetween('2001-01-01')('2002-01-01'), equalTo(365)));
 });
 
 describe('dates between', () => {
@@ -99,4 +117,7 @@ describe('dates between', () => {
 
   it('dates between T10:00 and T11:00 is an empty array', () => assertThat(
     datesBetween('T10:00', 'T11:00'), equalTo([])));
+
+  it('can be curried', () => assertThat(
+    datesBetween('T10:00')('T11:00'), equalTo([])));
 });
