@@ -1,9 +1,4 @@
-import {
-  UNIT_NAMES,
-  ONE_HOUR,
-  ONE_MINUTE,
-  ONE_SECOND,
-} from '../constants';
+import { UNIT_NAMES } from '../constants';
 
 import {
   toIso,

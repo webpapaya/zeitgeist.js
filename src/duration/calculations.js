@@ -23,8 +23,6 @@ import {
   removeDateComponent,
 } from './index';
 
-import { curry } from '../utils';
-
 export const normalize = (isoString) => {
   const fragments = toFragments(isoString);
 
@@ -41,39 +39,6 @@ export const normalize = (isoString) => {
   });
 };
 
-const addUnit = (isoString, amount, unit) => {
-  const fragments = toFragments(isoString);
-  fragments[unit] += amount;
-  return toIso(fragments);
-};
-
-export const subtractMilliseconds = curry((amount, isoString) =>
-  addMilliseconds(amount * -1, isoString));
-
-export const subtractMicroseconds = curry((amount, isoString) =>
-  addMicroseconds(amount * -1, isoString));
-
-export const subtractSeconds = curry((amount, isoString) =>
-  addSeconds(amount * -1, isoString));
-
-export const subtractMinutes = curry((amount, isoString) =>
-  addMinutes(amount * -1, isoString));
-
-export const subtractHours = curry((amount, isoString) =>
-  addHours(amount * -1, isoString));
-
-export const subtractDays = curry((amount, isoString) =>
-  addDays(amount * -1, isoString));
-
-export const subtractWeeks = curry((amount, isoString) =>
-  addWeeks(amount * -1, isoString));
-
-export const subtractMonths = curry((amount, isoString) =>
-  addMonths(amount * -1, isoString));
-
-export const subtractYears = curry((amount, isoString) =>
-  addYears(amount * -1, isoString));
-
 export {
   addMicroseconds,
   addMilliseconds,
@@ -85,3 +50,15 @@ export {
   addMonths,
   addYears,
 } from './calculations/add';
+
+export {
+  subtractMilliseconds,
+  subtractMicroseconds,
+  subtractSeconds,
+  subtractMinutes,
+  subtractHours,
+  subtractDays,
+  subtractWeeks,
+  subtractMonths,
+  subtractYears,
+} from './calculations/subtract';
