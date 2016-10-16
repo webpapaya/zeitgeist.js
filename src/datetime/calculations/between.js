@@ -38,7 +38,7 @@ export const daysBetween = (from, to) => {
 const leapMicrosecondsBetween = (from, to) => {
   const microsecondsBetween = Object.keys(leapSecondData)
     .reduce((totalLeapSeconds, dateOfLeapSecond) => {
-      return isBetween(dateOfLeapSecond, { from, to })
+      return isBetween({ from, to }, dateOfLeapSecond)
         ? totalLeapSeconds + leapSecondData[dateOfLeapSecond].correction
         : totalLeapSeconds;
     }, 0);
