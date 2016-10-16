@@ -14,11 +14,34 @@ describe('Datetime Examples', () => {
     it('with the pipe/compose fn from ramda.js OR lodash/fn', () => {
       const addDoubleSchoolHour = pipe(
         DateTime.addMinutes(30),
-        DateTime.addHour(1)
+        DateTime.addHour(1),
       );
 
       assertThat(addDoubleSchoolHour('2000-01-01T08:00:00'),
         equalTo('2000-01-01T09:30:00'));
+    });
+
+    it('this composition can be used in async code as well', () => {
+      const Api = { getCurrentTime: () => Promise.resolve('2000-01-01T08:00:00') };
+      const addDoubleSchoolHour = pipe(
+        DateTime.addMinutes(30),
+        DateTime.addHour(1),
+      );
+
+      return Api.getCurrentTime()
+        .then(addDoubleSchoolHour)
+        .then((date) => assertThat(date, equalTo('2000-01-01T09:30:00')));
+    });
+
+    it('custom transformations between different formats can be archived easily', () => {
+      const addDoubleSchoolHour = pipe(
+        DateTime.fromUnixTimestamp,
+        DateTime.addMinutes(30),
+        DateTime.addHour(1),
+        DateTime.toJulianDay,
+      );
+
+      assertThat(addDoubleSchoolHour(9467020822), equalTo(2451544.5627546296));
     });
   });
 

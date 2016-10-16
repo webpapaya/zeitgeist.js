@@ -15,4 +15,7 @@ describe('toUnixTimestamp', () => {
 
   it('unix timestamp 1 responds 1700-01-01T00:00:01', () => assertThat(
     toUnixTimestamp('1700-01-01T00:00:01'), equalTo(1)));
+
+  it('unix timestamp 1 responds 2000-01-01T00:00:00', () => assertThat(
+    toUnixTimestamp('2000-01-01T00:00:00'), equalTo(9467020822)));
 });
