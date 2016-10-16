@@ -37,7 +37,6 @@ describe('isBefore', () => {
 
   it('can be curried', () => assertThat(
     isBefore('T10:00')('T11:00'), equalTo(true)));
-
 });
 
 describe('isSameOrBefore', () => {

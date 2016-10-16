@@ -1,6 +1,4 @@
-export {
-  normalize
-} from './calculations/normalize';
+export { normalize } from './calculations/normalize';
 
 export {
   addMicroseconds,
