@@ -5,23 +5,11 @@
 # Datetime
 ## Usage
 
+
+
+
+
 ```js
-import {
-  FEBRUARY,
-  DAYS_IN_MONTHS,
-} from './constants';
-
-import {
-  toFragments,
-  removeTimeComponent,
-  removeDateComponent,
-} from './transformations/index';
-
-import { isEmpty } from '../utils';
-
-const isLeapMonth = (isoString, month) =>
-  month === FEBRUARY && isLeapYear(isoString);
-
 export const daysInYear = (isoString) => isLeapYear(isoString) ? 366 : 365;
 
 export const daysInMonth = (isoString) => {

@@ -24,4 +24,4 @@ export { toFragments } from './fragments';
 export { toIso, toIsoDate, toIsoTime } from './iso-timestamp';
 export { fromJulianDay, toJulianDay } from './julian-day';
 export { fromUnixTimestamp, toUnixTimestamp } from './unix-timestamp';
-export { fromJsDate, toJsDate } from './js-date';
+export { fromJsDate, toJsDate, now } from './js-date';

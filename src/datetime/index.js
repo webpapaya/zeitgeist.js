@@ -62,6 +62,7 @@ export {
 
   toJsDate,
   fromJsDate,
+  now,
 } from './transformations/index';
 
 export {
