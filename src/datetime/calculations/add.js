@@ -16,7 +16,7 @@ import {
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
 
-export const addDuration = (isoString, isoDuration) => {
+export const addDuration = curry((isoDuration, isoString) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
 
   return pipe(
@@ -27,7 +27,7 @@ export const addDuration = (isoString, isoDuration) => {
     addMinutes(minutes),
     addSeconds(seconds),
   )(isoString);
-};
+});
 
 export const addSeconds = curry((seconds, isoString) =>
   addDays(seconds / SECONDS_IN_REGULAR_DAY, isoString));
