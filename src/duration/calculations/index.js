@@ -1,4 +1,4 @@
-export { normalize } from './calculations/normalize';
+export { normalize } from './normalize';
 
 export {
   addMicroseconds,
@@ -10,7 +10,7 @@ export {
   addWeeks,
   addMonths,
   addYears,
-} from './calculations/add';
+} from './add';
 
 export {
   subtractMilliseconds,
@@ -22,4 +22,4 @@ export {
   subtractWeeks,
   subtractMonths,
   subtractYears,
-} from './calculations/subtract';
+} from './subtract';

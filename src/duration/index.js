@@ -18,7 +18,9 @@ export {
   subtractWeeks,
   subtractMonths,
   subtractYears,
-} from './calculations';
+
+  normalize,
+} from './calculations/index';
 
 export {
   findSeconds,
