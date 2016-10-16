@@ -3,146 +3,168 @@
 # This Package is not production ready yet.
 
 # Datetime
-## Usage
 
+## Transformations
 
+Convert dates from one representation to another.
+ 
+```js
+ export {
+   toIso,
+   toFragments,
+   
+   
+   toIsoDate,
+   toIsoTime,
+   toFloat,
+ 
+   removeTimeComponent,
+   removeDateComponent,
+ 
+   fromJulianDay,
+   toJulianDay,
+ 
+   fromUnixTimestamp,
+   toUnixTimestamp,
+ 
+   toJsDate,
+   fromJsDate,
+ } from './transformations/index';
+```
 
+## Arithmetic calculations
 
+All calculations are immutable and can be either called in singular or
+plural (eg. addSecond, addSeconds). They take the amound to be 
+added/subtracted as the first argument and an ISO-8601 string as the 
+second argument.
 
 ```js
-export const daysInYear = (isoString) => isLeapYear(isoString) ? 366 : 365;
+addSeconds(1, '2000-01-01T00:00:00'); // => '2000-01-01T00:00:01'
+```
+ 
+All arithmetic calculations are curried which enables intermediate 
+functions to be defined easily. If you're writing a lecture scheduling 
+system where one lecture lasts 1.5 hours you can easily define your own 
+addLectureHour function.
 
-export const daysInMonth = (isoString) => {
-  const { month = 1 } = toFragments(isoString);
-  if (isLeapMonth(isoString, month)) { return 29; }
-  return DAYS_IN_MONTHS[month];
-};
+```js
+const addLectureHour = addHours(1.5);
+addLectureHour('2000-01-01T00:00:00'); // => '2000-01-01T01:50:00'
+```
 
-export const isLeapYear = (isoString) => {
-  const { year } = toFragments(isoString);
-  const dividableBy4 = year % 4 === 0;
-  const dividableBy100 = year % 100 === 0;
-  const dividableBy400 = year % 400 === 0;
+As all calculations are curried, so that functional composition is also 
+possible.
 
-  return (dividableBy4 && !dividableBy100) || dividableBy400;
-};
+```js
+import { pipe } from 'ramda';
 
-export const isLastDayOfMonth = (isoString) => {
-  const { day } = toFragments(isoString);
-  return daysInMonth(isoString) === day;
-};
+const addLectureHour = pipe(
+  addMinutes(30),    
+  addHours(1),
+);
 
-export const isFirstDayOfMonth = (isoString) => {
-  const { day } = toFragments(isoString);
-  return day === 1;
-};
+addLectureHour('2000-01-01T00:00:00'); // => '2000-01-01T01:50:00'
+```
 
-export const containsDateComponent = (isoString) => !isEmpty(removeTimeComponent(isoString));
-export const containsTimeComponent = (isoString) => !isEmpty(removeDateComponent(isoString));
-
-export {
-  toIso,
-  toFragments,
-  toIsoDate,
-  toIsoTime,
-  toFloat,
-
-  removeTimeComponent,
-  removeDateComponent,
-
-  fromJulianDay,
-  toJulianDay,
-
-  fromUnixTimestamp,
-  toUnixTimestamp,
-
-  toJsDate,
-  fromJsDate,
-} from './transformations/index';
-
-export {
-  normalize,
-
-  microsecondsBetween,
-  millisecondsBetween,
-  secondsBetween,
-  minutesBetween,
-  hoursBetween,
-
-  datesBetween,
-  daysBetween,
-
-  addDuration,
+### Public Functions
+```js
+import {
+  addMicroseconds,
+  addMicrosecond,
+  addMilliseconds,
+  addMillisecond,
   addSeconds,
-  addSeconds as addSecond,
+  addSecond,
   addMinutes,
-  addMinutes as addMinute,
+  addMinute,
   addHours,
-  addHours as addHour,
+  addHour,
   addDays,
-  addDays as addDay,
+  addDay,
+  addWeeks,
+  addWeek,
   addMonths,
-  addMonths as addMonth,
+  addMonth,
   addYears,
-  addYears as addYear,
+  addYear,
 
-  subtractDuration,
+  subtractMilliseconds,
+  subtractMillisecond,
+  subtractMicroseconds,
+  subtractMicrosecond,
   subtractSeconds,
-  subtractSeconds as subtractSecond,
+  subtractSecond,
   subtractMinutes,
-  subtractMinutes as subtractMinute,
+  subtractMinute,
   subtractHours,
-  subtractHours as subtractHour,
+  subtractHour,
   subtractDays,
-  subtractDays as subtractDay,
+  subtractDay,
+  subtractWeeks,
+  subtractWeek,
   subtractMonths,
-  subtractMonths as subtractMonth,
+  subtractMonth,
   subtractYears,
-  subtractYears as subtractYear,
+  subtractYear,
+} from 'zeitgeist/datetime';
+```
 
+## Round/Ceil/Floor
+
+Zeitgeist allows you to round/ceil/floor dates.
+
+```js
+floorHour('2000-01-01T11:12:23'); // => '2000-01-01T11:00:00' 
+```
+
+### Public Functions
+ 
+```js
+import {
   floorSecond,
-  floorSecond as floorSeconds,
+  floorSeconds,
   floorMinute,
-  floorMinute as floorMinutes,
+  floorMinutes,
   floorHour,
-  floorHour as floorHours,
+  floorHours,
   floorDay,
-  floorDay as floorDays,
+  floorDays,
   floorWeek,
-  floorWeek as floorWeeks,
+  floorWeeks,
   floorMonth,
-  floorMonth as floorMonths,
+  floorMonths,
   floorYear,
-  floorYear as floorYears,
+  floorYears,
 
   ceilSecond,
-  ceilSecond as ceilSeconds,
+  ceilSeconds,
   ceilMinute,
-  ceilMinute as ceilMinutes,
+  ceilMinutes,
   ceilHour,
-  ceilHour as ceilHours,
+  ceilHours,
   ceilDay,
-  ceilDay as ceilDays,
+  ceilDays,
   ceilWeek,
-  ceilWeek as ceilWeeks,
+  ceilWeeks,
   ceilMonth,
-  ceilMonth as ceilMonths,
+  ceilMonths,
   ceilYear,
-  ceilYear as ceilYears,
+  ceilYears,
 
   roundSecond,
-  roundSecond as roundSeconds,
+  roundSeconds,
   roundMinute,
-  roundMinute as roundMinutes,
+  roundMinutes,
   roundHour,
-  roundHour as roundHours,
+  roundHours,
   roundDay,
-  roundDay as roundDays,
+  roundDays,
   roundMonth,
-  roundMonth as roundMonths,
+  roundMonths,
   roundYear,
-  roundYear as roundYears,
-
+  roundYears,
+  
   startOfSecond,
   startOfMinute,
   startOfHour,
@@ -158,6 +180,52 @@ export {
   endOfWeek,
   endOfMonth,
   endOfYear,
+} from 'zeitgeist/datetime';
+```
+ 
+## Getters
+
+Getting specific units out of an ISO-8601 string works as well:
+
+
+
+
+
+
+
+
+
+
+-------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+```js
+
+export {
+  normalize,
+
+  microsecondsBetween,
+  millisecondsBetween,
+  secondsBetween,
+  minutesBetween,
+  hoursBetween,
+
+  datesBetween,
+  daysBetween,
 } from './calculations/index';
 
 export {
@@ -319,3 +387,9 @@ Because date components (years, months, weeks, days) can't be converted to other
 doesn't support them yet. To do precise arithmetic operations it is recommended to avoid years, months, weeks and days completely when using durations.
 
 For more information have a look at http://www.ostyn.com/standards/scorm/samples/ISOTimeForSCORM.htm
+
+
+## Contributions
+
+There is still lot to do and fix in order to get to the [0.0.1 milestone](https://github.com/webpapaya/zeitgeist.js/milestone/1).
+
