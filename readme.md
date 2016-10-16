@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/webpapaya/zeitgeist.js.svg?branch=master)](https://travis-ci.org/webpapaya/zeitgeist.js)
+
 # This Package is not production ready yet.
 
 # Roadmap to v0.0.1
