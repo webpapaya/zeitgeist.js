@@ -405,5 +405,8 @@ For more information have a look at http://www.ostyn.com/standards/scorm/samples
 
 ## Contributions
 
-There is still lot to do and fix in order to get to the [0.0.1 milestone](https://github.com/webpapaya/zeitgeist.js/milestone/1).
+There is still lot to do and fix in order to get to the 
+[0.0.1 milestone](https://github.com/webpapaya/zeitgeist.js/milestone/1).
+Contributions are very welcome. Just ping me on twitter @webpapaya
+or comment in one of the open tickets you want to work on.
 
