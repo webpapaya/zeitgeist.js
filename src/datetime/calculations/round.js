@@ -17,19 +17,23 @@ import {
   isSameOrAfter,
   daysBetween,
   addDays,
+  normalize,
 } from '../index';
 
 import {
   fractionOfNumber,
 } from '../../utils';
 
-const prepareArgs = (fn) => (isoString) => fn(toFragments(isoString), isoString);
+const normalizeArg = (fn) => (isoDatetime) => fn(normalize(isoDatetime));
+const prepareArgs = (fn) => normalizeArg((isoString) =>
+  fn(toFragments(isoString), isoString));
 
-export const roundSecond = prepareArgs(({ second }, isoString) => {
+export const roundSecond = (isoString) => {
+  const { second } = toFragments(isoString);
   return fractionOfNumber(second) >= 0.5
     ? ceilSecond(isoString)
     : floorSecond(isoString);
-});
+};
 
 export const roundMinute = prepareArgs(({ second }, isoString) => {
   return second >= 30

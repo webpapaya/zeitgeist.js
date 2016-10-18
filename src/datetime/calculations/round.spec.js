@@ -133,5 +133,8 @@ describe('round', () => {
 
     it('2000-06-16T12:31:13.123 is ceiled', () => assertThat(
       roundYear('2000-06-16T12:31:13.123'), equalTo('2001-01-01T00:00:00')));
+
+    it('2000-05-60T12:31:13.123 is ceiled', () => assertThat(
+      roundYear('2000-05-60T12:31:13.123'), equalTo('2001-01-01T00:00:00')));
   });
 });
