@@ -6,7 +6,7 @@ import {
 const prepareArg = (fn) => (isoDuration) => toIso(fn(toFragments(isoDuration)));
 
 export const floorSecond = prepareArg((fragments) => ({
-  ...fragments, seconds: Math.floor( fragments.seconds )
+  ...fragments, seconds: Math.floor(fragments.seconds),
 }));
 
 export const floorMinute = prepareArg((fragments) => ({
@@ -31,7 +31,7 @@ export const floorDay = prepareArg((fragments) => ({
 
 export const floorWeek = prepareArg((fragments) => ({
   ...fragments,
-  weeks:  Math.floor(fragments.weeks),
+  weeks: Math.floor(fragments.weeks),
   days: 0,
   hours: 0,
   minutes: 0,

@@ -1,5 +1,5 @@
 import { assertThat, equalTo, not } from 'hamjest';
-import { pipe } from './utils'
+import { pipe } from './utils';
 import * as DateTime from './datetime/index';
 
 describe('Datetime Examples', () => {
