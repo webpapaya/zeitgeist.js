@@ -3,25 +3,23 @@ import {
   toFragments,
 } from '../index';
 
-const floorSecond = (isoDuration) => {
-  const fragments = toFragments(isoDuration);
-  return toIso({ ...fragments, seconds: Math.floor( fragments.seconds )})
-};
+const prepareArg = (fn) => (isoDuration) => toIso(fn(toFragments(isoDuration)));
 
-const floorMinute = (isoDuration) => {
-  const fragments = toFragments(isoDuration);
-  return toIso({ ...fragments, minutes: Math.floor(fragments.minutes), seconds: 0 })
-};
+const floorSecond = prepareArg((fragments) => ({
+  ...fragments, seconds: Math.floor( fragments.seconds )
+}));
 
-const floorHour = (isoDuration) => {
-  const fragments = toFragments(isoDuration);
-  return toIso({ ...fragments,
-    hours: Math.floor(fragments.hours),
-    minutes: 0,
-    seconds: 0,
-  });
-};
+const floorMinute = prepareArg((fragments) => ({
+  ...fragments,
+  minutes: Math.floor(fragments.minutes),
+  seconds: 0,
+}));
 
+const floorHour = prepareArg((fragments) => ({
+  hours: Math.floor(fragments.hours),
+  minutes: 0,
+  seconds: 0,
+}));
 
 
 import { assertThat, equalTo } from 'hamjest';
