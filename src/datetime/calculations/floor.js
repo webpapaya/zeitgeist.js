@@ -6,7 +6,11 @@ import {
   subtractDays,
 } from '../index';
 
-const parseArgAsFragments = (fn) => (isoString) => toIso(fn(toFragments(isoString)));
+import {
+  pipe
+} from '../../utils';
+
+const parseArgAsFragments = (fn) => pipe(toFragments, fn, toIso);
 
 export const floorSecond = parseArgAsFragments((fragments) => ({
   ...fragments, second: Math.floor(fragments.second)
