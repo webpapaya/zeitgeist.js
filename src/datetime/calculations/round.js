@@ -20,9 +20,7 @@ import {
   normalize,
 } from '../index';
 
-import {
-  fractionOfNumber,
-} from '../../utils';
+import { fractionOfNumber } from '../../utils';
 
 const normalizeArg = (fn) => (isoDateTime) => fn(normalize(isoDateTime));
 const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
