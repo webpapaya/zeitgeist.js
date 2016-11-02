@@ -53,7 +53,7 @@ export const floorMonth = prepareArg((fragments) => ({
 
 export const floorYear = prepareArg((fragments) => ({
   ...fragments,
-  [years]: Math.floor(fragments.months),
+  [years]: Math.floor(fragments.years),
   [months]: 0,
   [weeks]: 0,
   [days]: 0,
