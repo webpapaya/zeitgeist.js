@@ -129,6 +129,9 @@ describe('round', () => {
 
     it('2000-01-01T11:12:31.123 is ceiled', () => assertThat(
       roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14')));
+
+    it('`I\'m Invalid` results in Invalid Date', () => assertThat(
+      roundSecond('I\'m Invalid'), equalTo('Invalid Date')));
   });
 
   describe('roundMinute', () => {
@@ -137,6 +140,9 @@ describe('round', () => {
 
     it('2000-01-01T11:31:13.123 ceiled', () => assertThat(
       roundMinute('2000-01-01T11:31:31.123'), equalTo('2000-01-01T11:32:00')));
+
+    it('`I\'m Invalid` results in Invalid Date', () => assertThat(
+      roundMinute('I\'m Invalid'), equalTo('Invalid Date')));
   });
 
   describe('roundHour', () => {
@@ -145,6 +151,9 @@ describe('round', () => {
 
     it('2000-01-01T11:31:13.123 is ceiled', () => assertThat(
       roundHour('2000-01-01T12:31:13.123'), equalTo('2000-01-01T13:00:00')));
+
+    it('`I\'m Invalid` results in Invalid Date', () => assertThat(
+      roundHour('I\'m Invalid'), equalTo('Invalid Date')));
   });
 
   describe('roundDay', () => {
@@ -153,6 +162,9 @@ describe('round', () => {
 
     it('2000-01-01T12:31:13.123 is ceiled', () => assertThat(
       roundDay('2000-01-01T12:31:13.123'), equalTo('2000-01-02T00:00:00')));
+
+    it('`I\'m Invalid` results in Invalid Date', () => assertThat(
+      roundDay('I\'m Invalid'), equalTo('Invalid Date')));
   });
 
   describe('roundMonth', () => {
@@ -161,6 +173,9 @@ describe('round', () => {
 
     it('2000-01-16T12:31:13.123 is ceiled', () => assertThat(
       roundMonth('2000-01-16T12:31:13.123'), equalTo('2000-02-01T00:00:00')));
+
+    it('`I\'m Invalid` results in Invalid Date', () => assertThat(
+      roundMonth('I\'m Invalid'), equalTo('Invalid Date')));
   });
 
   describe('roundYear', () => {
@@ -172,5 +187,8 @@ describe('round', () => {
 
     it('2000-05-60T12:31:13.123 is ceiled', () => assertThat(
       roundYear('2000-05-60T12:31:13.123'), equalTo('2001-01-01T00:00:00')));
+
+    it('`I\'m Invalid` results in Invalid Date', () => assertThat(
+      roundYear('I\'m Invalid'), equalTo('Invalid Date')));
   });
 });

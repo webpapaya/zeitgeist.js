@@ -18,20 +18,25 @@ import {
   daysBetween,
   addDays,
   normalize,
+  isValid,
 } from '../index';
 
 import { fractionOfNumber } from '../../utils';
 
-const normalizeArg = (fn) => (isoDateTime) => fn(normalize(isoDateTime));
+const normalizeArg = (fn) => validate((isoDateTime) => fn(normalize(isoDateTime)));
 const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
   fn(toFragments(isoDateTime), isoDateTime));
 
-export const roundSecond = (isoString) => {
+const validate = (fn) => (isoString) => isValid(isoString)
+  ? fn(isoString)
+  : 'Invalid Date';
+
+export const roundSecond = validate((isoString) => {
   const { second } = toFragments(isoString);
   return fractionOfNumber(second) >= 0.5
     ? ceilSecond(isoString)
     : floorSecond(isoString);
-};
+});
 
 export const roundMinute = prepareArgs(({ second }, isoDateTime) => {
   return second >= 30
@@ -51,7 +56,7 @@ export const roundDay = prepareArgs(({ hour }, isoDateTime) => {
     : floorDay(isoDateTime);
 });
 
-export const roundMonth = (isoDateTime) => {
+export const roundMonth = validate((isoDateTime) => {
   const startOfThisMonth = floorMonth(isoDateTime);
   const startOfNextMonth = ceilMonth(isoDateTime);
   const daysInThisMonth = daysBetween(startOfThisMonth, startOfNextMonth);
@@ -60,7 +65,7 @@ export const roundMonth = (isoDateTime) => {
   return isSameOrAfter(isoDateTime, middleOfMonth)
     ? ceilMonth(isoDateTime)
     : floorMonth(isoDateTime);
-};
+});
 
 export const roundYear = prepareArgs(({ month }, isoDateTime) => {
   return month >= 6
