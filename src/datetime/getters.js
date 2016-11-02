@@ -3,7 +3,7 @@ import {
   toFragments,
   toIso,
   removeTimeComponent,
-  removeDateComponent
+  removeDateComponent,
 } from './index';
 import { isEmpty } from '../utils';
 import {
