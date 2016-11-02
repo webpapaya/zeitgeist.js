@@ -1,3 +1,5 @@
+import { INVALID_DATE } from '../constants';
+import { fractionOfNumber } from '../../utils';
 import {
   floorSecond,
   floorMinute,
@@ -21,15 +23,13 @@ import {
   isValid,
 } from '../index';
 
-import { fractionOfNumber } from '../../utils';
 
 const normalizeArg = (fn) => validate((isoDateTime) => fn(normalize(isoDateTime)));
 const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
   fn(toFragments(isoDateTime), isoDateTime));
 
-const validate = (fn) => (isoString) => isValid(isoString)
-  ? fn(isoString)
-  : 'Invalid Date';
+const validate = (fn) => (isoString) =>
+  isValid(isoString) ? fn(isoString) : INVALID_DATE;
 
 export const roundSecond = validate((isoString) => {
   const { second } = toFragments(isoString);

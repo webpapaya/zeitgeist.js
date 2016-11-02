@@ -1,3 +1,4 @@
+import { INVALID_DATE } from '../constants';
 import {
   getWeekday,
 
@@ -20,7 +21,7 @@ import {
 
 const validate = (fn) => (isoString) => isValid(isoString)
   ? fn(isoString)
-  : 'Invalid Date';
+  : INVALID_DATE;
 
 export const ceilSecond = validate((isoString) =>
   floorSecond(addSeconds(1, isoString)));

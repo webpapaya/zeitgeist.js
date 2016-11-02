@@ -1,4 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
+import { INVALID_DATE } from '../constants';
 import {
   startOfSecond,
   startOfMinute,
@@ -14,7 +15,7 @@ describe('startOfSecond', () => {
     startOfSecond('2000-01-01T10:11:12.12'), equalTo('2000-01-01T10:11:12')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    startOfSecond('I\'m invalid'), equalTo('Invalid Date')));
+    startOfSecond('I\'m invalid'), equalTo(INVALID_DATE)));
 });
 
 describe('startOfMinute', () => {
@@ -22,7 +23,7 @@ describe('startOfMinute', () => {
     startOfMinute('2000-01-01T10:11:12.12'), equalTo('2000-01-01T10:11:00')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    startOfMinute('I\'m invalid'), equalTo('Invalid Date')));
+    startOfMinute('I\'m invalid'), equalTo(INVALID_DATE)));
 });
 
 describe('startOfHour', () => {
@@ -30,7 +31,7 @@ describe('startOfHour', () => {
     startOfHour('2000-01-01T10:11:12.12'), equalTo('2000-01-01T10:00:00')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    startOfHour('I\'m invalid'), equalTo('Invalid Date')));
+    startOfHour('I\'m invalid'), equalTo(INVALID_DATE)));
 });
 
 describe('startOfDay', () => {
@@ -38,7 +39,7 @@ describe('startOfDay', () => {
     startOfDay('2000-01-01T10:11:12.12'), equalTo('2000-01-01T00:00:00')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    startOfDay('I\'m invalid'), equalTo('Invalid Date')));
+    startOfDay('I\'m invalid'), equalTo(INVALID_DATE)));
 });
 
 describe('startOfWeek', () => {
@@ -46,7 +47,7 @@ describe('startOfWeek', () => {
     startOfWeek('2000-01-01T10:11:12.12'), equalTo('1999-12-27T00:00:00')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    startOfWeek('I\'m invalid'), equalTo('Invalid Date')));
+    startOfWeek('I\'m invalid'), equalTo(INVALID_DATE)));
 });
 
 describe('startOfMonth', () => {
@@ -54,7 +55,7 @@ describe('startOfMonth', () => {
     startOfMonth('2000-01-02T10:11:12.12'), equalTo('2000-01-01T00:00:00')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    startOfMonth('I\'m invalid'), equalTo('Invalid Date')));
+    startOfMonth('I\'m invalid'), equalTo(INVALID_DATE)));
 });
 
 describe('startOfYear', () => {
@@ -62,5 +63,5 @@ describe('startOfYear', () => {
     startOfYear('2000-02-02T10:11:12.12'), equalTo('2000-01-01T00:00:00')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    startOfYear('I\'m invalid'), equalTo('Invalid Date')));
+    startOfYear('I\'m invalid'), equalTo(INVALID_DATE)));
 });

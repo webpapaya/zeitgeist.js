@@ -1,5 +1,5 @@
 import { createRegexBuilder } from '../utils';
-import { INVALID_FORMAT } from '../core/constants';
+import { INVALID_DATE } from '../core/constants';
 
 const MATCH_INT = createRegexBuilder()
   .and(/[+-]?\d+/.source);
@@ -91,7 +91,7 @@ const THE_MOTHER_OF_ISO8601_DATE_TIME = createRegexBuilder()
 export const isValid = (isoString) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoString);
 
 export const validateFirstArg = (fn) => (isoString, ...args) =>
-  isValid(isoString) ? fn(isoString, ...args) : INVALID_FORMAT;
+  isValid(isoString) ? fn(isoString, ...args) : INVALID_DATE;
 
 export const validateFirstAndSecondArg = (fn) => (firstArg, secondArg, ...args) => {
   const isFirstValid = isValid(firstArg);
@@ -99,5 +99,5 @@ export const validateFirstAndSecondArg = (fn) => (firstArg, secondArg, ...args) 
 
   return isFirstValid && isSecondValid
     ? fn(firstArg, secondArg, ...args)
-    : [isFirstValid ? firstArg : INVALID_FORMAT, isSecondValid ? secondArg : INVALID_FORMAT];
+    : [isFirstValid ? firstArg : INVALID_DATE, isSecondValid ? secondArg : INVALID_DATE];
 };

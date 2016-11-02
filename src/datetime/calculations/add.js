@@ -1,4 +1,5 @@
 import { curry, pipe } from '../../utils';
+import { INVALID_DATE } from '../constants';
 import { toFragments as toDurationFragments } from '../../duration/index';
 import { isValid } from '../index';
 
@@ -17,10 +18,8 @@ import {
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
 
-const validateAndCurry = (fn) => curry((amount, isoString) => {
-  if(!isValid(isoString)) { return 'Invalid Date'; }
-  return fn(amount, isoString);
-});
+const validateAndCurry = (fn) => curry((amount, isoString) =>
+  isValid(isoString) ? fn(amount, isoString) : INVALID_DATE);
 
 export const addDuration = validateAndCurry((isoDuration, isoString) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);

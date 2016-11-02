@@ -1,4 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
+import { INVALID_DATE } from '../constants';
 import {
   ceilSecond,
   ceilMinute,
@@ -28,7 +29,7 @@ describe('floor', () => {
       floorSecond('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:13')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      floorSecond('I\'m Invalid'), equalTo('Invalid Date')));
+      floorSecond('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('floorMinute', () => {
@@ -36,7 +37,7 @@ describe('floor', () => {
       floorMinute('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      floorMinute('I\'m Invalid'), equalTo('Invalid Date')));
+      floorMinute('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('floorHour', () => {
@@ -44,7 +45,7 @@ describe('floor', () => {
       floorHour('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      floorHour('I\'m Invalid'), equalTo('Invalid Date')));
+      floorHour('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('floorDay', () => {
@@ -52,7 +53,7 @@ describe('floor', () => {
       floorDay('2000-01-01T11:12:13.123'), equalTo('2000-01-01T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      floorDay('I\'m Invalid'), equalTo('Invalid Date')));
+      floorDay('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('floorMonth', () => {
@@ -60,7 +61,7 @@ describe('floor', () => {
       floorMonth('2000-01-05T11:12:13.123'), equalTo('2000-01-01T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      floorMonth('I\'m Invalid'), equalTo('Invalid Date')));
+      floorMonth('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('floorYear', () => {
@@ -68,7 +69,7 @@ describe('floor', () => {
       floorYear('2000-02-05T11:12:13.123'), equalTo('2000-01-01T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      floorYear('I\'m Invalid'), equalTo('Invalid Date')));
+      floorYear('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 });
 
@@ -78,7 +79,7 @@ describe('ceil', () => {
       ceilSecond('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:14')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      ceilSecond('I\'m Invalid'), equalTo('Invalid Date')));
+      ceilSecond('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('ceilMinute', () => {
@@ -86,7 +87,7 @@ describe('ceil', () => {
       ceilMinute('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:13:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      ceilMinute('I\'m Invalid'), equalTo('Invalid Date')));
+      ceilMinute('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('ceilHour', () => {
@@ -94,7 +95,7 @@ describe('ceil', () => {
       ceilHour('2000-01-01T11:12:13.123'), equalTo('2000-01-01T12:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      ceilHour('I\'m Invalid'), equalTo('Invalid Date')));
+      ceilHour('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('ceilDay', () => {
@@ -102,7 +103,7 @@ describe('ceil', () => {
       ceilDay('2000-01-01T11:12:13.123'), equalTo('2000-01-02T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      ceilDay('I\'m Invalid'), equalTo('Invalid Date')));
+      ceilDay('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('ceilMonth', () => {
@@ -110,7 +111,7 @@ describe('ceil', () => {
       ceilMonth('2000-01-01T11:12:13.123'), equalTo('2000-02-01T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      ceilMonth('I\'m Invalid'), equalTo('Invalid Date')));
+      ceilMonth('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('ceilYear', () => {
@@ -118,7 +119,7 @@ describe('ceil', () => {
       ceilYear('2000-01-01T11:12:13.123'), equalTo('2001-01-01T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      ceilYear('I\'m Invalid'), equalTo('Invalid Date')));
+      ceilYear('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 });
 
@@ -131,7 +132,7 @@ describe('round', () => {
       roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      roundSecond('I\'m Invalid'), equalTo('Invalid Date')));
+      roundSecond('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('roundMinute', () => {
@@ -142,7 +143,7 @@ describe('round', () => {
       roundMinute('2000-01-01T11:31:31.123'), equalTo('2000-01-01T11:32:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      roundMinute('I\'m Invalid'), equalTo('Invalid Date')));
+      roundMinute('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('roundHour', () => {
@@ -153,7 +154,7 @@ describe('round', () => {
       roundHour('2000-01-01T12:31:13.123'), equalTo('2000-01-01T13:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      roundHour('I\'m Invalid'), equalTo('Invalid Date')));
+      roundHour('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('roundDay', () => {
@@ -164,7 +165,7 @@ describe('round', () => {
       roundDay('2000-01-01T12:31:13.123'), equalTo('2000-01-02T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      roundDay('I\'m Invalid'), equalTo('Invalid Date')));
+      roundDay('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('roundMonth', () => {
@@ -175,7 +176,7 @@ describe('round', () => {
       roundMonth('2000-01-16T12:31:13.123'), equalTo('2000-02-01T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      roundMonth('I\'m Invalid'), equalTo('Invalid Date')));
+      roundMonth('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 
   describe('roundYear', () => {
@@ -189,6 +190,6 @@ describe('round', () => {
       roundYear('2000-05-60T12:31:13.123'), equalTo('2001-01-01T00:00:00')));
 
     it('`I\'m Invalid` results in Invalid Date', () => assertThat(
-      roundYear('I\'m Invalid'), equalTo('Invalid Date')));
+      roundYear('I\'m Invalid'), equalTo(INVALID_DATE)));
   });
 });

@@ -1,3 +1,4 @@
+import { INVALID_DATE } from '../constants';
 import {
   fromJulianDay,
   toJulianDay,
@@ -6,4 +7,4 @@ import {
 
 export const normalize = (isoString) => isValid(isoString)
   ? fromJulianDay(toJulianDay(isoString))
-  : 'Invalid Date';
+  : INVALID_DATE;

@@ -1,3 +1,4 @@
+import { INVALID_DATE } from '../constants';
 import {
   toFragments,
   toIso,
@@ -20,7 +21,7 @@ import {
 
 const validate = (fn) => (isoString) => isValid(isoString)
   ? fn(isoString)
-  : 'Invalid Date';
+  : INVALID_DATE;
 
 export const endOfSecond = validate((isoString) => {
   const fragments = toFragments(isoString);
