@@ -10,4 +10,7 @@ describe('normalize', () => {
 
   it('2001-01-01T00:00:90 gets normalized to 2001-01-01T00:01:30', () => assertThat(
     normalize('2001-01-01T00:00:90'), equalTo('2001-01-01T00:01:30')));
+
+  it('`I\'m invalid` gets normalized to Invalid Date', () => assertThat(
+    normalize('I\'m invalid'), equalTo('Invalid Date')));
 });

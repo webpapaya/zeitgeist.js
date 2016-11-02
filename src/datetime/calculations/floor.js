@@ -25,10 +25,10 @@ export const floorMinute = parseArgAsFragments((fragments) =>
 export const floorHour = parseArgAsFragments((fragments) =>
   ({ ...fragments, minute: 0, second: 0 }));
 
-export const floorWeek = (isoString) => {
+export const floorWeek = validate((isoString) => {
   const weekDay = getWeekday(isoString);
   return floorDay(subtractDays(weekDay - 1, isoString));
-};
+});
 
 export const floorDay = parseArgAsFragments((fragments) =>
   ({ ...fragments, hour: 0, minute: 0, second: 0 }));
