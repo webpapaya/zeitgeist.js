@@ -155,4 +155,8 @@ export {
   isSameSecond,
 } from './compare';
 
+export {
+  isValid
+} from './validate';
+
 export { format } from './format';
