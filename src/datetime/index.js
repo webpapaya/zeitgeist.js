@@ -156,7 +156,8 @@ export {
 } from './compare';
 
 export {
-  isValid
+  isValid,
+  validateFirstArg,
 } from './validate';
 
 export { format } from './format';

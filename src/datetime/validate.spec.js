@@ -46,7 +46,7 @@ describe('validateFirstArg', () => {
     validatedFn('2000-01-01'), equalTo('2000-01-01')));
 
   it('validatedFn responds `Invalid Format` when invalid', () => assertThat(
-    validatedFn('xxxx'), equalTo('Invalid Format')));
+    validatedFn('xxxx'), equalTo('Invalid Date')));
 });
 
 
@@ -57,6 +57,6 @@ describe('validateFirstAndSecondArg', () => {
     validatedFn('2000-01', '2000-01'), equalTo(['2000-01', '2000-01'])));
 
   it('validatedFn responds `Invalid Format` when invalid', () => assertThat(
-    validatedFn('xxxx', '2000-01'), equalTo(['Invalid Format', '2000-01'])));
+    validatedFn('xxxx', '2000-01'), equalTo(['Invalid Date', '2000-01'])));
 });
 

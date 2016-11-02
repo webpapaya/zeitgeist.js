@@ -14,12 +14,18 @@ import {
   subtractHours,
   subtractDays,
   subtractMonths,
+
+  isValid,
 } from '../index';
 
-export const endOfSecond = (isoString) => {
+const validate = (fn) => (isoString) => isValid(isoString)
+  ? fn(isoString)
+  : 'Invalid Date';
+
+export const endOfSecond = validate((isoString) => {
   const fragments = toFragments(isoString);
   return toIso({ ...fragments, second: Math.floor(fragments.second) + 0.999999 });
-};
+});
 
 export const endOfMinute = (isoString) => endOfSecond(subtractSeconds(1, ceilMinute(isoString)));
 export const endOfHour = (isoString) => endOfMinute(subtractMinutes(1, ceilHour(isoString)));

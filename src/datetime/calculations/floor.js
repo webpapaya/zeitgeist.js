@@ -4,11 +4,17 @@ import {
 
   getWeekday,
   subtractDays,
+  isValid,
 } from '../index';
 
 import { pipe } from '../../utils';
 
-const parseArgAsFragments = (fn) => pipe(toFragments, fn, toIso);
+const validate = (fn) => (isoString) => isValid(isoString)
+  ? fn(isoString)
+  : 'Invalid Date';
+
+const parseArgAsFragments = (fn) => validate((isoString) =>
+  pipe(toFragments, fn, toIso)(isoString));
 
 export const floorSecond = parseArgAsFragments((fragments) =>
   ({ ...fragments, second: Math.floor(fragments.second) }));
