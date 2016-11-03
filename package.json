@@ -7,7 +7,8 @@
     "lint": "eslint-crewmeister src",
     "test": "mocha {src,scripts}/{*,**/*,**/**/*,**/**/**/*}.spec.js --recursive --compilers js:babel-register --reporter spec",
     "prepublish": "babel src/ --out-dir lib/ --ignore *.spec.js",
-    "tz:download:leapseconds": "babel-node scripts/leapseconds.js leapseconds"
+    "tz:download:leapseconds": "babel-node scripts/leapseconds.js leapseconds",
+    "build": "mkdir -p dist/ && browserify src/index.js -o dist/index.js -t babelify"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,8 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
     "eslint-config-crewmeister": "latest",
     "hamjest": "^2.13.0",
     "mocha": "^2.5.3",

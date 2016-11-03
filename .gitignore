@@ -42,3 +42,4 @@ lib/
 .moment-data
 _site
 .sass-cache
+dist/
