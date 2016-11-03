@@ -7,7 +7,7 @@ import {
   floorWeek,
   floorMonth,
   floorYear,
-} from './floor';
+} from './index';
 
 describe('floor', () => {
   describe('floorSecond', () => {

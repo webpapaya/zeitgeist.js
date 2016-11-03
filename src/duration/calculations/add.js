@@ -3,12 +3,14 @@ import { UNIT_NAMES } from '../constants';
 import {
   toIso,
   toFragments,
+  isValid,
 } from '../index';
 
 import { curry } from '../../utils';
 
 
 const addUnit = (isoString, amount, unit) => {
+  if (!isValid(isoString)) { return 'Invalid Duration'; }
   const fragments = toFragments(isoString);
   fragments[unit] += amount;
   return toIso(fragments);

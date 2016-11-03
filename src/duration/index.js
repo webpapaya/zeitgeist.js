@@ -38,6 +38,22 @@ export {
   subtractYears as subtractYear,
 
   normalize,
+
+  ceilSecond,
+  ceilMinute,
+  ceilHour,
+  ceilDay,
+  ceilWeek,
+  ceilMonth,
+  ceilYear,
+
+  floorSecond,
+  floorMinute,
+  floorHour,
+  floorDay,
+  floorWeek,
+  floorMonth,
+  floorYear,
 } from './calculations/index';
 
 export {
@@ -70,3 +86,7 @@ export {
   fromFragments,
   fromIso,
 } from './wrapper';
+
+export {
+  isValid,
+} from './validate';

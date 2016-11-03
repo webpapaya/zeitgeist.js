@@ -7,7 +7,7 @@ import {
   ceilWeek,
   ceilMonth,
   ceilYear,
-} from './ceil';
+} from './index';
 
 describe('ceil', () => {
   describe('ceilSecond', () => {
