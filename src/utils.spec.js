@@ -4,14 +4,14 @@ import {
   buildMaybeMonad,
   leftPad,
   fractionOfNumber,
-  compose,
+  pipe,
 } from './utils';
 
-describe('compose', () => {
+describe('pipe', () => {
   it('responds a new fn', () => {
     const first = (input) => `${input }First`;
     const second = (input) => `${input }Second`;
-    const composed = compose(first, second);
+    const composed = pipe(first, second);
 
     assertThat(composed('init'), equalTo(second(first('init'))));
   });

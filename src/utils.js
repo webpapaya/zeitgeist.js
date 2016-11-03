@@ -1,7 +1,5 @@
 export curry from 'ramda/src/curry';
 
-export const pipe = (...fns) => (initialValue) =>
-  fns.reduce((value, fn) => fn(value), initialValue);
 
 export const isEmpty = (value) => value === null || value === void 0 || value === '';
 export const isCollectionEmpty = (collection) => collection.length === 0;
@@ -135,5 +133,5 @@ export const tco = (f) => {
   };
 };
 
-export const compose = (...fns) => (input) =>
-  fns.reduce((value, currentFn) => currentFn(value), input);
+export const pipe = (...fns) => (initialValue) =>
+  fns.reduce((value, fn) => fn(value), initialValue);
