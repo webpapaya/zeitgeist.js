@@ -15,30 +15,30 @@ import {
   findYears,
 } from './index';
 
-const asUnit = (isoString, divider) => {
-  const microseconds = asMicroseconds(isoString);
+const asUnit = (isoDuration, divider) => {
+  const microseconds = asMicroseconds(isoDuration);
   return microseconds / divider;
 };
 
-const containsDateUnits = (isoString) => {
+const containsDateUnits = (isoDuration) => {
   return [
-    findDays(isoString),
-    findWeeks(isoString),
-    findMonths(isoString),
-    findYears(isoString),
+    findDays(isoDuration),
+    findWeeks(isoDuration),
+    findMonths(isoDuration),
+    findYears(isoDuration),
   ].some((element) => element !== 0);
 };
 
-export const asMicroseconds = (isoString) => {
-  if (containsDateUnits(isoString)) { throw new Error('Can\'t convert from date units.'); }
+export const asMicroseconds = (isoDuration) => {
+  if (containsDateUnits(isoDuration)) { throw new Error('Can\'t convert from date units.'); }
   return [
-    findSeconds(isoString) * ONE_SECOND,
-    findMinutes(isoString) * ONE_MINUTE,
-    findHours(isoString) * ONE_HOUR,
+    findSeconds(isoDuration) * ONE_SECOND,
+    findMinutes(isoDuration) * ONE_MINUTE,
+    findHours(isoDuration) * ONE_HOUR,
   ].reduce((sum, seconds) => sum + seconds);
 };
 
-export const asMilliseconds = (isoString) => asUnit(isoString, ONE_MILLISECOND);
-export const asSeconds = (isoString) => asUnit(isoString, ONE_SECOND);
-export const asMinutes = (isoString) => asUnit(isoString, ONE_MINUTE);
-export const asHours = (isoString) => asUnit(isoString, ONE_HOUR);
+export const asMilliseconds = (isoDuration) => asUnit(isoDuration, ONE_MILLISECOND);
+export const asSeconds = (isoDuration) => asUnit(isoDuration, ONE_SECOND);
+export const asMinutes = (isoDuration) => asUnit(isoDuration, ONE_MINUTE);
+export const asHours = (isoDuration) => asUnit(isoDuration, ONE_HOUR);
