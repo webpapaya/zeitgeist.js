@@ -1,14 +1,4 @@
 import {
-  floorSecond,
-  floorMinute,
-  floorHour,
-  floorDay,
-  floorWeek,
-  floorMonth,
-  floorYear,
-} from './floor';
-
-import {
   addSeconds,
   addMinutes,
   addHours,
@@ -16,6 +6,14 @@ import {
   addWeeks,
   addMonths,
   addYears,
+
+  floorSecond,
+  floorMinute,
+  floorHour,
+  floorDay,
+  floorWeek,
+  floorMonth,
+  floorYear,
 } from '../index';
 
 export const ceilSecond = (isoDuration) => floorSecond(addSeconds(1, isoDuration));

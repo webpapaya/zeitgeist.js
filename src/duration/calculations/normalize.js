@@ -9,9 +9,14 @@ import {
   toFragments,
   asMicroseconds,
   removeDateComponent,
+  isValid,
 } from '../index';
 
-export const normalize = (isoString) => {
+const validate = (fn) => (isoString) => isValid(isoString)
+  ? fn(isoString)
+  : 'Invalid Duration';
+
+export const normalize = validate((isoString) => {
   const fragments = toFragments(isoString);
 
   const microseconds = asMicroseconds(removeDateComponent(isoString));
@@ -25,4 +30,4 @@ export const normalize = (isoString) => {
     minutes,
     seconds,
   });
-};
+});

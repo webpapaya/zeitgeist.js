@@ -14,5 +14,8 @@ describe('calculations', () => {
 
     it('P1DT61M results in PT1H1M', () => assertThat(
       normalize('P1DT61M'), equalTo('P1DT1H1M')));
+
+    it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      normalize('I\'m invalid'), equalTo('Invalid Duration')));
   });
 });

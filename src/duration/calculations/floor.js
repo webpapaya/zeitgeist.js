@@ -1,11 +1,16 @@
 import {
   toIso,
   toFragments,
+  isValid,
 } from '../index';
 
 import { UNIT_NAMES } from '../constants';
 
-const prepareArg = (fn) => (isoDuration) => toIso(fn(toFragments(isoDuration)));
+const validate = (fn) => (isoDruation) => isValid(isoDruation)
+  ? fn(isoDruation)
+  : 'Invalid Duration';
+
+const prepareArg = (fn) => validate((isoDuration) => toIso(fn(toFragments(isoDuration))));
 const { seconds, minutes, hours, days, weeks, months, years } = UNIT_NAMES;
 
 export const floorSecond = prepareArg((fragments) => ({
