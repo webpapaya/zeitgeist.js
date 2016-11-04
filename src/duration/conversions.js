@@ -20,10 +20,10 @@ const validate = (fn) => (isoDuration, ...args) => isValid(isoDuration)
   ? fn(isoDuration, ...args)
   : 'Invalid Duration';
 
-const asUnit = (isoDuration, divider) => {
+const asUnit = validate((isoDuration, divider) => {
   const microseconds = asMicroseconds(isoDuration);
   return microseconds / divider;
-};
+});
 
 const containsDateUnits = (isoDuration) => {
   return [
@@ -43,14 +43,7 @@ export const asMicroseconds = validate((isoDuration) => {
   ].reduce((sum, seconds) => sum + seconds);
 });
 
-export const asMilliseconds = validate((isoDuration) =>
-  asUnit(isoDuration, ONE_MILLISECOND));
-
-export const asSeconds = validate((isoDuration) =>
-  asUnit(isoDuration, ONE_SECOND));
-
-export const asMinutes = validate((isoDuration) =>
-  asUnit(isoDuration, ONE_MINUTE));
-
-export const asHours = validate((isoDuration) =>
-  asUnit(isoDuration, ONE_HOUR));
+export const asMilliseconds = (isoDuration) => asUnit(isoDuration, ONE_MILLISECOND);
+export const asSeconds = (isoDuration) => asUnit(isoDuration, ONE_SECOND);
+export const asMinutes = (isoDuration) => asUnit(isoDuration, ONE_MINUTE);
+export const asHours = (isoDuration) => asUnit(isoDuration, ONE_HOUR);

@@ -1,4 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
+import { INVALID_DURATION } from '../constants';
 import {
   addMicroseconds,
   addMilliseconds,
@@ -21,7 +22,7 @@ describe('calculations', () => {
         addMilliseconds(1)('PT0S'), equalTo('PT0.001S')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addMilliseconds(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addMilliseconds(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('microsecond', () => {
@@ -32,7 +33,7 @@ describe('calculations', () => {
         addMicroseconds(1)('PT0S'), equalTo('PT0.000001S')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addMicroseconds(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addMicroseconds(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('seconds', () => {
@@ -46,7 +47,7 @@ describe('calculations', () => {
         addSeconds(61)('PT0S'), equalTo('PT61S')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addSeconds(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addSeconds(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('minutes', () => {
@@ -57,7 +58,7 @@ describe('calculations', () => {
         addMinutes(1)('PT0M'), equalTo('PT1M')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addMinutes(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addMinutes(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('hours', () => {
@@ -68,7 +69,7 @@ describe('calculations', () => {
         addHours(1)('PT0H'), equalTo('PT1H')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addHours(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addHours(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('days', () => {
@@ -79,7 +80,7 @@ describe('calculations', () => {
         addDays(1)('P0D'), equalTo('P1D')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addDays(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addDays(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('weeks', () => {
@@ -90,7 +91,7 @@ describe('calculations', () => {
         addWeeks(1)('P0W'), equalTo('P1W')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addWeeks(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addWeeks(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('months', () => {
@@ -101,7 +102,7 @@ describe('calculations', () => {
         addMonths(1)('P0M'), equalTo('P1M')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addMonths(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addMonths(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
     describe('years', () => {
@@ -112,7 +113,7 @@ describe('calculations', () => {
         addYears(1)('P0Y'), equalTo('P1Y')));
 
       it('`I\'m invalid` responds Invalid Format', () => assertThat(
-        addYears(1)('I\'m invalid'), equalTo('Invalid Duration')));
+        addYears(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
   });
 });
