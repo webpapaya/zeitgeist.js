@@ -1,4 +1,4 @@
-import { INVALID_DATE } from '../constants';
+import { validateFirstArg as validate } from '../validate';
 import {
   toFragments,
   toIso,
@@ -15,13 +15,7 @@ import {
   subtractHours,
   subtractDays,
   subtractMonths,
-
-  isValid,
 } from '../index';
-
-const validate = (fn) => (isoString) => isValid(isoString)
-  ? fn(isoString)
-  : INVALID_DATE;
 
 export const endOfSecond = validate((isoString) => {
   const fragments = toFragments(isoString);

@@ -1,7 +1,5 @@
 import { curry, pipe } from '../../utils';
-import { INVALID_DATE } from '../constants';
 import { toFragments as toDurationFragments } from '../../duration/index';
-import { isValid } from '../index';
 
 import {
   toFragments,
@@ -10,9 +8,11 @@ import {
   toJulianDay,
   containsTimeComponent,
   removeTimeComponent,
+  isValid,
 } from '../index';
 
 import {
+  INVALID_DATE,
   SECONDS_IN_REGULAR_DAY,
   MINUTES_IN_REGULAR_DAY,
   HOURS_IN_REGULAR_DAY,

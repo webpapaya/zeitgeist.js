@@ -4,12 +4,6 @@ import {
   UNITS,
 } from './constants';
 
-import { isValid } from './index';
-
-const validate = (fn) => (isoDuration) => isValid(isoDuration)
-  ? fn(isoDuration)
-  : 'Invalid Duration';
-
 const charsBetween = (string, start, end) =>
   string.substring(string.lastIndexOf(start) + 1, string.lastIndexOf(end));
 

@@ -1,10 +1,8 @@
-import { INVALID_DATE } from '../constants';
+import { validateFirstArg as validate } from '../validate';
 import {
   fromJulianDay,
   toJulianDay,
-  isValid,
 } from '../index';
 
-export const normalize = (isoString) => isValid(isoString)
-  ? fromJulianDay(toJulianDay(isoString))
-  : INVALID_DATE;
+export const normalize = validate((isoString) =>
+  fromJulianDay(toJulianDay(isoString)));

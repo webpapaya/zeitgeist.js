@@ -1,17 +1,12 @@
-import { INVALID_DATE } from '../constants';
+import { validateFirstArg as validate } from '../validate';
 import {
   toIso,
   toFragments,
   getWeekday,
   subtractDays,
-  isValid,
 } from '../index';
 
 import { pipe } from '../../utils';
-
-const validate = (fn) => (isoString) => isValid(isoString)
-  ? fn(isoString)
-  : INVALID_DATE;
 
 const parseArgAsFragments = (fn) => validate((isoString) =>
   pipe(toFragments, fn, toIso)(isoString));
