@@ -1,3 +1,4 @@
+import { validateFirstArg as validate } from '../validate';
 import {
   getWeekday,
 
@@ -16,11 +17,23 @@ import {
   addYears,
 } from '../index';
 
-export const ceilSecond = (isoString) => floorSecond(addSeconds(1, isoString));
-export const ceilMinute = (isoString) => floorMinute(addMinutes(1, isoString));
-export const ceilHour = (isoString) => floorHour(addHours(1, isoString));
+export const ceilSecond = validate((isoString) =>
+  floorSecond(addSeconds(1, isoString)));
 
-export const ceilDay = (isoString) => floorDay(addDays(1, isoString));
-export const ceilWeek = (isoString) => floorDay(addDays(7 - getWeekday(isoString) + 1, isoString));
-export const ceilMonth = (isoString) => floorMonth(addMonths(1, isoString));
-export const ceilYear = (isoString) => floorYear(addYears(1, isoString));
+export const ceilMinute = validate((isoString) =>
+  floorMinute(addMinutes(1, isoString)));
+
+export const ceilHour = validate((isoString) =>
+  floorHour(addHours(1, isoString)));
+
+export const ceilDay = validate((isoString) =>
+  floorDay(addDays(1, isoString)));
+
+export const ceilWeek = validate((isoString) =>
+  floorDay(addDays(7 - getWeekday(isoString) + 1, isoString)));
+
+export const ceilMonth = validate((isoString) =>
+  floorMonth(addMonths(1, isoString)));
+
+export const ceilYear = validate((isoString) =>
+  floorYear(addYears(1, isoString)));

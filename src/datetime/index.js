@@ -1,49 +1,3 @@
-import {
-  FEBRUARY,
-  DAYS_IN_MONTHS,
-} from './constants';
-
-import {
-  toFragments,
-  removeTimeComponent,
-  removeDateComponent,
-} from './transformations/index';
-
-import { isEmpty } from '../utils';
-
-const isLeapMonth = (isoString, month) =>
-  month === FEBRUARY && isLeapYear(isoString);
-
-export const daysInYear = (isoString) => isLeapYear(isoString) ? 366 : 365;
-
-export const daysInMonth = (isoString) => {
-  const { month = 1 } = toFragments(isoString);
-  if (isLeapMonth(isoString, month)) { return 29; }
-  return DAYS_IN_MONTHS[month];
-};
-
-export const isLeapYear = (isoString) => {
-  const { year } = toFragments(isoString);
-  const dividableBy4 = year % 4 === 0;
-  const dividableBy100 = year % 100 === 0;
-  const dividableBy400 = year % 400 === 0;
-
-  return (dividableBy4 && !dividableBy100) || dividableBy400;
-};
-
-export const isLastDayOfMonth = (isoString) => {
-  const { day } = toFragments(isoString);
-  return daysInMonth(isoString) === day;
-};
-
-export const isFirstDayOfMonth = (isoString) => {
-  const { day } = toFragments(isoString);
-  return day === 1;
-};
-
-export const containsDateComponent = (isoString) => !isEmpty(removeTimeComponent(isoString));
-export const containsTimeComponent = (isoString) => !isEmpty(removeDateComponent(isoString));
-
 export {
   toIso,
   toFragments,
@@ -176,6 +130,13 @@ export {
   getHour,
   getMinute,
   getSecond,
+  isLeapYear,
+  containsDateComponent,
+  containsTimeComponent,
+  isFirstDayOfMonth,
+  isLastDayOfMonth,
+  daysInMonth,
+  daysInYear,
 } from './getters';
 
 export {
@@ -193,5 +154,10 @@ export {
   isSameMinute,
   isSameSecond,
 } from './compare';
+
+export {
+  isValid,
+  validateFirstArg,
+} from './validate';
 
 export { format } from './format';

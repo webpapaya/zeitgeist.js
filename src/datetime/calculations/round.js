@@ -1,3 +1,5 @@
+import { validateFirstArg as validate } from '../validate';
+import { fractionOfNumber } from '../../utils';
 import {
   floorSecond,
   floorMinute,
@@ -17,51 +19,51 @@ import {
   isSameOrAfter,
   daysBetween,
   addDays,
+  normalize,
 } from '../index';
 
-import {
-  fractionOfNumber,
-} from '../../utils';
+const normalizeArg = (fn) => validate((isoDateTime) => fn(normalize(isoDateTime)));
+const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
+  fn(toFragments(isoDateTime), isoDateTime));
 
-const prepareArgs = (fn) => (isoString) => fn(toFragments(isoString), isoString);
-
-export const roundSecond = prepareArgs(({ second }, isoString) => {
+export const roundSecond = validate((isoString) => {
+  const { second } = toFragments(isoString);
   return fractionOfNumber(second) >= 0.5
     ? ceilSecond(isoString)
     : floorSecond(isoString);
 });
 
-export const roundMinute = prepareArgs(({ second }, isoString) => {
+export const roundMinute = prepareArgs(({ second }, isoDateTime) => {
   return second >= 30
-    ? ceilMinute(isoString)
-    : floorMinute(isoString);
+    ? ceilMinute(isoDateTime)
+    : floorMinute(isoDateTime);
 });
 
-export const roundHour = prepareArgs(({ minute }, isoString) => {
+export const roundHour = prepareArgs(({ minute }, isoDateTime) => {
   return minute >= 30
-    ? ceilHour(isoString)
-    : floorHour(isoString);
+    ? ceilHour(isoDateTime)
+    : floorHour(isoDateTime);
 });
 
-export const roundDay = prepareArgs(({ hour }, isoString) => {
+export const roundDay = prepareArgs(({ hour }, isoDateTime) => {
   return hour >= 12
-    ? ceilDay(isoString)
-    : floorDay(isoString);
+    ? ceilDay(isoDateTime)
+    : floorDay(isoDateTime);
 });
 
-export const roundMonth = (isoString) => {
-  const startOfThisMonth = floorMonth(isoString);
-  const startOfNextMonth = ceilMonth(isoString);
+export const roundMonth = validate((isoDateTime) => {
+  const startOfThisMonth = floorMonth(isoDateTime);
+  const startOfNextMonth = ceilMonth(isoDateTime);
   const daysInThisMonth = daysBetween(startOfThisMonth, startOfNextMonth);
   const middleOfMonth = floorDay(addDays(daysInThisMonth / 2, startOfThisMonth));
 
-  return isSameOrAfter(isoString, middleOfMonth)
-    ? ceilMonth(isoString)
-    : floorMonth(isoString);
-};
+  return isSameOrAfter(isoDateTime, middleOfMonth)
+    ? ceilMonth(isoDateTime)
+    : floorMonth(isoDateTime);
+});
 
-export const roundYear = prepareArgs(({ month }, isoString) => {
+export const roundYear = prepareArgs(({ month }, isoDateTime) => {
   return month >= 6
-    ? ceilYear(isoString)
-    : floorYear(isoString);
+    ? ceilYear(isoDateTime)
+    : floorYear(isoDateTime);
 });

@@ -13,7 +13,6 @@ Convert dates from one representation to another.
    toIso,
    toFragments,
    
-   
    toIsoDate,
    toIsoTime,
    toFloat,
@@ -68,6 +67,7 @@ addLectureHour('2000-01-01T00:00:00'); // => '2000-01-01T01:50:00'
 ```
 
 ### Public Functions
+
 ```js
 import {
   addMicroseconds,
@@ -185,50 +185,17 @@ import {
  
 ## Getters
 
-Getting specific units out of an ISO-8601 string works as well:
-
-
-
-
-
-
-
-
-
-
--------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
+Getting specific units out of an ISO-8601 string works as well. It accepts 
+an ISO-8601 date string as first argument.
 
 ```js
+getYear('2000-01-01'); // => 2000
+```
 
-export {
-  normalize,
+### Public Functions
 
-  microsecondsBetween,
-  millisecondsBetween,
-  secondsBetween,
-  minutesBetween,
-  hoursBetween,
-
-  datesBetween,
-  daysBetween,
-} from './calculations/index';
-
-export {
+```js
+import {
   getWeekday,
   getWeekOfYear,
   getDayOfYear,
@@ -239,9 +206,22 @@ export {
   getHour,
   getMinute,
   getSecond,
-} from './getters';
+} from 'zeitgeist/datetime';
+```
 
-export {
+## Comparison
+
+Compare takes two ISO-8601 date strings. They accept two ISO-8601 date
+strings as their arguments.
+
+```js
+isBefore('2000-01-01', '2000-02-03'); // => true
+isBetween({from: '2000', to: '2001'}, '2000-02-31'); // => true
+```
+
+### Public Functions
+```js
+import {
   isBetween,
   isBefore,
   isAfter,
@@ -255,10 +235,45 @@ export {
   isSameHour,
   isSameMinute,
   isSameSecond,
-} from './compare';
-
-export { format } from './format';
+} from 'zeitgeist/datetime';
 ```
+
+## Time-Between
+Knowing how much time there is between two given dates might be needed
+in your application.
+
+```js
+hoursBetween('T11:00', 'T10:00'); // => 1
+daysBetween('2000-01-01', '2000-01-02'); // => 1
+
+// Dates between includes the first and last date.
+datesBetween('2000-01-01', '2000-01-02'); // => ['2000-01-01', '2000-01-02']
+```
+
+### Public functions
+
+```js
+import {
+  microsecondsBetween,
+  millisecondsBetween,
+  secondsBetween,
+  minutesBetween,
+  hoursBetween,
+
+  datesBetween,
+  daysBetween,
+} from 'zeitgeist/datetime';
+```
+
+## Date normalisation
+
+```js
+import { normalize } from 'zeitgeist/datetime';
+
+normalize('2000-13-01'); // => '2001-01-01' 
+```
+
+
 # Durations
 An immutable duration library based on the ISO-8601 format for durations. 
 
@@ -291,7 +306,6 @@ export {
   findYears,
 };
 ```
-
 
 #### Calculations
 
@@ -391,5 +405,8 @@ For more information have a look at http://www.ostyn.com/standards/scorm/samples
 
 ## Contributions
 
-There is still lot to do and fix in order to get to the [0.0.1 milestone](https://github.com/webpapaya/zeitgeist.js/milestone/1).
+There is still lot to do and fix in order to get to the 
+[0.0.1 milestone](https://github.com/webpapaya/zeitgeist.js/milestone/1).
+Contributions are very welcome. Just ping me on twitter @webpapaya
+or comment in one of the open tickets you want to work on.
 

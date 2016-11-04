@@ -19,6 +19,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractMicroseconds(1)('PT0S'), equalTo('PT-0.000001S')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractMicroseconds(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('milliseconds', () => {
@@ -27,6 +30,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractMilliseconds(1)('PT0S'), equalTo('PT-0.001S')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractMilliseconds(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('seconds', () => {
@@ -38,6 +44,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractSeconds(61)('PT0S'), equalTo('PT-61S')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractSeconds(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('minutes', () => {
@@ -46,6 +55,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractMinutes(1)('PT0M'), equalTo('PT-1M')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractMinutes(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('hours', () => {
@@ -54,6 +66,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractHours(1)('PT0H'), equalTo('PT-1H')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractHours(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('days', () => {
@@ -62,6 +77,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractDays(1)('P0D'), equalTo('P-1D')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractDays(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('weeks', () => {
@@ -70,6 +88,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractWeeks(1)('P0W'), equalTo('P-1W')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractWeeks(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('months', () => {
@@ -78,6 +99,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractMonths(1)('P0M'), equalTo('P-1M')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractMonths(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
 
     describe('years', () => {
@@ -86,6 +110,9 @@ describe('calculations', () => {
 
       it('can be curried', () => assertThat(
         subtractYears(1)('P0Y'), equalTo('P-1Y')));
+
+      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+        subtractYears(1)('I\'m invalid'), equalTo('Invalid Duration')));
     });
   });
 });

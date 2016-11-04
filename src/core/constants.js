@@ -1,4 +1,4 @@
-export const INVALID_FORMAT = 'Invalid Format';
+export const INVALID_DATE = 'Invalid Date';
 
 export const ONE_MICROSECOND = 1;
 export const ONE_MILLISECOND = ONE_MICROSECOND * 1000;

@@ -23,3 +23,23 @@ export {
   subtractMonths,
   subtractYears,
 } from './subtract';
+
+export {
+  ceilSecond,
+  ceilMinute,
+  ceilHour,
+  ceilDay,
+  ceilWeek,
+  ceilMonth,
+  ceilYear,
+} from './ceil';
+
+export {
+  floorSecond,
+  floorMinute,
+  floorHour,
+  floorDay,
+  floorWeek,
+  floorMonth,
+  floorYear,
+} from './floor';

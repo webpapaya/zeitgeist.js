@@ -1,12 +1,17 @@
-import { UNIT_NAMES } from '../constants';
+import { UNIT_NAMES, INVALID_DURATION } from '../constants';
 
 import {
   toIso,
   toFragments,
+  isValid,
 } from '../index';
 
 import { curry } from '../../utils';
 
+const curryAndValidate = (fn) => curry((amount, isoString) => isValid(isoString)
+  ? fn(amount, isoString)
+  : INVALID_DURATION
+);
 
 const addUnit = (isoString, amount, unit) => {
   const fragments = toFragments(isoString);
@@ -14,29 +19,29 @@ const addUnit = (isoString, amount, unit) => {
   return toIso(fragments);
 };
 
-export const addMilliseconds = curry((amount, isoString) =>
+export const addMilliseconds = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount / (10 ** 3), UNIT_NAMES.seconds));
 
-export const addMicroseconds = curry((amount, isoString) =>
+export const addMicroseconds = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount / (10 ** 6), UNIT_NAMES.seconds));
 
-export const addSeconds = curry((amount, isoString) =>
+export const addSeconds = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount, UNIT_NAMES.seconds));
 
-export const addMinutes = curry((amount, isoString) =>
+export const addMinutes = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount, UNIT_NAMES.minutes));
 
-export const addHours = curry((amount, isoString) =>
+export const addHours = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount, UNIT_NAMES.hours));
 
-export const addDays = curry((amount, isoString) =>
+export const addDays = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount, UNIT_NAMES.days));
 
-export const addWeeks = curry((amount, isoString) =>
+export const addWeeks = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount, UNIT_NAMES.weeks));
 
-export const addMonths = curry((amount, isoString) =>
+export const addMonths = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount, UNIT_NAMES.months));
 
-export const addYears = curry((amount, isoString) =>
+export const addYears = curryAndValidate((amount, isoString) =>
   addUnit(isoString, amount, UNIT_NAMES.years));
