@@ -12,30 +12,30 @@ import {
 
 import { curry } from '../../utils';
 
-export const subtractMilliseconds = curry((amount, isoString) =>
-  addMilliseconds(amount * -1, isoString));
+export const subtractMilliseconds = curry((amount, isoDuration) =>
+  addMilliseconds(amount * -1, isoDuration));
 
-export const subtractMicroseconds = curry((amount, isoString) =>
-  addMicroseconds(amount * -1, isoString));
+export const subtractMicroseconds = curry((amount, isoDuration) =>
+  addMicroseconds(amount * -1, isoDuration));
 
-export const subtractSeconds = curry((amount, isoString) =>
-  addSeconds(amount * -1, isoString));
+export const subtractSeconds = curry((amount, isoDuration) =>
+  addSeconds(amount * -1, isoDuration));
 
-export const subtractMinutes = curry((amount, isoString) =>
-  addMinutes(amount * -1, isoString));
+export const subtractMinutes = curry((amount, isoDuration) =>
+  addMinutes(amount * -1, isoDuration));
 
-export const subtractHours = curry((amount, isoString) =>
-  addHours(amount * -1, isoString));
+export const subtractHours = curry((amount, isoDuration) =>
+  addHours(amount * -1, isoDuration));
 
-export const subtractDays = curry((amount, isoString) =>
-  addDays(amount * -1, isoString));
+export const subtractDays = curry((amount, isoDuration) =>
+  addDays(amount * -1, isoDuration));
 
-export const subtractWeeks = curry((amount, isoString) =>
-  addWeeks(amount * -1, isoString));
+export const subtractWeeks = curry((amount, isoDuration) =>
+  addWeeks(amount * -1, isoDuration));
 
-export const subtractMonths = curry((amount, isoString) =>
-  addMonths(amount * -1, isoString));
+export const subtractMonths = curry((amount, isoDuration) =>
+  addMonths(amount * -1, isoDuration));
 
-export const subtractYears = curry((amount, isoString) =>
-  addYears(amount * -1, isoString));
+export const subtractYears = curry((amount, isoDuration) =>
+  addYears(amount * -1, isoDuration));
 

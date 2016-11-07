@@ -12,14 +12,14 @@ import {
   isValid,
 } from '../index';
 
-const validate = (fn) => (isoString) => isValid(isoString)
-  ? fn(isoString)
+const validate = (fn) => (isoDuration) => isValid(isoDuration)
+  ? fn(isoDuration)
   : 'Invalid Duration';
 
-export const normalize = validate((isoString) => {
-  const fragments = toFragments(isoString);
+export const normalize = validate((isoDuration) => {
+  const fragments = toFragments(isoDuration);
 
-  const microseconds = asMicroseconds(removeDateComponent(isoString));
+  const microseconds = asMicroseconds(removeDateComponent(isoDuration));
   const hours = Math.floor(microseconds / ONE_HOUR);
   const minutes = Math.floor((microseconds - hours * ONE_HOUR) / ONE_MINUTE);
   const seconds = ((microseconds - minutes * ONE_MINUTE) - (hours * ONE_HOUR)) / ONE_SECOND;

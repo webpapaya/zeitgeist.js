@@ -24,6 +24,6 @@ const MATCH_DURATION = createRegexBuilder()
   .and(MATCH_TIME)
   .endOfLine();
 
-export const isValid = (isoString) =>
-  MATCH_DURATION.test(isoString.toUpperCase());
+export const isValid = (isoDuration) =>
+  MATCH_DURATION.test(isoDuration.toUpperCase());
 

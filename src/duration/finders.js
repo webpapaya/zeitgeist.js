@@ -10,12 +10,12 @@ const charsBetween = (string, start, end) =>
 const containsTimeDesignator = (string) =>
   string.lastIndexOf(TIME_DESIGNATOR) === -1;
 
-const extractTimeComponents = (isoString) =>
-  isoString.split(TIME_DESIGNATOR)[1] || '';
+const extractTimeComponents = (isoDuration) =>
+  isoDuration.split(TIME_DESIGNATOR)[1] || '';
 
-const extractDateComponents = (isoString) => {
-  if (containsTimeDesignator(isoString)) { return isoString.replace(DURATION_DESIGNATOR, ''); }
-  return charsBetween(isoString, DURATION_DESIGNATOR, TIME_DESIGNATOR);
+const extractDateComponents = (isoDuration) => {
+  if (containsTimeDesignator(isoDuration)) { return isoDuration.replace(DURATION_DESIGNATOR, ''); }
+  return charsBetween(isoDuration, DURATION_DESIGNATOR, TIME_DESIGNATOR);
 };
 
 const findUnit = (stringComponent, unit) => {
@@ -27,27 +27,27 @@ const findUnit = (stringComponent, unit) => {
   return parseFloat(matchedUnit[0].slice(0, -1));
 };
 
-const findTimeUnit = (unit, isoString) => {
-  const timeComponent = extractTimeComponents(isoString || '');
+const findTimeUnit = (unit, isoDuration) => {
+  const timeComponent = extractTimeComponents(isoDuration || '');
   return findUnit(timeComponent, unit);
 };
 
-const findDateUnit = (unit, isoString) => {
-  const dateComponent = extractDateComponents(isoString || '');
+const findDateUnit = (unit, isoDuration) => {
+  const dateComponent = extractDateComponents(isoDuration || '');
   return findUnit(dateComponent, unit);
 };
 
-export const removeDateComponent = (isoString) =>
-  `${DURATION_DESIGNATOR}${TIME_DESIGNATOR}${extractTimeComponents(isoString)}`;
+export const removeDateComponent = (isoDuration) =>
+  `${DURATION_DESIGNATOR}${TIME_DESIGNATOR}${extractTimeComponents(isoDuration)}`;
 
-export const removeTimeComponent = (isoString) =>
-  `${DURATION_DESIGNATOR}${extractDateComponents(isoString)}`;
+export const removeTimeComponent = (isoDuration) =>
+  `${DURATION_DESIGNATOR}${extractDateComponents(isoDuration)}`;
 
-export const findSeconds = (isoString) => findTimeUnit(UNITS.seconds, isoString);
-export const findMinutes = (isoString) => findTimeUnit(UNITS.minutes, isoString);
-export const findHours = (isoString) => findTimeUnit(UNITS.hours, isoString);
+export const findSeconds = (isoDuration) => findTimeUnit(UNITS.seconds, isoDuration);
+export const findMinutes = (isoDuration) => findTimeUnit(UNITS.minutes, isoDuration);
+export const findHours = (isoDuration) => findTimeUnit(UNITS.hours, isoDuration);
 
-export const findDays = (isoString) => findDateUnit(UNITS.days, isoString);
-export const findWeeks = (isoString) => findDateUnit(UNITS.weeks, isoString);
-export const findMonths = (isoString) => findDateUnit(UNITS.months, isoString);
-export const findYears = (isoString) => findDateUnit(UNITS.years, isoString);
+export const findDays = (isoDuration) => findDateUnit(UNITS.days, isoDuration);
+export const findWeeks = (isoDuration) => findDateUnit(UNITS.weeks, isoDuration);
+export const findMonths = (isoDuration) => findDateUnit(UNITS.months, isoDuration);
+export const findYears = (isoDuration) => findDateUnit(UNITS.years, isoDuration);

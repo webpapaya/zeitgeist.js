@@ -38,47 +38,47 @@ import {
 } from './index';
 
 export const fromFragments = (fragments) => {
-  const isoString = toIso(fragments);
-  return fromIso(isoString);
+  const isoDuration = toIso(fragments);
+  return fromIso(isoDuration);
 };
 
-export const fromIso = (isoString) => {
+export const fromIso = (isoDuration) => {
   return {
-    toIso: () => isoString,
-    toFragments: () => toFragments(isoString),
+    toIso: () => isoDuration,
+    toFragments: () => toFragments(isoDuration),
 
-    findSeconds: () => findSeconds(isoString),
-    findMinutes: () => findMinutes(isoString),
-    findHours: () => findHours(isoString),
-    findDays: () => findDays(isoString),
-    findWeeks: () => findWeeks(isoString),
-    findMonths: () => findMonths(isoString),
-    findYears: () => findYears(isoString),
+    findSeconds: () => findSeconds(isoDuration),
+    findMinutes: () => findMinutes(isoDuration),
+    findHours: () => findHours(isoDuration),
+    findDays: () => findDays(isoDuration),
+    findWeeks: () => findWeeks(isoDuration),
+    findMonths: () => findMonths(isoDuration),
+    findYears: () => findYears(isoDuration),
 
-    asMicroseconds: () => asMicroseconds(isoString),
-    asMilliseconds: () => asMilliseconds(isoString),
-    asSeconds: () => asSeconds(isoString),
-    asMinutes: () => asMinutes(isoString),
-    asHours: () => asHours(isoString),
+    asMicroseconds: () => asMicroseconds(isoDuration),
+    asMilliseconds: () => asMilliseconds(isoDuration),
+    asSeconds: () => asSeconds(isoDuration),
+    asMinutes: () => asMinutes(isoDuration),
+    asHours: () => asHours(isoDuration),
 
-    addMicroseconds: (amount) => fromIso(addMicroseconds(amount, isoString)),
-    addMilliseconds: (amount) => fromIso(addMilliseconds(amount, isoString)),
-    addSeconds: (amount) => fromIso(addSeconds(amount, isoString)),
-    addMinutes: (amount) => fromIso(addMinutes(amount, isoString)),
-    addHours: (amount) => fromIso(addHours(amount, isoString)),
-    addDays: (amount) => fromIso(addDays(amount, isoString)),
-    addWeeks: (amount) => fromIso(addWeeks(amount, isoString)),
-    addMonths: (amount) => fromIso(addMonths(amount, isoString)),
-    addYears: (amount) => fromIso(addYears(amount, isoString)),
+    addMicroseconds: (amount) => fromIso(addMicroseconds(amount, isoDuration)),
+    addMilliseconds: (amount) => fromIso(addMilliseconds(amount, isoDuration)),
+    addSeconds: (amount) => fromIso(addSeconds(amount, isoDuration)),
+    addMinutes: (amount) => fromIso(addMinutes(amount, isoDuration)),
+    addHours: (amount) => fromIso(addHours(amount, isoDuration)),
+    addDays: (amount) => fromIso(addDays(amount, isoDuration)),
+    addWeeks: (amount) => fromIso(addWeeks(amount, isoDuration)),
+    addMonths: (amount) => fromIso(addMonths(amount, isoDuration)),
+    addYears: (amount) => fromIso(addYears(amount, isoDuration)),
 
-    subtractMilliseconds: (amount) => fromIso(subtractMilliseconds(amount, isoString)),
-    subtractMicroseconds: (amount) => fromIso(subtractMicroseconds(amount, isoString)),
-    subtractSeconds: (amount) => fromIso(subtractSeconds(amount, isoString)),
-    subtractMinutes: (amount) => fromIso(subtractMinutes(amount, isoString)),
-    subtractHours: (amount) => fromIso(subtractHours(amount, isoString)),
-    subtractDays: (amount) => fromIso(subtractDays(amount, isoString)),
-    subtractWeeks: (amount) => fromIso(subtractWeeks(amount, isoString)),
-    subtractMonths: (amount) => fromIso(subtractMonths(amount, isoString)),
-    subtractYears: (amount) => fromIso(subtractYears(amount, isoString)),
+    subtractMilliseconds: (amount) => fromIso(subtractMilliseconds(amount, isoDuration)),
+    subtractMicroseconds: (amount) => fromIso(subtractMicroseconds(amount, isoDuration)),
+    subtractSeconds: (amount) => fromIso(subtractSeconds(amount, isoDuration)),
+    subtractMinutes: (amount) => fromIso(subtractMinutes(amount, isoDuration)),
+    subtractHours: (amount) => fromIso(subtractHours(amount, isoDuration)),
+    subtractDays: (amount) => fromIso(subtractDays(amount, isoDuration)),
+    subtractWeeks: (amount) => fromIso(subtractWeeks(amount, isoDuration)),
+    subtractMonths: (amount) => fromIso(subtractMonths(amount, isoDuration)),
+    subtractYears: (amount) => fromIso(subtractYears(amount, isoDuration)),
   };
 };
