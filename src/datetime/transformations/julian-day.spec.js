@@ -7,53 +7,53 @@ describe('fromJulianDay is the inverse function of toJulianDay', () => {
 
   describe('years', () => {
     for (let year = 2000; year <= 2010; year++) {
-      const isoString = toIso({ ...defaultFragments, year });
+      const isoDatetime = toIso({ ...defaultFragments, year });
 
-      it(`${isoString} works`, () => assertThat(
-        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+      it(`${isoDatetime} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoDatetime)), equalTo(isoDatetime)));
     }
   });
 
   describe('months', () => {
     for (let month = 1; month <= 12; month++) {
-      const isoString = toIso({ ...defaultFragments, month });
+      const isoDatetime = toIso({ ...defaultFragments, month });
 
-      it(`${isoString} works`, () => assertThat(
-        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+      it(`${isoDatetime} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoDatetime)), equalTo(isoDatetime)));
     }
   });
 
   describe('days', () => {
     for (let day = 1; day <= 31; day++) {
-      const isoString = toIso({ ...defaultFragments, day });
+      const isoDatetime = toIso({ ...defaultFragments, day });
 
-      it(`${isoString} works`, () => assertThat(
-        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+      it(`${isoDatetime} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoDatetime)), equalTo(isoDatetime)));
     }
   });
 
   describe('hours', () => {
     for (let hour = 0; hour < 24; hour++) {
-      const isoString = toIso({ ...defaultFragments, hour });
+      const isoDatetime = toIso({ ...defaultFragments, hour });
 
-      it(`${isoString} works`, () => assertThat(
-        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+      it(`${isoDatetime} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoDatetime)), equalTo(isoDatetime)));
     }
   });
 
   describe('minutes', () => {
     for (let minute = 0; minute < 60; minute++) {
-      const isoString = toIso({ ...defaultFragments, minute });
-      it(`${isoString} works`, () => assertThat(
-        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+      const isoDatetime = toIso({ ...defaultFragments, minute });
+      it(`${isoDatetime} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoDatetime)), equalTo(isoDatetime)));
     }
   });
 
   describe('seconds', () => {
     for (let second = 0; second < 60; second++) {
-      const isoString = toIso({ ...defaultFragments, second });
-      it(`${isoString} works`, () => assertThat(
-        fromJulianDay(toJulianDay(isoString)), equalTo(isoString)));
+      const isoDatetime = toIso({ ...defaultFragments, second });
+      it(`${isoDatetime} works`, () => assertThat(
+        fromJulianDay(toJulianDay(isoDatetime)), equalTo(isoDatetime)));
     }
   });
 });

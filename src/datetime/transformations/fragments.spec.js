@@ -8,61 +8,61 @@ import {
 
 describe('extractTimezoneAsTime', () => {
   [
-    { isoString: '2000', timezone: '' },
-    { isoString: '2000-01', timezone: '' },
-    { isoString: '2000-01-01', timezone: '' },
-    { isoString: '2000-01-01T10', timezone: '' },
-    { isoString: '2000-01-01 10', timezone: '' },
-    { isoString: '2000-01-01 10:10', timezone: '' },
-    { isoString: '2000-01-01 10:10:-01', timezone: '' },
-    { isoString: '2000-01-01 10:10:10Z', timezone: '+00:00' },
-    { isoString: '2000-01-01 10:10:10Z ', timezone: '+00:00' },
-    { isoString: '2000-01-01 10:10:10+01:00', timezone: '+01:00' },
-    { isoString: '2000-01-01T10:10:10-01:00', timezone: '-01:00' },
-    { isoString: '2000-01-01 10:10:10+00:00', timezone: '+00:00' },
-  ].forEach(({ isoString, timezone }) => {
-    it(`${isoString} responds ${timezone}`, () => assertThat(
-      extractTimezoneAsTime(isoString), equalTo(timezone)));
+    { isoDatetime: '2000', timezone: '' },
+    { isoDatetime: '2000-01', timezone: '' },
+    { isoDatetime: '2000-01-01', timezone: '' },
+    { isoDatetime: '2000-01-01T10', timezone: '' },
+    { isoDatetime: '2000-01-01 10', timezone: '' },
+    { isoDatetime: '2000-01-01 10:10', timezone: '' },
+    { isoDatetime: '2000-01-01 10:10:-01', timezone: '' },
+    { isoDatetime: '2000-01-01 10:10:10Z', timezone: '+00:00' },
+    { isoDatetime: '2000-01-01 10:10:10Z ', timezone: '+00:00' },
+    { isoDatetime: '2000-01-01 10:10:10+01:00', timezone: '+01:00' },
+    { isoDatetime: '2000-01-01T10:10:10-01:00', timezone: '-01:00' },
+    { isoDatetime: '2000-01-01 10:10:10+00:00', timezone: '+00:00' },
+  ].forEach(({ isoDatetime, timezone }) => {
+    it(`${isoDatetime} responds ${timezone}`, () => assertThat(
+      extractTimezoneAsTime(isoDatetime), equalTo(timezone)));
   });
 });
 
 describe('extractDate', () => {
   [
-    { isoString: '', date: '' },
-    { isoString: '10', date: '10' },
-    { isoString: '2000', date: '2000' },
-    { isoString: '999999', date: '999999' },
-    { isoString: '2000-01', date: '2000-01' },
-    { isoString: '2000-01-01', date: '2000-01-01' },
-    { isoString: '2000-01-01T10', date: '2000-01-01' },
-    { isoString: '2000-01-01 10', date: '2000-01-01' },
-    { isoString: '-2000--01--01', date: '-2000--01--01' },
-    { isoString: '2000-01-01 10:10', date: '2000-01-01' },
-    { isoString: '2000-01-01T10:10:10', date: '2000-01-01' },
-    { isoString: '2000-01-01 10:10:10Z', date: '2000-01-01' },
-    { isoString: '2000-01-01 10:10:10+01:00', date: '2000-01-01' },
-  ].forEach(({ isoString, date }) => {
-    it(`${isoString} responds ${date}`, () => assertThat(
-      extractDate(isoString), equalTo(date)));
+    { isoDatetime: '', date: '' },
+    { isoDatetime: '10', date: '10' },
+    { isoDatetime: '2000', date: '2000' },
+    { isoDatetime: '999999', date: '999999' },
+    { isoDatetime: '2000-01', date: '2000-01' },
+    { isoDatetime: '2000-01-01', date: '2000-01-01' },
+    { isoDatetime: '2000-01-01T10', date: '2000-01-01' },
+    { isoDatetime: '2000-01-01 10', date: '2000-01-01' },
+    { isoDatetime: '-2000--01--01', date: '-2000--01--01' },
+    { isoDatetime: '2000-01-01 10:10', date: '2000-01-01' },
+    { isoDatetime: '2000-01-01T10:10:10', date: '2000-01-01' },
+    { isoDatetime: '2000-01-01 10:10:10Z', date: '2000-01-01' },
+    { isoDatetime: '2000-01-01 10:10:10+01:00', date: '2000-01-01' },
+  ].forEach(({ isoDatetime, date }) => {
+    it(`${isoDatetime} responds ${date}`, () => assertThat(
+      extractDate(isoDatetime), equalTo(date)));
   });
 });
 
 describe('extractTime', () => {
   [
-    { isoString: 'T20:15', time: '20:15' },
-    { isoString: '2000', time: '' },
-    { isoString: '2000-01', time: '' },
-    { isoString: '2000-01-01', time: '' },
-    { isoString: '2000-01-01T10', time: '10' },
-    { isoString: '2000-01-01 10', time: '10' },
-    { isoString: '2000-01-01 10:10', time: '10:10' },
-    { isoString: '2000-01-01 10:10:10', time: '10:10:10' },
-    { isoString: '2000-01-01 10:10:10Z', time: '10:10:10' },
-    { isoString: '2000-01-01 10:10:10+01:00', time: '10:10:10' },
-    { isoString: '2000-01-01 10:10:10-01:00', time: '10:10:10' },
-  ].forEach(({ isoString, time }) => {
-    it(`${isoString} responds ${time}`, () => assertThat(
-      extractTime(isoString), equalTo(time)));
+    { isoDatetime: 'T20:15', time: '20:15' },
+    { isoDatetime: '2000', time: '' },
+    { isoDatetime: '2000-01', time: '' },
+    { isoDatetime: '2000-01-01', time: '' },
+    { isoDatetime: '2000-01-01T10', time: '10' },
+    { isoDatetime: '2000-01-01 10', time: '10' },
+    { isoDatetime: '2000-01-01 10:10', time: '10:10' },
+    { isoDatetime: '2000-01-01 10:10:10', time: '10:10:10' },
+    { isoDatetime: '2000-01-01 10:10:10Z', time: '10:10:10' },
+    { isoDatetime: '2000-01-01 10:10:10+01:00', time: '10:10:10' },
+    { isoDatetime: '2000-01-01 10:10:10-01:00', time: '10:10:10' },
+  ].forEach(({ isoDatetime, time }) => {
+    it(`${isoDatetime} responds ${time}`, () => assertThat(
+      extractTime(isoDatetime), equalTo(time)));
   });
 });
 

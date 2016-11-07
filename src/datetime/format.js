@@ -4,7 +4,7 @@ import { locale as defaultLocale } from '../locales/default-locale';
 import { toFragments } from './index';
 
 const sortByLengthDesc = (a, b) => b.length - a.length;
-const findToken = (isoString, format, tokenRegex) =>
+const findToken = (isoDatetime, format, tokenRegex) =>
   format.match(tokenRegex) || [];
 
 const buildTokenRegex = (tokenList) => {
@@ -16,16 +16,16 @@ const buildTokenRegex = (tokenList) => {
   return new RegExp(token, 'g');
 };
 
-export const format = (isoString, givenFormat, options = {}) => {
+export const format = (isoDatetime, givenFormat, options = {}) => {
   const {
     tokenList = defaultToken,
     locale = defaultLocale,
   } = options;
 
-  const fragments = toFragments(isoString);
+  const fragments = toFragments(isoDatetime);
   const tokenRegex = buildTokenRegex(tokenList);
 
-  return findToken(isoString, givenFormat, tokenRegex).reduce((formattedDate, token) => {
+  return findToken(isoDatetime, givenFormat, tokenRegex).reduce((formattedDate, token) => {
     const replacedToken = tokenList[token](fragments, locale);
     return formattedDate.replace(token, replacedToken);
   }, givenFormat);

@@ -10,17 +10,17 @@ import {
   subtractDays,
 } from './index';
 
-export const wrapper = (isoString) => {
+export const wrapper = (isoDatetime) => {
   return {
-    toIso: () => isoString,
-    toFragments: () => toFragments(isoString),
+    toIso: () => isoDatetime,
+    toFragments: () => toFragments(isoDatetime),
 
-    addYears: (amount) => wrapper(addYears(amount, isoString)),
-    addMonths: (amount) => wrapper(addMonths(amount, isoString)),
-    addDays: (amount) => wrapper(addDays(amount, isoString)),
+    addYears: (amount) => wrapper(addYears(amount, isoDatetime)),
+    addMonths: (amount) => wrapper(addMonths(amount, isoDatetime)),
+    addDays: (amount) => wrapper(addDays(amount, isoDatetime)),
 
-    subtractYears: (amount) => wrapper(subtractYears(amount, isoString)),
-    subtractMonths: (amount) => wrapper(subtractMonths(amount, isoString)),
-    subtractDays: (amount) => wrapper(subtractDays(amount, isoString)),
+    subtractYears: (amount) => wrapper(subtractYears(amount, isoDatetime)),
+    subtractMonths: (amount) => wrapper(subtractMonths(amount, isoDatetime)),
+    subtractDays: (amount) => wrapper(subtractDays(amount, isoDatetime)),
   };
 };

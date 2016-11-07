@@ -15,8 +15,8 @@ const calculateLeapDayOffset = ({ year }) => 2 - floor(year / 100) + floor(year 
 const calculateDayFraction = ({ hour = 0, minute = 0, second = 0 }) =>
   hour / HOURS_IN_REGULAR_DAY + minute / MINUTES_IN_REGULAR_DAY + second / SECONDS_IN_REGULAR_DAY;
 
-const toCalculationFragments = (isoString) => {
-  const fragments = toFragments(isoString);
+const toCalculationFragments = (isoDatetime) => {
+  const fragments = toFragments(isoDatetime);
   const month = fragments.month <= 2 ? fragments.month + 12 : fragments.month;
   const year = fragments.month <= 2 ? fragments.year - 1 : fragments.year;
 
@@ -27,8 +27,8 @@ const AVERAGE_YEAR_DURATION = 365.25;
 const AVERAGE_MONTH_DURATION = 30.6001;
 
 // https://www.wikiwand.com/de/Julianisches_Datum
-export const toJulianDay = (isoString) => {
-  const fragments = toCalculationFragments(isoString);
+export const toJulianDay = (isoDatetime) => {
+  const fragments = toCalculationFragments(isoDatetime);
 
   return sum([
     floor(AVERAGE_YEAR_DURATION * (fragments.year + 4716)),

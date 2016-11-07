@@ -1,14 +1,14 @@
 import { separateDateAndTimeComponents, toFragments } from './fragments';
 import { leftPad } from '../../utils';
 
-export const removeTimeComponent = (isoString) =>
-  separateDateAndTimeComponents(isoString).dateComponent;
+export const removeTimeComponent = (isoDatetime) =>
+  separateDateAndTimeComponents(isoDatetime).dateComponent;
 
-export const removeDateComponent = (isoString) =>
-  separateDateAndTimeComponents(isoString).timeComponent;
+export const removeDateComponent = (isoDatetime) =>
+  separateDateAndTimeComponents(isoDatetime).timeComponent;
 
-export const toFloat = (isoString) => {
-  const fragments = toFragments(isoString);
+export const toFloat = (isoDatetime) => {
+  const fragments = toFragments(isoDatetime);
 
   return parseFloat([
     leftPad(fragments.year),

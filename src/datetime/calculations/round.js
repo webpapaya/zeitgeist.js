@@ -26,11 +26,11 @@ const normalizeArg = (fn) => validate((isoDateTime) => fn(normalize(isoDateTime)
 const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
   fn(toFragments(isoDateTime), isoDateTime));
 
-export const roundSecond = validate((isoString) => {
-  const { second } = toFragments(isoString);
+export const roundSecond = validate((isoDatetime) => {
+  const { second } = toFragments(isoDatetime);
   return fractionOfNumber(second) >= 0.5
-    ? ceilSecond(isoString)
-    : floorSecond(isoString);
+    ? ceilSecond(isoDatetime)
+    : floorSecond(isoDatetime);
 });
 
 export const roundMinute = prepareArgs(({ second }, isoDateTime) => {

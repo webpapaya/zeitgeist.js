@@ -88,10 +88,10 @@ const THE_MOTHER_OF_ISO8601_DATE_TIME = createRegexBuilder()
     .and(MATCH_TIMEZONE)
     .endOfLine());
 
-export const isValid = (isoString) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoString);
+export const isValid = (isoDatetime) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoDatetime);
 
-export const validateFirstArg = (fn) => (isoString, ...args) =>
-  isValid(isoString) ? fn(isoString, ...args) : INVALID_DATE;
+export const validateFirstArg = (fn) => (isoDatetime, ...args) =>
+  isValid(isoDatetime) ? fn(isoDatetime, ...args) : INVALID_DATE;
 
 export const validateFirstAndSecondArg = (fn) => (firstArg, secondArg, ...args) => {
   const isFirstValid = isValid(firstArg);

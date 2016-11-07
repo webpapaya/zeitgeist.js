@@ -17,14 +17,14 @@ import {
   subtractMonths,
 } from '../index';
 
-export const endOfSecond = validate((isoString) => {
-  const fragments = toFragments(isoString);
+export const endOfSecond = validate((isoDatetime) => {
+  const fragments = toFragments(isoDatetime);
   return toIso({ ...fragments, second: Math.floor(fragments.second) + 0.999999 });
 });
 
-export const endOfMinute = (isoString) => endOfSecond(subtractSeconds(1, ceilMinute(isoString)));
-export const endOfHour = (isoString) => endOfMinute(subtractMinutes(1, ceilHour(isoString)));
-export const endOfDay = (isoString) => endOfHour(subtractHours(1, ceilDay(isoString)));
-export const endOfMonth = (isoString) => endOfDay(subtractDays(1, ceilMonth(isoString)));
-export const endOfYear = (isoString) => endOfMonth(subtractMonths(1, ceilYear(isoString)));
-export const endOfWeek = (isoString) => endOfDay(subtractDays(1, ceilWeek(isoString)));
+export const endOfMinute = (isoDatetime) => endOfSecond(subtractSeconds(1, ceilMinute(isoDatetime)));
+export const endOfHour = (isoDatetime) => endOfMinute(subtractMinutes(1, ceilHour(isoDatetime)));
+export const endOfDay = (isoDatetime) => endOfHour(subtractHours(1, ceilDay(isoDatetime)));
+export const endOfMonth = (isoDatetime) => endOfDay(subtractDays(1, ceilMonth(isoDatetime)));
+export const endOfYear = (isoDatetime) => endOfMonth(subtractMonths(1, ceilYear(isoDatetime)));
+export const endOfWeek = (isoDatetime) => endOfDay(subtractDays(1, ceilWeek(isoDatetime)));

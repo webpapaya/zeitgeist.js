@@ -10,7 +10,7 @@ import {
   addYears,
 } from '../index';
 
-export const subtractDuration = curry((isoDuration, isoString) => {
+export const subtractDuration = curry((isoDuration, isoDatetime) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
 
   return pipe(
@@ -20,23 +20,23 @@ export const subtractDuration = curry((isoDuration, isoString) => {
     addHours(hours * -1),
     addMinutes(minutes * -1),
     addSeconds(seconds * -1),
-  )(isoString);
+  )(isoDatetime);
 });
 
-export const subtractSeconds = curry((seconds, isoString) =>
-  addSeconds(seconds * -1, isoString));
+export const subtractSeconds = curry((seconds, isoDatetime) =>
+  addSeconds(seconds * -1, isoDatetime));
 
-export const subtractMinutes = curry((minutes, isoString) =>
-  addMinutes(minutes * -1, isoString));
+export const subtractMinutes = curry((minutes, isoDatetime) =>
+  addMinutes(minutes * -1, isoDatetime));
 
-export const subtractHours = curry((hours, isoString) =>
-  addHours(hours * -1, isoString));
+export const subtractHours = curry((hours, isoDatetime) =>
+  addHours(hours * -1, isoDatetime));
 
-export const subtractDays = curry((days, isoString) =>
-  addDays(days * -1, isoString));
+export const subtractDays = curry((days, isoDatetime) =>
+  addDays(days * -1, isoDatetime));
 
-export const subtractMonths = curry((months, isoString) =>
-  addMonths(months * -1, isoString));
+export const subtractMonths = curry((months, isoDatetime) =>
+  addMonths(months * -1, isoDatetime));
 
-export const subtractYears = curry((years, isoString) =>
-  addYears(years * -1, isoString));
+export const subtractYears = curry((years, isoDatetime) =>
+  addYears(years * -1, isoDatetime));

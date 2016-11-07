@@ -8,8 +8,8 @@ import {
 
 import { pipe } from '../../utils';
 
-const parseArgAsFragments = (fn) => validate((isoString) =>
-  pipe(toFragments, fn, toIso)(isoString));
+const parseArgAsFragments = (fn) => validate((isoDatetime) =>
+  pipe(toFragments, fn, toIso)(isoDatetime));
 
 export const floorSecond = parseArgAsFragments((fragments) =>
   ({ ...fragments, second: Math.floor(fragments.second) }));
@@ -20,9 +20,9 @@ export const floorMinute = parseArgAsFragments((fragments) =>
 export const floorHour = parseArgAsFragments((fragments) =>
   ({ ...fragments, minute: 0, second: 0 }));
 
-export const floorWeek = validate((isoString) => {
-  const weekDay = getWeekday(isoString);
-  return floorDay(subtractDays(weekDay - 1, isoString));
+export const floorWeek = validate((isoDatetime) => {
+  const weekDay = getWeekday(isoDatetime);
+  return floorDay(subtractDays(weekDay - 1, isoDatetime));
 });
 
 export const floorDay = parseArgAsFragments((fragments) =>

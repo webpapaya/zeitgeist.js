@@ -18,10 +18,10 @@ import {
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
 
-const validateAndCurry = (fn) => curry((amount, isoString) =>
-  isValid(isoString) ? fn(amount, isoString) : INVALID_DATE);
+const validateAndCurry = (fn) => curry((amount, isoDatetime) =>
+  isValid(isoDatetime) ? fn(amount, isoDatetime) : INVALID_DATE);
 
-export const addDuration = validateAndCurry((isoDuration, isoString) => {
+export const addDuration = validateAndCurry((isoDuration, isoDatetime) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
 
   return pipe(
@@ -31,28 +31,28 @@ export const addDuration = validateAndCurry((isoDuration, isoString) => {
     addHours(hours),
     addMinutes(minutes),
     addSeconds(seconds),
-  )(isoString);
+  )(isoDatetime);
 });
 
-export const addSeconds = validateAndCurry((seconds, isoString) =>
-  addDays(seconds / SECONDS_IN_REGULAR_DAY, isoString));
+export const addSeconds = validateAndCurry((seconds, isoDatetime) =>
+  addDays(seconds / SECONDS_IN_REGULAR_DAY, isoDatetime));
 
-export const addMinutes = validateAndCurry((minutes, isoString) =>
-  addDays(minutes / MINUTES_IN_REGULAR_DAY, isoString));
+export const addMinutes = validateAndCurry((minutes, isoDatetime) =>
+  addDays(minutes / MINUTES_IN_REGULAR_DAY, isoDatetime));
 
-export const addHours = validateAndCurry((hours, isoString) =>
-  addDays(hours / HOURS_IN_REGULAR_DAY, isoString));
+export const addHours = validateAndCurry((hours, isoDatetime) =>
+  addDays(hours / HOURS_IN_REGULAR_DAY, isoDatetime));
 
-export const addDays = validateAndCurry((days, isoString) => {
-  const calculatedIsoString = fromJulianDay(toJulianDay(isoString) + days);
+export const addDays = validateAndCurry((days, isoDatetime) => {
+  const calculatedIsoString = fromJulianDay(toJulianDay(isoDatetime) + days);
 
-  return containsTimeComponent(isoString)
+  return containsTimeComponent(isoDatetime)
     ? calculatedIsoString
     : removeTimeComponent(calculatedIsoString);
 });
 
-export const addMonths = validateAndCurry((months, isoString) => {
-  const fragments = toFragments(isoString);
+export const addMonths = validateAndCurry((months, isoDatetime) => {
+  const fragments = toFragments(isoDatetime);
   return toIso({
     ...fragments,
     year: (fragments.year + Math.floor((fragments.month + months - 1) / 12)),

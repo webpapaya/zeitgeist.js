@@ -4,5 +4,5 @@ import {
   toJulianDay,
 } from '../index';
 
-export const normalize = validate((isoString) =>
-  fromJulianDay(toJulianDay(isoString)));
+export const normalize = validate((isoDatetime) =>
+  fromJulianDay(toJulianDay(isoDatetime)));
