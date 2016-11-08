@@ -47,7 +47,7 @@ describe('subtractDays', () => {
   it('subtract -1 day from 2000-12-31 results in 2001-01-01', () => assertThat(
     subtractDays(-1, '2000-12-31T00:00:00'), equalTo('2001-01-01T00:00:00')));
 
-  it('`I\'m invalid`results in Invalid Date', () => assertThat(
+  it('`I\'m invalid`results in `INVALID_DATETIME`', () => assertThat(
     subtractDays(-1, 'I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
@@ -55,7 +55,7 @@ describe('subtractSeconds', () => {
   it('subtract 1 second from 2001-01-01T00:00:01 results in 2001-01-01T00:00:00', () => assertThat(
     subtractSeconds(1, '2001-01-01T00:00:01'), equalTo('2001-01-01T00:00:00')));
 
-  it('`I\'m invalid`results in Invalid Date', () => assertThat(
+  it('`I\'m invalid`results in `INVALID_DATETIME`', () => assertThat(
     subtractSeconds(-1, 'I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
@@ -63,7 +63,7 @@ describe('subtractMinutes', () => {
   it('subtract 1 minute from 2001-01-01T00:01:00 results in 2001-01-01T00:00:00', () => assertThat(
     subtractMinutes(1, '2001-01-01T00:01:00'), equalTo('2001-01-01T00:00:00')));
 
-  it('`I\'m invalid`results in Invalid Date', () => assertThat(
+  it('`I\'m invalid`results in `INVALID_DATETIME`', () => assertThat(
     subtractMinutes(-1, 'I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
@@ -71,7 +71,7 @@ describe('subtractHours', () => {
   it('subtract 1 hour from 2001-01-01T01:00:00 results in 2001-01-01T00:00:00', () => assertThat(
     subtractHours(1, '2001-01-01T01:00:00'), equalTo('2001-01-01T00:00:00')));
 
-  it('`I\'m invalid`results in Invalid Date', () => assertThat(
+  it('`I\'m invalid`results in `INVALID_DATETIME`', () => assertThat(
     subtractHours(-1, 'I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
@@ -85,7 +85,7 @@ describe('subtract months', () => {
   it('subtract -1 month from 2000-01-01 results in 2000-02-01', () => assertThat(
     subtractMonths(-1, '2000-01-01'), equalTo('2000-02-01')));
 
-  it('`I\'m invalid`results in Invalid Date', () => assertThat(
+  it('`I\'m invalid`results in `INVALID_DATETIME`', () => assertThat(
     subtractMonths(-1, 'I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
@@ -99,6 +99,6 @@ describe('subtractYears', () => {
   it('subtract -1 years from 2000-01-01 results in 2001-01-01', () => assertThat(
     subtractYears(-1, '2000-01-01'), equalTo('2001-01-01')));
 
-  it('`I\'m invalid`results in Invalid Date', () => assertThat(
+  it('`I\'m invalid`results in `INVALID_DATETIME`', () => assertThat(
     subtractYears(-1, 'I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
