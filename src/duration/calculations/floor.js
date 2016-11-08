@@ -1,11 +1,10 @@
-import { INVALID_DURATION } from '../constants';
 import {
   toIso,
   toFragments,
   isValid,
 } from '../index';
 
-import { UNIT_NAMES } from '../constants';
+import { UNIT_NAMES, INVALID_DURATION } from '../constants';
 
 const validate = (fn) => (isoDruation) => isValid(isoDruation)
   ? fn(isoDruation)

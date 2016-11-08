@@ -58,7 +58,6 @@ export const isLeapYear = (isoDatetime) => {
   return (dividableBy4 && !dividableBy100) || dividableBy400;
 };
 
-
 export const daysInYear = (isoDatetime) => isLeapYear(isoDatetime) ? 366 : 365;
 
 export const daysInMonth = (isoDatetime) => {
