@@ -1,6 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { normalize } from '../index';
-import { INVALID_DATE } from '../constants';
+import { INVALID_DATETIME } from '../constants';
 
 describe('normalize', () => {
   it('2001-01-01T00:01:-01 gets normalized to 2001-01-01T00:01:00', () => assertThat(
@@ -13,5 +13,5 @@ describe('normalize', () => {
     normalize('2001-01-01T00:00:90'), equalTo('2001-01-01T00:01:30')));
 
   it('`I\'m invalid` gets normalized to Invalid Date', () => assertThat(
-    normalize('I\'m invalid'), equalTo(INVALID_DATE)));
+    normalize('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });

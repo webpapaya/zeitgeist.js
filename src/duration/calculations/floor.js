@@ -1,3 +1,4 @@
+import { INVALID_DURATION } from '../constants';
 import {
   toIso,
   toFragments,
@@ -8,7 +9,7 @@ import { UNIT_NAMES } from '../constants';
 
 const validate = (fn) => (isoDruation) => isValid(isoDruation)
   ? fn(isoDruation)
-  : 'Invalid Duration';
+  : INVALID_DURATION;
 
 const prepareArg = (fn) => validate((isoDuration) => toIso(fn(toFragments(isoDuration))));
 const { seconds, minutes, hours, days, weeks, months, years } = UNIT_NAMES;

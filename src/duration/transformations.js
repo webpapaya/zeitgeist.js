@@ -19,20 +19,18 @@ import {
 const inArray = (array, element) => array.indexOf(element) !== -1;
 const hasKey = (object, keyName) => inArray(Object.keys(object), keyName);
 
-const buildIsoComponent = (fragments, units) => {
-  return Object.keys(fragments)
-    .filter((unitName) => hasKey(units, unitName))
-    .sort((a, b) => {
-      const sortedUnitNames = Object.keys(UNITS);
-      return sortedUnitNames.indexOf(b) - sortedUnitNames.indexOf(a);
-    })
-    .reduce((prev, name) => {
-      if (fragments[name] === 0) { return prev; }
-      const unit = units[name];
-      const value = parseFloat(fragments[name]);
-      return `${prev}${value}${unit}`;
-    }, '');
-};
+const buildIsoComponent = (fragments, units) => Object.keys(fragments)
+  .filter((unitName) => hasKey(units, unitName))
+  .sort((a, b) => {
+    const sortedUnitNames = Object.keys(UNITS);
+    return sortedUnitNames.indexOf(b) - sortedUnitNames.indexOf(a);
+  })
+  .reduce((prev, name) => {
+    if (fragments[name] === 0) { return prev; }
+    const unit = units[name];
+    const value = parseFloat(fragments[name]);
+    return `${prev}${value}${unit}`;
+  }, '');
 
 const buildDateComponent = (fragments) => {
   const dateComponent = buildIsoComponent(fragments, DATE_UNITS);

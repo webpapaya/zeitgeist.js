@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { INVALID_DATE } from '../constants';
+import { INVALID_DATETIME } from '../constants';
 import {
   endOfSecond,
   endOfMinute,
@@ -15,7 +15,7 @@ describe('endOfSecond', () => {
     endOfSecond('2000-01-01T10:11:12.12'), equalTo('2000-01-01T10:11:12.999999')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    endOfSecond('I\'m invalid'), equalTo(INVALID_DATE)));
+    endOfSecond('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
 describe('endOfMinute', () => {
@@ -23,7 +23,7 @@ describe('endOfMinute', () => {
     endOfMinute('2000-01-01T10:11:12.12'), equalTo('2000-01-01T10:11:59.999999')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    endOfMinute('I\'m invalid'), equalTo(INVALID_DATE)));
+    endOfMinute('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
 describe('endOfHour', () => {
@@ -31,7 +31,7 @@ describe('endOfHour', () => {
     endOfHour('2000-01-01T10:11:12.12'), equalTo('2000-01-01T10:59:59.999999')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    endOfHour('I\'m invalid'), equalTo(INVALID_DATE)));
+    endOfHour('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
 describe('endOfDay', () => {
@@ -39,7 +39,7 @@ describe('endOfDay', () => {
     endOfDay('2000-01-01T10:11:12.12'), equalTo('2000-01-01T23:59:59.999999')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    endOfDay('I\'m invalid'), equalTo(INVALID_DATE)));
+    endOfDay('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
 describe('endOfWeek', () => {
@@ -47,7 +47,7 @@ describe('endOfWeek', () => {
     endOfWeek('2000-01-01T10:11:12.12'), equalTo('2000-01-02T23:59:59.999999')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    endOfWeek('I\'m invalid'), equalTo(INVALID_DATE)));
+    endOfWeek('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
 
@@ -56,7 +56,7 @@ describe('endOfMonth', () => {
     endOfMonth('2000-01-01T10:11:12.12'), equalTo('2000-01-31T23:59:59.999999')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    endOfMonth('I\'m invalid'), equalTo(INVALID_DATE)));
+    endOfMonth('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
 
 describe('endOfYear', () => {
@@ -64,5 +64,5 @@ describe('endOfYear', () => {
     endOfYear('2000-01-01T10:11:12.12'), equalTo('2000-12-31T23:59:59.999999')));
 
   it('`I\'m invalid`results in Invalid Date', () => assertThat(
-    endOfYear('I\'m invalid'), equalTo(INVALID_DATE)));
+    endOfYear('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });

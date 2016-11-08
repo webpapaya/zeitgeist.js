@@ -12,14 +12,14 @@ import {
 } from '../index';
 
 import {
-  INVALID_DATE,
+  INVALID_DATETIME,
   SECONDS_IN_REGULAR_DAY,
   MINUTES_IN_REGULAR_DAY,
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
 
 const validateAndCurry = (fn) => curry((amount, isoDatetime) =>
-  isValid(isoDatetime) ? fn(amount, isoDatetime) : INVALID_DATE);
+  isValid(isoDatetime) ? fn(amount, isoDatetime) : INVALID_DATETIME);
 
 export const addDuration = validateAndCurry((isoDuration, isoDatetime) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);

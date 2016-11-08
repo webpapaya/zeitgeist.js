@@ -1,4 +1,5 @@
 import {
+  INVALID_DURATION,
   ONE_MILLISECOND,
   ONE_SECOND,
   ONE_MINUTE,
@@ -18,7 +19,7 @@ import {
 
 const validate = (fn) => (isoDuration, ...args) => isValid(isoDuration)
   ? fn(isoDuration, ...args)
-  : 'Invalid Duration';
+  : INVALID_DURATION;
 
 const asUnit = validate((isoDuration, divider) => {
   const microseconds = asMicroseconds(isoDuration);

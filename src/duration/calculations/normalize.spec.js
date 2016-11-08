@@ -1,4 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
+import { INVALID_DURATION } from '../constants';
 import { normalize } from '../index';
 
 describe('calculations', () => {
@@ -15,7 +16,7 @@ describe('calculations', () => {
     it('P1DT61M results in PT1H1M', () => assertThat(
       normalize('P1DT61M'), equalTo('P1DT1H1M')));
 
-    it('`I\'m invalid` responds Invalid Format', () => assertThat(
-      normalize('I\'m invalid'), equalTo('Invalid Duration')));
+    it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
+      normalize('I\'m invalid'), equalTo(INVALID_DURATION)));
   });
 });

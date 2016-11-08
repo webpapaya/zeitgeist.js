@@ -1,4 +1,5 @@
 import { assertThat, equalTo, throws } from 'hamjest';
+import { INVALID_DURATION } from './constants';
 import {
   asMicroseconds,
   asMilliseconds,
@@ -13,7 +14,7 @@ describe('as "unit" methods', () => {
       asMicroseconds('PT2s'), equalTo(2000000)));
 
     it('`I\'m invalid` responds Invalid Duration', () => assertThat(
-      asMicroseconds('I\'m invalid'), equalTo('Invalid Duration')));
+      asMicroseconds('I\'m invalid'), equalTo(INVALID_DURATION)));
   });
 
   describe('asMilliseconds', () => {
@@ -21,7 +22,7 @@ describe('as "unit" methods', () => {
       asMilliseconds('PT1.1s'), equalTo(1100)));
 
     it('`I\'m invalid` responds Invalid Duration', () => assertThat(
-      asMilliseconds('I\'m invalid'), equalTo('Invalid Duration')));
+      asMilliseconds('I\'m invalid'), equalTo(INVALID_DURATION)));
   });
 
   describe('asSeconds', () => {
@@ -29,7 +30,7 @@ describe('as "unit" methods', () => {
       asSeconds('PT1m1s'), equalTo(61)));
 
     it('`I\'m invalid` responds Invalid Duration', () => assertThat(
-      asMilliseconds('I\'m invalid'), equalTo('Invalid Duration')));
+      asMilliseconds('I\'m invalid'), equalTo(INVALID_DURATION)));
   });
 
   describe('asMinutes', () => {
@@ -37,7 +38,7 @@ describe('as "unit" methods', () => {
       asMinutes('PT1h1m'), equalTo(61)));
 
     it('`I\'m invalid` responds Invalid Duration', () => assertThat(
-      asMinutes('I\'m invalid'), equalTo('Invalid Duration')));
+      asMinutes('I\'m invalid'), equalTo(INVALID_DURATION)));
   });
 
   describe('asHours', () => {
@@ -54,6 +55,6 @@ describe('as "unit" methods', () => {
       () => asHours('P1W'), throws()));
 
     it('`I\'m invalid` responds Invalid Duration', () => assertThat(
-      asHours('I\'m invalid'), equalTo('Invalid Duration')));
+      asHours('I\'m invalid'), equalTo(INVALID_DURATION)));
   });
 });

@@ -21,7 +21,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addMilliseconds(1)('PT0S'), equalTo('PT0.001S')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addMilliseconds(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -32,7 +32,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addMicroseconds(1)('PT0S'), equalTo('PT0.000001S')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addMicroseconds(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -46,7 +46,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addSeconds(61)('PT0S'), equalTo('PT61S')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addSeconds(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -57,7 +57,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addMinutes(1)('PT0M'), equalTo('PT1M')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addMinutes(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -68,7 +68,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addHours(1)('PT0H'), equalTo('PT1H')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addHours(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -79,7 +79,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addDays(1)('P0D'), equalTo('P1D')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addDays(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -90,7 +90,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addWeeks(1)('P0W'), equalTo('P1W')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addWeeks(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -101,7 +101,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addMonths(1)('P0M'), equalTo('P1M')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addMonths(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
 
@@ -112,7 +112,7 @@ describe('calculations', () => {
       it('can be curried', () => assertThat(
         addYears(1)('P0Y'), equalTo('P1Y')));
 
-      it('`I\'m invalid` responds Invalid Format', () => assertThat(
+      it('`I\'m invalid` responds `INVALID_DURATION`', () => assertThat(
         addYears(1)('I\'m invalid'), equalTo(INVALID_DURATION)));
     });
   });

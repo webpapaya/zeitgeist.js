@@ -1,4 +1,5 @@
 import {
+  INVALID_DURATION,
   ONE_HOUR,
   ONE_MINUTE,
   ONE_SECOND,
@@ -14,7 +15,7 @@ import {
 
 const validate = (fn) => (isoDuration) => isValid(isoDuration)
   ? fn(isoDuration)
-  : 'Invalid Duration';
+  : INVALID_DURATION;
 
 export const normalize = validate((isoDuration) => {
   const fragments = toFragments(isoDuration);

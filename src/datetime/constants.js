@@ -65,5 +65,5 @@ export {
   ONE_MINUTE,
   ONE_HOUR,
   ONE_DAY as ONE_REGULAR_DAY,
-  INVALID_DATE,
+  INVALID_DATETIME,
 } from '../core/constants';
