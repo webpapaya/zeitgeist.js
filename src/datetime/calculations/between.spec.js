@@ -67,46 +67,36 @@ describe('hours between', () => {
 });
 
 describe('daysBetween responds', () => {
-  it('1 days between 2000-01-02T00:00 and 2000-01-01T23:59', () => assertThat(
-    daysBetween('2000-01-02T00:00', '2000-01-01T23:59'), equalTo(-1)));
-
-  it('0 days between 1700-01-01T00:00:00 and 1700-01-01T00:00:01', () => assertThat(
-    daysBetween('1700-01-01T00:00:01', '1700-01-01T00:00:00'), equalTo(0)));
-
-  it('0 days between 2000-01-01 and 2000-01-01', () => assertThat(
-    daysBetween('2000-01-01', '2000-01-01'), equalTo(0)));
-
-  it('1 days between 2000-01-01 and 2000-01-02', () => assertThat(
-    daysBetween('2000-01-01', '2000-01-02'), equalTo(1)));
-
-  it('-1 day between 2001-01-01 and 2000-12-31', () => assertThat(
-    daysBetween('2001-01-01', '2000-12-31'), equalTo(-1)));
-
-  it('1 day between 2000-12-31 and 2001-01-01', () => assertThat(
-    daysBetween('2000-12-31', '2001-01-01'), equalTo(1)));
-
-  it('1 days between 2000-01-02 and 2000-01-01', () => assertThat(
-    daysBetween('2000-01-02', '2000-01-01'), equalTo(-1)));
-
-  it('366 days between a leap year and a regular year', () => assertThat(
-    daysBetween('2000-01-01', '2001-01-01'), equalTo(366)));
-
-  it('365 days between two regular years', () => assertThat(
-    daysBetween('2001-01-01', '2002-01-01'), equalTo(365)));
+  [
+    { firstDate: '2000-01-02T00:00', secondDate: '2000-01-01T23:59', resultsIn: -1 },
+    { firstDate: '1700-01-01T00:00:00', secondDate: '1700-01-01T00:00:00', resultsIn: 0 },
+    { firstDate: '2000-01-01', secondDate: '2000-01-01', resultsIn: 0 },
+    { firstDate: '2000-01-01', secondDate: '2000-01-02', resultsIn: 1 },
+    { firstDate: '2001-01-01', secondDate: '2000-12-31', resultsIn: -1 },
+    { firstDate: '2000-12-31', secondDate: '2001-01-01', resultsIn: 1 },
+    { firstDate: '2000-01-02', secondDate: '2001-01-01', resultsIn: 365 },
+    { firstDate: '2000-01-02', secondDate: '2000-01-01', resultsIn: -1 },
+    { firstDate: '2000-01-01', secondDate: '2001-01-01', resultsIn: 366, description: 'leap year' },
+  ].forEach(({ firstDate, secondDate, resultsIn }) => {
+    it(`${resultsIn} days between ${secondDate} and ${firstDate} `, () => assertThat(
+      daysBetween(firstDate, secondDate), equalTo(resultsIn)));
+  });
 
   it('can be curried', () => assertThat(
     daysBetween('2001-01-01')('2002-01-01'), equalTo(365)));
 });
 
 describe('dates between', () => {
-  it('dates between 2000-01-01 and 2000-01-02 responds correct dates', () => assertThat(
-    datesBetween('2000-01-01', '2000-01-02'), equalTo(['2000-01-01', '2000-01-02'])));
-
-  it('dates between 2000-01-01T10:10 and 2000-01-02 responds correct dates', () => assertThat(
-    datesBetween('2000-01-01T10:10', '2000-01-02'), equalTo(['2000-01-01', '2000-01-02'])));
-
-  it('dates between 2000-01-02 and 2000-01-01 responds correct dates', () => assertThat(
-    datesBetween('2000-01-02', '2000-01-01'), equalTo(['2000-01-02', '2000-01-01'])));
+  [
+    { first: '2000-01-01', second: '2000-01-02', resultsIn: ['2000-01-01', '2000-01-02'] },
+    { first: '2000-01-01T10:10', second: '2000-01-02', resultsIn: ['2000-01-01', '2000-01-02'] },
+    { first: '2000-01-02', second: '2000-01-01', resultsIn: ['2000-01-02', '2000-01-01'] },
+    { first: '', second: '', resultsIn: [] },
+    { first: 'T10:00', second: 'T11:00', resultsIn: [] },
+  ].forEach(({ first, second, resultsIn }) => {
+    it(`${resultsIn} days between ${second} and ${first} `, () => assertThat(
+      datesBetween(first, second), equalTo(resultsIn)));
+  });
 
   it('dates between 2000-01-03 and 2000-01-01 responds correct dates', () => assertThat(
     datesBetween('2000-01-03', '2000-01-01'), equalTo([
@@ -114,12 +104,6 @@ describe('dates between', () => {
       '2000-01-02',
       '2000-01-01',
     ])));
-
-  it('dates between two empty strings is an empty array', () => assertThat(
-    datesBetween('', ''), equalTo([])));
-
-  it('dates between T10:00 and T11:00 is an empty array', () => assertThat(
-    datesBetween('T10:00', 'T11:00'), equalTo([])));
 
   it('can be curried', () => assertThat(
     datesBetween('T10:00')('T11:00'), equalTo([])));
