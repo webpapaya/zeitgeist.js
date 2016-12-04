@@ -8,18 +8,19 @@ import {
 
 describe('extractTimezoneAsTime', () => {
   [
-    { isoDatetime: '2000', timezone: '' },
-    { isoDatetime: '2000-01', timezone: '' },
-    { isoDatetime: '2000-01-01', timezone: '' },
-    { isoDatetime: '2000-01-01T10', timezone: '' },
-    { isoDatetime: '2000-01-01 10', timezone: '' },
-    { isoDatetime: '2000-01-01 10:10', timezone: '' },
-    { isoDatetime: '2000-01-01 10:10:-01', timezone: '' },
-    { isoDatetime: '2000-01-01 10:10:10Z', timezone: '+00:00' },
-    { isoDatetime: '2000-01-01 10:10:10Z ', timezone: '+00:00' },
-    { isoDatetime: '2000-01-01 10:10:10+01:00', timezone: '+01:00' },
-    { isoDatetime: '2000-01-01T10:10:10-01:00', timezone: '-01:00' },
-    { isoDatetime: '2000-01-01 10:10:10+00:00', timezone: '+00:00' },
+    { isoDatetime: '2000', timezone: 'PT0H' },
+    { isoDatetime: '2000-01', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01T10', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01 10', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01 10:10', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01 10:10:-01', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01 10:10:10Z', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01 10:10:10Z ', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01 10:10:10+01:00', timezone: 'PT1H' },
+    { isoDatetime: '2000-01-01T10:10:10-01:00', timezone: 'PT-1H' },
+    { isoDatetime: '2000-01-01 10:10:10+00:00', timezone: 'PT0H' },
+    { isoDatetime: '2000-01-01 10:10:10+10:10', timezone: 'PT10H10M' },
   ].forEach(({ isoDatetime, timezone }) => {
     it(`${isoDatetime} responds ${timezone}`, () => assertThat(
       extractTimezoneAsTime(isoDatetime), equalTo(timezone)));

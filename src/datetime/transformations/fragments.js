@@ -50,7 +50,16 @@ export const extractTimezoneAsTime = (isoDatetime) => buildMaybeMonad(isoDatetim
   .map((value) => value.replace(MATCH_UTC_TIMEZONE_SHORTHAND, '+00:00'))
   .map((value) => value.match(MATCH_TIMEZONE))
   .map((value) => value[0].slice(1))
-  .setIfBlank('')
+  .map((value) => value.split(TIME_UNIT_SEPARATOR))
+  .map(([ timezoneHourWithSign, timezoneMinute ]) => {
+    const sign = timezoneHourWithSign[0];
+    const timezoneHour = timezoneHourWithSign.slice(1);
+    return toDuration({
+      hours: sign + parseInt(timezoneHour, 10),
+      minutes: parseInt(sign + timezoneMinute, 10),
+    });
+  })
+  .setIfBlank('PT0H')
   .toValue();
 
 const toInteger = (value) => value ? parseInt(value, 10) : void 0;
@@ -61,12 +70,10 @@ export const toFragments = (isoDatetime) => {
 
   const dateComponent = extractDate(isoDatetime);
   const timeComponent = extractTime(isoDatetime);
-  const timezoneComponent = extractTimezoneAsTime(isoDatetime);
+  const timezoneOffset = extractTimezoneAsTime(isoDatetime);
 
   const [year, month, day] = dateComponent.split(DATE_UNIT_SEPARATOR);
   const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
-  const [timezoneHour, timezoneMinute] = timezoneComponent.split(TIME_UNIT_SEPARATOR);
-  const sign = timezoneHour[0];
 
   return Object.freeze({
     year: toInteger(year),
@@ -75,9 +82,6 @@ export const toFragments = (isoDatetime) => {
     hour: toInteger(hour),
     minute: toInteger(minute),
     second: toFloat(second),
-    timezoneOffset: toDuration({
-      hours: parseInt(timezoneHour, 10),
-      minutes: parseInt(sign + timezoneMinute, 10)
-    })
+    timezoneOffset: timezoneOffset
   });
 };

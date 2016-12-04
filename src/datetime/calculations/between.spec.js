@@ -62,6 +62,9 @@ describe('hours between', () => {
   it('T10:00 and T11:00 is 1 hour ', () => assertThat(
     hoursBetween('T11:00', 'T10:00'), equalTo(1)));
 
+  it('2000-01-01T10:00:00+00:00 and 2000-01-01T10:00:00+01:00 is 1 hour ', () => assertThat(
+    hoursBetween('2000-01-01T10:00:00+00:00', '2000-01-01T10:00:00+01:00'), equalTo(1)));
+
   it('can be curried ', () => assertThat(
     hoursBetween('T11:00')('T10:00'), equalTo(1)));
 });
