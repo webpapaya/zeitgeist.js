@@ -15,6 +15,8 @@ import {
   tco,
 } from '../../utils';
 
+import { asMicroseconds as durationToMicroseconds } from '../../duration/index';
+
 import {
   ONE_MILLISECOND,
   ONE_SECOND,
@@ -54,11 +56,15 @@ export const microsecondsBetween = curry((from, to) => {
   const microsecondsBetweenDays = Math.abs(daysBetween(from, to) * ONE_REGULAR_DAY);
   const leapSeconds = leapMicrosecondsBetween(from, to);
 
+  const toTimezoneOffset = durationToMicroseconds(toAsFragments.timezoneOffset);
+  const fromTimezoneOffset = durationToMicroseconds(fromAsFragments.timezoneOffset);
+
+
   return Object.keys(TIME_UNITS).reduce((totalSeconds, unit) => {
     const valueToBeAdded = readUnit(fromAsFragments, unit) - readUnit(toAsFragments, unit);
     const multiplier = TIME_UNITS[unit];
     return totalSeconds + (valueToBeAdded * multiplier);
-  }, microsecondsBetweenDays + leapSeconds);
+  }, microsecondsBetweenDays + leapSeconds) + toTimezoneOffset - fromTimezoneOffset;
 });
 
 export const millisecondsBetween = curry((from, to) =>
