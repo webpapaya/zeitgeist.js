@@ -64,7 +64,7 @@ export const microsecondsBetween = curry((from, to) => {
     const valueToBeAdded = readUnit(fromAsFragments, unit) - readUnit(toAsFragments, unit);
     const multiplier = TIME_UNITS[unit];
     return totalSeconds + (valueToBeAdded * multiplier);
-  }, microsecondsBetweenDays + leapSeconds) + toTimezoneOffset - fromTimezoneOffset;
+  }, microsecondsBetweenDays + leapSeconds) + fromTimezoneOffset - toTimezoneOffset;
 });
 
 export const millisecondsBetween = curry((from, to) =>
