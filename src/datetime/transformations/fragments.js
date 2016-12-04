@@ -5,6 +5,8 @@ import {
   TIME_UNIT_SEPARATOR,
 } from '../constants';
 
+import { toIso as toDuration } from '../../duration/index';
+
 import { buildMaybeMonad } from '../../utils';
 
 const containsChar = (isoDatetime, s) => isoDatetime.indexOf(s) !== -1;
@@ -64,6 +66,7 @@ export const toFragments = (isoDatetime) => {
   const [year, month, day] = dateComponent.split(DATE_UNIT_SEPARATOR);
   const [hour, minute, second] = timeComponent.split(TIME_UNIT_SEPARATOR);
   const [timezoneHour, timezoneMinute] = timezoneComponent.split(TIME_UNIT_SEPARATOR);
+  const sign = timezoneHour[0];
 
   return Object.freeze({
     year: toInteger(year),
@@ -72,7 +75,9 @@ export const toFragments = (isoDatetime) => {
     hour: toInteger(hour),
     minute: toInteger(minute),
     second: toFloat(second),
-    timezoneHour: toInteger(timezoneHour),
-    timezoneMinute: toInteger(timezoneMinute),
+    timezoneOffset: toDuration({
+      hours: parseInt(timezoneHour, 10),
+      minutes: parseInt(sign + timezoneMinute, 10)
+    })
   });
 };
