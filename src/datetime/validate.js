@@ -86,7 +86,13 @@ const THE_MOTHER_OF_ISO8601_DATE_TIME = createRegexBuilder()
     .startOfLine()
     .join(MATCH_YEAR, '-', MATCH_MONTH, '-', MATCH_DAY)
     .and(MATCH_TIMEZONE)
-    .endOfLine());
+    .endOfLine())
+
+  .or(createRegexBuilder())
+    .startOfLine()
+    .join('T', MATCH_HOUR, ':', MATCH_MINUTE)
+    .endOfLine();
+
 
 export const isValid = (isoDatetime) => THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoDatetime);
 

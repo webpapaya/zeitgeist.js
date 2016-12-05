@@ -33,6 +33,7 @@ describe('isValid', () => {
     { isoDatetime: '', valid: false },
     { isoDatetime: 'Invalid Data', valid: false },
     { isoDatetime: '2xxx', valid: false },
+    { isoDatetime: 'T10:00', valid: true },
   ].forEach(({ isoDatetime, valid, description = '' }) => {
     it(`"${isoDatetime}" is ${valid ? 'valid' : 'invalid'}, ${description}`, () => assertThat(
       isValid(isoDatetime), equalTo(valid)));
