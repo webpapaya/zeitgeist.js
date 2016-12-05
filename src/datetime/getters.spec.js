@@ -10,6 +10,8 @@ import {
   getHour,
   getMinute,
   getSecond,
+
+  containsTimezone,
 } from './index';
 
 import {
@@ -120,3 +122,15 @@ describe('getSecond', () => {
   it('2000-01-02T03:04:05.6 responds 4', () => assertThat(
     getSecond('2000-01-02T03:04:05.6'), equalTo(5.6)));
 });
+
+describe('containsTimezone', () => {
+  it('2000-01-02T03:04:05.6 responds false', () => assertThat(
+    containsTimezone('2000-01-02T03:04:05.6'), equalTo(false)));
+
+  it('2000-01-02T03:04:05+10:00 responds true', () => assertThat(
+    containsTimezone('2000-01-02T03:04:05+10:00'), equalTo(true)));
+
+  it('2000-01-02T03:04:05Z responds true', () => assertThat(
+    containsTimezone('2000-01-02T03:04:05Z'), equalTo(true)));
+});
+

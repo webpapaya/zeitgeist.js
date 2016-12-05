@@ -1,5 +1,6 @@
 import { separateDateAndTimeComponents, toFragments } from './fragments';
 import { leftPad } from '../../utils';
+import { addDuration, containsTimezone } from '../index';
 
 export const removeTimeComponent = (isoDatetime) =>
   separateDateAndTimeComponents(isoDatetime).dateComponent;
@@ -7,8 +8,16 @@ export const removeTimeComponent = (isoDatetime) =>
 export const removeDateComponent = (isoDatetime) =>
   separateDateAndTimeComponents(isoDatetime).timeComponent;
 
+const toUtc = (isoDatetime) => {
+  const { timezoneOffset } = toFragments(isoDatetime);
+
+  return addDuration(timezoneOffset, isoDatetime);
+};
+
 export const toFloat = (isoDatetime) => {
-  const fragments = toFragments(isoDatetime);
+  const fragments = containsTimezone(isoDatetime)
+    ? toFragments(toUtc(isoDatetime))
+    : toFragments(isoDatetime);
 
   return parseFloat([
     leftPad(fragments.year),

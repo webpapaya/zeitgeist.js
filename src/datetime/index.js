@@ -133,6 +133,7 @@ export {
   isLeapYear,
   containsDateComponent,
   containsTimeComponent,
+  containsTimezone,
   isFirstDayOfMonth,
   isLastDayOfMonth,
   daysInMonth,
