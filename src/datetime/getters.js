@@ -13,6 +13,7 @@ import {
 
 const WEEKDAY_REFERENCE_DATE = '2001-01-01';
 const DAYS_IN_ONE_WEEK = 7;
+const MATCH_TIMEZONE = /([+-]\d\d:\d\d$)|(Z$)/;
 
 const fixNegativeDaysBetween = (days) => days >= 0
   ? days
@@ -45,6 +46,11 @@ export const getDay = parseIsoString(({ day }) => day);
 export const getHour = parseIsoString(({ hour }) => hour);
 export const getMinute = parseIsoString(({ minute }) => minute);
 export const getSecond = parseIsoString(({ second }) => second);
+export const getTimezone = (isoDatetime) => {
+  const timezone = isoDatetime.match(MATCH_TIMEZONE);
+  return timezone === null ? null : timezone[0];
+};
+
 
 const isLeapMonth = (isoDatetime, month) =>
   month === FEBRUARY && isLeapYear(isoDatetime);
@@ -78,5 +84,6 @@ export const isFirstDayOfMonth = (isoDatetime) => {
 
 export const containsDateComponent = (isoDatetime) => !isEmpty(removeTimeComponent(isoDatetime));
 export const containsTimeComponent = (isoDatetime) => !isEmpty(removeDateComponent(isoDatetime));
-export const containsTimezone = (isoDatetime) =>
-  isoDatetime.match(/([+-]\d\d:\d\d)|(Z)$/) !== null;
+export const containsTimezone = (isoDatetime) => isoDatetime.match(MATCH_TIMEZONE) !== null;
+
+

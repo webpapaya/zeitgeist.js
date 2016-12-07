@@ -9,6 +9,7 @@ import {
   containsTimeComponent,
   removeTimeComponent,
   isValid,
+  getTimezone,
 } from '../index';
 
 import {
@@ -44,23 +45,46 @@ export const addHours = validateAndCurry((hours, isoDatetime) =>
   addDays(hours / HOURS_IN_REGULAR_DAY, isoDatetime));
 
 export const addDays = validateAndCurry((days, isoDatetime) => {
+  const timezone = getTimezone(isoDatetime);
   const calculatedIsoString = fromJulianDay(toJulianDay(isoDatetime) + days);
 
-  return containsTimeComponent(isoDatetime)
+  const withoutTimeComponent = containsTimeComponent(isoDatetime)
     ? calculatedIsoString
     : removeTimeComponent(calculatedIsoString);
+
+  return timezone
+    ? withoutTimeComponent + timezone
+    : withoutTimeComponent;
 });
 
 export const addMonths = validateAndCurry((months, isoDatetime) => {
+  const timezone = getTimezone(isoDatetime);
   const fragments = toFragments(isoDatetime);
-  return toIso({
+  const calculatedIsoString = toIso({
     ...fragments,
     year: (fragments.year + Math.floor((fragments.month + months - 1) / 12)),
     month: (fragments.month + months + 11) % 12 + 1,
   });
+
+  const withoutTimeComponent = containsTimeComponent(isoDatetime)
+    ? calculatedIsoString
+    : removeTimeComponent(calculatedIsoString);
+
+  return timezone
+    ? withoutTimeComponent + timezone
+    : withoutTimeComponent;
 });
 
-export const addYears = validateAndCurry((years, isoStringOrFragments) => {
-  const fragments = toFragments(isoStringOrFragments);
-  return toIso({ ...fragments, year: fragments.year + years });
+export const addYears = validateAndCurry((years, isoDatetime) => {
+  const timezone = getTimezone(isoDatetime);
+  const fragments = toFragments(isoDatetime);
+  const calculatedIsoString = toIso({ ...fragments, year: fragments.year + years });
+
+  const withoutTimeComponent = containsTimeComponent(isoDatetime)
+    ? calculatedIsoString
+    : removeTimeComponent(calculatedIsoString);
+
+  return timezone
+    ? withoutTimeComponent + timezone
+    : withoutTimeComponent;
 });

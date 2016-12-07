@@ -130,6 +130,7 @@ export {
   getHour,
   getMinute,
   getSecond,
+  getTimezone,
   isLeapYear,
   containsDateComponent,
   containsTimeComponent,

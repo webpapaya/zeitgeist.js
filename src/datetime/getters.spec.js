@@ -12,6 +12,7 @@ import {
   getSecond,
 
   containsTimezone,
+  getTimezone,
 } from './index';
 
 import {
@@ -134,3 +135,16 @@ describe('containsTimezone', () => {
     containsTimezone('2000-01-02T03:04:05Z'), equalTo(true)));
 });
 
+describe('getTimezone', () => {
+  it('2000-01-02T03:04:05.6 responds null', () => assertThat(
+    getTimezone('2000-01-02T03:04:05.6'), equalTo(null)));
+
+  it('2000-01-02T03:04:05Z responds Z', () => assertThat(
+    getTimezone('2000-01-02T03:04:05Z'), equalTo('Z')));
+
+  it('2000-01-02T03:04:05+00:10 responds +00:10', () => assertThat(
+    getTimezone('2000-01-02T03:04:05+00:10'), equalTo('+00:10')));
+
+  it('2000-01-02T03:04:05-00:10 responds -00:10', () => assertThat(
+    getTimezone('2000-01-02T03:04:05-00:10'), equalTo('-00:10')));
+});

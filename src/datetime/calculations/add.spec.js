@@ -18,6 +18,7 @@ describe('addDuration', () => {
     { date: '2000-01-01T00:00:00', plusDuration: 'PT1H', resultsIn: '2000-01-01T01:00:00' },
     { date: '2000-01-01T00:00:00', plusDuration: 'PT1M', resultsIn: '2000-01-01T00:01:00' },
     { date: '2000-01-01T00:00:00', plusDuration: 'PT1S', resultsIn: '2000-01-01T00:00:01' },
+    { date: '2000-01-01T00:00:00+00:01', plusDuration: 'PT1S', resultsIn: '2000-01-01T00:00:01+00:01' },
     { date: 'I\'m invalid', plusDuration: 'PT1S', resultsIn: INVALID_DATETIME },
   ].forEach(({ date, plusDuration, resultsIn }) => {
     it(`${plusDuration} to ${date} results in ${resultsIn}`, () => assertThat(
