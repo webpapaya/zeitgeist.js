@@ -30,18 +30,11 @@ export {
   addMonths as addMonth,
   addYears as addYear,
 
-  subtractDuration,
-  subtractSeconds,
   subtractSeconds as subtractSecond,
-  subtractMinutes,
   subtractMinutes as subtractMinute,
-  subtractHours,
   subtractHours as subtractHour,
-  subtractDays,
   subtractDays as subtractDay,
-  subtractMonths,
   subtractMonths as subtractMonth,
-  subtractYears,
   subtractYears as subtractYear,
 
   floorSecond,
@@ -150,7 +143,8 @@ export {
 export { format } from './format';
 
 
-
+import { INVALID_DATETIME } from './constants';
+import { isValid } from './validate';
 import { curry } from '../utils';
 import {
   normalize as _normalize,
@@ -169,6 +163,14 @@ import {
   addHours as _addHours,
   addMinutes as _addMinutes,
   addSeconds as _addSeconds,
+
+  subtractDuration as _subtractDuration,
+  subtractYears as _subtractYears,
+  subtractMonths as _subtractMonths,
+  subtractDays as _subtractDays,
+  subtractHours as _subtractHours,
+  subtractMinutes as _subtractMinutes,
+  subtractSeconds as _subtractSeconds,
 } from './calculations/index';
 
 import { getTimezone } from './getters';
@@ -201,8 +203,9 @@ const dropTimezone = (isoDatetime) => {
 };
 
 const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
+  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
+
   const timezone = getTimezone(isoDateTime) || '';
-  // TODO: dropping the timezone could be problematic. Need to investigate.
   const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
   return `${fn(amount, dateTimeWithoutTimezone)}${timezone}`;
 });
@@ -214,3 +217,11 @@ export const addDays = calculationDecorator(_addDays);
 export const addHours = calculationDecorator(_addHours);
 export const addMinutes = calculationDecorator(_addMinutes);
 export const addSeconds = calculationDecorator(_addSeconds);
+
+export const subtractDuration = calculationDecorator(_subtractDuration);
+export const subtractYears = calculationDecorator(_subtractYears);
+export const subtractMonths = calculationDecorator(_subtractMonths);
+export const subtractDays = calculationDecorator(_subtractDays);
+export const subtractHours = calculationDecorator(_subtractHours);
+export const subtractMinutes = calculationDecorator(_subtractMinutes);
+export const subtractSeconds = calculationDecorator(_subtractSeconds);

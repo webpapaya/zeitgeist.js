@@ -23,20 +23,20 @@ export const subtractDuration = curry((isoDuration, isoDatetime) => {
   )(isoDatetime);
 });
 
-export const subtractSeconds = curry((seconds, isoDatetime) =>
-  addSeconds(seconds * -1, isoDatetime));
+export const subtractSeconds = (seconds, isoDatetime) =>
+  addSeconds(seconds * -1, isoDatetime);
 
-export const subtractMinutes = curry((minutes, isoDatetime) =>
-  addMinutes(minutes * -1, isoDatetime));
+export const subtractMinutes = (minutes, isoDatetime) =>
+  addMinutes(minutes * -1, isoDatetime);
 
-export const subtractHours = curry((hours, isoDatetime) =>
-  addHours(hours * -1, isoDatetime));
+export const subtractHours = (hours, isoDatetime) =>
+  addHours(hours * -1, isoDatetime);
 
-export const subtractDays = curry((days, isoDatetime) =>
-  addDays(days * -1, isoDatetime));
+export const subtractDays = (days, isoDatetime) =>
+  addDays(days * -1, isoDatetime);
 
-export const subtractMonths = curry((months, isoDatetime) =>
-  addMonths(months * -1, isoDatetime));
+export const subtractMonths = (months, isoDatetime) =>
+  addMonths(months * -1, isoDatetime);
 
-export const subtractYears = curry((years, isoDatetime) =>
-  addYears(years * -1, isoDatetime));
+export const subtractYears = (years, isoDatetime) =>
+  addYears(years * -1, isoDatetime);
