@@ -9,7 +9,6 @@ import {
   containsTimeComponent,
   removeTimeComponent,
   isValid,
-  getTimezone,
 } from '../index';
 
 import {
@@ -45,20 +44,14 @@ export const addHours = validateAndCurry((hours, isoDatetime) =>
   addDays(hours / HOURS_IN_REGULAR_DAY, isoDatetime));
 
 export const addDays = validateAndCurry((days, isoDatetime) => {
-  const timezone = getTimezone(isoDatetime);
   const calculatedIsoString = fromJulianDay(toJulianDay(isoDatetime) + days);
 
-  const withoutTimeComponent = containsTimeComponent(isoDatetime)
+  return containsTimeComponent(isoDatetime)
     ? calculatedIsoString
     : removeTimeComponent(calculatedIsoString);
-
-  return timezone
-    ? withoutTimeComponent + timezone
-    : withoutTimeComponent;
 });
 
 export const addMonths = validateAndCurry((months, isoDatetime) => {
-  const timezone = getTimezone(isoDatetime);
   const fragments = toFragments(isoDatetime);
   const calculatedIsoString = toIso({
     ...fragments,
@@ -66,25 +59,12 @@ export const addMonths = validateAndCurry((months, isoDatetime) => {
     month: (fragments.month + months + 11) % 12 + 1,
   });
 
-  const withoutTimeComponent = containsTimeComponent(isoDatetime)
+  return containsTimeComponent(isoDatetime)
     ? calculatedIsoString
     : removeTimeComponent(calculatedIsoString);
-
-  return timezone
-    ? withoutTimeComponent + timezone
-    : withoutTimeComponent;
 });
 
 export const addYears = validateAndCurry((years, isoDatetime) => {
-  const timezone = getTimezone(isoDatetime);
   const fragments = toFragments(isoDatetime);
-  const calculatedIsoString = toIso({ ...fragments, year: fragments.year + years });
-
-  const withoutTimeComponent = containsTimeComponent(isoDatetime)
-    ? calculatedIsoString
-    : removeTimeComponent(calculatedIsoString);
-
-  return timezone
-    ? withoutTimeComponent + timezone
-    : withoutTimeComponent;
+  return toIso({ ...fragments, year: fragments.year + years });
 });
