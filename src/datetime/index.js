@@ -21,8 +21,6 @@ export {
 } from './transformations/index';
 
 export {
-  normalize,
-
   datesBetween,
 
   addDuration,
@@ -168,7 +166,11 @@ import {
   minutesBetween as _minutesBetween,
   hoursBetween as _hoursBetween,
   daysBetween as _daysBetween,
+
+  normalize as _normalize,
 } from './calculations/index';
+
+import { getTimezone } from './getters';
 
 import { toUtc as _toUtc } from './transformations/index'
 import { containsDateComponent as _containsDateComponent } from './getters';
@@ -187,3 +189,9 @@ export const minutesBetween = betweenDecorator(_minutesBetween);
 export const hoursBetween = betweenDecorator(_hoursBetween);
 export const daysBetween = betweenDecorator(_daysBetween);
 
+export const normalize = (isoDatetime) => {
+  const timezone = getTimezone(isoDatetime);
+  return timezone
+    ? `${_normalize(isoDatetime)}${timezone}`
+    : _normalize(isoDatetime);
+};
