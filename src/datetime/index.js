@@ -24,7 +24,6 @@ export {
   normalize,
 
   datesBetween,
-  daysBetween,
 
   addDuration,
   addSeconds,
@@ -159,6 +158,8 @@ export {
 
 export { format } from './format';
 
+
+
 import { curry } from '../utils';
 import {
   microsecondsBetween as _microsecondsBetween,
@@ -166,6 +167,7 @@ import {
   secondsBetween as _secondsBetween,
   minutesBetween as _minutesBetween,
   hoursBetween as _hoursBetween,
+  daysBetween as _daysBetween,
 } from './calculations/index';
 
 import { toUtc as _toUtc } from './transformations/index'
@@ -183,3 +185,5 @@ export const millisecondsBetween = betweenDecorator(_millisecondsBetween);
 export const secondsBetween = betweenDecorator(_secondsBetween);
 export const minutesBetween = betweenDecorator(_minutesBetween);
 export const hoursBetween = betweenDecorator(_hoursBetween);
+export const daysBetween = betweenDecorator(_daysBetween);
+

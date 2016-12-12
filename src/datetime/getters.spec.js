@@ -38,8 +38,8 @@ describe('getWeekday', () => {
   it('2001-01-04 is a Thursday', () => assertThat(
     getWeekday('2001-01-04'), equalTo(THURSDAY)));
 
-  it('2001-01-05.6 is a Friday', () => assertThat(
-    getWeekday('2001-01-05.6'), equalTo(FRIDAY)));
+  it('2001-01-05 is a Friday', () => assertThat(
+    getWeekday('2001-01-05'), equalTo(FRIDAY)));
 
   it('2001-01-06 is a Saturday', () => assertThat(
     getWeekday('2001-01-06'), equalTo(SATURDAY)));
