@@ -28,6 +28,9 @@ describe('floor', () => {
     it('2000-01-01T11:12:13.123 results in 2000-01-01T11:12:13', () => assertThat(
       floorSecond('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:13')));
 
+    it.skip('2000-01-01T11:12:13.123+01:00 results in 2000-01-01T11:12:13+01:00', () => assertThat(
+      floorSecond('2000-01-01T11:12:13.123+01:00'), equalTo('2000-01-01T11:12:13+01:00')));
+
     it('`I\'m Invalid` results in `INVALID_DATETIME`', () => assertThat(
       floorSecond('I\'m Invalid'), equalTo(INVALID_DATETIME)));
   });

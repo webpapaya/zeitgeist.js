@@ -8,9 +8,8 @@ export const removeTimeComponent = (isoDatetime) =>
 export const removeDateComponent = (isoDatetime) =>
   separateDateAndTimeComponents(isoDatetime).timeComponent;
 
-const toUtc = (isoDatetime) => {
+export const toUtc = (isoDatetime) => {
   const { timezoneOffset } = toFragments(isoDatetime);
-
   return addDuration(timezoneOffset, isoDatetime);
 };
 

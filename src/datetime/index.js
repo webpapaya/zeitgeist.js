@@ -17,16 +17,11 @@ export {
   toJsDate,
   fromJsDate,
   now,
+  toUtc,
 } from './transformations/index';
 
 export {
   normalize,
-
-  microsecondsBetween,
-  millisecondsBetween,
-  secondsBetween,
-  minutesBetween,
-  hoursBetween,
 
   datesBetween,
   daysBetween,
@@ -163,3 +158,28 @@ export {
 } from './validate';
 
 export { format } from './format';
+
+import { curry } from '../utils';
+import {
+  microsecondsBetween as _microsecondsBetween,
+  millisecondsBetween as _millisecondsBetween,
+  secondsBetween as _secondsBetween,
+  minutesBetween as _minutesBetween,
+  hoursBetween as _hoursBetween,
+} from './calculations/index';
+
+import { toUtc as _toUtc } from './transformations/index'
+import { containsDateComponent as _containsDateComponent } from './getters';
+
+const betweenDecorator = (fn) => curry((from, to) => {
+  return fn(
+    _containsDateComponent(from) ? _toUtc(from) : from,
+    _containsDateComponent(to) ? _toUtc(to) : to
+  );
+});
+
+export const microsecondsBetween = betweenDecorator(_microsecondsBetween);
+export const millisecondsBetween = betweenDecorator(_millisecondsBetween);
+export const secondsBetween = betweenDecorator(_secondsBetween);
+export const minutesBetween = betweenDecorator(_minutesBetween);
+export const hoursBetween = betweenDecorator(_hoursBetween);

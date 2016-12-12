@@ -15,9 +15,6 @@ describe('microsecondsBetween', () => {
 
   it('can be curried', () => assertThat(
     microsecondsBetween('T10:01')('T10:00'), equalTo(60e6)));
-
-  it('can be curried', () => assertThat(
-    microsecondsBetween('T10:01')('T10:00'), equalTo(60e6)));
 });
 
 describe('millisecondsBetween', () => {
