@@ -82,6 +82,13 @@ export const isFirstDayOfMonth = (isoDatetime) => {
   return day === 1;
 };
 
+export const getTimeComponent = (isoDatetime) => {
+  const timeComponent = removeDateComponent(isoDatetime);
+  return timeComponent ? `T${timeComponent}` : '';
+};
+
+export const getDateComponent = (isoDatetime) => removeTimeComponent(isoDatetime);
+
 export const containsDateComponent = (isoDatetime) => !isEmpty(removeTimeComponent(isoDatetime));
 export const containsTimeComponent = (isoDatetime) => !isEmpty(removeDateComponent(isoDatetime));
 export const containsTimezone = (isoDatetime) => isoDatetime.match(MATCH_TIMEZONE) !== null;

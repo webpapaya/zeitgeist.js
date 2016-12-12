@@ -1,7 +1,11 @@
 import { token as defaultToken } from '../locales/default-token';
 import { locale as defaultLocale } from '../locales/default-locale';
 
-import { toFragments } from './index';
+import {
+  toFragments,
+  getDateComponent,
+  getTimeComponent,
+} from './index';
 
 const sortByLengthDesc = (a, b) => b.length - a.length;
 const findToken = (isoDatetime, format, tokenRegex) =>
@@ -29,4 +33,17 @@ export const format = (isoDatetime, givenFormat, options = {}) => {
     const replacedToken = tokenList[token](fragments, locale);
     return formattedDate.replace(token, replacedToken);
   }, givenFormat);
+};
+
+export const applyFormat = (original, modified) => {
+  const originalTimeComponent = getTimeComponent(original);
+  const originalDateComponent = getDateComponent(original);
+
+  const modifiedTimeComponent = getTimeComponent(modified);
+  const modifiedDateComponent = getDateComponent(modified);
+
+  return [
+    modifiedDateComponent.substring(0, originalDateComponent.length),
+    modifiedTimeComponent.substring(0, originalTimeComponent.length),
+  ].join('');
 };

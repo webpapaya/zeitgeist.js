@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { format } from './format';
+import { format, applyFormat } from './format';
 
 const DATE = '2012-02-01T09:08:07.123';
 
@@ -104,4 +104,16 @@ describe('format 2000-01-01 with token', () => {
 
   it('YYYY responds 2000', () => assertThat(
     format('2000-01-01', 'YYYY'), equalTo('2000')));
+});
+
+
+describe('applyFormat', () => {
+  [
+    { original: '2000', modified: '2001', result: '2001' },
+    { original: '2000-01', modified: '2001-01-01', result: '2001-01' },
+    { original: 'T00:00', modified: '2001-01-01T01:00', result: 'T01:00' },
+  ].forEach(({ original, modified, result }) => {
+    it(`modified ${modified}  applied to ${original} results in ${result}`, () => assertThat(
+      applyFormat(original, modified), equalTo(result)));
+  });
 });

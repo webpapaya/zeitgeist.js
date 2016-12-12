@@ -109,6 +109,10 @@ export {
   getMinute,
   getSecond,
   getTimezone,
+
+  getDateComponent,
+  getTimeComponent,
+
   isLeapYear,
   containsDateComponent,
   containsTimeComponent,
@@ -177,6 +181,7 @@ import { getTimezone } from './getters';
 
 import { toUtc as _toUtc } from './transformations/index'
 import { containsDateComponent as _containsDateComponent } from './getters';
+import { applyFormat } from './format';
 
 const betweenDecorator = (fn) => curry((from, to) => {
   return fn(
@@ -207,7 +212,9 @@ const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
 
   const timezone = getTimezone(isoDateTime) || '';
   const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
-  return `${fn(amount, dateTimeWithoutTimezone)}${timezone}`;
+
+  const result = `${fn(amount, dateTimeWithoutTimezone)}${timezone}`;
+  return applyFormat(isoDateTime, result);
 });
 
 export const addDuration = calculationDecorator(_addDuration);

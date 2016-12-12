@@ -6,8 +6,6 @@ import {
   toIso,
   fromJulianDay,
   toJulianDay,
-  containsTimeComponent,
-  removeTimeComponent,
 } from '../index';
 
 import {
@@ -38,25 +36,16 @@ export const addMinutes = curry((minutes, isoDatetime) =>
 export const addHours = curry((hours, isoDatetime) =>
   addDays(hours / HOURS_IN_REGULAR_DAY, isoDatetime));
 
-export const addDays = curry((days, isoDatetime) => {
-  const calculatedIsoString = fromJulianDay(toJulianDay(isoDatetime) + days);
-
-  return containsTimeComponent(isoDatetime)
-    ? calculatedIsoString
-    : removeTimeComponent(calculatedIsoString);
-});
+export const addDays = curry((days, isoDatetime) =>
+  fromJulianDay(toJulianDay(isoDatetime) + days));
 
 export const addMonths = curry((months, isoDatetime) => {
   const fragments = toFragments(isoDatetime);
-  const calculatedIsoString = toIso({
+  return toIso({
     ...fragments,
     year: (fragments.year + Math.floor((fragments.month + months - 1) / 12)),
     month: (fragments.month + months + 11) % 12 + 1,
   });
-
-  return containsTimeComponent(isoDatetime)
-    ? calculatedIsoString
-    : removeTimeComponent(calculatedIsoString);
 });
 
 export const addYears = curry((years, isoDatetime) => {
