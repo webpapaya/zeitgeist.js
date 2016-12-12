@@ -15,8 +15,6 @@ import {
   tco,
 } from '../../utils';
 
-import { asMicroseconds as durationToMicroseconds } from '../../duration/index';
-
 import {
   ONE_MILLISECOND,
   ONE_SECOND,
@@ -31,14 +29,14 @@ import leapSecondData from '../../data/leapseconds.json';
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
 const floor = (value) => Math.floor(value);
 
-export const daysBetween = curry((from, to) => {
+export const daysBetween = (from, to) => {
   const daysFrom = containsDateComponent(from) ? toJulianDay(from) : 0;
   const daysTo = containsDateComponent(to) ? toJulianDay(to) : 0;
 
   return floor(daysTo + 0.5) - floor(daysFrom + 0.5);
-});
+};
 
-const leapMicrosecondsBetween = curry((from, to) => {
+const leapMicrosecondsBetween = (from, to) => {
   const microsecondsBetween = Object.keys(leapSecondData)
     .reduce((totalLeapSeconds, dateOfLeapSecond) => {
       return isBetween({ from, to }, dateOfLeapSecond)
@@ -47,9 +45,9 @@ const leapMicrosecondsBetween = curry((from, to) => {
     }, 0);
 
   return microsecondsBetween * ONE_SECOND;
-});
+};
 
-export const microsecondsBetween = curry((from, to) => {
+export const microsecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);
   const toAsFragments = toFragments(to);
 
@@ -61,19 +59,19 @@ export const microsecondsBetween = curry((from, to) => {
     const multiplier = TIME_UNITS[unit];
     return totalSeconds + (valueToBeAdded * multiplier);
   }, microsecondsBetweenDays + leapSeconds);
-});
+};
 
-export const millisecondsBetween = curry((from, to) =>
-  microsecondsBetween(from, to) / ONE_MILLISECOND);
+export const millisecondsBetween = (from, to) =>
+  microsecondsBetween(from, to) / ONE_MILLISECOND;
 
-export const secondsBetween = curry((from, to) =>
-  microsecondsBetween(from, to) / ONE_SECOND);
+export const secondsBetween = (from, to) =>
+  microsecondsBetween(from, to) / ONE_SECOND;
 
-export const minutesBetween = curry((from, to) =>
-  microsecondsBetween(from, to) / ONE_MINUTE);
+export const minutesBetween = (from, to) =>
+  microsecondsBetween(from, to) / ONE_MINUTE;
 
-export const hoursBetween = curry((from, to) =>
-  microsecondsBetween(from, to) / ONE_HOUR);
+export const hoursBetween = (from, to) =>
+  microsecondsBetween(from, to) / ONE_HOUR;
 
 const calculateDatesBetween = tco((from, to, dates = []) => {
   const nextDates = !isEmpty(from) ? [...dates, from] : [...dates];
