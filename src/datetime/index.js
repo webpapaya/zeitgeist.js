@@ -255,13 +255,13 @@ export const ceilHour = roundDecorator(_ceilHour);
 export const ceilMinute = roundDecorator(_ceilMinute);
 export const ceilSecond = roundDecorator(_ceilSecond);
 
-export const roundYear = _roundYear;
-export const roundMonth = _roundMonth;
-export const roundWeek = _roundWeek;
-export const roundDay = _roundDay;
-export const roundHour = _roundHour;
-export const roundMinute = _roundMinute;
-export const roundSecond = _roundSecond;
+export const roundYear = roundDecorator(_roundYear);
+export const roundMonth = roundDecorator(_roundMonth);
+export const roundWeek = roundDecorator(_roundWeek);
+export const roundDay = roundDecorator(_roundDay);
+export const roundHour = roundDecorator(_roundHour);
+export const roundMinute = roundDecorator(_roundMinute);
+export const roundSecond = roundDecorator(_roundSecond);
 
 export const floorYear = roundDecorator(_floorYear);
 export const floorMonth = roundDecorator(_floorMonth);

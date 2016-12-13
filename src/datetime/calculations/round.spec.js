@@ -170,6 +170,9 @@ describe('round', () => {
     it('2000-01-01T11:12:31.123 is ceiled', () => assertThat(
       roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14')));
 
+    it('2000-01-01T11:12:31.123+10:00 doesn\'t drop timezone', () => assertThat(
+      roundSecond('2000-01-01T11:12:13.5+10:00'), equalTo('2000-01-01T11:12:14+10:00')));
+
     it('`I\'m Invalid` results in `INVALID_DATETIME`', () => assertThat(
       roundSecond('I\'m Invalid'), equalTo(INVALID_DATETIME)));
   });
@@ -180,6 +183,9 @@ describe('round', () => {
 
     it('2000-01-01T11:31:13.123 ceiled', () => assertThat(
       roundMinute('2000-01-01T11:31:31.123'), equalTo('2000-01-01T11:32:00')));
+
+    it('2000-01-01T11:31:13.123+10:00 doesn\'t drop timezone', () => assertThat(
+      roundMinute('2000-01-01T11:31:31.123+10:00'), equalTo('2000-01-01T11:32:00+10:00')));
 
     it('`I\'m Invalid` results in `INVALID_DATETIME`', () => assertThat(
       roundMinute('I\'m Invalid'), equalTo(INVALID_DATETIME)));
@@ -192,6 +198,9 @@ describe('round', () => {
     it('2000-01-01T11:31:13.123 is ceiled', () => assertThat(
       roundHour('2000-01-01T12:31:13.123'), equalTo('2000-01-01T13:00:00')));
 
+    it('2000-01-01T11:31:13.123+10:00 doesn\'t drop timezone', () => assertThat(
+      roundHour('2000-01-01T12:31:13.123+10:00'), equalTo('2000-01-01T13:00:00+10:00')));
+
     it('`I\'m Invalid` results in `INVALID_DATETIME`', () => assertThat(
       roundHour('I\'m Invalid'), equalTo(INVALID_DATETIME)));
   });
@@ -203,6 +212,9 @@ describe('round', () => {
     it('2000-01-01T12:31:13.123 is ceiled', () => assertThat(
       roundDay('2000-01-01T12:31:13.123'), equalTo('2000-01-02T00:00:00')));
 
+    it('2000-01-01T12:31:13.123+10:00 doesn\'t drop timezone', () => assertThat(
+      roundDay('2000-01-01T12:31:13.123+10:00'), equalTo('2000-01-02T00:00:00+10:00')));
+
     it('`I\'m Invalid` results in `INVALID_DATETIME`', () => assertThat(
       roundDay('I\'m Invalid'), equalTo(INVALID_DATETIME)));
   });
@@ -213,6 +225,9 @@ describe('round', () => {
 
     it('2000-01-16T12:31:13.123 is ceiled', () => assertThat(
       roundMonth('2000-01-16T12:31:13.123'), equalTo('2000-02-01T00:00:00')));
+
+    it('2000-01-16T12:31:13.123+10:00 doesn\'t drop timezone', () => assertThat(
+      roundMonth('2000-01-16T12:31:13.123+10:00'), equalTo('2000-02-01T00:00:00+10:00')));
 
     it('`I\'m Invalid` results in `INVALID_DATETIME`', () => assertThat(
       roundMonth('I\'m Invalid'), equalTo(INVALID_DATETIME)));
@@ -227,6 +242,9 @@ describe('round', () => {
 
     it('2000-05-60T12:31:13.123 is ceiled', () => assertThat(
       roundYear('2000-05-60T12:31:13.123'), equalTo('2001-01-01T00:00:00')));
+
+    it('2000-05-60T12:31:13.123+10:00 doesn\'t drop timezone', () => assertThat(
+      roundYear('2000-05-60T12:31:13.123+10:00'), equalTo('2001-01-01T00:00:00+10:00')));
 
     it('`I\'m Invalid` results in `INVALID_DATETIME`', () => assertThat(
       roundYear('I\'m Invalid'), equalTo(INVALID_DATETIME)));
