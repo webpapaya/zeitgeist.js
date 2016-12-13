@@ -88,21 +88,6 @@ export {
 } from './getters';
 
 export {
-  isBetween,
-  isBefore,
-  isAfter,
-  isSameOrAfter,
-  isSameOrBefore,
-
-  isSameYear,
-  isSameMonth,
-  isSameDay,
-  isSameHour,
-  isSameMinute,
-  isSameSecond,
-} from './compare';
-
-export {
   isValid,
   validateFirstArg,
 } from './validate';
@@ -287,7 +272,34 @@ export const startOfMonth = roundDecorator(_startOfMonth);
 export const startOfYear = roundDecorator(_startOfYear);
 
 import {
+  isBetween as _isBetween,
+
   isSame as _isSame,
+  isBefore as _isBefore,
+  isAfter as _isAfter,
+  isSameOrAfter as _isSameOrAfter,
+  isSameOrBefore as _isSameOrBefore,
+
+  isSameYear as _isSameYear,
+  isSameMonth as _isSameMonth,
+  isSameDay as _isSameDay,
+  isSameHour as _isSameHour,
+  isSameMinute as _isSameMinute,
+  isSameSecond as _isSameSecond,
 } from './compare';
 
+export const isBetween = _isBetween;
+
 export const isSame = betweenDecorator(_isSame);
+export const isBefore = betweenDecorator(_isBefore);
+export const isAfter = betweenDecorator(_isAfter);
+
+export const isSameOrAfter = betweenDecorator(_isSameOrAfter);
+export const isSameOrBefore = betweenDecorator(_isSameOrBefore);
+
+export const isSameYear = _isSameYear;
+export const isSameMonth = _isSameMonth;
+export const isSameDay = _isSameDay;
+export const isSameHour = _isSameHour;
+export const isSameMinute = _isSameMinute;
+export const isSameSecond = _isSameSecond;

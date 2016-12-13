@@ -38,6 +38,9 @@ describe('isBefore', () => {
   it('2000-01-02 is NOT before 2000-01-01', () => assertThat(
     isBefore('2000-01-02', '2000-01-01'), equalTo(false)));
 
+  it('2000-01-01T00:00:00+01:00 is before 2000-01-01T00:00:00+00:00', () => assertThat(
+    isBefore('2000-01-01T00:00:00+01:00', '2000-01-01T00:00:00+00:00'), equalTo(true)));
+
   it('T10:00 is before T11:00', () => assertThat(
     isBefore('T10:00', 'T11:00'), equalTo(true)));
 
@@ -48,6 +51,9 @@ describe('isBefore', () => {
 describe('isSameOrBefore', () => {
   it('2000-01-01 is before 2000-01-02', () => assertThat(
     isSameOrBefore('2000-01-01', '2000-01-02'), equalTo(true)));
+
+  it('2000-01-01T01:00:00+01:00 is same 2000-01-01T00:00:00+00:00', () => assertThat(
+    isSameOrBefore('2000-01-01T01:00:00+01:00', '2000-01-01T00:00:00+00:00'), equalTo(true)));
 
   it('2000-01-01 is equal to 2000-01-01', () => assertThat(
     isSameOrBefore('2000-01-01', '2000-01-01'), equalTo(true)));
@@ -60,8 +66,11 @@ describe('isAfter', () => {
   it('2000-01-01 is NOT after 2000-01-02', () => assertThat(
     isAfter('2000-01-01', '2000-01-02'), equalTo(false)));
 
-  it('2000-01-02 is before 2000-01-01', () => assertThat(
+  it('2000-01-02 is after 2000-01-01', () => assertThat(
     isAfter('2000-01-02', '2000-01-01'), equalTo(true)));
+
+  it('2000-01-01T01:00:00+01:00 is after 2000-01-01T01:00:00+00:00', () => assertThat(
+    isAfter('2000-01-01T00:00:00+00:00', '2000-01-01T00:00:00+01:00'), equalTo(true)));
 
   it('T10:00 is NOT after T11:00', () => assertThat(
     isAfter('T10:00', 'T11:00'), equalTo(false)));
@@ -70,12 +79,15 @@ describe('isAfter', () => {
     isAfter('T10:00')('T11:00'), equalTo(false)));
 });
 
-describe('isSameOrBefore', () => {
+describe('isSameOrAfter', () => {
   it('2000-01-01 is NOT after 2000-01-02', () => assertThat(
     isSameOrAfter('2000-01-01', '2000-01-02'), equalTo(false)));
 
   it('2000-01-01 is equal to 2000-01-01', () => assertThat(
     isSameOrAfter('2000-01-01', '2000-01-01'), equalTo(true)));
+
+  it('2000-01-01T01:00:00+01:00 is after 2000-01-01T01:00:00+00:00', () => assertThat(
+    isSameOrAfter('2000-01-01T00:00:00+00:00', '2000-01-01T00:00:00+01:00'), equalTo(true)));
 
   it('can be curried', () => assertThat(
     isSameOrAfter('2000-01-01')('2000-01-01'), equalTo(true)));
@@ -162,6 +174,9 @@ describe('isSameSecond', () => {
 
   it('2000-01-03T01:03:04 and 2000-01-03T01:03:05 is NOT same minute', () => assertThat(
     isSameSecond('2000-01-03T01:03:04', '2000-01-03T01:03:05'), equalTo(false)));
+
+  it('T10:00:01 and T10:00:01 is same second', () => assertThat(
+    isSameSecond('T10:00:01', 'T10:00:01'), equalTo(true)));
 
   it('can be curried', () => assertThat(
     isSameSecond('2000-01-03T01:03:04')('2000-01-03T01:03:05'), equalTo(false)));
