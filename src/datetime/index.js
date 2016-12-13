@@ -52,19 +52,12 @@ export {
   floorYear,
   floorYear as floorYears,
 
-  ceilSecond,
   ceilSecond as ceilSeconds,
-  ceilMinute,
   ceilMinute as ceilMinutes,
-  ceilHour,
   ceilHour as ceilHours,
-  ceilDay,
   ceilDay as ceilDays,
-  ceilWeek,
   ceilWeek as ceilWeeks,
-  ceilMonth,
   ceilMonth as ceilMonths,
-  ceilYear,
   ceilYear as ceilYears,
 
   roundSecond,
@@ -175,6 +168,15 @@ import {
   subtractHours as _subtractHours,
   subtractMinutes as _subtractMinutes,
   subtractSeconds as _subtractSeconds,
+
+  ceilYear as _ceilYear,
+  ceilMonth as _ceilMonth,
+  ceilWeek as _ceilWeek,
+  ceilDay as _ceilDay,
+  ceilHour as _ceilHour,
+  ceilMinute as _ceilMinute,
+  ceilSecond as _ceilSecond,
+
 } from './calculations/index';
 
 import { getTimezone } from './getters';
@@ -185,8 +187,8 @@ import { applyFormat } from './format';
 
 const betweenDecorator = (fn) => curry((from, to) => {
   return fn(
-    _containsDateComponent(from) ? _toUtc(from) : from,
-    _containsDateComponent(to) ? _toUtc(to) : to
+    dropTimezone(_containsDateComponent(from) ? _toUtc(from) : from),
+    dropTimezone(_containsDateComponent(to) ? _toUtc(to) : to)
   );
 });
 
@@ -232,3 +234,21 @@ export const subtractDays = calculationDecorator(_subtractDays);
 export const subtractHours = calculationDecorator(_subtractHours);
 export const subtractMinutes = calculationDecorator(_subtractMinutes);
 export const subtractSeconds = calculationDecorator(_subtractSeconds);
+
+const roundDecorator = (fn) => (isoDateTime) => {
+  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
+
+  const timezone = getTimezone(isoDateTime) || '';
+  const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
+
+  const result = `${fn(dateTimeWithoutTimezone)}${timezone}`;
+  return applyFormat(isoDateTime, result);
+};
+
+export const ceilYear = roundDecorator(_ceilYear);
+export const ceilMonth = roundDecorator(_ceilMonth);
+export const ceilWeek = roundDecorator(_ceilWeek);
+export const ceilDay = roundDecorator(_ceilDay);
+export const ceilHour = roundDecorator(_ceilHour);
+export const ceilMinute = roundDecorator(_ceilMinute);
+export const ceilSecond = roundDecorator(_ceilSecond);
