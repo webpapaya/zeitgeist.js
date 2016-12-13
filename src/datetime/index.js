@@ -59,14 +59,6 @@ export {
   roundDay as roundDays,
   roundMonth as roundMonths,
   roundYear as roundYears,
-
-  startOfSecond,
-  startOfMinute,
-  startOfHour,
-  startOfDay,
-  startOfWeek,
-  startOfMonth,
-  startOfYear,
 } from './calculations/index';
 
 export {
@@ -179,6 +171,14 @@ import {
   endOfWeek as _endOfWeek,
   endOfMonth as _endOfMonth,
   endOfYear as _endOfYear,
+
+  startOfSecond as _startOfSecond,
+  startOfMinute as _startOfMinute,
+  startOfHour as _startOfHour,
+  startOfDay as _startOfDay,
+  startOfWeek as _startOfWeek,
+  startOfMonth as _startOfMonth,
+  startOfYear as _startOfYear,
 } from './calculations/index';
 
 import { getTimezone } from './getters';
@@ -278,3 +278,11 @@ export const endOfDay = roundDecorator(_endOfDay);
 export const endOfWeek = roundDecorator(_endOfWeek);
 export const endOfMonth = roundDecorator(_endOfMonth);
 export const endOfYear = roundDecorator(_endOfYear);
+
+export const startOfSecond = roundDecorator(_startOfSecond);
+export const startOfMinute = roundDecorator(_startOfMinute);
+export const startOfHour = roundDecorator(_startOfHour);
+export const startOfDay = roundDecorator(_startOfDay);
+export const startOfWeek = roundDecorator(_startOfWeek);
+export const startOfMonth = roundDecorator(_startOfMonth);
+export const startOfYear = roundDecorator(_startOfYear);
