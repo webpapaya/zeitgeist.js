@@ -9,17 +9,17 @@ import {
   floorSecond,
 } from './index';
 
-export const isBefore = curry((maybeBefore, maybeAfter) =>
-  toFloat(maybeBefore) < toFloat(maybeAfter));
+export const isBefore = (maybeBefore, maybeAfter) =>
+  toFloat(maybeBefore) < toFloat(maybeAfter);
 
-export const isSameOrBefore = curry((maybeBefore, maybeAfter) =>
-  isSame(maybeBefore, maybeAfter) || isBefore(maybeBefore, maybeAfter));
+export const isSameOrBefore = (maybeBefore, maybeAfter) =>
+  isSame(maybeBefore, maybeAfter) || isBefore(maybeBefore, maybeAfter);
 
-export const isAfter = curry((maybeBefore, maybeAfter) =>
-  toFloat(maybeBefore) > toFloat(maybeAfter));
+export const isAfter = (maybeBefore, maybeAfter) =>
+  toFloat(maybeBefore) > toFloat(maybeAfter);
 
-export const isSameOrAfter = curry((maybeBefore, maybeAfter) =>
-  isSame(maybeBefore, maybeAfter) || isAfter(maybeBefore, maybeAfter));
+export const isSameOrAfter = (maybeBefore, maybeAfter) =>
+  isSame(maybeBefore, maybeAfter) || isAfter(maybeBefore, maybeAfter);
 
 export const isBetween = curry(({ from, to }, dateToCheck) => {
   return isSameOrAfter(from, to)
@@ -27,8 +27,8 @@ export const isBetween = curry(({ from, to }, dateToCheck) => {
     : isSameOrAfter(to, dateToCheck) && isSameOrBefore(from, dateToCheck);
 });
 
-export const isSame = curry((firstDate, secondDate) =>
-  toFloat(firstDate) === toFloat(secondDate));
+export const isSame = (firstDate, secondDate) =>
+  toFloat(firstDate) === toFloat(secondDate);
 
 export const isSameYear = curry((firstDate, secondDate) =>
   isSame(floorYear(firstDate), floorYear(secondDate)));
