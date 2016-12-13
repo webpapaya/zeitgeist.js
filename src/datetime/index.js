@@ -67,14 +67,6 @@ export {
   startOfWeek,
   startOfMonth,
   startOfYear,
-
-  endOfSecond,
-  endOfMinute,
-  endOfHour,
-  endOfDay,
-  endOfWeek,
-  endOfMonth,
-  endOfYear,
 } from './calculations/index';
 
 export {
@@ -179,6 +171,14 @@ import {
   floorHour as _floorHour,
   floorMinute as _floorMinute,
   floorSecond as _floorSecond,
+
+  endOfSecond as _endOfSecond,
+  endOfMinute as _endOfMinute,
+  endOfHour as _endOfHour,
+  endOfDay as _endOfDay,
+  endOfWeek as _endOfWeek,
+  endOfMonth as _endOfMonth,
+  endOfYear as _endOfYear,
 } from './calculations/index';
 
 import { getTimezone } from './getters';
@@ -243,8 +243,8 @@ const roundDecorator = (fn) => (isoDateTime) => {
   const timezone = getTimezone(isoDateTime) || '';
   const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
 
-  const result = `${fn(dateTimeWithoutTimezone)}${timezone}`;
-  return applyFormat(isoDateTime, result);
+  const result = applyFormat(dateTimeWithoutTimezone, fn(dateTimeWithoutTimezone));
+  return `${result}${timezone}`;
 };
 
 export const ceilYear = roundDecorator(_ceilYear);
@@ -270,3 +270,11 @@ export const floorDay = roundDecorator(_floorDay);
 export const floorHour = roundDecorator(_floorHour);
 export const floorMinute = roundDecorator(_floorMinute);
 export const floorSecond = roundDecorator(_floorSecond);
+
+export const endOfSecond = roundDecorator(_endOfSecond);
+export const endOfMinute = roundDecorator(_endOfMinute);
+export const endOfHour = roundDecorator(_endOfHour);
+export const endOfDay = roundDecorator(_endOfDay);
+export const endOfWeek = roundDecorator(_endOfWeek);
+export const endOfMonth = roundDecorator(_endOfMonth);
+export const endOfYear = roundDecorator(_endOfYear);
