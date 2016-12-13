@@ -37,19 +37,12 @@ export {
   subtractMonths as subtractMonth,
   subtractYears as subtractYear,
 
-  floorSecond,
   floorSecond as floorSeconds,
-  floorMinute,
   floorMinute as floorMinutes,
-  floorHour,
   floorHour as floorHours,
-  floorDay,
   floorDay as floorDays,
-  floorWeek,
   floorWeek as floorWeeks,
-  floorMonth,
   floorMonth as floorMonths,
-  floorYear,
   floorYear as floorYears,
 
   ceilSecond as ceilSeconds,
@@ -60,17 +53,11 @@ export {
   ceilMonth as ceilMonths,
   ceilYear as ceilYears,
 
-  roundSecond,
   roundSecond as roundSeconds,
-  roundMinute,
   roundMinute as roundMinutes,
-  roundHour,
   roundHour as roundHours,
-  roundDay,
   roundDay as roundDays,
-  roundMonth,
   roundMonth as roundMonths,
-  roundYear,
   roundYear as roundYears,
 
   startOfSecond,
@@ -177,6 +164,21 @@ import {
   ceilMinute as _ceilMinute,
   ceilSecond as _ceilSecond,
 
+  roundYear as _roundYear,
+  roundMonth as _roundMonth,
+  roundWeek as _roundWeek,
+  roundDay as _roundDay,
+  roundHour as _roundHour,
+  roundMinute as _roundMinute,
+  roundSecond as _roundSecond,
+
+  floorYear as _floorYear,
+  floorMonth as _floorMonth,
+  floorWeek as _floorWeek,
+  floorDay as _floorDay,
+  floorHour as _floorHour,
+  floorMinute as _floorMinute,
+  floorSecond as _floorSecond,
 } from './calculations/index';
 
 import { getTimezone } from './getters';
@@ -252,3 +254,19 @@ export const ceilDay = roundDecorator(_ceilDay);
 export const ceilHour = roundDecorator(_ceilHour);
 export const ceilMinute = roundDecorator(_ceilMinute);
 export const ceilSecond = roundDecorator(_ceilSecond);
+
+export const roundYear = _roundYear;
+export const roundMonth = _roundMonth;
+export const roundWeek = _roundWeek;
+export const roundDay = _roundDay;
+export const roundHour = _roundHour;
+export const roundMinute = _roundMinute;
+export const roundSecond = _roundSecond;
+
+export const floorYear = roundDecorator(_floorYear);
+export const floorMonth = roundDecorator(_floorMonth);
+export const floorWeek = roundDecorator(_floorWeek);
+export const floorDay = roundDecorator(_floorDay);
+export const floorHour = roundDecorator(_floorHour);
+export const floorMinute = roundDecorator(_floorMinute);
+export const floorSecond = roundDecorator(_floorSecond);
