@@ -24,6 +24,9 @@ describe('isSame', () => {
   it('2000-01-01T10:00:00+01:00 is NOT same as 2000-01-01T10:00:00+00:00', () => assertThat(
     isSame('2000-01-01T10:00:00+01:00', '2000-01-01T10:00:00+00:00'), equalTo(false)));
 
+  it('2000-01-01T11:00:00+01:00 is the same as 2000-01-01T10:00:00+00:00', () => assertThat(
+    isSame('2000-01-01T11:00:00+01:00', '2000-01-01T10:00:00+00:00'), equalTo(true)));
+
   it('can be curried', () => assertThat(
     isSame('2000-01-01')('2000-01-01'), equalTo(true)));
 });

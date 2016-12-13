@@ -52,7 +52,7 @@ describe('minutes between', () => {
     minutesBetween('T11:00', 'T10:00'), equalTo(60)));
 
   it('2000-01-01T10:00:00+00:00 and 2000-01-01T10:00:00+00:15 is 15 minutes', () => assertThat(
-    minutesBetween('2000-01-01T10:00:00+00:00', '2000-01-01T10:00:00+00:15'), equalTo(-15)));
+    minutesBetween('2000-01-01T10:00:00+00:00', '2000-01-01T10:00:00+00:15'), equalTo(15)));
 
   it('can be curried', () => assertThat(
     minutesBetween('T11:00')('T10:00'), equalTo(60)));
@@ -63,13 +63,13 @@ describe('hours between', () => {
     hoursBetween('T11:00', 'T10:00'), equalTo(1)));
 
   it('2000-01-01T10:00:00+00:00 and 2000-01-01T10:00:00+01:00 is 1 hour', () => assertThat(
-    hoursBetween('2000-01-01T10:00:00+00:00', '2000-01-01T10:00:00+01:00'), equalTo(-1)));
+    hoursBetween('2000-01-01T10:00:00+00:00', '2000-01-01T10:00:00+01:00'), equalTo(1)));
 
   it('2000-01-01T10:00:00+01:00 and 2000-01-01T10:00:00+01:00 is 0 hours', () => assertThat(
     hoursBetween('2000-01-01T10:00:00+01:00', '2000-01-01T10:00:00+01:00'), equalTo(0)));
 
   it('2000-01-01T10:00:00+01:00 and 2000-01-01T10:00:00+00:00 is -1 hours', () => assertThat(
-    hoursBetween('2000-01-01T10:00:00+01:00', '2000-01-01T10:00:00+00:00'), equalTo(1)));
+    hoursBetween('2000-01-01T10:00:00+01:00', '2000-01-01T10:00:00+00:00'), equalTo(-1)));
 
   it('can be curried ', () => assertThat(
     hoursBetween('T11:00')('T10:00'), equalTo(1)));

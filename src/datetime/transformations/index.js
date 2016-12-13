@@ -1,6 +1,6 @@
 import { separateDateAndTimeComponents, toFragments } from './fragments';
 import { leftPad } from '../../utils';
-import { addDuration, containsTimezone } from '../index';
+import { subtractDuration, containsTimezone } from '../index';
 
 export const removeTimeComponent = (isoDatetime) =>
   separateDateAndTimeComponents(isoDatetime).dateComponent;
@@ -10,7 +10,7 @@ export const removeDateComponent = (isoDatetime) =>
 
 export const toUtc = (isoDatetime) => {
   const { timezoneOffset } = toFragments(isoDatetime);
-  return addDuration(timezoneOffset, isoDatetime);
+  return subtractDuration(timezoneOffset, isoDatetime);
 };
 
 export const toFloat = (isoDatetime) => {

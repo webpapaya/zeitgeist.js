@@ -94,7 +94,6 @@ export {
   isSameOrAfter,
   isSameOrBefore,
 
-  isSame,
   isSameYear,
   isSameMonth,
   isSameDay,
@@ -286,3 +285,9 @@ export const startOfDay = roundDecorator(_startOfDay);
 export const startOfWeek = roundDecorator(_startOfWeek);
 export const startOfMonth = roundDecorator(_startOfMonth);
 export const startOfYear = roundDecorator(_startOfYear);
+
+import {
+  isSame as _isSame,
+} from './compare';
+
+export const isSame = betweenDecorator(_isSame);
