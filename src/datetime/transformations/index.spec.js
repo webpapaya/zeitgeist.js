@@ -3,7 +3,6 @@ import {
   toIso,
   toIsoDate,
   toIsoTime,
-  toFloat,
   removeTimeComponent,
   removeDateComponent,
   containsDateComponent,

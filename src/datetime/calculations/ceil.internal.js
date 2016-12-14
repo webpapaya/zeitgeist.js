@@ -1,4 +1,3 @@
-import { validateFirstArg as validate } from '../validate';
 import {
   getWeekday,
 
