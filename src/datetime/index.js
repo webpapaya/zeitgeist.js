@@ -19,6 +19,12 @@ export {
 
 export {
   datesBetween,
+  microsecondsBetween,
+  millisecondsBetween,
+  secondsBetween,
+  minutesBetween,
+  hoursBetween,
+  daysBetween,
 
   addDuration,
   addYears,
@@ -120,13 +126,6 @@ import {
   hoursBetween as _hoursBetween,
   daysBetween as _daysBetween,
 
-  subtractDuration as _subtractDuration,
-  subtractYears as _subtractYears,
-  subtractMonths as _subtractMonths,
-  subtractDays as _subtractDays,
-  subtractHours as _subtractHours,
-  subtractMinutes as _subtractMinutes,
-  subtractSeconds as _subtractSeconds,
 
   ceilYear as _ceilYear,
   ceilMonth as _ceilMonth,
@@ -188,12 +187,6 @@ const betweenDecorator = (fn) => curry((from, to) => {
   );
 });
 
-export const microsecondsBetween = betweenDecorator(_microsecondsBetween);
-export const millisecondsBetween = betweenDecorator(_millisecondsBetween);
-export const secondsBetween = betweenDecorator(_secondsBetween);
-export const minutesBetween = betweenDecorator(_minutesBetween);
-export const hoursBetween = betweenDecorator(_hoursBetween);
-export const daysBetween = betweenDecorator(_daysBetween);
 
 export const normalize = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';
