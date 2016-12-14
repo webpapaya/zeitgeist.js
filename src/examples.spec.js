@@ -41,7 +41,7 @@ describe('Datetime Examples', () => {
         DateTime.toJulianDay,
       );
 
-      assertThat(addDoubleSchoolHour(9467020822), equalTo(2451544.5627546296));
+      assertThat(addDoubleSchoolHour(9467020822), equalTo(2550159.5627546296));
     });
   });
 

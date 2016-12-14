@@ -47,7 +47,7 @@ const leapMicrosecondsBetween = (from, to) => {
   return microsecondsBetween * ONE_SECOND;
 };
 
-export const microsecondsBetween = (from, to) => {
+const calculateMicrosecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);
   const toAsFragments = toFragments(to);
 
@@ -60,6 +60,10 @@ export const microsecondsBetween = (from, to) => {
     return totalSeconds + (valueToBeAdded * multiplier);
   }, microsecondsBetweenDays + leapSeconds);
 };
+
+export const microsecondsBetween = (from, to) => isBefore(from, to)
+  ? calculateMicrosecondsBetween(to, from) * -1
+  : calculateMicrosecondsBetween(from, to);
 
 export const millisecondsBetween = (from, to) =>
   microsecondsBetween(from, to) / ONE_MILLISECOND;

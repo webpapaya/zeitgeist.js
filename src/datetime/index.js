@@ -11,9 +11,6 @@ export {
   fromJulianDay,
   toJulianDay,
 
-  fromUnixTimestamp,
-  toUnixTimestamp,
-
   toJsDate,
   fromJsDate,
   now,
@@ -225,15 +222,13 @@ export const subtractSeconds = calculationDecorator(_subtractSeconds);
 
 const roundDecorator = (fn) => (isoDateTime) => {
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-
   const timezone = getTimezone(isoDateTime) || '';
+
   const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
 
   const result = applyFormat(dateTimeWithoutTimezone, fn(dateTimeWithoutTimezone));
   return `${result}${timezone}`;
 };
-
-
 
 export const ceilYear = roundDecorator(_ceilYear);
 export const ceilMonth = roundDecorator(_ceilMonth);
@@ -292,7 +287,6 @@ import {
   isSameSecond as _isSameSecond,
 } from './compare';
 
-
 export const isBetween = curry(({ from, to }, isoDateTime) =>
   _isBetween({ from: _toUtc(from), to: _toUtc(to) }, _toUtc(isoDateTime)));
 
@@ -308,3 +302,16 @@ export const isSameDay = betweenDecorator(_isSameDay);
 export const isSameHour = betweenDecorator(_isSameHour);
 export const isSameMinute = betweenDecorator(_isSameMinute);
 export const isSameSecond = betweenDecorator(_isSameSecond);
+
+import {
+  fromUnixTimestamp as _fromUnixTimestamp,
+  toUnixTimestamp as _toUnixTimestamp,
+} from './transformations/unix-timestamp';
+
+export const fromUnixTimestamp = _fromUnixTimestamp;
+
+export const toUnixTimestamp = (isoDateTime) =>{
+  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
+  return _toUnixTimestamp(_toUtc(isoDateTime));
+};
+
