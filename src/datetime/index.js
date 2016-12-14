@@ -35,11 +35,18 @@ export {
   addMonths as addMonth,
   addYears as addYear,
 
+  subtractDuration,
+  subtractSeconds,
   subtractSeconds as subtractSecond,
+  subtractMinutes,
   subtractMinutes as subtractMinute,
+  subtractHours,
   subtractHours as subtractHour,
+  subtractDays,
   subtractDays as subtractDay,
+  subtractMonths,
   subtractMonths as subtractMonth,
+  subtractYears,
   subtractYears as subtractYear,
 
   floorSecond as floorSeconds,
@@ -112,14 +119,6 @@ import {
   minutesBetween as _minutesBetween,
   hoursBetween as _hoursBetween,
   daysBetween as _daysBetween,
-
-  addDuration as _addDuration,
-  addYears as _addYears,
-  addMonths as _addMonths,
-  addDays as _addDays,
-  addHours as _addHours,
-  addMinutes as _addMinutes,
-  addSeconds as _addSeconds,
 
   subtractDuration as _subtractDuration,
   subtractYears as _subtractYears,
@@ -206,13 +205,6 @@ export const dropTimezone = (isoDatetime) => {
   return isoDatetime.replace(timezone, '');
 };
 
-export const subtractDuration = calculationDecorator(_subtractDuration);
-export const subtractYears = calculationDecorator(_subtractYears);
-export const subtractMonths = calculationDecorator(_subtractMonths);
-export const subtractDays = calculationDecorator(_subtractDays);
-export const subtractHours = calculationDecorator(_subtractHours);
-export const subtractMinutes = calculationDecorator(_subtractMinutes);
-export const subtractSeconds = calculationDecorator(_subtractSeconds);
 
 export const ceilYear = roundDecorator(_ceilYear);
 export const ceilMonth = roundDecorator(_ceilMonth);
