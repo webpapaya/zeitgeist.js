@@ -36,29 +36,16 @@ export const daysBetween = (from, to) => {
   return floor(daysTo + 0.5) - floor(daysFrom + 0.5);
 };
 
-const leapMicrosecondsBetween = (from, to) => {
-  const microsecondsBetween = Object.keys(leapSecondData)
-    .reduce((totalLeapSeconds, dateOfLeapSecond) => {
-      return isBetween({ from, to }, dateOfLeapSecond)
-        ? totalLeapSeconds + leapSecondData[dateOfLeapSecond].correction
-        : totalLeapSeconds;
-    }, 0);
-
-  return microsecondsBetween * ONE_SECOND;
-};
-
 const calculateMicrosecondsBetween = (from, to) => {
   const fromAsFragments = toFragments(from);
   const toAsFragments = toFragments(to);
-
   const microsecondsBetweenDays = Math.abs(daysBetween(from, to) * ONE_REGULAR_DAY);
-  const leapSeconds = leapMicrosecondsBetween(from, to);
 
   return Object.keys(TIME_UNITS).reduce((totalSeconds, unit) => {
     const valueToBeAdded = readUnit(fromAsFragments, unit) - readUnit(toAsFragments, unit);
     const multiplier = TIME_UNITS[unit];
     return totalSeconds + (valueToBeAdded * multiplier);
-  }, microsecondsBetweenDays + leapSeconds);
+  }, microsecondsBetweenDays);
 };
 
 export const microsecondsBetween = (from, to) => isBefore(from, to)
