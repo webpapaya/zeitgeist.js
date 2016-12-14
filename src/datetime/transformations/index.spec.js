@@ -98,7 +98,7 @@ describe('containsTimeComponent', () => {
 });
 
 describe('toUtc', () => {
-  it.skip('2000-01-01T00:00:01+00:01 results in 2000-01-01T00:00:00+00:00', () => assertThat(
+  it('2000-01-01T00:00:01+00:01 results in 2000-01-01T00:00:00+00:00', () => assertThat(
     toUtc('2000-01-01T00:01:00+00:01'), equalTo('2000-01-01T00:00:00+00:00')));
 });
 

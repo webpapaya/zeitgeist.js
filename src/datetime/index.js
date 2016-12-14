@@ -165,6 +165,8 @@ import {
   startOfYear as _startOfYear,
 } from './calculations/index';
 
+export { applyFormat } from './format';
+
 import { getTimezone } from './getters';
 
 import { toUtc as _toUtc } from './transformations/index'
@@ -190,7 +192,7 @@ export const normalize = (isoDatetime) => {
   return`${_normalize(isoDatetime)}${timezone}`;
 };
 
-const dropTimezone = (isoDatetime) => {
+export const dropTimezone = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';
   return isoDatetime.replace(timezone, '');
 };
@@ -230,6 +232,8 @@ const roundDecorator = (fn) => (isoDateTime) => {
   const result = applyFormat(dateTimeWithoutTimezone, fn(dateTimeWithoutTimezone));
   return `${result}${timezone}`;
 };
+
+
 
 export const ceilYear = roundDecorator(_ceilYear);
 export const ceilMonth = roundDecorator(_ceilMonth);
