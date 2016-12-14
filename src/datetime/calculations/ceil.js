@@ -1,39 +1,18 @@
-import { validateFirstArg as validate } from '../validate';
+import { roundDecorator } from '../decorator';
 import {
-  getWeekday,
+  ceilYear as _ceilYear,
+  ceilMonth as _ceilMonth,
+  ceilWeek as _ceilWeek,
+  ceilDay as _ceilDay,
+  ceilHour as _ceilHour,
+  ceilMinute as _ceilMinute,
+  ceilSecond as _ceilSecond,
+} from './ceil.internal';
 
-  floorSecond,
-  floorMinute,
-  floorHour,
-  floorDay,
-  floorMonth,
-  floorYear,
-
-  addSeconds,
-  addMinutes,
-  addHours,
-  addDays,
-  addMonths,
-  addYears,
-} from '../index';
-
-export const ceilSecond = (isoDatetime) =>
-  floorSecond(addSeconds(1, isoDatetime));
-
-export const ceilMinute = (isoDatetime) =>
-  floorMinute(addMinutes(1, isoDatetime));
-
-export const ceilHour = (isoDatetime) =>
-  floorHour(addHours(1, isoDatetime));
-
-export const ceilDay = (isoDatetime) =>
-  floorDay(addDays(1, isoDatetime));
-
-export const ceilWeek = (isoDatetime) =>
-  floorDay(addDays(7 - getWeekday(isoDatetime) + 1, isoDatetime));
-
-export const ceilMonth = (isoDatetime) =>
-  floorMonth(addMonths(1, isoDatetime));
-
-export const ceilYear = (isoDatetime) =>
-  floorYear(addYears(1, isoDatetime));
+export const ceilYear = roundDecorator(_ceilYear);
+export const ceilMonth = roundDecorator(_ceilMonth);
+export const ceilWeek = roundDecorator(_ceilWeek);
+export const ceilDay = roundDecorator(_ceilDay);
+export const ceilHour = roundDecorator(_ceilHour);
+export const ceilMinute = roundDecorator(_ceilMinute);
+export const ceilSecond = roundDecorator(_ceilSecond);

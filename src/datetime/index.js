@@ -55,28 +55,48 @@ export {
   subtractYears,
   subtractYears as subtractYear,
 
+  floorSecond,
   floorSecond as floorSeconds,
+  floorMinute,
   floorMinute as floorMinutes,
+  floorHour,
   floorHour as floorHours,
+  floorDay,
   floorDay as floorDays,
+  floorWeek,
   floorWeek as floorWeeks,
+  floorMonth,
   floorMonth as floorMonths,
+  floorYear,
   floorYear as floorYears,
 
+  ceilSecond,
   ceilSecond as ceilSeconds,
+  ceilMinute,
   ceilMinute as ceilMinutes,
+  ceilHour,
   ceilHour as ceilHours,
+  ceilDay,
   ceilDay as ceilDays,
+  ceilWeek,
   ceilWeek as ceilWeeks,
+  ceilMonth,
   ceilMonth as ceilMonths,
+  ceilYear,
   ceilYear as ceilYears,
 
-  roundSecond as roundSeconds,
-  roundMinute as roundMinutes,
-  roundHour as roundHours,
-  roundDay as roundDays,
-  roundMonth as roundMonths,
+  roundYear,
   roundYear as roundYears,
+  roundMonth,
+  roundMonth as roundMonths,
+  roundDay,
+  roundDay as roundDays,
+  roundHour,
+  roundHour as roundHours,
+  roundMinute,
+  roundMinute as roundMinutes,
+  roundSecond,
+  roundSecond as roundSeconds,
 } from './calculations/index';
 
 export {
@@ -118,38 +138,6 @@ import { isValid } from './validate';
 import { curry } from '../utils';
 import {
   normalize as _normalize,
-
-  microsecondsBetween as _microsecondsBetween,
-  millisecondsBetween as _millisecondsBetween,
-  secondsBetween as _secondsBetween,
-  minutesBetween as _minutesBetween,
-  hoursBetween as _hoursBetween,
-  daysBetween as _daysBetween,
-
-
-  ceilYear as _ceilYear,
-  ceilMonth as _ceilMonth,
-  ceilWeek as _ceilWeek,
-  ceilDay as _ceilDay,
-  ceilHour as _ceilHour,
-  ceilMinute as _ceilMinute,
-  ceilSecond as _ceilSecond,
-
-  roundYear as _roundYear,
-  roundMonth as _roundMonth,
-  roundWeek as _roundWeek,
-  roundDay as _roundDay,
-  roundHour as _roundHour,
-  roundMinute as _roundMinute,
-  roundSecond as _roundSecond,
-
-  floorYear as _floorYear,
-  floorMonth as _floorMonth,
-  floorWeek as _floorWeek,
-  floorDay as _floorDay,
-  floorHour as _floorHour,
-  floorMinute as _floorMinute,
-  floorSecond as _floorSecond,
 
   endOfSecond as _endOfSecond,
   endOfMinute as _endOfMinute,
@@ -197,31 +185,6 @@ export const dropTimezone = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';
   return isoDatetime.replace(timezone, '');
 };
-
-
-export const ceilYear = roundDecorator(_ceilYear);
-export const ceilMonth = roundDecorator(_ceilMonth);
-export const ceilWeek = roundDecorator(_ceilWeek);
-export const ceilDay = roundDecorator(_ceilDay);
-export const ceilHour = roundDecorator(_ceilHour);
-export const ceilMinute = roundDecorator(_ceilMinute);
-export const ceilSecond = roundDecorator(_ceilSecond);
-
-export const roundYear = roundDecorator(_roundYear);
-export const roundMonth = roundDecorator(_roundMonth);
-export const roundWeek = roundDecorator(_roundWeek);
-export const roundDay = roundDecorator(_roundDay);
-export const roundHour = roundDecorator(_roundHour);
-export const roundMinute = roundDecorator(_roundMinute);
-export const roundSecond = roundDecorator(_roundSecond);
-
-export const floorYear = roundDecorator(_floorYear);
-export const floorMonth = roundDecorator(_floorMonth);
-export const floorWeek = roundDecorator(_floorWeek);
-export const floorDay = roundDecorator(_floorDay);
-export const floorHour = roundDecorator(_floorHour);
-export const floorMinute = roundDecorator(_floorMinute);
-export const floorSecond = roundDecorator(_floorSecond);
 
 export const endOfSecond = roundDecorator(_endOfSecond);
 export const endOfMinute = roundDecorator(_endOfMinute);
