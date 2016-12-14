@@ -293,13 +293,12 @@ export const isBetween = _isBetween;
 export const isSame = betweenDecorator(_isSame);
 export const isBefore = betweenDecorator(_isBefore);
 export const isAfter = betweenDecorator(_isAfter);
-
 export const isSameOrAfter = betweenDecorator(_isSameOrAfter);
 export const isSameOrBefore = betweenDecorator(_isSameOrBefore);
 
-export const isSameYear = _isSameYear;
-export const isSameMonth = _isSameMonth;
-export const isSameDay = _isSameDay;
-export const isSameHour = _isSameHour;
-export const isSameMinute = _isSameMinute;
-export const isSameSecond = _isSameSecond;
+export const isSameYear = betweenDecorator(_isSameYear);
+export const isSameMonth = betweenDecorator(_isSameMonth);
+export const isSameDay = betweenDecorator(_isSameDay);
+export const isSameHour = betweenDecorator(_isSameHour);
+export const isSameMinute = betweenDecorator(_isSameMinute);
+export const isSameSecond = betweenDecorator(_isSameSecond);

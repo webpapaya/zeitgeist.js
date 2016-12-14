@@ -42,8 +42,10 @@ export const isSameDay = curry((firstDate, secondDate) =>
 export const isSameHour = curry((firstDate, secondDate) =>
   isSame(floorHour(firstDate), floorHour(secondDate)));
 
-export const isSameMinute = curry((firstDate, secondDate) =>
-  isSame(floorMinute(firstDate), floorMinute(secondDate)));
+export const isSameMinute = curry((firstDate, secondDate) => {
+  return isSame(floorMinute(firstDate), floorMinute(secondDate));
+});
+
 
 export const isSameSecond = curry((firstDate, secondDate) =>
   isSame(floorSecond(firstDate), floorSecond(secondDate)));
