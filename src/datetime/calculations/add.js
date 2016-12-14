@@ -1,54 +1,18 @@
-import { curry, pipe } from '../../utils';
-import { toFragments as toDurationFragments } from '../../duration/index';
-
+import { calculationDecorator } from '../decorator';
 import {
-  toFragments,
-  toIso,
-  fromJulianDay,
-  toJulianDay,
-} from '../index';
+  addDuration as _addDuration,
+  addYears as _addYears,
+  addMonths as _addMonths,
+  addDays as _addDays,
+  addHours as _addHours,
+  addMinutes as _addMinutes,
+  addSeconds as _addSeconds,
+} from './add.internal';
 
-import {
-  SECONDS_IN_REGULAR_DAY,
-  MINUTES_IN_REGULAR_DAY,
-  HOURS_IN_REGULAR_DAY,
-} from '../constants';
-
-export const addDuration = (isoDuration, isoDatetime) => {
-  const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
-
-  return pipe(
-    addDays(days),
-    addMonths(months),
-    addYears(years),
-    addHours(hours),
-    addMinutes(minutes),
-    addSeconds(seconds),
-  )(isoDatetime);
-};
-
-export const addSeconds = curry((seconds, isoDatetime) =>
-  addDays(seconds / SECONDS_IN_REGULAR_DAY, isoDatetime));
-
-export const addMinutes = curry((minutes, isoDatetime) =>
-  addDays(minutes / MINUTES_IN_REGULAR_DAY, isoDatetime));
-
-export const addHours = curry((hours, isoDatetime) =>
-  addDays(hours / HOURS_IN_REGULAR_DAY, isoDatetime));
-
-export const addDays = curry((days, isoDatetime) =>
-  fromJulianDay(toJulianDay(isoDatetime) + days));
-
-export const addMonths = curry((months, isoDatetime) => {
-  const fragments = toFragments(isoDatetime);
-  return toIso({
-    ...fragments,
-    year: (fragments.year + Math.floor((fragments.month + months - 1) / 12)),
-    month: (fragments.month + months + 11) % 12 + 1,
-  });
-});
-
-export const addYears = curry((years, isoDatetime) => {
-  const fragments = toFragments(isoDatetime);
-  return toIso({ ...fragments, year: fragments.year + years });
-});
+export const addDuration = calculationDecorator(_addDuration);
+export const addYears = calculationDecorator(_addYears);
+export const addMonths = calculationDecorator(_addMonths);
+export const addDays = calculationDecorator(_addDays);
+export const addHours = calculationDecorator(_addHours);
+export const addMinutes = calculationDecorator(_addMinutes);
+export const addSeconds = calculationDecorator(_addSeconds);

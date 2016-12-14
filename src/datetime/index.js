@@ -20,6 +20,14 @@ export {
 export {
   datesBetween,
 
+  addDuration,
+  addYears,
+  addMonths,
+  addDays,
+  addHours,
+  addMinutes,
+  addSeconds,
+
   addSeconds as addSecond,
   addMinutes as addMinute,
   addHours as addHour,
@@ -164,8 +172,12 @@ import {
 
 export { applyFormat } from './format';
 
-import { getTimezone } from './getters';
+import {
+  roundDecorator,
+  calculationDecorator,
+} from './decorator';
 
+import { getTimezone } from './getters';
 import { toUtc as _toUtc } from './transformations/index'
 import { containsDateComponent as _containsDateComponent } from './getters';
 import { applyFormat } from './format';
@@ -194,24 +206,6 @@ export const dropTimezone = (isoDatetime) => {
   return isoDatetime.replace(timezone, '');
 };
 
-const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
-  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-
-  const timezone = getTimezone(isoDateTime) || '';
-  const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
-
-  const result = `${fn(amount, dateTimeWithoutTimezone)}${timezone}`;
-  return applyFormat(isoDateTime, result);
-});
-
-export const addDuration = calculationDecorator(_addDuration);
-export const addYears = calculationDecorator(_addYears);
-export const addMonths = calculationDecorator(_addMonths);
-export const addDays = calculationDecorator(_addDays);
-export const addHours = calculationDecorator(_addHours);
-export const addMinutes = calculationDecorator(_addMinutes);
-export const addSeconds = calculationDecorator(_addSeconds);
-
 export const subtractDuration = calculationDecorator(_subtractDuration);
 export const subtractYears = calculationDecorator(_subtractYears);
 export const subtractMonths = calculationDecorator(_subtractMonths);
@@ -219,16 +213,6 @@ export const subtractDays = calculationDecorator(_subtractDays);
 export const subtractHours = calculationDecorator(_subtractHours);
 export const subtractMinutes = calculationDecorator(_subtractMinutes);
 export const subtractSeconds = calculationDecorator(_subtractSeconds);
-
-const roundDecorator = (fn) => (isoDateTime) => {
-  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-  const timezone = getTimezone(isoDateTime) || '';
-
-  const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
-
-  const result = applyFormat(dateTimeWithoutTimezone, fn(dateTimeWithoutTimezone));
-  return `${result}${timezone}`;
-};
 
 export const ceilYear = roundDecorator(_ceilYear);
 export const ceilMonth = roundDecorator(_ceilMonth);
@@ -309,9 +293,8 @@ import {
 } from './transformations/unix-timestamp';
 
 export const fromUnixTimestamp = _fromUnixTimestamp;
-
 export const toUnixTimestamp = (isoDateTime) =>{
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-  return _toUnixTimestamp(_toUtc(isoDateTime));
-};
+  return _toUnixTimestamp(isoDateTime);
+}
 
