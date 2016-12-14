@@ -1,5 +1,6 @@
 import { token as defaultToken } from '../locales/default-token';
 import { locale as defaultLocale } from '../locales/default-locale';
+import { getTimezone } from './getters';
 
 import {
   toFragments,
@@ -47,3 +48,9 @@ export const applyFormat = (original, modified) => {
     modifiedTimeComponent.substring(0, originalTimeComponent.length),
   ].join('');
 };
+
+export const dropTimezone = (isoDatetime) => {
+  const timezone = getTimezone(isoDatetime) || '';
+  return isoDatetime.replace(timezone, '');
+};
+

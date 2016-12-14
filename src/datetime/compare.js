@@ -1,51 +1,34 @@
 import { curry } from '../utils';
+import { betweenDecorator } from './decorator';
+import { toUtc } from './index';
 import {
-  toFloat,
-  floorYear,
-  floorMonth,
-  floorDay,
-  floorHour,
-  floorMinute,
-  floorSecond,
-} from './index';
+  isBetween as _isBetween,
+  isSame as _isSame,
+  isBefore as _isBefore,
+  isAfter as _isAfter,
+  isSameOrAfter as _isSameOrAfter,
+  isSameOrBefore as _isSameOrBefore,
 
-export const isBefore = (maybeBefore, maybeAfter) =>
-  toFloat(maybeBefore) < toFloat(maybeAfter);
+  isSameYear as _isSameYear,
+  isSameMonth as _isSameMonth,
+  isSameDay as _isSameDay,
+  isSameHour as _isSameHour,
+  isSameMinute as _isSameMinute,
+  isSameSecond as _isSameSecond,
+} from './compare.internal';
 
-export const isSameOrBefore = (maybeBefore, maybeAfter) =>
-  isSame(maybeBefore, maybeAfter) || isBefore(maybeBefore, maybeAfter);
+export const isBetween = curry(({ from, to }, isoDateTime) =>
+  _isBetween({ from: toUtc(from), to: toUtc(to) }, toUtc(isoDateTime)));
 
-export const isAfter = (maybeBefore, maybeAfter) =>
-  toFloat(maybeBefore) > toFloat(maybeAfter);
+export const isSame = betweenDecorator(_isSame);
+export const isBefore = betweenDecorator(_isBefore);
+export const isAfter = betweenDecorator(_isAfter);
+export const isSameOrAfter = betweenDecorator(_isSameOrAfter);
+export const isSameOrBefore = betweenDecorator(_isSameOrBefore);
 
-export const isSameOrAfter = (maybeBefore, maybeAfter) =>
-  isSame(maybeBefore, maybeAfter) || isAfter(maybeBefore, maybeAfter);
-
-export const isBetween = curry(({ from, to }, dateToCheck) => {
-  return isSameOrAfter(from, to)
-    ? isSameOrAfter(from, dateToCheck) && isSameOrBefore(to, dateToCheck)
-    : isSameOrAfter(to, dateToCheck) && isSameOrBefore(from, dateToCheck);
-});
-
-export const isSame = (firstDate, secondDate) =>
-  toFloat(firstDate) === toFloat(secondDate);
-
-export const isSameYear = curry((firstDate, secondDate) =>
-  isSame(floorYear(firstDate), floorYear(secondDate)));
-
-export const isSameMonth = curry((firstDate, secondDate) =>
-  isSame(floorMonth(firstDate), floorMonth(secondDate)));
-
-export const isSameDay = curry((firstDate, secondDate) =>
-  isSame(floorDay(firstDate), floorDay(secondDate)));
-
-export const isSameHour = curry((firstDate, secondDate) =>
-  isSame(floorHour(firstDate), floorHour(secondDate)));
-
-export const isSameMinute = curry((firstDate, secondDate) => {
-  return isSame(floorMinute(firstDate), floorMinute(secondDate));
-});
-
-
-export const isSameSecond = curry((firstDate, secondDate) =>
-  isSame(floorSecond(firstDate), floorSecond(secondDate)));
+export const isSameYear = betweenDecorator(_isSameYear);
+export const isSameMonth = betweenDecorator(_isSameMonth);
+export const isSameDay = betweenDecorator(_isSameDay);
+export const isSameHour = betweenDecorator(_isSameHour);
+export const isSameMinute = betweenDecorator(_isSameMinute);
+export const isSameSecond = betweenDecorator(_isSameSecond);

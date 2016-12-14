@@ -1,8 +1,4 @@
-import { validateFirstArg as validate } from '../validate';
-import {
-  fromJulianDay,
-  toJulianDay,
-} from '../index';
+import { roundDecorator } from '../decorator';
+import { normalize as _normalize } from './normalize.internal';
 
-export const normalize = validate((isoDatetime) =>
-  fromJulianDay(toJulianDay(isoDatetime)));
+export const normalize = roundDecorator(_normalize);

@@ -1,9 +1,11 @@
-import { addSeconds, secondsBetween } from '../index';
+import { isValid } from '../validate';
+import {
+  fromUnixTimestamp as _fromUnixTimestamp,
+  toUnixTimestamp as _toUnixTimestamp,
+} from './unix-timestamp.internal';
 
-// TODO: fix wrong unix timestamp
-export const fromUnixTimestamp = (unixTimestamp) =>
-  addSeconds(unixTimestamp, '1970-01-01T00:00:00');
-
-export const toUnixTimestamp = (isoDatetime) =>
-  secondsBetween(isoDatetime, '1970-01-01T00:00:00');
-
+export const fromUnixTimestamp = _fromUnixTimestamp;
+export const toUnixTimestamp = (isoDateTime) => {
+  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
+  return _toUnixTimestamp(isoDateTime);
+};
