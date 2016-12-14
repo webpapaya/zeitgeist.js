@@ -292,7 +292,9 @@ import {
   isSameSecond as _isSameSecond,
 } from './compare';
 
-export const isBetween = _isBetween;
+
+export const isBetween = curry(({ from, to }, isoDateTime) =>
+  _isBetween({ from: _toUtc(from), to: _toUtc(to) }, _toUtc(isoDateTime)));
 
 export const isSame = betweenDecorator(_isSame);
 export const isBefore = betweenDecorator(_isBefore);

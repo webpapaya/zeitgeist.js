@@ -109,6 +109,12 @@ describe('isBetween', () => {
       to: '1972-06-30T23:59:59',
     }, '1972-06-30T23:59:60'), equalTo(true)));
 
+  it('works with timezones as well', () => assertThat(
+    isBetween({
+      from: '2000-01-01T00:00:00+00:00',
+      to: '2000-01-01T00:00:00-01:00',
+    }, '2000-01-01T00:30:00+00:00'), equalTo(true)));
+
   it('can be curried', () => assertThat(
     isBetween({ from: 'T09:00', to: 'T10:00' })('T10:00'), equalTo(true)));
 });
