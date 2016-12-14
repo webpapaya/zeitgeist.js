@@ -8,7 +8,7 @@ import {
   addDays,
   addMonths,
   addYears,
-} from '../index';
+} from './add.internal';
 
 export const subtractDuration = curry((isoDuration, isoDatetime) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
