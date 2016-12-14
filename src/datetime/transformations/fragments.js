@@ -51,7 +51,7 @@ export const extractTimezoneAsTime = (isoDatetime) => buildMaybeMonad(isoDatetim
   .map((value) => value.match(MATCH_TIMEZONE))
   .map((value) => value[0].slice(1))
   .map((value) => value.split(TIME_UNIT_SEPARATOR))
-  .map(([ timezoneHourWithSign, timezoneMinute ]) => {
+  .map(([timezoneHourWithSign, timezoneMinute]) => {
     const sign = timezoneHourWithSign[0];
     const timezoneHour = timezoneHourWithSign.slice(1);
     return toDuration({
@@ -82,6 +82,6 @@ export const toFragments = (isoDatetime) => {
     hour: toInteger(hour),
     minute: toInteger(minute),
     second: toFloat(second),
-    timezoneOffset: timezoneOffset
+    timezoneOffset: timezoneOffset,
   });
 };

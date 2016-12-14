@@ -164,7 +164,7 @@ import {
 } from './decorator';
 
 import { getTimezone } from './getters';
-import { toUtc as _toUtc } from './transformations/index'
+import { toUtc as _toUtc } from './transformations/index';
 import { containsDateComponent as _containsDateComponent } from './getters';
 import { applyFormat } from './format';
 
@@ -178,7 +178,7 @@ const betweenDecorator = (fn) => curry((from, to) => {
 
 export const normalize = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';
-  return`${_normalize(isoDatetime)}${timezone}`;
+  return `${_normalize(isoDatetime)}${timezone}`;
 };
 
 export const dropTimezone = (isoDatetime) => {
@@ -241,8 +241,8 @@ import {
 } from './transformations/unix-timestamp';
 
 export const fromUnixTimestamp = _fromUnixTimestamp;
-export const toUnixTimestamp = (isoDateTime) =>{
+export const toUnixTimestamp = (isoDateTime) => {
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
   return _toUnixTimestamp(isoDateTime);
-}
+};
 

@@ -93,4 +93,3 @@ export const containsDateComponent = (isoDatetime) => !isEmpty(removeTimeCompone
 export const containsTimeComponent = (isoDatetime) => !isEmpty(removeDateComponent(isoDatetime));
 export const containsTimezone = (isoDatetime) => isoDatetime.match(MATCH_TIMEZONE) !== null;
 
-

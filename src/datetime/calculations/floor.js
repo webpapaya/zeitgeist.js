@@ -17,6 +17,3 @@ export const floorHour = roundDecorator(_floorHour);
 export const floorMinute = roundDecorator(_floorMinute);
 export const floorSecond = roundDecorator(_floorSecond);
 
-
-
-

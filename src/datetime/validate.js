@@ -97,7 +97,7 @@ const THE_MOTHER_OF_ISO8601_DATE_TIME = createRegexBuilder()
 export const isValid = (isoDatetime) => {
   // if (typeof isoDatetime === 'object') { return true; }
   return THE_MOTHER_OF_ISO8601_DATE_TIME.test(isoDatetime);
-}
+};
 
 export const validateFirstArg = (fn) => (isoDatetime, ...args) =>
   isValid(isoDatetime) ? fn(isoDatetime, ...args) : INVALID_DATETIME;
