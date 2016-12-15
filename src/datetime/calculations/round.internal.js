@@ -1,20 +1,5 @@
-import { validateFirstArg as validate } from '../validate';
 import { fractionOfNumber } from '../../utils';
 import {
-  floorSecond,
-  floorMinute,
-  floorHour,
-  floorDay,
-  floorMonth,
-  floorYear,
-
-  ceilSecond,
-  ceilMinute,
-  ceilHour,
-  ceilDay,
-  ceilMonth,
-  ceilYear,
-
   toFragments,
   isSameOrAfter,
   daysBetween,
@@ -22,16 +7,34 @@ import {
   normalize,
 } from '../index';
 
-const normalizeArg = (fn) => validate((isoDateTime) => fn(normalize(isoDateTime)));
+import {
+  floorSecond,
+  floorMinute,
+  floorHour,
+  floorDay,
+  floorMonth,
+  floorYear,
+} from './floor.internal';
+
+import {
+  ceilSecond,
+  ceilMinute,
+  ceilHour,
+  ceilDay,
+  ceilMonth,
+  ceilYear,
+} from './ceil.internal';
+
+const normalizeArg = (fn) => (isoDateTime) => fn(normalize(isoDateTime));
 const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
   fn(toFragments(isoDateTime), isoDateTime));
 
-export const roundSecond = validate((isoDatetime) => {
+export const roundSecond = (isoDatetime) => {
   const { second } = toFragments(isoDatetime);
   return fractionOfNumber(second) >= 0.5
     ? ceilSecond(isoDatetime)
     : floorSecond(isoDatetime);
-});
+};
 
 export const roundMinute = prepareArgs(({ second }, isoDateTime) => {
   return second >= 30
@@ -51,7 +54,7 @@ export const roundDay = prepareArgs(({ hour }, isoDateTime) => {
     : floorDay(isoDateTime);
 });
 
-export const roundMonth = validate((isoDateTime) => {
+export const roundMonth = (isoDateTime) => {
   const startOfThisMonth = floorMonth(isoDateTime);
   const startOfNextMonth = ceilMonth(isoDateTime);
   const daysInThisMonth = daysBetween(startOfThisMonth, startOfNextMonth);
@@ -60,7 +63,7 @@ export const roundMonth = validate((isoDateTime) => {
   return isSameOrAfter(isoDateTime, middleOfMonth)
     ? ceilMonth(isoDateTime)
     : floorMonth(isoDateTime);
-});
+};
 
 export const roundYear = prepareArgs(({ month }, isoDateTime) => {
   return month >= 6

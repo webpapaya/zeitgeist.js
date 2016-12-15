@@ -1,4 +1,3 @@
-import { validateFirstArg as validate } from '../validate';
 import {
   toIso,
   toFragments,
@@ -6,10 +5,10 @@ import {
   subtractDays,
 } from '../index';
 
-import { pipe } from '../../utils';
+import { compose } from '../../utils';
 
-const parseArgAsFragments = (fn) => validate((isoDatetime) =>
-  pipe(toFragments, fn, toIso)(isoDatetime));
+const parseArgAsFragments = (fn) => (isoDatetime) =>
+  compose(toFragments, fn, toIso)(isoDatetime);
 
 export const floorSecond = parseArgAsFragments((fragments) =>
   ({ ...fragments, second: Math.floor(fragments.second) }));
@@ -20,10 +19,10 @@ export const floorMinute = parseArgAsFragments((fragments) =>
 export const floorHour = parseArgAsFragments((fragments) =>
   ({ ...fragments, minute: 0, second: 0 }));
 
-export const floorWeek = validate((isoDatetime) => {
+export const floorWeek = (isoDatetime) => {
   const weekDay = getWeekday(isoDatetime);
   return floorDay(subtractDays(weekDay - 1, isoDatetime));
-});
+};
 
 export const floorDay = parseArgAsFragments((fragments) =>
   ({ ...fragments, hour: 0, minute: 0, second: 0 }));

@@ -1,27 +1,30 @@
 import { compose } from '../../utils';
-import { validateFirstArg as validate } from '../validate';
 import {
   toFragments,
   toIso,
+} from '../index';
 
+import {
   ceilMinute,
   ceilHour,
   ceilDay,
   ceilMonth,
   ceilYear,
   ceilWeek,
+} from './ceil.internal';
 
+import {
   subtractSeconds,
   subtractMinutes,
   subtractHours,
   subtractDays,
   subtractMonths,
-} from '../index';
+} from './subtract.internal';
 
-export const endOfSecond = validate((isoDatetime) => {
+export const endOfSecond = (isoDatetime) => {
   const fragments = toFragments(isoDatetime);
   return toIso({ ...fragments, second: Math.floor(fragments.second) + 0.999999 });
-});
+};
 
 export const endOfMinute = (isoDatetime) => compose(
   ceilMinute,
