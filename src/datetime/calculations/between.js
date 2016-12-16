@@ -12,7 +12,7 @@ import {
   daysBetween as _daysBetween,
 } from './between.internal';
 
-export const datesBetween = _datesBetween;
+export const datesBetween = betweenDecorator(_datesBetween);
 export const microsecondsBetween = betweenDecorator(_microsecondsBetween);
 export const millisecondsBetween = betweenDecorator(_millisecondsBetween);
 export const secondsBetween = betweenDecorator(_secondsBetween);
