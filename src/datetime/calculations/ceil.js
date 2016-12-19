@@ -1,4 +1,4 @@
-import { roundDecorator } from '../decorator';
+import { roundDecorator, fragmentsRoundDecorator } from '../decorator';
 import {
   ceilYear as _ceilYear,
   ceilMonth as _ceilMonth,
@@ -15,4 +15,4 @@ export const ceilWeek = roundDecorator(_ceilWeek);
 export const ceilDay = roundDecorator(_ceilDay);
 export const ceilHour = roundDecorator(_ceilHour);
 export const ceilMinute = roundDecorator(_ceilMinute);
-export const ceilSecond = roundDecorator(_ceilSecond);
+export const ceilSecond = fragmentsRoundDecorator(_ceilSecond);

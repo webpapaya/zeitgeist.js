@@ -1,4 +1,4 @@
-import { roundDecorator } from '../decorator';
+import { roundDecorator, fragmentsRoundDecorator } from '../decorator';
 import {
   floorYear as _floorYear,
   floorMonth as _floorMonth,
@@ -9,11 +9,11 @@ import {
   floorSecond as _floorSecond,
 } from './floor.internal';
 
-export const floorYear = roundDecorator(_floorYear);
-export const floorMonth = roundDecorator(_floorMonth);
+export const floorYear = fragmentsRoundDecorator(_floorYear);
+export const floorMonth = fragmentsRoundDecorator(_floorMonth);
 export const floorWeek = roundDecorator(_floorWeek);
-export const floorDay = roundDecorator(_floorDay);
-export const floorHour = roundDecorator(_floorHour);
-export const floorMinute = roundDecorator(_floorMinute);
-export const floorSecond = roundDecorator(_floorSecond);
+export const floorDay = fragmentsRoundDecorator(_floorDay);
+export const floorHour = fragmentsRoundDecorator(_floorHour);
+export const floorMinute = fragmentsRoundDecorator(_floorMinute);
+export const floorSecond = fragmentsRoundDecorator(_floorSecond);
 

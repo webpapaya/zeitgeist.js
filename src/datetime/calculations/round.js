@@ -1,4 +1,4 @@
-import { roundDecorator } from '../decorator';
+import { roundDecorator, fragmentsRoundDecorator } from '../decorator';
 import {
   roundYear as _roundYear,
   roundMonth as _roundMonth,
@@ -15,5 +15,5 @@ export const roundWeek = roundDecorator(_roundWeek);
 export const roundDay = roundDecorator(_roundDay);
 export const roundHour = roundDecorator(_roundHour);
 export const roundMinute = roundDecorator(_roundMinute);
-export const roundSecond = roundDecorator(_roundSecond);
+export const roundSecond = fragmentsRoundDecorator(_roundSecond);
 

@@ -20,6 +20,20 @@ export const roundDecorator = (fn) => (isoDateTime) => {
   return `${result}${timezone}`;
 };
 
+export const fragmentsRoundDecorator = (fn) => (isoDateTime) => {
+  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
+
+  const timezone = getTimezone(isoDateTime) || '';
+
+  const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
+  const fragments = toFragments(dateTimeWithoutTimezone);
+
+
+
+  const result = applyFormat(dateTimeWithoutTimezone, toIso(fn(fragments)));
+  return `${result}${timezone}`;
+};
+
 export const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
 

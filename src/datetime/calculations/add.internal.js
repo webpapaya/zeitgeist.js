@@ -4,9 +4,12 @@ import { toFragments as toDurationFragments } from '../../duration/index';
 import {
   toFragments,
   toIso,
+} from '../index';
+
+import {
   fromJulianDay,
   toJulianDay,
-} from '../index';
+} from '../transformations/julian-day.internal';
 
 import {
   SECONDS_IN_REGULAR_DAY,
@@ -27,8 +30,11 @@ export const addDuration = (isoDuration, isoDatetime) => {
   )(isoDatetime);
 };
 
-export const addSeconds = curry((seconds, isoDatetime) =>
-  addDays(seconds / SECONDS_IN_REGULAR_DAY, isoDatetime));
+export const addSeconds = curry((seconds, isoDatetime) => {
+
+  return addDays(seconds / SECONDS_IN_REGULAR_DAY, isoDatetime);
+});
+
 
 export const addMinutes = curry((minutes, isoDatetime) =>
   addDays(minutes / MINUTES_IN_REGULAR_DAY, isoDatetime));
@@ -36,8 +42,11 @@ export const addMinutes = curry((minutes, isoDatetime) =>
 export const addHours = curry((hours, isoDatetime) =>
   addDays(hours / HOURS_IN_REGULAR_DAY, isoDatetime));
 
-export const addDays = curry((days, isoDatetime) =>
-  fromJulianDay(toJulianDay(isoDatetime) + days));
+export const addDays = curry((days, isoDatetime) => {
+
+  return fromJulianDay(toJulianDay(isoDatetime) + days);
+});
+
 
 export const addMonths = curry((months, isoDatetime) => {
   const fragments = toFragments(isoDatetime);

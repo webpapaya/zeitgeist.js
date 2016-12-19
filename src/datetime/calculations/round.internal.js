@@ -5,6 +5,7 @@ import {
   daysBetween,
   addDays,
   normalize,
+  toIso,
 } from '../index';
 
 import {
@@ -25,15 +26,16 @@ import {
   ceilYear,
 } from './ceil.internal';
 
+
+
 const normalizeArg = (fn) => (isoDateTime) => fn(normalize(isoDateTime));
 const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
   fn(toFragments(isoDateTime), isoDateTime));
 
-export const roundSecond = (isoDatetime) => {
-  const { second } = toFragments(isoDatetime);
-  return fractionOfNumber(second) >= 0.5
-    ? ceilSecond(isoDatetime)
-    : floorSecond(isoDatetime);
+export const roundSecond = (fragments) => {
+  return fractionOfNumber(fragments.second) >= 0.5
+    ? toFragments(ceilSecond(toIso(fragments)))
+    : floorSecond(fragments);
 };
 
 export const roundMinute = prepareArgs(({ second }, isoDateTime) => {
