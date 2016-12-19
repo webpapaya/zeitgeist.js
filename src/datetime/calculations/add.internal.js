@@ -30,11 +30,8 @@ export const addDuration = (isoDuration, isoDatetime) => {
   )(isoDatetime);
 };
 
-export const addSeconds = curry((seconds, isoDatetime) => {
-
-  return addDays(seconds / SECONDS_IN_REGULAR_DAY, isoDatetime);
-});
-
+export const addSeconds = curry((seconds, isoDatetime) =>
+  addDays(seconds / SECONDS_IN_REGULAR_DAY, isoDatetime));
 
 export const addMinutes = curry((minutes, isoDatetime) =>
   addDays(minutes / MINUTES_IN_REGULAR_DAY, isoDatetime));
@@ -43,7 +40,6 @@ export const addHours = curry((hours, isoDatetime) =>
   addDays(hours / HOURS_IN_REGULAR_DAY, isoDatetime));
 
 export const addDays = curry((days, isoDatetime) => {
-
   return fromJulianDay(toJulianDay(isoDatetime) + days);
 });
 

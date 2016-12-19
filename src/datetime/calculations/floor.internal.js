@@ -10,8 +10,8 @@ import { compose } from '../../utils';
 const parseArgAsFragments = (fn) => (isoDatetime) =>
   compose(toFragments, fn, toIso)(isoDatetime);
 
-export const floorSecond = ((fragments) =>
-  ({ ...fragments, second: Math.floor(fragments.second) }));
+export const floorSecond = (fragments) =>
+  ({ ...fragments, second: Math.floor(fragments.second) });
 
 export const floorMinute = parseArgAsFragments((fragments) =>
   ({ ...fragments, second: 0 }));

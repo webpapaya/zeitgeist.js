@@ -9,11 +9,11 @@ import {
   roundSecond as _roundSecond,
 } from './round.internal';
 
-export const roundYear = roundDecorator(_roundYear);
-export const roundMonth = roundDecorator(_roundMonth);
-export const roundWeek = roundDecorator(_roundWeek);
-export const roundDay = roundDecorator(_roundDay);
-export const roundHour = roundDecorator(_roundHour);
-export const roundMinute = roundDecorator(_roundMinute);
+export const roundYear = fragmentsRoundDecorator(_roundYear);
+export const roundMonth = fragmentsRoundDecorator(_roundMonth);
+export const roundWeek = fragmentsRoundDecorator(_roundWeek);
+export const roundDay = fragmentsRoundDecorator(_roundDay);
+export const roundHour = fragmentsRoundDecorator(_roundHour);
+export const roundMinute = fragmentsRoundDecorator(_roundMinute);
 export const roundSecond = fragmentsRoundDecorator(_roundSecond);
 

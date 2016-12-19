@@ -1,12 +1,15 @@
 import { fractionOfNumber } from '../../utils';
 import {
   toFragments,
-  isSameOrAfter,
   daysBetween,
   addDays,
   normalize,
-  toIso,
+  toIso as toIsoTODORemoved,
 } from '../index';
+
+import {
+  isSameOrAfter
+} from '../compare.internal';
 
 import {
   floorSecond,
@@ -34,41 +37,42 @@ const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
 
 export const roundSecond = (fragments) => {
   return fractionOfNumber(fragments.second) >= 0.5
-    ? toFragments(ceilSecond(toIso(fragments)))
+    ? ceilSecond(fragments)
     : floorSecond(fragments);
 };
 
-export const roundMinute = prepareArgs(({ second }, isoDateTime) => {
-  return second >= 30
-    ? ceilMinute(isoDateTime)
-    : floorMinute(isoDateTime);
-});
+export const roundMinute = (fragments) => {
+  return fragments.second >= 30
+    ? ceilMinute(fragments)
+    : floorMinute(fragments);
+};
 
-export const roundHour = prepareArgs(({ minute }, isoDateTime) => {
-  return minute >= 30
-    ? ceilHour(isoDateTime)
-    : floorHour(isoDateTime);
-});
+export const roundHour = (fragments) => {
+  return fragments.minute >= 30
+    ? ceilHour(fragments)
+    : floorHour(fragments);
+};
 
-export const roundDay = prepareArgs(({ hour }, isoDateTime) => {
-  return hour >= 12
-    ? ceilDay(isoDateTime)
-    : floorDay(isoDateTime);
-});
+export const roundDay = (fragments) => {
+  return fragments.hour >= 12
+    ? ceilDay(fragments)
+    : floorDay(fragments);
+};
 
-export const roundMonth = (isoDateTime) => {
-  const startOfThisMonth = floorMonth(isoDateTime);
-  const startOfNextMonth = ceilMonth(isoDateTime);
+export const roundMonth = (fragments) => {
+  const startOfThisMonth = floorMonth(fragments);
+  const startOfNextMonth = ceilMonth(fragments);
+
   const daysInThisMonth = daysBetween(startOfThisMonth, startOfNextMonth);
   const middleOfMonth = floorDay(addDays(daysInThisMonth / 2, startOfThisMonth));
 
-  return isSameOrAfter(isoDateTime, middleOfMonth)
-    ? ceilMonth(isoDateTime)
-    : floorMonth(isoDateTime);
+  return isSameOrAfter(toIsoTODORemoved(fragments), middleOfMonth)
+    ? ceilMonth(fragments)
+    : floorMonth(fragments);
 };
 
-export const roundYear = prepareArgs(({ month }, isoDateTime) => {
-  return month >= 6
-    ? ceilYear(isoDateTime)
-    : floorYear(isoDateTime);
-});
+export const roundYear = (fragments) => {
+  return fragments.month >= 6
+    ? ceilYear(fragments)
+    : floorYear(fragments);
+};
