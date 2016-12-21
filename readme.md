@@ -1,18 +1,5 @@
 [![Build Status](https://travis-ci.org/webpapaya/zeitgeist.js.svg?branch=master)](https://travis-ci.org/webpapaya/zeitgeist.js) 
 
-# Architecture
-
--> iso timestamp
-    -> curry
-    -> validate
-    -> save timezone
-    -> to utc
-    -> to fragments 
-        -> function 
-    -> to timezone 
--> iso timestamp
-
-
 # This Package is not production ready yet.
 
 # Datetime
