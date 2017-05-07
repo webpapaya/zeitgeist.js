@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "eslint-crewmeister src",
     "test": "mocha {src,scripts}/{*,**/*,**/**/*,**/**/**/*}.spec.js --recursive --compilers js:babel-register --reporter spec",
-    "prebuild": "rimraf ./dist && mkdirp ./dist",
-    "build": "babel src/ --out-dir dist/ --ignore *.spec.js",
+    "prebuild": "rimraf ./lib && mkdirp ./lib",
+    "build": "babel src/ --out-dir lib/ --ignore *.spec.js",
     "preversion": "npm run lint && npm run test",
     "version": "npm run build && git add dist",
     "tz:download:leapseconds": "babel-node scripts/leapseconds.js leapseconds"
