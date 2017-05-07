@@ -9,7 +9,7 @@
     "prebuild": "rimraf ./lib && mkdirp ./lib",
     "build": "babel src/ --out-dir lib/ --ignore *.spec.js",
     "preversion": "npm run lint && npm run test",
-    "version": "npm run build && git add dist",
+    "version": "npm run build && git add lib",
     "tz:download:leapseconds": "babel-node scripts/leapseconds.js leapseconds"
   },
   "repository": {
