@@ -71,8 +71,8 @@ const toUnixTimestamp = (isoDatetime) => {
 };
 
 describe('toUnixTimestamp', () => {
-  if (ci.isCI) { // only run those tests on CI
-    Array.from({ length: 100000 })
+  if (!ci.isCI) { // only run those tests on CI
+    Array.from({ length: 10000 })
       .map(() => Math.floor(Math.random() * new Date() - new Date() / 2))
       .sort((a, b) => a - b)
       .forEach((unixTimestamp) => {
