@@ -71,18 +71,15 @@ const toUnixTimestamp = (isoDatetime) => {
 };
 
 describe('toUnixTimestamp', () => {
-  if (ci.isCI) {
-    for (let unixTimestamp = 0; unixTimestamp < +new Date(); unixTimestamp) {
-      const positiveDate = new Date(unixTimestamp).toISOString();
-      it(`${positiveDate} can be converted correctly`, () => {
-        assertThat(toUnixTimestamp(positiveDate), equalTo(unixTimestamp));
+  if (ci.isCI) { // only run those tests on CI
+    Array.from({ length: 100000 })
+      .map(() => Math.floor(Math.random() * new Date() - new Date() / 2))
+      .sort((a, b) => a - b)
+      .forEach((unixTimestamp) => {
+        it(`${new Date(unixTimestamp).toISOString()} is converted to ${unixTimestamp}`, () => {
+          assertThat(toUnixTimestamp(new Date(unixTimestamp).toISOString()), equalTo(unixTimestamp));
+        });
       });
-
-      const negativeDate = new Date(-unixTimestamp).toISOString();
-      it(`${negativeDate} can be converted correctly`, () => {
-        assertThat(toUnixTimestamp(negativeDate), equalTo(-unixTimestamp));
-      });
-    }
   }
 
   [
