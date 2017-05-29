@@ -23,8 +23,7 @@ describe('toUnixTimestamp', () => {
     toUnixTimestamp('1970-01-01T00:00:00-00:01'), equalTo(60)));
 });
 
-const floor = (value) => Math.floor(value)
-
+const floor = (value) => Math.floor(value);
 const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
   const year = m <= 2
     ? _year - 1
@@ -44,13 +43,19 @@ const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
 };
 
 describe('daysSinceEpoch', () => {
+  it('1969-12-30, responds -2', () => assertThat(
+    daysSinceEpoch({ year: 1969, month: 12, day: 30 }), equalTo(-2)));
+
+  it('1969-12-31, responds -1', () => assertThat(
+    daysSinceEpoch({ year: 1969, month: 12, day: 31 }), equalTo(-1)));
+
   it('1970-01-01, responds 0', () => assertThat(
-    daysSinceEpoch({ year: 1970, month: 1, day: 1}), equalTo(0)));
+    daysSinceEpoch({ year: 1970, month: 1, day: 1 }), equalTo(0)));
 
   it('1970-01-02, responds 1', () => assertThat(
-    daysSinceEpoch({ year: 1970, month: 1, day: 2}), equalTo(1)));
+    daysSinceEpoch({ year: 1970, month: 1, day: 2 }), equalTo(1)));
 
   it('1970-01-03, responds 2', () => assertThat(
-    daysSinceEpoch({ year: 1970, month: 1, day: 3}), equalTo(2)));
+    daysSinceEpoch({ year: 1970, month: 1, day: 3 }), equalTo(2)));
 });
 
