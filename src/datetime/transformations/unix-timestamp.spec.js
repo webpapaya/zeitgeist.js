@@ -71,8 +71,8 @@ const toUnixTimestamp = (isoDatetime) => {
 };
 
 describe('toUnixTimestamp', () => {
-  if (!ci.isCI) { // only run those tests on CI
-    Array.from({ length: 10000 })
+  if (ci.isCI) { // only run those tests on CI
+    Array.from({ length: 100000 })
       .map(() => Math.floor(Math.random() * new Date() - new Date() / 2))
       .sort((a, b) => a - b)
       .forEach((unixTimestamp) => {
@@ -90,6 +90,7 @@ describe('toUnixTimestamp', () => {
     { isoDatetime: '1970-01-01T01:00:00', unixTimestamp: 3600000 },
     { isoDatetime: '1970-01-02T00:00:00', unixTimestamp: 86400000 },
     { isoDatetime: '1970-01-01T00:00:01.001', unixTimestamp: 1001 },
+    { isoDatetime: '285428751-11-12T07:36:31', unixTimestamp: 9007199254740990000 },
   ].forEach(({ isoDatetime, unixTimestamp }) => {
     it(`${isoDatetime} is unix timestamp ${unixTimestamp} `, () => assertThat(
       toUnixTimestamp(isoDatetime), equalTo(unixTimestamp)));
