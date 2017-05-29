@@ -24,7 +24,6 @@ export const fragmentsRoundDecorator = (fn) => (isoDateTime) => {
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
 
 
-
   const timezone = getTimezone(isoDateTime) || '';
 
   const dateTimeWithoutTimezone = dropTimezone(isoDateTime);

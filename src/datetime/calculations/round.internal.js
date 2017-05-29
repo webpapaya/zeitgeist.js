@@ -8,7 +8,7 @@ import {
 } from '../index';
 
 import {
-  isSameOrAfter
+  isSameOrAfter,
 } from '../compare.internal';
 
 import {
@@ -28,7 +28,6 @@ import {
   ceilMonth,
   ceilYear,
 } from './ceil.internal';
-
 
 
 const normalizeArg = (fn) => (isoDateTime) => fn(normalize(isoDateTime));
