@@ -42,7 +42,7 @@ export const dayOfEpochToDate = (epochDay) => {
 };
 
 const fromUnixMicroseconds = (unixMicroseconds) => {
-  const epochDay = floor(unixMicroseconds / ONE_DAY );
+  const epochDay = floor(unixMicroseconds / ONE_DAY);
   const { year, month, day } = dayOfEpochToDate(epochDay);
 
   const hour = compose(
