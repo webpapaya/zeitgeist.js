@@ -1,4 +1,4 @@
-import { toFragments, toIso } from './index';
+import { toFragments } from './index';
 import { compose } from './../utils';
 import { isValid } from './validate';
 import { INVALID_DATETIME } from './constants';
