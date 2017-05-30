@@ -10,7 +10,6 @@ import {
 
 export const fromUnixTimestamp = _fromUnixTimestamp;
 
-
 const floor = (value) => Math.floor(value);
 export const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
   const year = m <= 2
@@ -67,8 +66,11 @@ export const dayOfEpochToDate = (unixTimestamp) => {
   const year = yearOfEpoch + era * 400;
 
   const dayOfYear = compose(
-    (sum) => sum - (365*yearOfEpoch + floor(yearOfEpoch/4) - floor(yearOfEpoch/100)),
-  )(dayOfEpoch)
+    (sum) => sum + 365 * yearOfEpoch,
+    (sum) => sum + floor(yearOfEpoch/4),
+    (sum) => sum - floor(yearOfEpoch/100),
+    (sum) => dayOfEpoch - sum
+  )(0);
 
   // const dayOfYear = dayOfEpoch - ;
   const mp = floor((5*dayOfYear + 2)/153);
