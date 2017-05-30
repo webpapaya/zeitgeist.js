@@ -21,7 +21,6 @@ describe('toUnixTimestamp', () => {
     { isoDatetime: '1970-01-01T01:00:00', unixTimestamp: 3600000 },
     { isoDatetime: '1970-01-02T00:00:00', unixTimestamp: 86400000 },
     { isoDatetime: '1970-01-01T00:00:01.001', unixTimestamp: 1001 },
-    { isoDatetime: '285428751-11-12T07:36:31', unixTimestamp: 9007199254740990000 },
   ].forEach(({ isoDatetime, unixTimestamp }) => {
     it(`${isoDatetime} is unix timestamp ${unixTimestamp} `, () => assertThat(
       toUnixTimestamp(isoDatetime), equalTo(unixTimestamp)));
