@@ -1,4 +1,3 @@
-import ci from 'ci-info';
 import { assertThat, equalTo } from 'hamjest';
 import { fromUnixTimestamp, toUnixTimestamp, daysSinceEpoch, dayOfEpochToDate } from './unix-timestamp';
 
@@ -18,17 +17,15 @@ describe('fromUnixTimestamp', () => {
   it('unix timestamp 1496168307917 responds 2017-05-30T18:18:27.917', () => assertThat(
     fromUnixTimestamp(1496168307917), equalTo('2017-05-30T18:18:27.917')));
 
-  if (ci.isCI) { // only run those tests on CI
-    describe('toUnixTimestamp is the reverse of fromUnixTimestamp', () => {
-      Array.from({ length: 100000 })
-        .map(() => Math.floor(Math.random() * new Date() - new Date() / 2))
-        .sort((a, b) => a - b)
-        .forEach((unixTimestamp) => {
-          it(`unix timestamp ${unixTimestamp} can be reversed`, () => assertThat(
-            toUnixTimestamp(fromUnixTimestamp(unixTimestamp)), equalTo(unixTimestamp)));
-        });
-    });
-  }
+  describe('toUnixTimestamp is the reverse of fromUnixTimestamp', () => {
+    Array.from({ length: 1000 })
+      .map(() => Math.floor(Math.random() * new Date() - new Date() / 2))
+      .sort((a, b) => a - b)
+      .forEach((unixTimestamp) => {
+        it(`unix timestamp ${unixTimestamp} can be reversed`, () => assertThat(
+          toUnixTimestamp(fromUnixTimestamp(unixTimestamp)), equalTo(unixTimestamp)));
+      });
+  });
 });
 
 describe('daysSinceEpoch', () => {
@@ -49,8 +46,8 @@ describe('daysSinceEpoch', () => {
 });
 
 describe('toUnixTimestamp', () => {
-  if (ci.isCI) { // only run those tests on CI
-    Array.from({ length: 100000 })
+  describe('randomized verification tests', () => {
+    Array.from({ length: 1000 })
       .map(() => Math.floor(Math.random() * new Date() - new Date() / 2))
       .sort((a, b) => a - b)
       .forEach((unixTimestamp) => {
@@ -58,7 +55,7 @@ describe('toUnixTimestamp', () => {
           assertThat(toUnixTimestamp(new Date(unixTimestamp).toISOString()), equalTo(unixTimestamp));
         });
       });
-  }
+  });
 
   [
     { isoDatetime: '1970-01-01T00:00:00', unixTimestamp: 0 },
