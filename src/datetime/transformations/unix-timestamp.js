@@ -64,8 +64,8 @@ const calculateDayOfYear = (dayOfEpoch, yearOfEpoch) => compose(
   (sum) => dayOfEpoch - sum
 )(0);
 
-export const dayOfEpochToDate = (unixTimestamp) => {
-  const timestamp = floor(unixTimestamp + 719468);
+export const dayOfEpochToDate = (epochDay) => {
+  const timestamp = floor(epochDay + 719468);
   const era = floor((timestamp >= 0
     ? timestamp
     : timestamp - 146096
