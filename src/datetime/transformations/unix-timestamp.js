@@ -1,13 +1,7 @@
-import { toFragments } from '../index';
+import { toFragments, toIso } from '../index';
 import { compose } from '../../utils';
 import { isValid } from '../validate';
 import { INVALID_DATETIME } from '../constants';
-import {
-  fromUnixTimestamp as _fromUnixTimestamp,
-
-} from './unix-timestamp.internal';
-
-export const fromUnixTimestamp = _fromUnixTimestamp;
 
 const floor = (value) => Math.floor(value);
 export const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
@@ -85,4 +79,36 @@ export const dayOfEpochToDate = (epochDay) => {
     month: month,
     day: day,
   };
+};
+
+
+
+const ONE_SECOND = 1000;
+const ONE_MINUTE = 60 * ONE_SECOND;
+const ONE_HOUR = 60 * ONE_MINUTE;
+const ONE_DAY = 24 * ONE_HOUR;
+
+export const fromUnixTimestamp = (unixTimestamp) => {
+  const epochDay = floor(unixTimestamp / (ONE_DAY));
+  const { year, month, day } = dayOfEpochToDate(epochDay);
+
+  const hour = compose(
+    (sum) => sum - epochDay * ONE_DAY,
+    (sum) => floor(sum / ONE_HOUR),
+  )(unixTimestamp);
+
+  const minute = compose(
+    (sum) => sum - epochDay * ONE_DAY,
+    (sum) => sum - hour * ONE_HOUR,
+    (sum) => floor(sum / ONE_MINUTE),
+  )(unixTimestamp);
+
+  const second = compose(
+    (sum) => sum - epochDay * ONE_DAY,
+    (sum) => sum - hour * ONE_HOUR,
+    (sum) => sum - minute * ONE_MINUTE,
+    (sum) => sum / ONE_SECOND,
+  )(unixTimestamp);
+
+  return toIso({ year, month, day, hour, minute, second });
 };
