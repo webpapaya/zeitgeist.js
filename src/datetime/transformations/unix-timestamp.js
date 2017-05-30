@@ -22,10 +22,10 @@ export const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
   return era * 146097 + dayOfEra - 719468;
 };
 
-const isFloat = (value) => !isNaN(value) && value.toString().indexOf('.') != -1;
+const isFloat = (value) => !isNaN(value) && value.toString().indexOf('.') !== -1;
 
 const getMillisecondsFromSeconds = (seconds) => isFloat(seconds)
-  ? parseInt(`${(seconds)}0000`.replace(/\d*\./, '0').slice(0, 4))
+  ? parseInt(`${(seconds)}0000`.replace(/\d*\./, '0').slice(0, 4), 10)
   : 0;
 
 export const toUnixTimestamp = (isoDatetime) => {
@@ -45,16 +45,16 @@ export const toUnixTimestamp = (isoDatetime) => {
 };
 
 const calculateYearOfEpoch = (dayOfEpoch) => compose(
-  (sum) => sum - floor(dayOfEpoch/1460),
-  (sum) => sum + floor(dayOfEpoch/36524),
-  (sum) => sum - floor(dayOfEpoch/146096),
+  (sum) => sum - floor(dayOfEpoch / 1460),
+  (sum) => sum + floor(dayOfEpoch / 36524),
+  (sum) => sum - floor(dayOfEpoch / 146096),
   (sum) => floor(sum / 365),
 )(dayOfEpoch);
 
 const calculateDayOfYear = (dayOfEpoch, yearOfEpoch) => compose(
   (sum) => sum + 365 * yearOfEpoch,
-  (sum) => sum + floor(yearOfEpoch/4),
-  (sum) => sum - floor(yearOfEpoch/100),
+  (sum) => sum + floor(yearOfEpoch / 4),
+  (sum) => sum - floor(yearOfEpoch / 100),
   (sum) => dayOfEpoch - sum
 )(0);
 
@@ -70,8 +70,8 @@ export const dayOfEpochToDate = (epochDay) => {
   const year = yearOfEpoch + era * 400;
   const dayOfYear = calculateDayOfYear(dayOfEpoch, yearOfEpoch);
 
-  const mp = floor((5*dayOfYear + 2)/153);
-  const day = dayOfYear - floor((153*mp+2)/5) + 1;
+  const mp = floor((5 * dayOfYear + 2) / 153);
+  const day = dayOfYear - floor((153 * mp + 2) / 5) + 1;
   const month = mp + (mp < 10 ? 3 : -9);
 
   return {
@@ -80,7 +80,6 @@ export const dayOfEpochToDate = (epochDay) => {
     day: day,
   };
 };
-
 
 
 const ONE_SECOND = 1000;

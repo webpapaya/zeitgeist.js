@@ -1,4 +1,4 @@
-import { roundDecorator, fragmentsRoundDecorator } from '../decorator';
+import { fragmentsRoundDecorator } from '../decorator';
 import {
   roundYear as _roundYear,
   roundMonth as _roundMonth,

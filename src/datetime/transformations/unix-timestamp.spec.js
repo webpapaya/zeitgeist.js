@@ -74,13 +74,13 @@ describe('toUnixTimestamp', () => {
 
 describe('dayOfEpochToDate', () => {
   [
-    { year: 1969, month: 12, day: 31, daysSinceEpoch: -1 },
-    { year: 1970, month: 1, day: 1, daysSinceEpoch: 0 },
-    { year: 1970, month: 1, day: 2, daysSinceEpoch: 1 },
-    { year: 1970, month: 1, day: 3, daysSinceEpoch: 2 },
-  ].forEach(({ year, month, day, daysSinceEpoch }) => {
-    it(`${daysSinceEpoch} is ${year} ${month} ${day} `, () => assertThat(
-      dayOfEpochToDate(daysSinceEpoch), equalTo({ year, month, day })));
+    { year: 1969, month: 12, day: 31, epochDay: -1 },
+    { year: 1970, month: 1, day: 1, epochDay: 0 },
+    { year: 1970, month: 1, day: 2, epochDay: 1 },
+    { year: 1970, month: 1, day: 3, epochDay: 2 },
+  ].forEach(({ year, month, day, epochDay }) => {
+    it(`${epochDay} is ${year} ${month} ${day} `, () => assertThat(
+      dayOfEpochToDate(epochDay), equalTo({ year, month, day })));
   });
 });
 

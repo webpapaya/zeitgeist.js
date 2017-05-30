@@ -103,7 +103,11 @@ describe('dates between', () => {
     { first: '2000-01-01', second: '2000-01-02', resultsIn: ['2000-01-01', '2000-01-02'] },
     { first: '2000-01-01T10:10', second: '2000-01-02', resultsIn: ['2000-01-01', '2000-01-02'] },
     { first: '2000-01-02', second: '2000-01-01', resultsIn: ['2000-01-02', '2000-01-01'] },
-    { first: '2000-01-01T00:00:00+01:00', second: '2000-01-01T00:00:00+00:00', resultsIn: ['1999-12-31', '2000-01-01'] },
+    {
+      first: '2000-01-01T00:00:00+01:00',
+      second: '2000-01-01T00:00:00+00:00',
+      resultsIn: ['1999-12-31', '2000-01-01'],
+    },
     { first: '', second: '', resultsIn: [] },
     { first: 'T10:00', second: 'T11:00', resultsIn: [] },
   ].forEach(({ first, second, resultsIn }) => {
