@@ -1,4 +1,3 @@
-
 import { toFragments } from '../index';
 import { compose } from '../../utils';
 import { isValid } from '../validate';
@@ -13,14 +12,14 @@ export const fromUnixTimestamp = _fromUnixTimestamp;
 const floor = (value) => Math.floor(value);
 export const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
   const year = m <= 2
-      ? _year - 1
-      : _year
-    ;
+    ? _year - 1
+    : _year
+  ;
 
   const era = floor((year >= 0
-        ? year
-        : year - 399
-    ) / 400);
+      ? year
+      : year - 399
+  ) / 400);
 
   const yearOfEra = year - era * 400;
   const dayOfYear = floor((153 * (m + (m > 2 ? -3 : 9)) + 2) / 5) + d - 1;
@@ -51,28 +50,32 @@ export const toUnixTimestamp = (isoDatetime) => {
   )(0);
 };
 
+const calculateYearOfEpoch = (dayOfEpoch) => compose(
+  (sum) => sum - floor(dayOfEpoch/1460),
+  (sum) => sum + floor(dayOfEpoch/36524),
+  (sum) => sum - floor(dayOfEpoch/146096),
+  (sum) => floor(sum / 365),
+)(dayOfEpoch);
+
+const calculateDayOfYear = (dayOfEpoch, yearOfEpoch) => compose(
+  (sum) => sum + 365 * yearOfEpoch,
+  (sum) => sum + floor(yearOfEpoch/4),
+  (sum) => sum - floor(yearOfEpoch/100),
+  (sum) => dayOfEpoch - sum
+)(0);
 
 export const dayOfEpochToDate = (unixTimestamp) => {
-  const z = floor(unixTimestamp + 719468);
-  const era = floor((z >= 0 ? z : z - 146096) / 146097);
-  const dayOfEpoch = z - era * 146097;
-  const yearOfEpoch = compose(
-    (sum) => sum - floor(dayOfEpoch/1460),
-    (sum) => sum + floor(dayOfEpoch/36524),
-    (sum) => sum - floor(dayOfEpoch/146096),
-    (sum) => floor(sum / 365)
-  )(dayOfEpoch);
+  const timestamp = floor(unixTimestamp + 719468);
+  const era = floor((timestamp >= 0
+    ? timestamp
+    : timestamp - 146096
+  ) / 146097);
 
+  const dayOfEpoch = timestamp - era * 146097;
+  const yearOfEpoch = calculateYearOfEpoch(dayOfEpoch);
   const year = yearOfEpoch + era * 400;
+  const dayOfYear = calculateDayOfYear(dayOfEpoch, yearOfEpoch);
 
-  const dayOfYear = compose(
-    (sum) => sum + 365 * yearOfEpoch,
-    (sum) => sum + floor(yearOfEpoch/4),
-    (sum) => sum - floor(yearOfEpoch/100),
-    (sum) => dayOfEpoch - sum
-  )(0);
-
-  // const dayOfYear = dayOfEpoch - ;
   const mp = floor((5*dayOfYear + 2)/153);
   const day = dayOfYear - floor((153*mp+2)/5) + 1;
   const month = mp + (mp < 10 ? 3 : -9);
