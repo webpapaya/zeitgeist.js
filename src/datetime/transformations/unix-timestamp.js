@@ -51,3 +51,33 @@ export const toUnixTimestamp = (isoDatetime) => {
     (sum) => sum + milliseconds,
   )(0);
 };
+
+
+export const dayOfEpochToDate = (unixTimestamp) => {
+  const z = floor(unixTimestamp + 719468);
+  const era = floor((z >= 0 ? z : z - 146096) / 146097);
+  const dayOfEpoch = z - era * 146097;
+  const yearOfEpoch = compose(
+    (sum) => sum - floor(dayOfEpoch/1460),
+    (sum) => sum + floor(dayOfEpoch/36524),
+    (sum) => sum - floor(dayOfEpoch/146096),
+    (sum) => floor(sum / 365)
+  )(dayOfEpoch);
+
+  const year = yearOfEpoch + era * 400;
+
+  const dayOfYear = compose(
+    (sum) => sum - (365*yearOfEpoch + floor(yearOfEpoch/4) - floor(yearOfEpoch/100)),
+  )(dayOfEpoch)
+
+  // const dayOfYear = dayOfEpoch - ;
+  const mp = floor((5*dayOfYear + 2)/153);
+  const day = dayOfYear - floor((153*mp+2)/5) + 1;
+  const month = mp + (mp < 10 ? 3 : -9);
+
+  return {
+    year: month <= 2 ? year + 1 : year,
+    month: month,
+    day: day,
+  };
+};
