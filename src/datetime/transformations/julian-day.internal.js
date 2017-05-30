@@ -4,7 +4,7 @@ import {
   HOURS_IN_REGULAR_DAY,
 } from '../constants';
 
-import { toFragments, toIso } from '../index';
+import { toFragments } from '../index';
 import { fractionOfNumber } from '../../utils';
 
 const floor = (value) => Math.floor(value);

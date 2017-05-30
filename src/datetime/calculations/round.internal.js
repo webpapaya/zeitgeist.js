@@ -1,14 +1,12 @@
 import { fractionOfNumber } from '../../utils';
 import {
-  toFragments,
   daysBetween,
   addDays,
-  normalize,
   toIso as toIsoTODORemoved,
 } from '../index';
 
 import {
-  isSameOrAfter
+  isSameOrAfter,
 } from '../compare.internal';
 
 import {
@@ -28,12 +26,6 @@ import {
   ceilMonth,
   ceilYear,
 } from './ceil.internal';
-
-
-
-const normalizeArg = (fn) => (isoDateTime) => fn(normalize(isoDateTime));
-const prepareArgs = (fn) => normalizeArg((isoDateTime) =>
-  fn(toFragments(isoDateTime), isoDateTime));
 
 export const roundSecond = (fragments) => {
   return fractionOfNumber(fragments.second) >= 0.5

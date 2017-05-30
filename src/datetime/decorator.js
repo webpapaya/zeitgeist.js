@@ -3,7 +3,7 @@ import { getTimezone } from './getters';
 import { applyFormat } from './format';
 import { isValid } from './validate';
 import { curry } from '../utils';
-import { containsDateComponent, toUtc, toIso, toFragments, normalize } from './index';
+import { containsDateComponent, toUtc, toIso, toFragments } from './index';
 
 export const dropTimezone = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';
@@ -22,7 +22,6 @@ export const roundDecorator = (fn) => (isoDateTime) => {
 
 export const fragmentsRoundDecorator = (fn) => (isoDateTime) => {
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-
 
 
   const timezone = getTimezone(isoDateTime) || '';
