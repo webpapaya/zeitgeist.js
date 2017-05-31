@@ -10,7 +10,6 @@ import {
 } from '../index';
 
 import {
-  ONE_MICROSECOND,
   ONE_MILLISECOND,
   ONE_SECOND,
   ONE_MINUTE,
@@ -30,12 +29,6 @@ export const addDuration = (isoDuration, isoDatetime) => {
     addSeconds(seconds),
   )(isoDatetime);
 };
-
-export const addMicroseconds = curry((microseconds, isoDatetime) => pipe(
-  toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + microseconds * ONE_MICROSECOND,
-  fromUnixMicroseconds,
-)(isoDatetime));
 
 export const addMilliseconds = curry((milliseconds, isoDatetime) => pipe(
   toUnixMicroseconds,

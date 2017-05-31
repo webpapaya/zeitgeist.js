@@ -7,7 +7,6 @@ import {
   addHours as _addHours,
   addMinutes as _addMinutes,
   addSeconds as _addSeconds,
-  addMicroseconds as _addMicroseconds,
   addMilliseconds as _addMilliseconds,
 } from './add.internal';
 
@@ -19,4 +18,3 @@ export const addHours = calculationDecorator(_addHours);
 export const addMinutes = calculationDecorator(_addMinutes);
 export const addSeconds = calculationDecorator(_addSeconds);
 export const addMilliseconds = calculationDecorator(_addMilliseconds);
-export const addMicroseconds = calculationDecorator(_addMicroseconds);
