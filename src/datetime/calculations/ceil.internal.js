@@ -3,14 +3,13 @@ import {
   getWeekday,
 } from '../index';
 
-import {
-  floorSecond,
-  floorMinute,
-  floorHour,
-  floorDay,
-  floorMonth,
-  floorYear,
-} from './floor';
+
+import floorSecond from '../floor-seconds';
+import floorMinute from '../floor-minutes';
+import floorHour from '../floor-hours';
+import floorDay from '../floor-days';
+import floorMonth from '../floor-months';
+import floorYear from '../floor-years';
 
 import addSeconds from '../add-seconds';
 import addMinutes from '../add-minutes';

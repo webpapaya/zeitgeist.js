@@ -21,8 +21,8 @@ export const roundDecorator = (fn) => (isoDateTime) => {
 };
 
 export const fragmentsRoundDecorator = (fn) => (isoDateTime) => {
+  isoDateTime = toIso(isoDateTime);
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-
 
   const timezone = getTimezone(isoDateTime) || '';
 

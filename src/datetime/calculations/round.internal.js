@@ -8,14 +8,12 @@ import {
   isSameOrAfter,
 } from '../compare.internal';
 
-import {
-  floorSecond,
-  floorMinute,
-  floorHour,
-  floorDay,
-  floorMonth,
-  floorYear,
-} from './floor.internal';
+import floorSecond from '../floor-seconds';
+import floorMinute from '../floor-minutes';
+import floorHour from '../floor-hours';
+import floorDay from '../floor-days';
+import floorMonth from '../floor-months';
+import floorYear from '../floor-years';
 
 import {
   ceilSecond,

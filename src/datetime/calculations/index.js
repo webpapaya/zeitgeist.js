@@ -28,15 +28,7 @@ export {
   ceilYear,
 } from './ceil';
 
-export {
-  floorSecond,
-  floorMinute,
-  floorHour,
-  floorWeek,
-  floorDay,
-  floorMonth,
-  floorYear,
-} from './floor';
+
 
 export {
   normalize,

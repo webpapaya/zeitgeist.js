@@ -1,9 +1,9 @@
-export {
-  floorSecond as startOfSecond,
-  floorMinute as startOfMinute,
-  floorHour as startOfHour,
-  floorDay as startOfDay,
-  floorMonth as startOfMonth,
-  floorYear as startOfYear,
-  floorWeek as startOfWeek,
-} from '../index';
+// export {
+//   'floor-second' as startOfSecond,
+//   'floor-minute' as startOfMinute,
+//   'floor-hour' as startOfHour,
+//   'floor-day' as startOfDay,
+//   'floor-month' as startOfMonth,
+//   'floor-year' as startOfYear,
+//   'floor-week' as startOfWeek,
+// } from '../index';
