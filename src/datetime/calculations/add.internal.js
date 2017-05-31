@@ -30,37 +30,18 @@ export const addDuration = (isoDuration, isoDatetime) => {
   )(isoDatetime);
 };
 
-export const addMilliseconds = curry((milliseconds, isoDatetime) => pipe(
+const createAddUnit = (unit) => curry((amount, isoDatetime) => pipe(
   toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + milliseconds * ONE_MILLISECOND,
+  (unixMicroseconds) => unixMicroseconds + amount * unit,
   fromUnixMicroseconds,
 )(isoDatetime));
 
-export const addSeconds = curry((seconds, isoDatetime) => pipe(
-  toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + seconds * ONE_SECOND,
-  fromUnixMicroseconds,
-)(isoDatetime));
+export const addMilliseconds = createAddUnit(ONE_MILLISECOND);
+export const addSeconds = createAddUnit(ONE_SECOND);
+export const addMinutes = createAddUnit(ONE_MINUTE);
+export const addHours = createAddUnit(ONE_HOUR);
+export const addDays = createAddUnit(ONE_REGULAR_DAY);
 
-
-export const addMinutes = curry((minutes, isoDatetime) => pipe(
-  toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + minutes * ONE_MINUTE,
-  fromUnixMicroseconds,
-)(isoDatetime));
-
-export const addHours = curry((hours, isoDatetime) => pipe(
-  toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + hours * ONE_HOUR,
-  fromUnixMicroseconds,
-)(isoDatetime));
-
-
-export const addDays = curry((days, isoDatetime) => pipe(
-  toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + days * ONE_REGULAR_DAY,
-  fromUnixMicroseconds,
-)(isoDatetime));
 
 export const addMonths = curry((months, isoDatetime) => {
   const fragments = toFragments(isoDatetime);

@@ -134,3 +134,4 @@ export const tco = (f) => {
 
 export const compose = (...fns) => (input) =>
   fns.reduce((value, currentFn) => currentFn(value), input);
+
