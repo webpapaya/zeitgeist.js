@@ -3,6 +3,8 @@ import { assertThat, equalTo } from 'hamjest';
 import { INVALID_DATETIME } from '../constants';
 import {
   addDuration,
+  addMicroseconds,
+  addMilliseconds,
   addSeconds,
   addMinutes,
   addHours,
@@ -24,6 +26,28 @@ describe('addDuration', () => {
   ].forEach(({ date, plusDuration, resultsIn }) => {
     it(`${plusDuration} to ${date} results in ${resultsIn}`, () => assertThat(
       addDuration(plusDuration, date), equalTo(resultsIn)));
+  });
+});
+
+describe('addMicroseconds', () => {
+  [
+    { date: '2001-01-01T00:00:00.000000', plusMicrosecond: 1, resultsIn: '2001-01-01T00:00:00.000001' },
+    { date: '2001-01-01T00:59:59.999999', plusMicrosecond: 1, resultsIn: '2001-01-01T01:00:00' },
+    { date: 'I\'m invalid', plusMicrosecond: 60, resultsIn: INVALID_DATETIME },
+  ].forEach(({ date, plusMicrosecond, resultsIn }) => {
+    it(`${plusMicrosecond} to ${date} results in ${resultsIn}`, () => assertThat(
+      addMicroseconds(plusMicrosecond, date), equalTo(resultsIn)));
+  });
+});
+
+describe('addMilliseconds', () => {
+  [
+    { date: '2001-01-01T00:00:00.000', plusMillisecond: 1, resultsIn: '2001-01-01T00:00:00.001' },
+    { date: '2001-01-01T00:59:59.999', plusMillisecond: 1, resultsIn: '2001-01-01T01:00:00' },
+    { date: 'I\'m invalid', plusMillisecond: 60, resultsIn: INVALID_DATETIME },
+  ].forEach(({ date, plusMillisecond, resultsIn }) => {
+    it(`${plusMillisecond} to ${date} results in ${resultsIn}`, () => assertThat(
+      addMilliseconds(plusMillisecond, date), equalTo(resultsIn)));
   });
 });
 

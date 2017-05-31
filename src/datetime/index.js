@@ -33,6 +33,8 @@ export {
   addHours,
   addMinutes,
   addSeconds,
+  addMilliseconds,
+  addMicroseconds,
 
   addSeconds as addSecond,
   addMinutes as addMinute,

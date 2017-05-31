@@ -1,5 +1,7 @@
 export {
   addDuration,
+  addMicroseconds,
+  addMilliseconds,
   addSeconds,
   addMinutes,
   addHours,

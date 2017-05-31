@@ -10,11 +10,15 @@ import {
 } from '../index';
 
 import {
+  ONE_MICROSECOND,
+  ONE_MILLISECOND,
   ONE_SECOND,
   ONE_MINUTE,
   ONE_HOUR,
   ONE_REGULAR_DAY,
 } from '../constants';
+
+
 
 export const addDuration = (isoDuration, isoDatetime) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
@@ -28,6 +32,18 @@ export const addDuration = (isoDuration, isoDatetime) => {
     addSeconds(seconds),
   )(isoDatetime);
 };
+
+export const addMicroseconds = curry((microseconds, isoDatetime) => pipe(
+  toUnixMicroseconds,
+  (unixMicroseconds) => unixMicroseconds + microseconds * ONE_MICROSECOND,
+  fromUnixMicroseconds,
+)(isoDatetime));
+
+export const addMilliseconds = curry((milliseconds, isoDatetime) => pipe(
+  toUnixMicroseconds,
+  (unixMicroseconds) => unixMicroseconds + milliseconds * ONE_MILLISECOND,
+  fromUnixMicroseconds,
+)(isoDatetime));
 
 export const addSeconds = curry((seconds, isoDatetime) => pipe(
   toUnixMicroseconds,
