@@ -43,13 +43,3 @@ export {
   endOfMonth,
   endOfYear,
 } from './end-of';
-
-export {
-  startOfSecond,
-  startOfMinute,
-  startOfHour,
-  startOfDay,
-  startOfWeek,
-  startOfMonth,
-  startOfYear,
-} from './start-of';
