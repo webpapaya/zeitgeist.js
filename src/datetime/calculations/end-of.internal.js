@@ -13,13 +13,12 @@ import {
   ceilWeek,
 } from './ceil.internal';
 
-import {
-  subtractSeconds,
-  subtractMinutes,
-  subtractHours,
-  subtractDays,
-  subtractMonths,
-} from './subtract.internal';
+import subtractSeconds from '../subtract-seconds';
+import subtractMinutes from '../subtract-minutes';
+import subtractHours from '../subtract-hours';
+import subtractDays from '../subtract-days';
+import subtractMonths from '../subtract-months';
+
 
 export const endOfSecond = (isoDatetime) => {
   const fragments = toFragments(isoDatetime);

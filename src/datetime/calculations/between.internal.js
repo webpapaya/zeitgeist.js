@@ -1,7 +1,6 @@
 import {
   toJulianDay,
   toFragments,
-  addDays,
   removeTimeComponent,
   containsDateComponent,
   isBefore,
@@ -22,6 +21,8 @@ import {
   TIME_UNITS,
   ONE_REGULAR_DAY,
 } from '../constants';
+
+import addDays from '../add-days';
 
 const readUnit = (fragments, unit) => (fragments[unit] || 0);
 const floor = (value) => Math.floor(value);

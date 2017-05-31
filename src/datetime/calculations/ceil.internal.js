@@ -12,14 +12,12 @@ import {
   floorYear,
 } from './floor';
 
-import {
-  addSeconds,
-  addMinutes,
-  addHours,
-  addDays,
-  addMonths,
-  addYears,
-} from './add.internal';
+import addSeconds from '../add-seconds';
+import addMinutes from '../add-minutes';
+import addHours from '../add-hours';
+import addDays from '../add-days';
+import addMonths from '../add-months';
+import addYears from '../add-years';
 
 // TODO: remove toIso call here
 export const ceilSecond = (isoDatetime) =>

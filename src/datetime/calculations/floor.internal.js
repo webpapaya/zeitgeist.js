@@ -2,8 +2,9 @@ import {
   toIso,
   toFragments,
   getWeekday,
-  subtractDays,
 } from '../index';
+
+import subtractDays from '../subtract-days';
 
 import { compose } from '../../utils';
 

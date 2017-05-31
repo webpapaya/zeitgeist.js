@@ -1,7 +1,6 @@
 import { fractionOfNumber } from '../../utils';
 import {
   daysBetween,
-  addDays,
   toIso as toIsoTODORemoved,
 } from '../index';
 
@@ -26,6 +25,8 @@ import {
   ceilMonth,
   ceilYear,
 } from './ceil.internal';
+
+import addDays from '../add-days';
 
 export const roundSecond = (fragments) => {
   return fractionOfNumber(fragments.second) >= 0.5

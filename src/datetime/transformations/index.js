@@ -1,11 +1,12 @@
 import { separateDateAndTimeComponents, toFragments } from './fragments';
 import { leftPad } from '../../utils';
 import {
-  subtractDuration,
   containsTimezone,
   dropTimezone,
   applyFormat,
 } from '../index';
+
+import subtractDuration from '../subtract-duration';
 
 export const removeTimeComponent = (isoDatetime) =>
   separateDateAndTimeComponents(isoDatetime).dateComponent;
