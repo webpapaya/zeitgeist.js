@@ -18,8 +18,6 @@ import {
   ONE_REGULAR_DAY,
 } from '../constants';
 
-
-
 export const addDuration = (isoDuration, isoDatetime) => {
   const { years, months, days, hours, minutes, seconds } = toDurationFragments(isoDuration);
 
