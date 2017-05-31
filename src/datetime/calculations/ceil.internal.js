@@ -1,5 +1,5 @@
-import { toIso } from '../index';
 import {
+  toIso,
   getWeekday,
 } from '../index';
 
