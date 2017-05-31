@@ -1,8 +1,6 @@
 import { curry, pipe } from '../../utils';
 import { toFragments as toDurationFragments } from '../../duration/index';
 
-import toUnixMicroseconds from '../to-unix-microseconds';
-import fromUnixMicroseconds from '../from-unix-microseconds';
 import createAddUnitFunction from '../_internal/create-add-unit-function';
 
 import {
