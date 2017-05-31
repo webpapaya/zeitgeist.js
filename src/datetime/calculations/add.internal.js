@@ -3,6 +3,7 @@ import { toFragments as toDurationFragments } from '../../duration/index';
 
 import toUnixMicroseconds from '../to-unix-microseconds';
 import fromUnixMicroseconds from '../from-unix-microseconds';
+import createAddUnitFunction from '../_internal/create-add-unit-function';
 
 import {
   toFragments,
@@ -29,18 +30,11 @@ export const addDuration = (isoDuration, isoDatetime) => {
     addSeconds(seconds),
   )(isoDatetime);
 };
-
-const createAddUnit = (unit) => curry((amount, isoDatetime) => pipe(
-  toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + amount * unit,
-  fromUnixMicroseconds,
-)(isoDatetime));
-
-export const addMilliseconds = createAddUnit(ONE_MILLISECOND);
-export const addSeconds = createAddUnit(ONE_SECOND);
-export const addMinutes = createAddUnit(ONE_MINUTE);
-export const addHours = createAddUnit(ONE_HOUR);
-export const addDays = createAddUnit(ONE_REGULAR_DAY);
+export const addMilliseconds = createAddUnitFunction(ONE_MILLISECOND);
+export const addSeconds = createAddUnitFunction(ONE_SECOND);
+export const addMinutes = createAddUnitFunction(ONE_MINUTE);
+export const addHours = createAddUnitFunction(ONE_HOUR);
+export const addDays = createAddUnitFunction(ONE_REGULAR_DAY);
 
 
 export const addMonths = curry((months, isoDatetime) => {

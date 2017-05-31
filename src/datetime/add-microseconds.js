@@ -1,13 +1,5 @@
-import { pipe } from '../utils';
-import { calculationDecorator } from './decorator';
-import toUnixMicroseconds from './to-unix-microseconds';
-import fromUnixMicroseconds from './from-unix-microseconds';
+import createAddUnitFunction from './_internal/create-add-unit-function';
 import { ONE_MICROSECOND } from './constants';
+import { calculationDecorator } from './decorator'; // TODO: move calculation decorator to createAddUnitFunction
 
-const addMicroseconds = calculationDecorator((microseconds, isoDatetime) => pipe(
-  toUnixMicroseconds,
-  (unixMicroseconds) => unixMicroseconds + microseconds * ONE_MICROSECOND,
-  fromUnixMicroseconds,
-)(isoDatetime));
-
-export default addMicroseconds;
+export default calculationDecorator(createAddUnitFunction(ONE_MICROSECOND));
