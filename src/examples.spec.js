@@ -38,10 +38,10 @@ describe('Datetime Examples', () => {
         DateTime.fromUnixTimestamp,
         DateTime.addMinutes(30),
         DateTime.addHour(1),
-        DateTime.toJulianDay,
+        DateTime.toUnixTimestamp,
       );
 
-      assertThat(addDoubleSchoolHour(9467020822), equalTo(2440697.134502315));
+      assertThat(addDoubleSchoolHour(9467020822), equalTo(9472420822));
     });
   });
 
