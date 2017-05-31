@@ -16,4 +16,4 @@ describe('addDuration', () => {
     it(`${plusDuration} to ${date} results in ${resultsIn}`, () => assertThat(
       addDuration(plusDuration, date), equalTo(resultsIn)));
   });
-})
+});

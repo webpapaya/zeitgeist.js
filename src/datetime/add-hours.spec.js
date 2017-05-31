@@ -13,4 +13,4 @@ describe('addHours', () => {
       addHours(plusHours, date), equalTo(resultsIn)));
   });
 });
-;
+
