@@ -11,4 +11,9 @@ describe('addMicroseconds', () => {
     it(`${plusMicrosecond} to ${date} results in ${resultsIn}`, () => assertThat(
       addMicroseconds(plusMicrosecond, date), equalTo(resultsIn)));
   });
+
+  it('can be curried', () => {
+    const add2Microseconds = addMicroseconds(2);
+    assertThat(add2Microseconds('2001-01-01T00:00:00.000000'), equalTo('2001-01-01T00:00:00.000002'));
+  });
 });
