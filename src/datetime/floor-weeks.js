@@ -7,4 +7,4 @@ const floorWeeks = (isoDatetime) => {
   return floorDays(subtractDays(weekDay - 1, isoDatetime));
 };
 
-export default floorWeeks
+export default floorWeeks;

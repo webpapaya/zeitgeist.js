@@ -1,6 +1,6 @@
-import { assertThat, equalTo } from "hamjest";
-import { INVALID_DATETIME } from "./constants";
-import endOfHour from "./end-of-hour"
+import { assertThat, equalTo } from 'hamjest';
+import { INVALID_DATETIME } from './constants';
+import endOfHour from './end-of-hour';
 
 describe('endOfHour', () => {
   it('2000-01-01T10:11:12.12 results in 2000-01-01T10:59:59.99', () => assertThat(
@@ -12,5 +12,4 @@ describe('endOfHour', () => {
   it('`I\'m invalid`results in `INVALID_DATETIME`', () => assertThat(
     endOfHour('I\'m invalid'), equalTo(INVALID_DATETIME)));
 });
-
 

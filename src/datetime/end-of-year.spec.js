@@ -1,8 +1,8 @@
-import { assertThat, equalTo } from "hamjest";
-import { INVALID_DATETIME } from "./constants";
-import endOfYear from "./end-of-year";
+import { assertThat, equalTo } from 'hamjest';
+import { INVALID_DATETIME } from './constants';
+import endOfYear from './end-of-year';
 
-describe.skip('endOfYear', () => {
+describe('endOfYear', () => {
   it('2000-01-01T10:11:12.12 results in 2000-01-31T23:59:59.99', () => assertThat(
     endOfYear('2000-01-01T10:11:12.12'), equalTo('2000-12-31T23:59:59.99')));
 

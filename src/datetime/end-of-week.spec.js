@@ -1,6 +1,6 @@
-import { assertThat, equalTo } from "hamjest";
-import { INVALID_DATETIME } from "./constants";
-import endOfWeek from "./end-of-week"
+import { assertThat, equalTo } from 'hamjest';
+import { INVALID_DATETIME } from './constants';
+import endOfWeek from './end-of-week';
 
 describe('endOfWeek', () => {
   it('2000-01-01T10:11:12.12 results in 2000-01-02T23:59:59.99', () => assertThat(

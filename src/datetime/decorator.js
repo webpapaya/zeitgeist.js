@@ -20,8 +20,8 @@ export const roundDecorator = (fn) => (isoDateTime) => {
   return `${result}${timezone}`;
 };
 
-export const fragmentsRoundDecorator = (fn) => (isoDateTime) => {
-  isoDateTime = toIso(isoDateTime);
+export const fragmentsRoundDecorator = (fn) => (_isoDateTime) => {
+  const isoDateTime = toIso(_isoDateTime);
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
 
   const timezone = getTimezone(isoDateTime) || '';
