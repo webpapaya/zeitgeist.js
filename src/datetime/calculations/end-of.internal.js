@@ -19,7 +19,6 @@ import subtractHours from '../subtract-hours';
 import subtractDays from '../subtract-days';
 import subtractMonths from '../subtract-months';
 
-
 export const endOfSecond = (isoDatetime) => {
   const fragments = toFragments(isoDatetime);
   return toIso({ ...fragments, second: Math.floor(fragments.second) + 0.999999 });
