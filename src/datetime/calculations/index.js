@@ -28,18 +28,5 @@ export {
   ceilYear,
 } from './ceil';
 
+export { normalize } from './normalize';
 
-
-export {
-  normalize,
-} from './normalize';
-
-export {
-  endOfSecond,
-  endOfMinute,
-  endOfHour,
-  endOfDay,
-  endOfWeek,
-  endOfMonth,
-  endOfYear,
-} from './end-of';
