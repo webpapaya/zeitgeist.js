@@ -89,7 +89,7 @@ describe('round', () => {
     it('2000-06-16T12:31:13.123 is ceiled', () => assertThat(
       roundYear('2000-06-16T12:31:13.123'), equalTo('2001-01-01T00:00:00.000')));
 
-    it.skip('2000-05-60T12:31:13.123 is ceiled', () => assertThat(
+    it('2000-05-60T12:31:13.123 is ceiled', () => assertThat(
       roundYear('2000-05-60T12:31:13.123'), equalTo('2001-01-01T00:00:00.000')));
 
     it('2000-05-60T12:31:13.123+10:00 doesn\'t drop timezone', () => assertThat(
