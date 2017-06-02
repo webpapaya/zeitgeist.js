@@ -15,14 +15,12 @@ import floorDay from '../floor-days';
 import floorMonth from '../floor-months';
 import floorYear from '../floor-years';
 
-import {
-  ceilSecond,
-  ceilMinute,
-  ceilHour,
-  ceilDay,
-  ceilMonth,
-  ceilYear,
-} from './ceil.internal';
+import ceilSecond from '../ceil-seconds';
+import ceilMinute from '../ceil-minutes';
+import ceilHour from '../ceil-hours';
+import ceilDay from '../ceil-days';
+import ceilMonth from '../ceil-months';
+import ceilYear from '../ceil-years';
 
 import addDays from '../add-days';
 

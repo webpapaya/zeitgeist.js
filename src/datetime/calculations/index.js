@@ -18,15 +18,6 @@ export {
   roundYear,
 } from './round';
 
-export {
-  ceilSecond,
-  ceilMinute,
-  ceilHour,
-  ceilDay,
-  ceilWeek,
-  ceilMonth,
-  ceilYear,
-} from './ceil';
 
 export { normalize } from './normalize';
 

@@ -1,9 +1,9 @@
 import { pipe } from './../utils';
-import { ceilMonth } from './calculations/ceil';
 import { roundDecorator } from './decorator';
 
 import subtractDays from './subtract-days';
 import endOfDay from './end-of-day';
+import ceilMonth from './ceil-months';
 
 export const endOfMonth = (isoDatetime) => pipe(
   ceilMonth,

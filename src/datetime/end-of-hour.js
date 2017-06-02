@@ -1,9 +1,9 @@
 import { pipe } from './../utils';
-import { ceilHour } from './calculations/ceil';
 import { roundDecorator } from './decorator';
 
 import subtractMinutes from './subtract-minutes';
 import endOfMinute from './end-of-minute';
+import ceilHour from './ceil-hours';
 
 const endOfHour = (isoDatetime) => pipe(
   ceilHour,

@@ -1,7 +1,8 @@
 import { pipe } from './../utils';
-import { ceilDay } from './calculations/ceil';
+
 import { roundDecorator } from './decorator';
 
+import ceilDay from './ceil-days';
 import subtractHours from './subtract-hours';
 import endOfHour from './end-of-hour';
 

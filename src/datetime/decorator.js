@@ -10,7 +10,8 @@ export const dropTimezone = (isoDatetime) => {
   return isoDatetime.replace(timezone, '');
 };
 
-export const roundDecorator = (fn) => (isoDateTime) => {
+export const roundDecorator = (fn) => (_isoDateTime) => {
+  const isoDateTime = toIso(_isoDateTime);
   if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
   const timezone = getTimezone(isoDateTime) || '';
 

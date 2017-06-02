@@ -1,9 +1,10 @@
 import { pipe } from './../utils';
-import { ceilWeek } from './calculations/ceil';
+
 import { roundDecorator } from './decorator';
 
 import subtractDays from './subtract-days';
 import endOfDay from './end-of-day';
+import ceilWeek from './ceil-weeks';
 
 export const endOfWeek = (isoDatetime) => pipe(
   ceilWeek,

@@ -1,9 +1,9 @@
 import { compose } from './../utils';
-import { ceilMinute } from './calculations/ceil';
 import { roundDecorator } from './decorator';
 
 import subtractSeconds from './subtract-seconds';
 import endOfSecond from './end-of-second';
+import ceilMinute from './ceil-minutes';
 
 const endOfMinute = (isoDatetime) => {
   return compose(

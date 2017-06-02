@@ -12,10 +12,12 @@ import {
 describe('round', () => {
   describe('roundSecond', () => {
     it('2000-01-01T11:12:13.123 is floored', () => assertThat(
-      roundSecond('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:13.000')));
+        roundSecond('2000-01-01T11:12:13.123'), equalTo('2000-01-01T11:12:13.000')));
 
-    it('2000-01-01T11:12:31.123 is ceiled', () => assertThat(
-      roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14.0')));
+    it('2000-01-01T11:12:31.123 is ceiled', () => {
+      assertThat(
+        roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14.0'))
+    });
 
     it('2000-01-01T11:12:31.5+10:00 doesn\'t drop timezone', () => assertThat(
       roundSecond('2000-01-01T11:12:13.5+10:00'), equalTo('2000-01-01T11:12:14.0+10:00')));
