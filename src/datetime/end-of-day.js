@@ -2,7 +2,7 @@ import { pipe } from './../utils';
 
 import { roundDecorator } from './decorator';
 
-import ceilDay from './ceil-days';
+import ceilDay from './ceil-day';
 import subtractHours from './subtract-hours';
 import endOfHour from './end-of-hour';
 

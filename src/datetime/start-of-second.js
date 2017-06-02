@@ -1,1 +1,1 @@
-export default from './floor-seconds';
+export default from './floor-second';

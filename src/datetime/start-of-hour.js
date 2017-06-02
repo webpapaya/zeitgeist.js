@@ -1,1 +1,1 @@
-export default from './floor-hours';
+export default from './floor-hour';

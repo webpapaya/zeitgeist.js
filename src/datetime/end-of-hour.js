@@ -3,7 +3,7 @@ import { roundDecorator } from './decorator';
 
 import subtractMinutes from './subtract-minutes';
 import endOfMinute from './end-of-minute';
-import ceilHour from './ceil-hours';
+import ceilHour from './ceil-hour';
 
 const endOfHour = (isoDatetime) => pipe(
   ceilHour,

@@ -1,1 +1,1 @@
-export default from './floor-weeks';
+export default from './floor-week';

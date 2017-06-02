@@ -1,1 +1,1 @@
-export default from './floor-months';
+export default from './floor-month';

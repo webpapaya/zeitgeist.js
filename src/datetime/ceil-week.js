@@ -1,6 +1,6 @@
 import { getWeekday } from './index';
 
-import floorDay from './floor-days';
+import floorDay from './floor-day';
 import addDays from './add-days';
 
 

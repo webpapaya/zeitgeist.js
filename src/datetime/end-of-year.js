@@ -1,7 +1,7 @@
 import { pipe } from './../utils';
-import { ceilYear } from './calculations/ceil';
 import { roundDecorator } from './decorator';
 
+import ceilYear from './ceil-year';
 import subtractMonths from './subtract-months';
 import endOfMonth from './end-of-month';
 

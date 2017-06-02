@@ -3,7 +3,7 @@ import { roundDecorator } from './decorator';
 
 import subtractSeconds from './subtract-seconds';
 import endOfSecond from './end-of-second';
-import ceilMinute from './ceil-minutes';
+import ceilMinute from './ceil-minute';
 
 const endOfMinute = (isoDatetime) => {
   return compose(

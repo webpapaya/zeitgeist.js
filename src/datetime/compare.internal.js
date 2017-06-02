@@ -1,11 +1,11 @@
 import { curry } from '../utils';
 
-import floorSecond from './floor-seconds';
-import floorMinute from './floor-minutes';
-import floorHour from './floor-hours';
-import floorDay from './floor-days';
-import floorMonth from './floor-months';
-import floorYear from './floor-years';
+import floorSecond from './floor-second';
+import floorMinute from './floor-minute';
+import floorHour from './floor-hour';
+import floorDay from './floor-day';
+import floorMonth from './floor-month';
+import floorYear from './floor-year';
 
 import { toFloat } from './index';
 

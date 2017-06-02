@@ -1,7 +1,7 @@
 import { toIso } from './index';
 import { roundDecorator } from './decorator';
 
-import floorMinute from './floor-minutes';
+import floorMinute from './floor-minute';
 import addMinutes from './add-minutes';
 
 // TODO: remove toIso call here

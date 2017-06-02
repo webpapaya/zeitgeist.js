@@ -1,4 +1,4 @@
-import floorDays from './floor-days';
+import floorDays from './floor-day';
 import subtractDays from './subtract-days';
 import { getWeekday } from './index';
 

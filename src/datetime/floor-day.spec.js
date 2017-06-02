@@ -1,6 +1,6 @@
 import { assertThat, equalTo } from 'hamjest';
 import { INVALID_DATETIME } from './constants';
-import floorDays from './floor-days';
+import floorDays from './floor-day';
 
 describe('floorDays', () => {
   it('2000-01-01T11:12:13.123 results in 2000-01-01T00:00:00.000', () => assertThat(
