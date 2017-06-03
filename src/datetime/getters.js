@@ -1,5 +1,4 @@
 import {
-  daysBetween,
   toFragments,
   toIso,
   removeTimeComponent,
@@ -11,6 +10,8 @@ import {
   DAYS_IN_MONTHS,
 } from './constants';
 
+import differenceInCalendarDays from './difference-in-calendar-dates';
+
 const WEEKDAY_REFERENCE_DATE = '2001-01-01';
 const DAYS_IN_ONE_WEEK = 7;
 const MATCH_TIMEZONE = /([+-]\d\d:\d\d$)|(Z$)/;
@@ -20,12 +21,12 @@ const fixNegativeDaysBetween = (days) => days >= 0
   : DAYS_IN_ONE_WEEK + days;
 
 export const getWeekday = (isoDatetime) => {
-  const days = daysBetween(WEEKDAY_REFERENCE_DATE, isoDatetime);
+  const days = differenceInCalendarDays(WEEKDAY_REFERENCE_DATE, isoDatetime);
   return fixNegativeDaysBetween(days % DAYS_IN_ONE_WEEK) + 1;
 };
 
 export const getDayOfYear = (isoDatetime) =>
-  daysBetween(toIso({ year: toFragments(isoDatetime).year, month: 1, day: 1 }), isoDatetime) + 1;
+  differenceInCalendarDays(toIso({ year: toFragments(isoDatetime).year, month: 1, day: 1 }), isoDatetime) + 1;
 
 // See: https://en.wikipedia.org/wiki/ISO_week_date#Relation_with_the_Gregorian_calendar
 // Only support ISO week of the year for now.

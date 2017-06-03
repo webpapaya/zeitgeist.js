@@ -44,9 +44,4 @@ export const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
   return applyFormat(isoDateTime, result);
 });
 
-export const betweenDecorator = (fn) => curry((from, to) => {
-  return fn(
-    dropTimezone(containsDateComponent(from) ? toUtc(from) : from),
-    dropTimezone(containsDateComponent(to) ? toUtc(to) : to)
-  );
-});
+
