@@ -2,7 +2,6 @@ import { assertThat, equalTo } from 'hamjest';
 import { datesBetween } from '../index';
 
 
-
 describe('listOfDatesBetween', () => {
   [
     { first: '2000-01-01', second: '2000-01-02', resultsIn: ['2000-01-01', '2000-01-02'] },

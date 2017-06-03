@@ -3,7 +3,7 @@ import { getTimezone } from './getters';
 import { applyFormat } from './format';
 import { isValid } from './validate';
 import { curry } from '../utils';
-import { containsDateComponent, toUtc, toIso, toFragments, normalize } from './index';
+import { toIso, toFragments, normalize } from './index';
 
 export const dropTimezone = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';
@@ -43,5 +43,4 @@ export const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
   const result = `${toIso(fn(amount, dateTimeWithoutTimezone))}${timezone}`;
   return applyFormat(isoDateTime, result);
 });
-
 

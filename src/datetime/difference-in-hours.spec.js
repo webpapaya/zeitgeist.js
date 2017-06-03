@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import differenceInHours from './difference-in-hours'
+import differenceInHours from './difference-in-hours';
 
 describe.skip('hours between', () => {
   it('T10:00 and T11:00 is 1 hour ', () => assertThat(

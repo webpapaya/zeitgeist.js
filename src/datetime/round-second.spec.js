@@ -9,7 +9,7 @@ describe('roundSecond', () => {
 
   it('2000-01-01T11:12:31.123 is ceiled', () => {
     assertThat(
-      roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14.0'))
+      roundSecond('2000-01-01T11:12:13.5'), equalTo('2000-01-01T11:12:14.0'));
   });
 
   it('2000-01-01T11:12:31.5+10:00 doesn\'t drop timezone', () => assertThat(
