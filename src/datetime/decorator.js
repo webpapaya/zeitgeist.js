@@ -1,9 +1,10 @@
 import { INVALID_DATETIME } from './constants';
 import { getTimezone } from './getters';
 import { applyFormat } from './format';
-import { isValid } from './validate';
 import { curry } from '../utils';
 import { toIso, toFragments, normalize } from './index';
+
+import isValid from './is-valid';
 
 export const dropTimezone = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';

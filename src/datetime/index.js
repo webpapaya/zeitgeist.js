@@ -54,11 +54,6 @@ export {
 } from './getters';
 
 export {
-  isValid,
-  validateFirstArg,
-} from './validate';
-
-export {
   isBetween,
   isSame,
   isBefore,

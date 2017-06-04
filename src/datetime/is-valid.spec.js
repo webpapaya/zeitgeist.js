@@ -1,10 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { INVALID_DATETIME } from './constants';
-import {
-  isValid,
-  validateFirstArg,
-  validateFirstAndSecondArg,
-} from './validate';
+import isValid from './is-valid';
 
 describe('isValid', () => {
   [
@@ -39,24 +34,3 @@ describe('isValid', () => {
       isValid(isoDatetime), equalTo(valid)));
   });
 });
-
-describe('validateFirstArg', () => {
-  const validatedFn = validateFirstArg((value) => value);
-
-  it('validatedFn responds given value when valid', () => assertThat(
-    validatedFn('2000-01-01'), equalTo('2000-01-01')));
-
-  it('validatedFn responds `Invalid Format` when invalid', () => assertThat(
-    validatedFn('xxxx'), equalTo(INVALID_DATETIME)));
-});
-
-describe('validateFirstAndSecondArg', () => {
-  const validatedFn = validateFirstAndSecondArg((first, second) => [first, second]);
-
-  it('validatedFn responds given value when valid', () => assertThat(
-    validatedFn('2000-01', '2000-01'), equalTo(['2000-01', '2000-01'])));
-
-  it('validatedFn responds `Invalid Format` when invalid', () => assertThat(
-    validatedFn('xxxx', '2000-01'), equalTo([INVALID_DATETIME, '2000-01'])));
-});
-
