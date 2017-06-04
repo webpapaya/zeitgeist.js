@@ -6,12 +6,13 @@ import { compose, curry } from '../utils';
 const zones = momentZones.reduce((prev, { name, abbrs, untils, offsets }) => ({
   ...prev,
   [name]: Array.from({ length: abbrs.length }).reduce((items, _, index) => [
+    ...items,
     {
       abbr: abbrs[index],
       until: untils[index],
       offset: offsets[index],
     },
-    ...items,
+
   ], []),
 }), {});
 
@@ -39,8 +40,8 @@ const inTimezone = (timezoneName, isoDatetime) => {
   const zone = zones[timezoneName]; // TODO: handle not found zone
   const unixTimestamp = toUnixTimestamp(isoDatetime);
 
-  const possibleOffsets = zone.filter(({ until }) => (until <= unixTimestamp && until !== null));
-  const { offset } = possibleOffsets[possibleOffsets.length - 1];
+  const possibleOffsets = zone.filter(({ until }) => (until >= unixTimestamp && until !== null));
+  const { offset } = possibleOffsets[0];
 
   const timezoneOffset = minutesToTimezoneOffset(offset);
 
@@ -55,9 +56,9 @@ describe('inTimezone', () => {
     assertThat(inTimezone('Europe/Vienna', '2000-01-01T00:00:00+00:00'), equalTo('2000-01-01T01:00:00+01:00'))
   });
 
-  // it('2000-01-01T00:00:00+00:00 in Europe/Vienna', () => {
-  //   assertThat(inTimezone('Europe/Vienna', '2000-06-01T00:00:00+00:00'), equalTo('2000-06-01T01:00:00+01:00'))
-  // });
+  it('2000-01-01T00:00:00+00:00 in Europe/Vienna', () => {
+    assertThat(inTimezone('Europe/Vienna', '2000-06-01T00:00:00+00:00'), equalTo('2000-06-01T02:00:00+02:00'))
+  });
 
   it('2000-01-01T00:00:00+00:00 in America/New_York', () => {
     assertThat(inTimezone('America/New_York', '2000-01-01T00:00:00+00:00'), equalTo('1999-12-31T19:00:00-05:00'))
