@@ -1,0 +1,66 @@
+import { assertThat, equalTo } from 'hamjest';
+import { zones as momentZones } from './tz-data/latest.json';
+import { dropTimezone } from './index';
+import { compose, curry } from '../utils';
+
+const zones = momentZones.reduce((prev, { name, abbrs, untils, offsets }) => ({
+  ...prev,
+  [name]: Array.from({ length: abbrs.length }).reduce((items, _, index) => [
+    {
+      abbr: abbrs[index],
+      until: untils[index],
+      offset: offsets[index],
+    },
+    ...items,
+  ], []),
+}), {});
+
+import toUnixTimestamp from './to-unix-timestamp';
+import subtractMinutes from './subtract-minutes';
+
+const minutesToTimezoneOffset = (offset) => {
+  const hours = Math.floor(offset / 60);
+  const minutes = offset - hours * 60;
+
+  return hours > 0
+    ? `-${leftPad(Math.abs(hours))}:${leftPad(minutes)}`
+    : `+${leftPad(Math.abs(hours))}:${leftPad(minutes)}`
+  ;
+};
+
+const setTimezoneOffset = curry((timezoneOffset, isoDatetime) => {
+  const dateTimeWithoutOffset = dropTimezone(isoDatetime);
+  return `${dateTimeWithoutOffset}${timezoneOffset}`;
+});
+
+const leftPad = (value) => `00${value}`.slice(-2);
+
+const inTimezone = (timezoneName, isoDatetime) => {
+  const zone = zones[timezoneName]; // TODO: handle not found zone
+  const unixTimestamp = toUnixTimestamp(isoDatetime);
+
+  const possibleOffsets = zone.filter(({ until }) => (until <= unixTimestamp && until !== null));
+  const { offset } = possibleOffsets[possibleOffsets.length - 1];
+
+  const timezoneOffset = minutesToTimezoneOffset(offset);
+
+  return compose(
+    setTimezoneOffset(timezoneOffset),
+    subtractMinutes(offset)
+  )(isoDatetime);
+};
+
+describe('inTimezone', () => {
+  it('2000-01-01T00:00:00+00:00 in Europe/Vienna', () => {
+    assertThat(inTimezone('Europe/Vienna', '2000-01-01T00:00:00+00:00'), equalTo('2000-01-01T01:00:00+01:00'))
+  });
+
+  // it('2000-01-01T00:00:00+00:00 in Europe/Vienna', () => {
+  //   assertThat(inTimezone('Europe/Vienna', '2000-06-01T00:00:00+00:00'), equalTo('2000-06-01T01:00:00+01:00'))
+  // });
+
+  it('2000-01-01T00:00:00+00:00 in America/New_York', () => {
+    assertThat(inTimezone('America/New_York', '2000-01-01T00:00:00+00:00'), equalTo('1999-12-31T19:00:00-05:00'))
+  });
+});
+
