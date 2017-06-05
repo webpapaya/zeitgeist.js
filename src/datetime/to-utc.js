@@ -6,7 +6,7 @@ import subtractMinutes from './subtract-minutes';
 import setTimezoneOffset from './set-timezone-offset';
 
 const timezoneOffsetToMinutes = (timezoneOffset) => {
-  if(!timezoneOffset) { return 0; }
+  if (!timezoneOffset) { return 0; }
   const [hours, minutes] = timezoneOffset.split(':')
     .map((unit) => parseInt(unit));
 
