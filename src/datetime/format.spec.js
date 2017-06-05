@@ -112,6 +112,7 @@ describe('applyFormat', () => {
     { original: '2000', modified: '2001', result: '2001' },
     { original: '2000-01', modified: '2001-01-01', result: '2001-01' },
     { original: 'T00:00', modified: '2001-01-01T01:00', result: 'T01:00' },
+    { original: '2000-01-01T10:10:10.999999', modified: '2000-01-01T10:10:10', result: '2000-01-01T10:10:10.000000' },
   ].forEach(({ original, modified, result }) => {
     it(`modified ${modified}  applied to ${original} results in ${result}`, () => assertThat(
       applyFormat(original, modified), equalTo(result)));

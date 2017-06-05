@@ -1,5 +1,5 @@
 import { curry } from '../utils';
-import { betweenDecorator } from './decorator';
+import betweenDecorator from './_internal/between-decorator';
 import { toUtc } from './index';
 import {
   isBetween as _isBetween,

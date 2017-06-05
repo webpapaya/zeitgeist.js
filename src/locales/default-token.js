@@ -1,6 +1,8 @@
 import { doesWeekBelongToPreviousYear } from '../datetime/getters';
-import { toIso, daysBetween, getWeekday, getWeekOfYear } from '../datetime/index';
+import { toIso, getWeekday, getWeekOfYear } from '../datetime/index';
 import { leftPad } from '../utils';
+
+import differenceInCalendarDates from '../datetime/difference-in-calendar-dates';
 
 const formatYYYY = (fragments) => `${fragments.year}`;
 const formatYY = (fragments) => formatYYYY(fragments).slice(-2);
@@ -8,7 +10,7 @@ const formatY = (fragments) => formatYYYY(fragments);
 
 const formatD = (fragments) => `${fragments.day}`;
 const formatDD = (fragments) => leftPad(formatD(fragments));
-const formatDDD = (fragments) => daysBetween(`${fragments.year}-01-01`, toIso(fragments)) + 1;
+const formatDDD = (fragments) => differenceInCalendarDates(`${fragments.year}-01-01`, toIso(fragments)) + 1;
 const formatDDDD = (fragments) => leftPad(formatDDD(fragments), 3);
 
 const formatM = (fragments) => `${fragments.month}`;

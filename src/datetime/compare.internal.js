@@ -1,13 +1,13 @@
 import { curry } from '../utils';
-import {
-  toFloat,
-  floorYear,
-  floorMonth,
-  floorDay,
-  floorHour,
-  floorMinute,
-  floorSecond,
-} from './index';
+
+import floorSecond from './floor-second';
+import floorMinute from './floor-minute';
+import floorHour from './floor-hour';
+import floorDay from './floor-day';
+import floorMonth from './floor-month';
+import floorYear from './floor-year';
+
+import { toFloat } from './index';
 
 export const isBefore = (maybeBefore, maybeAfter) =>
   toFloat(maybeBefore) < toFloat(maybeAfter);

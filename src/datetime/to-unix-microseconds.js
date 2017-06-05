@@ -1,6 +1,5 @@
 import { toFragments } from './index';
 import { compose } from './../utils';
-import { isValid } from './validate';
 import {
   INVALID_DATETIME,
 
@@ -10,6 +9,8 @@ import {
   ONE_REGULAR_DAY,
 
 } from './constants';
+
+import isValid from './is-valid';
 
 const floor = (value) => Math.floor(value);
 const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {

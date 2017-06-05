@@ -40,7 +40,7 @@ export const applyFormat = (original, modified) => {
   const originalTimeComponent = getTimeComponent(original);
   const originalDateComponent = getDateComponent(original);
 
-  const modifiedTimeComponent = getTimeComponent(modified);
+  const modifiedTimeComponent = `${getTimeComponent(modified)}.000000`;
   const modifiedDateComponent = getDateComponent(modified);
 
   return [
@@ -53,4 +53,3 @@ export const dropTimezone = (isoDatetime) => {
   const timezone = getTimezone(isoDatetime) || '';
   return isoDatetime.replace(timezone, '');
 };
-

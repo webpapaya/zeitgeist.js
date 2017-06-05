@@ -1,7 +1,9 @@
-import {
-  fromJulianDay,
-  toJulianDay,
-} from '../index';
+import { pipe } from '../../utils';
 
-export const normalize = (isoDatetime) =>
-  fromJulianDay(toJulianDay(isoDatetime));
+import fromUnixMicrosecond from '../from-unix-microseconds';
+import toUnixMicrosecond from '../to-unix-microseconds';
+
+export const normalize = (isoDatetime) => pipe(
+  toUnixMicrosecond,
+  fromUnixMicrosecond,
+)(isoDatetime);
