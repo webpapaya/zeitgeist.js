@@ -21,9 +21,9 @@
 - [ ] format(format, isoDatetime)
   - 
 - [ ] setTimezoneOffset(time, isoDatetime)
-- [ ] getTimezoneOffset(time)
+- [ ] getTimezoneOffsetOffset(time)
 - [ ] setTimezoneOffsetAsDuration(duration, isoDatetime)
-- [ ] getTimezoneOffsetAsDuration(duration)
+- [ ] getTimezoneOffsetOffsetAsDuration(duration)
 - [ ] toTimezoneOffset
 - [ ] toTimezone (this will be fun)
 

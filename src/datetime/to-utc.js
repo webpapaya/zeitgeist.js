@@ -1,4 +1,3 @@
-import { getTimezone } from './index';
 import { pipe } from '../utils';
 import { ONE_HOUR, ONE_MINUTE } from './constants';
 
@@ -13,13 +12,13 @@ const timezoneOffsetToMinutes = (timezoneOffset) => {
   return (hours * ONE_HOUR + minutes * ONE_MINUTE) / ONE_MINUTE;
 };
 
-const getTimezoneInMinutes = (isoDatetime) => pipe(
-  getTimezone,
+const getTimezoneOffsetInMinutes = (isoDatetime) => pipe(
+  getTimezoneOffset,
   timezoneOffsetToMinutes,
 )(isoDatetime);
 
 const toUtc = (isoDatetime) => pipe(
-  subtractMinutes(getTimezoneInMinutes(isoDatetime)),
+  subtractMinutes(getTimezoneOffsetInMinutes(isoDatetime)),
   setTimezoneOffset('+00:00'),
 )(isoDatetime);
 

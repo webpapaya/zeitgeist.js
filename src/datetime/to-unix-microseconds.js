@@ -1,4 +1,4 @@
-import { toFragments, containsTimezone, getTimezone } from './index';
+import { toFragments, containsTimezone } from './index';
 import { compose } from './../utils';
 import {
   INVALID_DATETIME,
@@ -11,6 +11,7 @@ import {
 } from './constants';
 
 import isValid from './is-valid';
+import getTimezoneOffset from './get-timezone-offset';
 
 const floor = (value) => Math.floor(value);
 const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
@@ -40,7 +41,7 @@ const getMillisecondsFromSeconds = (seconds) => isFloat(seconds)
 const calculateTimezoneOffset = (isoDatetime) => {
   if (!containsTimezone(isoDatetime)) { return 0; }
 
-  const timezoneOffset = getTimezone(isoDatetime);
+  const timezoneOffset = getTimezoneOffset(isoDatetime);
 
   if (timezoneOffset === 'Z') { return 0; }
 

@@ -38,7 +38,7 @@ export {
   getHour,
   getMinute,
   getSecond,
-  getTimezone,
+  getTimezoneOffset,
 
   getDateComponent,
   getTimeComponent,

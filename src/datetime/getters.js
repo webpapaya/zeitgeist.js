@@ -47,11 +47,8 @@ export const getDay = parseIsoString(({ day }) => day);
 export const getHour = parseIsoString(({ hour }) => hour);
 export const getMinute = parseIsoString(({ minute }) => minute);
 export const getSecond = parseIsoString(({ second }) => second);
-export const getTimezone = (isoDatetime) => {
-  const timezone = isoDatetime.match(MATCH_TIMEZONE);
-  return timezone === null ? null : timezone[0];
-};
 
+export getTimezoneOffset from './get-timezone-offset';
 
 const isLeapMonth = (isoDatetime, month) =>
   month === FEBRUARY && isLeapYear(isoDatetime);
