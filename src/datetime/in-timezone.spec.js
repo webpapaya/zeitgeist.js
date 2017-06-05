@@ -1,8 +1,7 @@
 import { assertThat, equalTo } from 'hamjest';
 import { zones as momentZones } from './tz-data/latest.json';
-import { dropTimezone, getTimezone } from './index';
+import { dropTimezone } from './index';
 import { compose, curry } from '../utils';
-import { ONE_HOUR, ONE_MINUTE } from './constants';
 
 const zones = momentZones.reduce((prev, { name, abbrs, untils, offsets }) => ({
   ...prev,
@@ -13,12 +12,12 @@ const zones = momentZones.reduce((prev, { name, abbrs, untils, offsets }) => ({
       until: untils[index],
       offset: offsets[index],
     },
-
   ], []),
 }), {});
 
 import toUnixTimestamp from './to-unix-timestamp';
 import subtractMinutes from './subtract-minutes';
+import toUtc from './to-utc';
 
 const minutesToTimezoneOffset = (offset) => {
   const hours = Math.floor(offset / 60);
@@ -28,12 +27,6 @@ const minutesToTimezoneOffset = (offset) => {
     ? `-${leftPad(Math.abs(hours))}:${leftPad(minutes)}`
     : `+${leftPad(Math.abs(hours))}:${leftPad(minutes)}`
   ;
-};
-
-const timezoneOffsetToMinutes = (timezoneOffset) => {
-  const [hours, minutes] = timezoneOffset.split(':').map((unit) => parseInt(unit));
-  return (hours * ONE_HOUR + minutes * ONE_MINUTE) / ONE_MINUTE;
-
 };
 
 const setTimezoneOffset = curry((timezoneOffset, isoDatetime) => {
@@ -53,7 +46,7 @@ const inTimezone = (timezoneName, isoDatetime) => {
   const timezoneOffset = minutesToTimezoneOffset(offset);
 
   return compose(
-    subtractMinutes(timezoneOffsetToMinutes(getTimezone(isoDatetime))),
+    toUtc,
     setTimezoneOffset(timezoneOffset),
     subtractMinutes(offset)
   )(isoDatetime);
