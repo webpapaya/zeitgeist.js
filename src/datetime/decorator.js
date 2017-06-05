@@ -6,10 +6,10 @@ import { toIso, toFragments, normalize } from './index';
 
 import isValid from './is-valid';
 
-export const dropTimezone = (isoDatetime) => {
-  const timezone = getTimezone(isoDatetime) || '';
-  return isoDatetime.replace(timezone, '');
-};
+import dropTimezone from './_internal/drop-timezone';
+
+export dropTimezone from './_internal/drop-timezone';
+
 
 export const roundDecorator = (fn) => (_isoDateTime) => {
   const isoDateTime = toIso(_isoDateTime);
