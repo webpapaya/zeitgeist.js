@@ -2,6 +2,32 @@
 
 # This Package is not production ready yet.
 
+# TODOs before first release:
+- [ ] Add compare functions
+  - isBefore(a, b)
+  - isAfter(a, b)
+  - isSame(a, b)
+  - isBeforeOrEqual(a, b)
+  - isAfterOrEqual(a, b)
+- [ ] Add toPrecision functions (think about naming again)
+  - toPrecisionMicroseconds(isoDatetime)
+  - toPrecisionMilliseconds(isoDatetime)
+  - toPrecisionSeconds(isoDatetime)
+  - toPrecisionMinutes(isoDatetime)
+  - toPrecisionHours(isoDatetime)
+  - toPrecisionDays(isoDatetime)
+  - toPrecisionMonths(isoDatetime)
+  - toPrecisionYears(isoDatetime)
+- [ ] format(format, isoDatetime)
+  - 
+- [ ] setTimezoneOffset(time, isoDatetime)
+- [ ] getTimezoneOffset(time)
+- [ ] setTimezoneOffsetAsDuration(duration, isoDatetime)
+- [ ] getTimezoneOffsetAsDuration(duration)
+- [ ] toTimezoneOffset
+- [ ] toTimezone (this will be fun)
+
+
 # Datetime
 
 ## Transformations

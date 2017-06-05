@@ -1,15 +1,14 @@
 import { INVALID_DATETIME } from './constants';
 import { getTimezone } from './getters';
 import { applyFormat } from './format';
-import { curry } from '../utils';
 import { toIso, toFragments, normalize } from './index';
 
 import isValid from './is-valid';
 
-export const dropTimezone = (isoDatetime) => {
-  const timezone = getTimezone(isoDatetime) || '';
-  return isoDatetime.replace(timezone, '');
-};
+import dropTimezone from './_internal/drop-timezone';
+
+export dropTimezone from './_internal/drop-timezone';
+
 
 export const roundDecorator = (fn) => (_isoDateTime) => {
   const isoDateTime = toIso(_isoDateTime);
@@ -34,14 +33,3 @@ export const fragmentsRoundDecorator = (fn) => (_isoDateTime) => {
   const result = applyFormat(dateTimeWithoutTimezone, toIso(fn(fragments)));
   return `${result}${timezone}`;
 };
-
-export const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
-  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-
-  const timezone = getTimezone(isoDateTime) || '';
-  const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
-
-  const result = `${toIso(fn(amount, dateTimeWithoutTimezone))}${timezone}`;
-  return applyFormat(isoDateTime, result);
-});
-
