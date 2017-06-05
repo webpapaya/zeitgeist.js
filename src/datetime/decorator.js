@@ -1,7 +1,6 @@
 import { INVALID_DATETIME } from './constants';
 import { getTimezone } from './getters';
 import { applyFormat } from './format';
-import { curry } from '../utils';
 import { toIso, toFragments, normalize } from './index';
 
 import isValid from './is-valid';
