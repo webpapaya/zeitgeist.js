@@ -1,8 +1,9 @@
-import { curry, pipe } from '../../utils';
+import { pipe } from '../../utils';
+import calculationDecorator from './calculation-decorator';
 import toUnixMicroseconds from '../to-unix-microseconds';
 import fromUnixMicroseconds from '../from-unix-microseconds';
 
-const createAddUnitFunction = (unit) => curry((amount, isoDatetime) => pipe(
+const createAddUnitFunction = (unit) => calculationDecorator((amount, isoDatetime) => pipe(
   toUnixMicroseconds,
   (unixMicroseconds) => unixMicroseconds + amount * unit,
   fromUnixMicroseconds,

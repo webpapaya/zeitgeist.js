@@ -1,6 +1,6 @@
 import { curry } from '../utils';
 import { toFragments, toIso } from './index';
-import { calculationDecorator } from './decorator'; // TODO: move calculation decorator to createAddUnitFunction
+import  calculationDecorator from './_internal/calculation-decorator';
 
 const addYears = calculationDecorator(curry((years, isoDatetime) => {
   const fragments = toFragments(isoDatetime);

@@ -34,14 +34,3 @@ export const fragmentsRoundDecorator = (fn) => (_isoDateTime) => {
   const result = applyFormat(dateTimeWithoutTimezone, toIso(fn(fragments)));
   return `${result}${timezone}`;
 };
-
-export const calculationDecorator = (fn) => curry((amount, isoDateTime) => {
-  if (!isValid(isoDateTime)) { return INVALID_DATETIME; }
-
-  const timezone = getTimezone(isoDateTime) || '';
-  const dateTimeWithoutTimezone = dropTimezone(isoDateTime);
-
-  const result = `${toIso(fn(amount, dateTimeWithoutTimezone))}${timezone}`;
-  return applyFormat(isoDateTime, result);
-});
-
