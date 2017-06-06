@@ -1,5 +1,5 @@
 import { assertThat, equalTo } from 'hamjest';
-import { zones as momentZones } from './tz-data/latest.json';
+import { zones as momentZones } from 'moment-timezone/data/unpacked/latest.json'
 import { dropTimezone } from './index';
 import { compose, curry } from '../utils';
 

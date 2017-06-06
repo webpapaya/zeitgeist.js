@@ -23,6 +23,7 @@
     "eslint-config-crewmeister": "latest",
     "hamjest": "^2.13.0",
     "mocha": "^2.5.3",
+    "moment-timezone": "^0.5.13",
     "node-fetch": "^1.6.0"
   },
   "keywords": [
