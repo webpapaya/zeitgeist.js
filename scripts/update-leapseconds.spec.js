@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { assertThat, equalTo } from 'hamjest';
-import { readLeapSeconds } from './leapseconds';
+import { readLeapSeconds } from './update-leapseconds';
 
 describe('readLeapSeconds', () => {
   it('reads iana leapseconds file correctly', () => {
