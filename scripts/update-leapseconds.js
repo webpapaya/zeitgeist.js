@@ -1,22 +1,17 @@
-import { exec } from 'child_process';
+import {
+  execute,
+  TZ_TAR_GZ,
+  TZ_URL,
+  TMP_DIR,
+} from './utils';
+
 import { readFileSync, writeFileSync } from 'fs';
-
-const execute = (command) => {
-  return new Promise((resolve) => {
-    exec(command, resolve);
-  });
-};
-
-const TZ_TAR_GZ = 'tzdata-latest.tar.gz';
-const TZ_URL = `https://www.ietf.org/timezones/${TZ_TAR_GZ}`;
-const TZ_DIR = '.tzdata';
 
 const downloadLatestTzData = () => {
   return Promise.resolve()
-    .then(() => execute(`rm -rf ${TZ_DIR}`))
     .then(() => execute(`wget ${TZ_URL}`))
-    .then(() => execute(`mkdir -p ${TZ_DIR}`))
-    .then(() => execute(`tar zxvf ${TZ_TAR_GZ} -C ${TZ_DIR}`))
+    .then(() => execute(`mkdir -p ${TMP_DIR}`))
+    .then(() => execute(`tar zxvf ${TZ_TAR_GZ} -C ${TMP_DIR}`))
     .then(() => execute(`rm ${TZ_TAR_GZ}`));
 };
 
@@ -56,7 +51,6 @@ export const readLeapSeconds = (fileContents) => {
 
 const fetchAndStoreLeapSeconds = () => {
   return downloadLatestTzData()
-    .then(() => execute('mkdir -p src/data'))
     .then(() => {
       const fileContent = readFileSync('.tzdata/leapseconds', 'utf8');
       return readLeapSeconds(fileContent);
@@ -67,6 +61,4 @@ const fetchAndStoreLeapSeconds = () => {
     });
 };
 
-if(process.argv[2] === 'leapSeconds') {
-  fetchAndStoreLeapSeconds();
-}
+export default fetchAndStoreLeapSeconds;
