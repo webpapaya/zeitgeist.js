@@ -1,21 +1,14 @@
 import { assertThat, equalTo } from 'hamjest';
-// import { zones as momentZones } from 'moment-timezone/data/unpacked/latest.json';
-// import { zones as packedZones } from 'moment-timezone/data/packed/latest.json';
-import unpackMomentTZFile from './_internal/unpack-tz-file';
+import loadTimezone from './load-timezone';
+import vienna from '../data/timezones/europe/vienna.json';
+import newYork from '../data/timezones/america/new_york.json';
+
+import TIMEZONE_REGISTRY from './_internal/timezone-registry';
+
 import { dropTimezone } from './index';
 import { compose, curry } from '../utils';
 
-// const zones = momentZones.reduce((prev, { name, abbrs, untils, offsets }) => ({
-//   ...prev,
-//   [name]: Array.from({ length: abbrs.length }).reduce((items, _, index) => [
-//     ...items,
-//     {
-//       abbr: abbrs[index],
-//       until: untils[index],
-//       offset: offsets[index],
-//     },
-//   ], []),
-// }), {});
+
 
 import toUnixTimestamp from './to-unix-timestamp';
 import subtractMinutes from './subtract-minutes';
@@ -39,7 +32,7 @@ const setTimezoneOffset = curry((timezoneOffset, isoDatetime) => {
 const leftPad = (value) => `00${value}`.slice(-2);
 
 const inTimezone = (timezoneName, isoDatetime) => {
-  const zone = zones[timezoneName]; // TODO: handle not found zone
+  const zone = TIMEZONE_REGISTRY[timezoneName.toLowerCase()]; // TODO: handle not found zone
   const unixTimestamp = toUnixTimestamp(isoDatetime);
 
   const possibleOffsets = zone.filter(({ until }) => (until >= unixTimestamp && until !== null));
@@ -54,7 +47,12 @@ const inTimezone = (timezoneName, isoDatetime) => {
   )(isoDatetime);
 };
 
-describe.skip('inTimezone', () => {
+describe('inTimezone', () => {
+  before(() => {
+    loadTimezone(vienna);
+    loadTimezone(newYork);
+  });
+
   it('2000-01-01T00:00:00+00:00 in Europe/Vienna', () => {
     assertThat(inTimezone('Europe/Vienna', '2000-01-01T00:00:00+00:00'),
       equalTo('2000-01-01T01:00:00+01:00'));
@@ -73,10 +71,6 @@ describe.skip('inTimezone', () => {
   it('2000-01-01T01:00:00+01:00 in Europe/Vienna', () => {
     assertThat(inTimezone('Europe/Vienna', '2000-01-01T01:00:00+01:00'),
       equalTo('2000-01-01T01:00:00+01:00'));
-  });
-
-  it('xxx', () => {
-    console.log(unpackMomentTZFile(packedZones[1]));
   });
 });
 
