@@ -49,7 +49,7 @@ const calculateTimezoneOffset = (isoDatetime) => {
   const [hours, minutes] = timezoneOffset
     .slice(1)
     .split(':')
-    .map((unit) => parseInt(unit))
+    .map((unit) => parseInt(unit, 10))
     .map((unit) => sign === '-' ? unit : unit * -1);
 
   return hours * ONE_HOUR + minutes * ONE_MINUTE;

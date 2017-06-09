@@ -3,8 +3,6 @@ import TIMEZONE_REGISTRY from './_internal/timezone-registry';
 import { dropTimezone } from './index';
 import { compose, curry } from '../utils';
 
-
-
 import toUnixTimestamp from './to-unix-timestamp';
 import subtractMinutes from './subtract-minutes';
 import toUtc from './to-utc';

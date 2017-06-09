@@ -8,7 +8,7 @@ import getTimezoneOffset from './get-timezone-offset';
 const timezoneOffsetToMinutes = (timezoneOffset) => {
   if (!timezoneOffset) { return 0; }
   const [hours, minutes] = timezoneOffset.split(':')
-    .map((unit) => parseInt(unit));
+    .map((unit) => parseInt(unit, 10));
 
   return (hours * ONE_HOUR + minutes * ONE_MINUTE) / ONE_MINUTE;
 };
