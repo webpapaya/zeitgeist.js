@@ -3,13 +3,13 @@ import {
   readFile,
   basename,
   dirname,
-  relativePath,
   writeFile,
   MOMENT_TZ_URL,
   TZ_DB_PATH,
 } from './utils';
 
 const updateTzDatabase = () => Promise.resolve()
+  .then(() => execute(`rm -r ${dirname(TZ_DB_PATH)}`))
   .then(() => execute(`mkdir -p ${dirname(TZ_DB_PATH)}`))
   .then(() => execute(`wget -O ${TZ_DB_PATH} ${MOMENT_TZ_URL}`))
   .then(() => JSON.parse(readFile(TZ_DB_PATH, 'utf8')))
