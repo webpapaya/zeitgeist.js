@@ -14,11 +14,12 @@ const updateTzDatabase = () => Promise.resolve()
   .then(({ version, zones, links }) => {
     const writeZoneToFile = (data) => {
       const zoneName = data.split('|')[0];
-      const fileContent = JSON.stringify({ version, data: data.replace(zoneName, zoneName.toLowerCase()) });
+      const name = zoneName.toLowerCase();
+      const fileContent = JSON.stringify({ version, name, data: data.replace(zoneName, name) });
 
       return Promise.resolve()
-        .then(() => execute(`mkdir -p src/data/timezones/${dirname(zoneName.toLowerCase())}`))
-        .then(() => execute(`echo '${fileContent}' > src/data/timezones/${zoneName.toLowerCase()}.json`));
+        .then(() => execute(`mkdir -p src/data/timezones/${dirname(name)}`))
+        .then(() => execute(`echo '${fileContent}' > src/data/timezones/${name}.json`));
     };
 
     return Promise.all([
