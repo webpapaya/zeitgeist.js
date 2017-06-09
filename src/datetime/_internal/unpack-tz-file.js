@@ -1,5 +1,21 @@
 // Extracted from TODO: add file
 
+import { pipe } from '../../utils';
+
+const insertAt = (index, value, array) => {
+  const _array = [...array];
+  _array[index] = value;
+  return _array;
+};
+
+const splitBy = (pattern) => (string) =>
+  string.split(pattern);
+
+const itemAtIndex = (index) => (array) => array[index];
+
+// -------- END UTILS ------------- //
+
+
 const charCodeToInt = (charCode) => {
   if (charCode > 96) { return charCode - 87; }
   if (charCode > 64) { return charCode - 29; }
@@ -42,37 +58,58 @@ function unpackBase60(string) {
 const arrayToInt = (array) =>
   array.map(unpackBase60);
 
-const insertAt = (index, value, array) => {
-  const _array = [...array];
-  _array[index] = value;
-  return _array;
-};
 
 const intToUntil = (array, index = 0) => {
-  if (index === array.length) { return array; }
+  if (index === array.length) { return insertAt(index, Infinity, array); }
 
   const until = Math.round((array[index - 1] || 0) + (array[index] * 60000));
 
   return intToUntil(insertAt(index, until, array), index + 1);
 };
 
-const mapIndices = (source, indices) =>
+const mapIndices = (indices) => (source) =>
   indices.map((i) => source[indices[i]]);
 
+const extractIndices = (data) => pipe(
+  splitBy('|'),
+  itemAtIndex(3),
+  splitBy(''),
+  arrayToInt,
+)(data);
+
+const offsetAtIndex = (indices, data, index) => pipe(
+  splitBy('|'),
+  itemAtIndex(2),
+  splitBy(' '),
+  arrayToInt,
+  mapIndices(indices),
+  itemAtIndex(index),
+)(data);
+
+const untilAtIndex = (indices, data, index) => pipe(
+  splitBy('|'),
+  itemAtIndex(4),
+  splitBy(' '),
+  arrayToInt,
+  intToUntil,
+  itemAtIndex(index),
+)(data);
+
+const abbrAtIndex = (indices, data, index) => pipe(
+  splitBy('|'),
+  itemAtIndex(1),
+  splitBy(' '),
+  mapIndices(indices),
+  itemAtIndex(index),
+)(data);
+
 const unpack = (data) => {
-  const parts = data.split('|');
-
-  const indices = arrayToInt(parts[3].split(''));
-  let untils = arrayToInt(parts[4].split(' '));
-  const offsets = mapIndices(arrayToInt(parts[2].split(' ')), indices);
-
-  untils = intToUntil(untils);
-
-  const abbrs = mapIndices(parts[1].split(' '), indices);
-
-  return Array.from({ length: offsets.length }).map((_, index) => {
-    return { until: untils[index], abbr: abbrs[index], offset: offsets[index] };
-  });
+  const indices = extractIndices(data);
+  return indices.map((_, index) => ({
+    until: untilAtIndex(indices, data, index),
+    abbr: abbrAtIndex(indices, data, index),
+    offset: offsetAtIndex(indices, data, index)
+  }));
 };
 
 export default unpack;
