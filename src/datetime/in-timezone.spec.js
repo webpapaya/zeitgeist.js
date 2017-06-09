@@ -1,19 +1,21 @@
 import { assertThat, equalTo } from 'hamjest';
-import { zones as momentZones } from 'moment-timezone/data/unpacked/latest.json'
+// import { zones as momentZones } from 'moment-timezone/data/unpacked/latest.json';
+// import { zones as packedZones } from 'moment-timezone/data/packed/latest.json';
+import unpackMomentTZFile from './_internal/unpack-tz-file';
 import { dropTimezone } from './index';
 import { compose, curry } from '../utils';
 
-const zones = momentZones.reduce((prev, { name, abbrs, untils, offsets }) => ({
-  ...prev,
-  [name]: Array.from({ length: abbrs.length }).reduce((items, _, index) => [
-    ...items,
-    {
-      abbr: abbrs[index],
-      until: untils[index],
-      offset: offsets[index],
-    },
-  ], []),
-}), {});
+// const zones = momentZones.reduce((prev, { name, abbrs, untils, offsets }) => ({
+//   ...prev,
+//   [name]: Array.from({ length: abbrs.length }).reduce((items, _, index) => [
+//     ...items,
+//     {
+//       abbr: abbrs[index],
+//       until: untils[index],
+//       offset: offsets[index],
+//     },
+//   ], []),
+// }), {});
 
 import toUnixTimestamp from './to-unix-timestamp';
 import subtractMinutes from './subtract-minutes';
@@ -52,7 +54,7 @@ const inTimezone = (timezoneName, isoDatetime) => {
   )(isoDatetime);
 };
 
-describe('inTimezone', () => {
+describe.skip('inTimezone', () => {
   it('2000-01-01T00:00:00+00:00 in Europe/Vienna', () => {
     assertThat(inTimezone('Europe/Vienna', '2000-01-01T00:00:00+00:00'),
       equalTo('2000-01-01T01:00:00+01:00'));
@@ -71,6 +73,10 @@ describe('inTimezone', () => {
   it('2000-01-01T01:00:00+01:00 in Europe/Vienna', () => {
     assertThat(inTimezone('Europe/Vienna', '2000-01-01T01:00:00+01:00'),
       equalTo('2000-01-01T01:00:00+01:00'));
+  });
+
+  it('xxx', () => {
+    console.log(unpackMomentTZFile(packedZones[1]));
   });
 });
 
