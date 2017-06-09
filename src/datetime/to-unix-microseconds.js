@@ -1,4 +1,4 @@
-import { toFragments } from './index';
+import { toFragments, containsTimezone } from './index';
 import { compose } from './../utils';
 import {
   INVALID_DATETIME,
@@ -11,6 +11,7 @@ import {
 } from './constants';
 
 import isValid from './is-valid';
+import getTimezoneOffset from './get-timezone-offset';
 
 const floor = (value) => Math.floor(value);
 const daysSinceEpoch = ({ year: _year, month: m, day: d }) => {
@@ -37,6 +38,23 @@ const getMillisecondsFromSeconds = (seconds) => isFloat(seconds)
   ? parseInt(`${(seconds)}0000000`.replace(/\d*\./, '0').slice(0, 7), 10)
   : 0;
 
+const calculateTimezoneOffset = (isoDatetime) => {
+  if (!containsTimezone(isoDatetime)) { return 0; }
+
+  const timezoneOffset = getTimezoneOffset(isoDatetime);
+
+  if (timezoneOffset === 'Z') { return 0; }
+
+  const sign = timezoneOffset[0];
+  const [hours, minutes] = timezoneOffset
+    .slice(1)
+    .split(':')
+    .map((unit) => parseInt(unit, 10))
+    .map((unit) => sign === '-' ? unit : unit * -1);
+
+  return hours * ONE_HOUR + minutes * ONE_MINUTE;
+};
+
 export default (isoDatetime) => {
   if (!isValid(isoDatetime)) { return INVALID_DATETIME; }
 
@@ -50,5 +68,6 @@ export default (isoDatetime) => {
     (sum) => sum + (fragments.minute || 0) * ONE_MINUTE,
     (sum) => sum + floor((fragments.second || 0)) * ONE_SECOND,
     (sum) => sum + milliseconds,
+    (sum) => sum + calculateTimezoneOffset(isoDatetime),
   )(0);
 };

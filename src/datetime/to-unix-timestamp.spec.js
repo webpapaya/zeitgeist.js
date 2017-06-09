@@ -26,4 +26,9 @@ describe('toUnixTimestamp', () => {
     it(`${isoDatetime} is unix timestamp ${unixTimestamp} `, () => assertThat(
       toUnixTimestamp(isoDatetime), equalTo(unixTimestamp)));
   });
+
+  it('works with timezones', () => {
+    assertThat(toUnixTimestamp('1970-01-01T00:00:00+00:00'),
+      equalTo(toUnixTimestamp('1970-01-01T01:00:00+01:00')));
+  });
 });

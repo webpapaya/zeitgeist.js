@@ -1,7 +1,7 @@
-import getTimezone from '../get-timezone';
+import getTimezoneOffset from '../get-timezone-offset';
 
 const dropTimezone = (isoDatetime) => {
-  const timezone = getTimezone(isoDatetime) || '';
+  const timezone = getTimezoneOffset(isoDatetime) || '';
   return isoDatetime.replace(timezone, '');
 };
 

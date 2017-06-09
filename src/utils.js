@@ -135,3 +135,13 @@ export const tco = (f) => {
 export const compose = (...fns) => (input) =>
   fns.reduce((value, currentFn) => currentFn(value), input);
 
+export const insertAt = (index, value, array) => {
+  const _array = [...array];
+  _array[index] = value;
+  return _array;
+};
+
+export const splitBy = (pattern) => (string) =>
+  string.split(pattern);
+
+export const itemAtIndex = (index) => (array) => array[index];

@@ -1,6 +1,6 @@
 import { token as defaultToken } from '../locales/default-token';
 import { locale as defaultLocale } from '../locales/default-locale';
-import { getTimezone } from './getters';
+import getTimezoneOffset from './get-timezone-offset';
 
 import {
   toFragments,
@@ -50,6 +50,6 @@ export const applyFormat = (original, modified) => {
 };
 
 export const dropTimezone = (isoDatetime) => {
-  const timezone = getTimezone(isoDatetime) || '';
+  const timezone = getTimezoneOffset(isoDatetime) || '';
   return isoDatetime.replace(timezone, '');
 };

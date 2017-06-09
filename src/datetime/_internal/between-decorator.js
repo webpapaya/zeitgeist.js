@@ -1,9 +1,10 @@
 import { curry } from '../../utils';
-import { getTimezone } from '../getters';
 import { containsDateComponent, toUtc } from '../index';
+import getTimezoneOffset from '../get-timezone-offset';
+
 
 const dropTimezone = (isoDatetime) => {
-  const timezone = getTimezone(isoDatetime) || '';
+  const timezone = getTimezoneOffset(isoDatetime) || '';
   return isoDatetime.replace(timezone, '');
 };
 
