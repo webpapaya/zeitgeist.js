@@ -28,7 +28,6 @@ import loadTimezone from \'${pathToLoadFn}\';
 loadTimezone(${JSON.stringify({ version, name, data: data.replace(zoneName, name) })});
 `;
 
-
       return Promise.resolve()
         .then(() => execute(`mkdir -p ${dirname(timezonePath)}`))
         .then(() => execute(`touch ${timezonePath}`))
