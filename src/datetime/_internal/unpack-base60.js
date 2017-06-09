@@ -7,9 +7,9 @@ const charCodeToInt = (charCode) => {
 
 function unpackBase60(string) {
   let i = 0;
-  let parts = string.split('.');
-  let whole = parts[0];
-  let fractional = parts[1] || '';
+  const parts = string.split('.');
+  const whole = parts[0];
+  const fractional = parts[1] || '';
   let multiplier = 1;
   let num;
   let out = 0;
