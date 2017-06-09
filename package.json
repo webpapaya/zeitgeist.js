@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint-crewmeister src",
     "test": "mocha {src,scripts}/{*,**/*,**/**/*,**/**/**/*}.spec.js --recursive --compilers js:babel-register --reporter progress",
-    "prepublish": "BABEL_ENV=production babel src/ --out-dir lib/ --ignore *.spec.js --source-maps",
+    "prepublish": "BABEL_ENV=production babel src/ --out-dir lib/ --ignore *.spec.js",
     "tz:update": "babel-node scripts/index.js"
   },
   "repository": {

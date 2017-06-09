@@ -1,16 +1,10 @@
 import { assertThat, equalTo } from 'hamjest';
-import loadTimezone from './load-timezone';
-import vienna from '../data/timezones/europe/vienna.json';
-import newYork from '../data/timezones/america/new_york.json';
+import '../data/timezones/europe/vienna';
+import '../data/timezones/america/new_york';
 
 import inTimezone from './in-timezone';
 
 describe('inTimezone', () => {
-  before(() => {
-    loadTimezone(vienna);
-    loadTimezone(newYork);
-  });
-
   it('2000-01-01T00:00:00+00:00 in Europe/Vienna', () => {
     assertThat(inTimezone('Europe/Vienna', '2000-01-01T00:00:00+00:00'),
       equalTo('2000-01-01T01:00:00+01:00'));

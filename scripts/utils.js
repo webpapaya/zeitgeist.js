@@ -13,4 +13,5 @@ export const DATA_DIR = 'src/data';
 
 export const execute = (command) => new Promise((resolve) => exec(command, resolve));
 export const readFile = readFileSync;
-export { basename, dirname } from 'path';
+export { basename, dirname, relative as relativePath } from 'path';
+export { writeFileSync as writeFile } from 'fs';
